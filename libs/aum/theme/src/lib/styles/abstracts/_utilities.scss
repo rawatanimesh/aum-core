@@ -1,0 +1,226 @@
+// contains mixins, functions, and global utilities
+
+@import './functions';
+
+// Mixin for Padding Classes
+// This will generate classes like .padding-4, .padding-8, etc.
+@mixin generate-padding($prefix: 'padding') {
+  $values: (4, 8, 12, 16, 24, 32, 40, 48, 56, 64);
+
+  @each $value in $values {
+    .#{$prefix}-#{$value} {
+      padding: em($value) !important;
+    }
+
+    .#{$prefix}-top-#{$value} {
+      padding-top: em($value) !important;
+    }
+
+    .#{$prefix}-bottom-#{$value} {
+      padding-bottom: em($value) !important;
+    }
+
+    .#{$prefix}-left-#{$value} {
+      padding-left: em($value) !important;
+    }
+
+    .#{$prefix}-right-#{$value} {
+      padding-right: em($value) !important;
+    }
+
+    .#{$prefix}-vertical-#{$value} {
+      padding-top: em($value) !important;
+      padding-bottom: em($value) !important;
+    }
+
+    .#{$prefix}-horizontal-#{$value} {
+      padding-left: em($value) !important;
+      padding-right: em($value) !important;
+    }
+  }
+}
+
+// Mixin for Margin Classes
+// This will generate classes like .margin-4, .margin-8, etc.
+@mixin generate-margin($prefix: 'margin') {
+  $values: (4, 8, 12, 16, 24, 32, 40, 48, 56, 64);
+
+  @each $value in $values {
+    .#{$prefix}-#{$value} {
+      margin: em($value) !important;
+    }
+
+    .#{$prefix}-top-#{$value} {
+      margin-top: em($value) !important;
+    }
+
+    .#{$prefix}-bottom-#{$value} {
+      margin-bottom: em($value) !important;
+    }
+
+    .#{$prefix}-left-#{$value} {
+      margin-left: em($value) !important;
+    }
+
+    .#{$prefix}-right-#{$value} {
+      margin-right: em($value) !important;
+    }
+
+    .#{$prefix}-vertical-#{$value} {
+      margin-top: em($value) !important;
+      margin-bottom: em($value) !important;
+    }
+
+    .#{$prefix}-horizontal-#{$value} {
+      margin-left: em($value) !important;
+      margin-right: em($value) !important;
+    }
+  }
+}
+
+// Mixin for Font Weight Classes
+// This will generate classes like .fw-100, .fw-200, etc.
+@mixin generate-font-weight($prefix: 'fw') {
+  $weights: (100, 200, 300, 400, 500, 600, 700, 800, 900);
+
+  @each $weight in $weights {
+    .#{$prefix}-#{$weight} {
+      font-weight: #{$weight} !important;
+    }
+  }
+}
+
+// Mixin for Font Size Classes
+// This will generate classes like .fs-10, .fs-12, etc.
+@mixin generate-font-size($prefix: 'fs') {
+  $sizes: (10, 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64);
+
+  @each $size in $sizes {
+    .#{$prefix}-#{$size} {
+      font-size: em($size) !important;
+    }
+  }
+}
+
+// Mixin for Border Radius Classes
+// This will generate classes like .br-4, .br-8, etc.
+@mixin generate-border-radius($prefix: 'br') {
+  $radii: (4, 8, 12, 16, 24, 32, 40, 50);
+
+  @each $radius in $radii {
+    .#{$prefix}-#{$radius} {
+      border-radius: em($radius) !important;
+    }
+  }
+}
+
+// Mixin for Text Alignment Classes
+// This will generate classes like .text-left, .text-center, etc.
+@mixin generate-text-alignment($prefix: 'text') {
+  $alignments: (left, center, right, justify);
+
+  @each $alignment in $alignments {
+    .#{$prefix}-#{$alignment} {
+      text-align: #{$alignment} !important;
+    }
+  }
+}
+
+// Mixin for Width and Height Percentages
+// This will generate classes like .w-25, .h-50, etc.
+@mixin generate-size-percent() {
+  $percents: (0, 25, 33, 50, 66, 75, 100);
+
+  @each $p in $percents {
+    .w-#{$p} {
+      width: #{$p + '%'};
+    }
+    .h-#{$p} {
+      height: #{$p + '%'};
+    }
+  }
+}
+
+// Generate Utility Classes
+@include generate-padding();
+@include generate-margin();
+@include generate-font-weight();
+@include generate-font-size();
+@include generate-border-radius();
+@include generate-text-alignment();
+@include generate-size-percent();
+
+// Sample usage
+// <div class="padding-8">Padding 8px</div>
+// <div class="padding-16">Padding 16px</div>
+// <div class="padding-horizontal-32">Padding Horizontal 32px</div>
+// <div class="margin-top-24">Margin Top 24px</div>
+// <div class="fw-700">Bold Text</div>
+// <div class="fs-20">Font Size 20px</div>
+// <div class="br-16">Rounded Corners</div>
+// <p class="text-right">This text is aligned right.</p>
+// <p class="text-justify">This text is justified.</p>
+
+/*************** FLEX UTILITY CLASSES **********/
+
+// Define default flex container
+// .flex {
+//   display: flex;
+// }
+
+// Define available flex properties
+$directions: ('row', 'row-reverse', 'column', 'column-reverse');
+$justifies: (
+  'flex-start',
+  'flex-end',
+  'center',
+  'space-between',
+  'space-around'
+);
+$aligns: ('stretch', 'flex-start', 'flex-end', 'center', 'baseline');
+$gaps: (4, 8, 12, 16, 24, 32, 40); // Optional gap sizes
+
+// Generate flex-direction classes
+// Generate flex utility classes for different directions, justifications, and alignments
+// This will create classes like .flex-row, .flex-column, etc.
+@each $direction in $directions {
+  .flex-#{$direction} {
+    display: flex;
+    flex-direction: #{$direction};
+  }
+
+  // Generate justify-content classes
+  // This will create classes like .flex-row-flex-end, .flex-column-center, etc.
+  @each $justify in $justifies {
+    .flex-#{$direction}-#{$justify} {
+      display: flex;
+      flex-direction: #{$direction};
+      justify-content: #{$justify};
+    }
+
+    // Generate align-items classes
+    // This will create classes like .flex-row-flex-end-center, etc.
+    @each $align in $aligns {
+      .flex-#{$direction}-#{$justify}-#{$align} {
+        display: flex;
+        flex-direction: #{$direction};
+        justify-content: #{$justify};
+        align-items: #{$align};
+      }
+    }
+  }
+}
+
+// Generate gap utility classes
+@each $gap in $gaps {
+  .gap-#{$gap} {
+    gap: em($gap);
+  }
+}
+
+// sample html to use these classes
+// <div class="flex flex-row-flex-end-center gap-16 fw-700 padding-16 margin-vertical-8 margin-horizontal-4 br-8 some-class"
+//    style="border: 1px solid">
+//     <div>Item 1</div>
+//     <div>Item 2</div>
+//   </div>

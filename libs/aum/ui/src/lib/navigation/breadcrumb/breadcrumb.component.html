@@ -1,0 +1,82 @@
+@let breadcrumbs = (breadcrumbs$ | async); @if (breadcrumbs?.length) {
+<nav class="aum-breadcrumb">
+  @if (breadcrumbs!.length <= 2) { @for (item of breadcrumbs!;track $index; let
+  last = $last) { @if (breadcrumbs!.length === 1 || last) {
+  <span>{{ item.title }}</span>
+  } @else {
+  <a [routerLink]="item.route" class="aum-breadcrumb-clickable">
+    {{ item.title }}
+  </a>
+  <span> &gt; </span>
+  } } } @else {
+  <!-- First breadcrumb -->
+  <a [routerLink]="breadcrumbs![0].route" class="aum-breadcrumb-clickable">
+    {{ breadcrumbs![0].title }}
+  </a>
+  <span> &gt; </span>
+
+  <!-- Truncated middle breadcrumb menu -->
+  <a [matMenuTriggerFor]="breadcrumbMenu" class="aum-breadcrumb-clickable">
+    ...
+  </a>
+  <mat-menu #breadcrumbMenu="matMenu">
+    @for (item of breadcrumbs!.slice(1, breadcrumbs!.length - 1);track $index) {
+    <button
+      mat-menu-item
+      [routerLink]="item.route"
+      class="aum-breadcrumb-clickable"
+    >
+      {{ item.title }}
+    </button>
+    }
+  </mat-menu>
+
+  <span> &gt; </span>
+
+  <!-- Last breadcrumb -->
+  <span>{{ breadcrumbs![breadcrumbs!.length - 1].title }}</span>
+  }
+</nav>
+}
+
+<!-- <ng-container *ngIf="breadcrumbs$ | async as breadcrumbs">
+    <nav class="breadcrumb-nav">
+      Show full breadcrumbs if 3 or fewer
+      <ng-container *ngIf="breadcrumbs.length <= 3; else truncatedBreadcrumbs">
+        <ng-container *ngFor="let item of breadcrumbs; let last = last">
+          <a [routerLink]="item.route">{{ item.title }}</a>
+          <span *ngIf="!last"> &gt; </span>
+        </ng-container>
+      </ng-container>
+
+      Truncated breadcrumbs if more than 3
+      <ng-template #truncatedBreadcrumbs>
+        First breadcrumb
+        <a [routerLink]="breadcrumbs[0].route">{{ breadcrumbs[0].title }}</a>
+        <span> &gt; </span>
+
+        Dropdown for middle items
+        <a [matMenuTriggerFor]="breadcrumbMenu">...</a>
+        <mat-menu #breadcrumbMenu="matMenu">
+          <button
+            *ngFor="let item of breadcrumbs.slice(1, breadcrumbs.length - 2)"
+            mat-menu-item
+            [routerLink]="item.route"
+          >
+            {{ item.title }}
+          </button>
+        </mat-menu>
+        <span> &gt; </span>
+
+        Last two items
+        <a [routerLink]="breadcrumbs[breadcrumbs.length - 2].route">
+          {{ breadcrumbs[breadcrumbs.length - 2].title }}
+        </a>
+        <span> &gt; </span>
+
+        <a [routerLink]="breadcrumbs[breadcrumbs.length - 1].route">
+          {{ breadcrumbs[breadcrumbs.length - 1].title }}
+        </a>
+      </ng-template>
+    </nav>
+  </ng-container> -->

@@ -1,0 +1,37 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body class="agentic-dashboard">
+    <!-- <agentic-banner></agentic-banner> -->
+
+    <div class="agentic-dashboard-header margin-40 text-center">
+      <span class="fw-600 fs-24">Recent Agents</span>
+      <aum-button
+        [value]="'Test Button'"
+        [tooltip]="'Dummy tooltip'"
+        [type]="'filled'"
+      ></aum-button>
+      <aum-button
+        [value]="'Test Button'"
+        [disabled]="true"
+        [type]="'filled'"
+      ></aum-button>
+      <aum-button
+        [value]="'Test Button'"
+        [disabled]="true"
+        [type]="'basic'"
+      ></aum-button>
+      <aum-button
+        [value]="'Test Button'"
+        [disabled]="true"
+        [type]="'outlined'"
+      ></aum-button>
+    </div>
+
+    <!-- <agentic-agent-list [agentList]="agentList"></agentic-agent-list> -->
+
+    <div class="agentic-dashboard-header margin-48 text-center">
+      <span class="fw-600 fs-24">Trending Agents</span>
+    </div>
+
+    <!-- <agentic-agent-list [agentList]="agentList"></agentic-agent-list> -->
+  </div>
+</aum-page>

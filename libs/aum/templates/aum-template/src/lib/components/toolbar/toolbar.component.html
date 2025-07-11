@@ -1,0 +1,73 @@
+<mat-toolbar>
+  <div class="aum-toolbar flex-row-space-between-center">
+    <!-- left side of the toolbar -->
+    <div class="aum-toolbar-left flex-row-flex-start-center gap-4">
+      <!-- <img [src]="rLogo" alt="r-logo" /> -->
+      <button
+        mat-icon-button
+        aria-label="hamburger-icon-button"
+        (click)="toggleMenu()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="flex-column-center-flex-start gap-4">
+        <!-- <img [src]="aumAiLogo" alt="ai-logo" /> -->
+        <aum-breadcrumb></aum-breadcrumb>
+      </div>
+    </div>
+
+    <!-- center space of the toolbar -->
+    <div class="aum-toolbar-center">
+      <!-- <div class="flex-row-center-center">center space for search input</div> -->
+    </div>
+
+    <!-- right side of the toolbar -->
+    <div class="aum-toolbar-right">
+      <div class="flex-row-flex-end-center gap-4 padding-right-8">
+        <button
+          mat-icon-button
+          aria-label="Toggle theme"
+          [matTooltip]="getThemeTooltip()"
+          (click)="toggleTheme()"
+        >
+          <mat-icon>{{ themeIcon() }}</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          [matMenuTriggerFor]="toobarMenu"
+          matTooltip="Preferences"
+          aria-label="Example icon-button with a menu"
+        >
+          <mat-icon>account_circle</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <mat-menu #toobarMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>My Profile</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="languagesMenu">
+      <mat-icon>language</mat-icon>
+      <span>Language</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+  <mat-menu #languagesMenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>abc</mat-icon>
+      <span>English</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon>currency_yen</mat-icon>
+      <span>Japanese</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

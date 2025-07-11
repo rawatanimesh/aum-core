@@ -1,0 +1,15 @@
+.aum-toolbar {
+  width: 100%;
+  &-left {
+    width: 30%;
+    // background-color: aquamarine;
+  }
+  &-center {
+    width: 40%;
+    // background-color: lightcoral;
+  }
+  &-right {
+    width: 30%;
+    // background-color: lightblue;
+  }
+}

@@ -1,0 +1,33 @@
+@use 'functions' as *;
+// @use '@angular/material' as mat;
+
+// :root {
+//   @include mat.button-overrides(
+//     (
+//       outlined-state-layer-color: green,
+//       outlined-container-height: em(20),
+//     )
+//   );
+// }
+
+.aum-button {
+  .mat-mdc-outlined-button:not(:disabled) {
+    border-color: var(--mat-sys-primary);
+    background-color: var(--mat-sys-surface);
+  }
+
+  &-small {
+    padding: em(4) em(12) !important;
+    height: em(32) !important;
+    .mat-mdc-button-touch-target {
+      height: em(32) !important;
+    }
+  }
+  &-large {
+    padding: em(8) em(16) !important;
+    height: em(41) !important;
+    span.mat-mdc-button-touch-target {
+      height: em(41) !important;
+    }
+  }
+}

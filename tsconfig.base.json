@@ -14,7 +14,16 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@aum-modules/dashboard": ["libs/modules/dashboard/src/index.ts"],
+      "@aum/aum-template": ["libs/aum/templates/aum-template/src/index.ts"],
+      "@aum/theme": ["libs/aum/theme/src/index.ts"],
+      "@aum/ui/buttons": ["libs/aum/ui/src/lib/buttons/index.ts"],
+      "@aum/ui/layout": ["libs/aum/ui/src/lib/layout/index.ts"],
+      "@aum/ui/navigation": ["libs/aum/ui/src/lib/navigation/index.ts"],
+      "@aum/utils/interfaces": ["libs/aum/utils/src/lib/interfaces/index.ts"],
+      "@aum/utils/services": ["libs/aum/utils/src/lib/services/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

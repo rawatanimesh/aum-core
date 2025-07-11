@@ -1,0 +1,20 @@
+@import './themes/theme';
+@import './abstracts/utilities.scss';
+
+/* Reset browser default body margin */
+body {
+  margin: 0;
+  font-family: Roboto;
+}
+a {
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
+
+.unstyled-button {
+  all: unset; // removes default button styles
+  cursor: pointer;
+}

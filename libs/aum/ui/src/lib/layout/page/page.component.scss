@@ -1,0 +1,111 @@
+@use 'variables.scss' as *;
+@use 'mixins.scss' as *;
+$box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.3);
+:host::ng-deep {
+  .hide-back-drop {
+    .mat-drawer-backdrop.mat-drawer-shown {
+      visibility: hidden !important;
+    }
+  }
+}
+
+.aum-page {
+  position: relative;
+  background-color: var(--mat-sys-surface);
+  width: 100%;
+  // height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.aum-page-header,
+.aum-page-footer {
+  background-color: white;
+  height: 3.692em;
+  width: 100%;
+  padding: 0 0.75em 0 0.75em;
+  box-shadow: $box-shadow;
+  // @include flex-content(space-between);
+  position: relative;
+  z-index: 9;
+}
+.aum-page-body {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  // overflow: hidden;
+}
+.aum-page-footer {
+  background-color: white;
+  height: 4.923em;
+  width: 100%;
+  padding: 0 0.75em 0 1.84em;
+  box-shadow: 0 0 0.924em rgba(0, 0, 0, 0.1);
+  // @include flex-content(space-between);
+  position: relative;
+  z-index: 9;
+}
+.aum-page-container {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  mat-sidenav {
+    height: 100%;
+    overflow: hidden;
+    border: none;
+    box-shadow: $box-shadow;
+    background-color: transparent;
+  }
+}
+.page-header-left {
+  flex: 1 1 0;
+  @include flex-content(felx-start);
+  i {
+    font-size: 1.8em;
+  }
+}
+.page-header-left-text {
+  margin: 0.769em;
+  .page-header-left-title-map {
+    color: #ff008c;
+    font-size: 1.923em;
+    margin-top: 0.1em;
+    line-height: 110%;
+    white-space: nowrap;
+  }
+  .page-header-left-subtitle-map {
+    font-style: italic;
+    font-size: 1.231em;
+    color: #000;
+    line-height: 110%;
+  }
+}
+.page-header-right {
+  ::ng-deep {
+    .page-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+  flex: 1 1 0;
+  @include flex-content(flex-end);
+}
+.page-header-middle {
+  @include flex-content();
+}
+.aum-page-body-content {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.page-body-sidebar {
+  position: absolute;
+  z-index: 99;
+  background-color: white;
+  width: 28.923em;
+  height: 100%;
+  top: 0;
+  right: 0;
+  box-shadow: 0 0 0.385em 0 #ddd;
+}

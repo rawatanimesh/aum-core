@@ -1,0 +1,20 @@
+{
+  "name": "aum-template",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/aum/templates/aum-template/src",
+  "prefix": "aum",
+  "projectType": "library",
+  "tags": ["aum-template"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/aum/templates/aum-template/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

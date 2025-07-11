@@ -1,0 +1,110 @@
+<div class="aum-page">
+  <!-- <div class="aum-page-header" *ngIf="pageHeader">
+    <div class="page-header-left">
+      <div class="page-header-left-text">
+        <ng-content
+          *ngIf="!pageHeaderLeft"
+          select="[header-left-content]"
+        ></ng-content>
+        <app-breadcrumb
+          *ngIf="pageHeaderLeft"
+          [pageInfo]="pageInfo"
+          (onClick)="breadCrumbClick($event)"
+        ></app-breadcrumb>
+      </div>
+    </div>
+    <div class="page-header-middle">
+      <ng-content select="[header-middle-content]"></ng-content>
+    </div>
+    <div class="page-header-right">
+      <ng-content
+        *ngIf="actions.length === 0"
+        select="[header-actions]"
+      ></ng-content>
+      <ng-container *ngIf="actions && actions.length > 0">
+        <div *ngFor="let item of actions">
+          <app-mat-button
+            *ngIf="item.dialogRouting"
+            [type]="'icon'"
+            [fontSet]="'icomoon'"
+            [iconType]="'fontset'"
+            [iconName]="item.icon"
+            [appTippyTitle]="item.label | translate"
+            appRouterLink="item.appRouterLink"
+            [enableDebounce]="false"
+            [queryParams]="item.queryParams"
+            [disabled]="item.disabled"
+          >
+          </app-mat-button>
+          <app-mat-button
+            *ngIf="!item.dialogRouting"
+            [type]="'icon'"
+            [fontSet]="'icomoon'"
+            [iconType]="'fontset'"
+            [iconName]="item.icon"
+            [appTippyTitle]="item.label | translate"
+            (clickButton)="pageAction(item)"
+            [disabled]="item.disabled"
+          >
+          </app-mat-button>
+        </div>
+      </ng-container>
+    </div>
+  </div> -->
+  <div
+    class="aum-page-body"
+    [style.height]="
+      pageHeader && !pageFooter
+        ? 'calc(100% - 3.692em)'
+        : !pageHeader && pageFooter
+        ? 'calc(100% - 4.923em)'
+        : pageHeader && pageFooter
+        ? 'calc(100% - 8.615em)'
+        : null
+    "
+    [style.width]="pageType === 'form' ? '70%' : '100%'"
+    [style.margin]="pageType === 'form' ? '0 auto' : '0'"
+  >
+    <!-- <mat-sidenav-container
+      [hasBackdrop]="false"
+      class="aum-page-container"
+      [class.hide-back-drop]="!showBackDrop"
+    >
+      <mat-sidenav
+        [mode]="sideMode"
+        [disableClose]="sideDisableClose"
+        [position]="sidePosition"
+        [opened]="showSide"
+        [autoFocus]="sideAutofocus"
+        [style.margin]="sideMargin"
+        [style.height]="calcHeight()"
+        [style.borderRadius]="sideRadius"
+        (openedStart)="triggerSide('open')"
+        (closed)="triggerSide('close')"
+      >
+        <ng-content
+          select="[page-sidebar]"
+          class="page-body-sidebar"
+        ></ng-content>
+      </mat-sidenav>
+
+      <mat-sidenav-content> -->
+    <!-- <div
+          class="aum-page-body-content"
+          [style.paddingRight]="showSide && sideMode === 'side' ? '0em' : null"
+        > -->
+    <ng-content select="[aum-page-body]"></ng-content>
+    <!-- </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container> -->
+  </div>
+
+  <!-- <div class="aum-page-footer" *ngIf="pageFooter"> -->
+  <!-- <div
+      [style.width]="pageType === 'form' ? '70%' : '100%'"
+      [style.margin]="pageType === 'form' ? '0 auto' : '0'"
+    > -->
+  <!-- <ng-content select="[aum-page-footer]"></ng-content> -->
+  <!-- </div> -->
+  <!-- </div> -->
+</div>

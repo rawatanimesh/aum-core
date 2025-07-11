@@ -21,7 +21,10 @@
             "input": "apps/aum-core/public"
           }
         ],
-        "styles": ["apps/aum-core/src/styles.scss"]
+        "styles": ["apps/aum-core/src/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["libs/aum/theme/src/lib/styles/abstracts/"]
+        }
       },
       "configurations": {
         "production": {

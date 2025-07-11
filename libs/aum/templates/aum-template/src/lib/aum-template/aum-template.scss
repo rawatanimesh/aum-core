@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+@use 'functions' as *;
+
+.aum-page {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  &-header {
+    // height: 5em;
+    height: em(51.7);
+    border-bottom: em(1) solid #ebebeb; //51.7+1 ~52
+    .mat-toolbar-single-row {
+      padding: 0;
+      gap: em(8);
+      height: 2.36em; //~52px
+    }
+  }
+  &-body {
+    width: 100%;
+    height: calc(100vh - em(52.5)) !important;
+    &-container {
+      width: 100%;
+      height: 100%;
+      .navSide {
+        width: em(300);
+      }
+    }
+    .mat-drawer:not(.mat-drawer-side) {
+      box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.3);
+      border-radius: 0;
+    }
+  }
+}

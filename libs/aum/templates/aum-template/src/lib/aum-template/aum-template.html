@@ -1,0 +1,36 @@
+<div class="aum-page">
+  <div class="aum-page-header">
+    <aum-toolbar (sideMenuToggle)="toggleSideNav()"></aum-toolbar>
+  </div>
+
+  <div class="aum-page-body">
+    <mat-sidenav-container class="aum-page-body-container" [hasBackdrop]="true">
+      <!-- Left Sidenav -->
+      <mat-sidenav #sidenav class="navSide" mode="over">
+        <aum-sidenav
+          (menuItemClicked)="updateBreadCrumbs($event); toggleSideNav()"
+        ></aum-sidenav>
+      </mat-sidenav>
+
+      <!-- Right Empty Sidenav (optional) -->
+      <mat-sidenav mode="over" position="end" opened="false"> </mat-sidenav>
+
+      <!-- Main Content -->
+      <mat-sidenav-content>
+        <!-- <div
+        class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"
+        [style.display]="'none'"
+        id="application-loader-with-overlay"
+      >
+        <app-overlay-loader class="create_loader"></app-overlay-loader>
+      </div> -->
+        <!-- <app-overlay-loader
+        class="create_loader"
+        id="application-loader"
+        [style.display]="isAppMount ? 'block' : 'none'"
+      ></app-overlay-loader> -->
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>

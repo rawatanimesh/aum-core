@@ -1,0 +1,10 @@
+@use 'functions' as *;
+
+.aum-card {
+  border: em(1) solid var(--mat-sys-primary);
+  background-color: var(--mat-sys-surface);
+  max-width: em(400);
+}
+.aum-card-shadow {
+  box-shadow: 0 em(2) em(10) em(5) #0000001a;
+}

@@ -1,0 +1,48 @@
+<div class="aum-button">
+  @switch (type) { @case ('outlined') {
+  <button
+    matButton="outlined"
+    [attr.aria-label]="value"
+    [disabled]="disabled"
+    [matTooltip]="tooltip"
+    [ngClass]="sizeClass"
+    (click)="clickButton.emit()"
+  >
+    {{ value }}
+  </button>
+  } @case ('filled') {
+  <button
+    matButton="filled"
+    [attr.aria-label]="value"
+    [disabled]="disabled"
+    [matTooltip]="tooltip"
+    [ngClass]="sizeClass"
+    (click)="clickButton.emit()"
+  >
+    {{ value }}
+  </button>
+  } @case ('basic') {
+  <button
+    matButton
+    [attr.aria-label]="value"
+    [disabled]="disabled"
+    [matTooltip]="tooltip"
+    [ngClass]="sizeClass"
+    (click)="clickButton.emit()"
+  >
+    {{ value }}
+  </button>
+  } @case ('icon') {
+  <button
+    matIconButton
+    [attr.aria-label]="value"
+    [disabled]="disabled"
+    [matTooltip]="tooltip"
+    (click)="clickButton.emit()"
+  >
+    @if (icon) {
+    <mat-icon>{{ icon }}</mat-icon>
+    }
+  </button>
+  } }
+</div>

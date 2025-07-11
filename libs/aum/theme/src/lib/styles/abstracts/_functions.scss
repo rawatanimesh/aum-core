@@ -1,0 +1,25 @@
+/*
+  Global functions for application goes here
+ */
+
+// Function to convert px to em based on a base font size (default: 13px)
+// @function em($px, $base: 13) {
+//   @return calc($px / $base) * 1em;
+// }
+@function em($px, $base: 16) {
+  @return ($px / $base) * 1em;
+}
+// how to import this file to use functions
+// @import 'functions';
+
+// Example Usage in SCSS
+// .some-class {
+//   font-size: em(13)  //compiles to font-size: 1em;
+// }
+
+// sample html to use this function
+// <div class="flex flex-row-flex-end-center gap-16 fw-700 padding-16 margin-vertical-8 margin-horizontal-4 br-8 some-class"
+//    style="border: 1px solid">
+//     <div>Item 1</div>
+//     <div>Item 2</div>
+//   </div>
