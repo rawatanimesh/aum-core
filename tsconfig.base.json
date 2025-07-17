@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@aum-modules/dashboard": ["libs/modules/dashboard/src/index.ts"],
+      "@aum-modules/playground": ["libs/modules/playground/src/index.ts"],
       "@aum/aum-template": ["libs/aum/templates/aum-template/src/index.ts"],
       "@aum/theme": ["libs/aum/theme/src/index.ts"],
       "@aum/ui/buttons": ["libs/aum/ui/src/lib/buttons/index.ts"],

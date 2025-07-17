@@ -9,33 +9,33 @@
 
   @each $value in $values {
     .#{$prefix}-#{$value} {
-      padding: em($value) !important;
+      padding: rem($value) !important;
     }
 
     .#{$prefix}-top-#{$value} {
-      padding-top: em($value) !important;
+      padding-top: rem($value) !important;
     }
 
     .#{$prefix}-bottom-#{$value} {
-      padding-bottom: em($value) !important;
+      padding-bottom: rem($value) !important;
     }
 
     .#{$prefix}-left-#{$value} {
-      padding-left: em($value) !important;
+      padding-left: rem($value) !important;
     }
 
     .#{$prefix}-right-#{$value} {
-      padding-right: em($value) !important;
+      padding-right: rem($value) !important;
     }
 
     .#{$prefix}-vertical-#{$value} {
-      padding-top: em($value) !important;
-      padding-bottom: em($value) !important;
+      padding-top: rem($value) !important;
+      padding-bottom: rem($value) !important;
     }
 
     .#{$prefix}-horizontal-#{$value} {
-      padding-left: em($value) !important;
-      padding-right: em($value) !important;
+      padding-left: rem($value) !important;
+      padding-right: rem($value) !important;
     }
   }
 }
@@ -47,33 +47,33 @@
 
   @each $value in $values {
     .#{$prefix}-#{$value} {
-      margin: em($value) !important;
+      margin: rem($value) !important;
     }
 
     .#{$prefix}-top-#{$value} {
-      margin-top: em($value) !important;
+      margin-top: rem($value) !important;
     }
 
     .#{$prefix}-bottom-#{$value} {
-      margin-bottom: em($value) !important;
+      margin-bottom: rem($value) !important;
     }
 
     .#{$prefix}-left-#{$value} {
-      margin-left: em($value) !important;
+      margin-left: rem($value) !important;
     }
 
     .#{$prefix}-right-#{$value} {
-      margin-right: em($value) !important;
+      margin-right: rem($value) !important;
     }
 
     .#{$prefix}-vertical-#{$value} {
-      margin-top: em($value) !important;
-      margin-bottom: em($value) !important;
+      margin-top: rem($value) !important;
+      margin-bottom: rem($value) !important;
     }
 
     .#{$prefix}-horizontal-#{$value} {
-      margin-left: em($value) !important;
-      margin-right: em($value) !important;
+      margin-left: rem($value) !important;
+      margin-right: rem($value) !important;
     }
   }
 }
@@ -97,7 +97,7 @@
 
   @each $size in $sizes {
     .#{$prefix}-#{$size} {
-      font-size: em($size) !important;
+      font-size: rem($size) !important;
     }
   }
 }
@@ -109,7 +109,7 @@
 
   @each $radius in $radii {
     .#{$prefix}-#{$radius} {
-      border-radius: em($radius) !important;
+      border-radius: rem($radius) !important;
     }
   }
 }
@@ -214,7 +214,7 @@ $gaps: (4, 8, 12, 16, 24, 32, 40); // Optional gap sizes
 // Generate gap utility classes
 @each $gap in $gaps {
   .gap-#{$gap} {
-    gap: em($gap);
+    gap: rem($gap);
   }
 }
 
