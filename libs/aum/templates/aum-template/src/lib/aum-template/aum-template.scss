@@ -10,22 +10,22 @@
   overflow: hidden;
   &-header {
     // height: 5em;
-    height: em(51.7);
-    border-bottom: em(1) solid #ebebeb; //51.7+1 ~52
+    height: rem(52);
+    border-bottom: rem(0.9) solid #ebebeb; //51.7+1 ~52
     .mat-toolbar-single-row {
       padding: 0;
-      gap: em(8);
-      height: 2.36em; //~52px
+      gap: rem(8);
+      height: rem(52); //~52px
     }
   }
   &-body {
     width: 100%;
-    height: calc(100vh - em(52.5)) !important;
+    height: calc(100vh - rem(52.5)) !important;
     &-container {
       width: 100%;
       height: 100%;
       .navSide {
-        width: em(300);
+        width: rem(300);
       }
     }
     .mat-drawer:not(.mat-drawer-side) {

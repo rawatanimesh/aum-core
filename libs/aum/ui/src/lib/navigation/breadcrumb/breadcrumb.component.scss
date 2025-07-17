@@ -1,9 +1,9 @@
 @use 'functions' as *;
 
 .aum-breadcrumb {
-  font-size: em(9);
-  height: em(16);
-  line-height: em(16);
+  font-size: rem(12);
+  height: rem(16);
+  line-height: rem(16);
   &-clickable {
     cursor: pointer;
     color: var(--mat-sys-primary);

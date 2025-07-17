@@ -19,6 +19,11 @@
           {
             "glob": "**/*",
             "input": "apps/aum-core/public"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/aum/theme/src/assets/resources/svgs",
+            "output": "assets/svgs"
           }
         ],
         "styles": ["apps/aum-core/src/styles.scss"],

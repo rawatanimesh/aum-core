@@ -17,11 +17,11 @@ export const appRoutes: Route[] = [
         loadComponent: () =>
           import('@aum-modules/dashboard').then((m) => m.Dashboard),
       },
-      // {
-      //   path: 'playground',
-      //   loadComponent: () =>
-      //     import('@aum/playground').then((m) => m.PlaygroundComponent),
-      // },
+      {
+        path: 'playground',
+        loadComponent: () =>
+          import('@aum-modules/playground').then((m) => m.Playground),
+      },
       // // Launch agent from dashboard (shortcut route)
       // {
       //   path: 'email-agent',

@@ -5,7 +5,7 @@
 //   @include mat.button-overrides(
 //     (
 //       outlined-state-layer-color: green,
-//       outlined-container-height: em(20),
+//       outlined-container-height: rem(20),
 //     )
 //   );
 // }
@@ -17,17 +17,17 @@
   }
 
   &-small {
-    padding: em(4) em(12) !important;
-    height: em(32) !important;
+    padding: rem(4) rem(12) !important;
+    height: rem(28) !important;
     .mat-mdc-button-touch-target {
-      height: em(32) !important;
+      height: rem(28) !important;
     }
   }
   &-large {
-    padding: em(8) em(16) !important;
-    height: em(41) !important;
+    padding: rem(8) rem(16) !important;
+    height: rem(36) !important;
     span.mat-mdc-button-touch-target {
-      height: em(41) !important;
+      height: rem(36) !important;
     }
   }
 }
