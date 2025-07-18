@@ -1,0 +1,108 @@
+@switch (mode) { @case ('daterange') {
+<mat-form-field
+  class="aum-date-picker-root aum-date-picker-box"
+  appearance="outline"
+  [floatLabel]="'always'"
+>
+  <mat-label>{{ label }}</mat-label>
+
+  <mat-date-range-input
+    [required]="required"
+    [rangePicker]="rangePicker"
+    [min]="minDate"
+    [max]="maxDate"
+    [disabled]="disabled"
+  >
+    <input matInput matStartDate placeholder="Start date" />
+    <input matInput matEndDate placeholder="End date" />
+  </mat-date-range-input>
+
+  <mat-datepicker-toggle matIconSuffix [for]="rangePicker" />
+
+  <mat-date-range-picker #rangePicker (closed)="onDateRangeChange()">
+  </mat-date-range-picker>
+</mat-form-field>
+} @case ('date') {
+<mat-form-field
+  class="aum-date-picker-root aum-date-picker-box"
+  appearance="outline"
+  [floatLabel]="'always'"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    placeholder="Select date"
+    [matDatepicker]="picker"
+    [required]="required"
+    [value]="isDate(value) ? value : null"
+    [min]="minDate"
+    [max]="maxDate"
+    [disabled]="disabled"
+    (dateChange)="onDateChange($event)"
+  />
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-datepicker #picker />
+</mat-form-field>
+}
+<!-- @case ('month') {
+<mat-form-field
+  class="aum-date-picker-root aum-date-picker-box"
+  appearance="outline"
+  [floatLabel]="'always'"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [matDatepicker]="monthPicker"
+    [value]="isDate(value) ? value : null"
+    [min]="minDate"
+    [max]="maxDate"
+    [disabled]="disabled"
+    (dateChange)="onDateChange($event)"
+  />
+  <mat-datepicker-toggle matIconSuffix [for]="monthPicker" />
+  <mat-datepicker
+    #monthPicker
+    startView="multi-year"
+    panelClass="month-picker"
+    (monthSelected)="onDateChange($event)"
+  />
+</mat-form-field>
+
+}  -->
+<!-- @case ('year') {
+<mat-form-field
+  class="aum-date-picker-root aum-date-picker-box"
+  appearance="outline"
+  [floatLabel]="'always'"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [matDatepicker]="yearPicker"
+    [value]="isDate(value) ? value : null"
+    [min]="minDate"
+    [max]="maxDate"
+    [disabled]="disabled"
+    (dateChange)="onDateChange($event)"
+  />
+  <mat-datepicker-toggle matIconSuffix [for]="yearPicker" />
+  <mat-datepicker
+    #yearPicker
+    startView="multi-year"
+    panelClass="year-picker"
+    (yearSelected)="onDateChange($event)"
+  />
+</mat-form-field>
+} -->
+<!-- @case ('time') {
+<input
+  matInput
+  type="time"
+  [value]="value || ''"
+  [disabled]="disabled"
+  (change)="onTimeChange($event)"
+/>
+} -->
+
+}

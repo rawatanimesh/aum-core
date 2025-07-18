@@ -1,0 +1,42 @@
+<mat-form-field
+  class="aum-input-root"
+  [ngClass]="{'aum-input-box': !textarea}"
+  [floatLabel]="'always'"
+  appearance="outline"
+>
+  <mat-label>{{ label }}</mat-label>
+  <ng-container *ngIf="!textarea">
+    <input
+      matInput
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+      [type]="type"
+      [value]="value"
+      [required]="required"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      (focus)="onFocus()"
+    />
+  </ng-container>
+  <ng-container *ngIf="textarea">
+    <textarea
+      matInput
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+      [value]="value"
+      [required]="required"
+      [placeholder]="placeholder"
+      [rows]="rows"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      (focus)="onFocus()"
+    ></textarea>
+  </ng-container>
+</mat-form-field>

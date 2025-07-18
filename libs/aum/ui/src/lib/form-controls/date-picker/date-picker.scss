@@ -1,0 +1,84 @@
+@use 'functions' as *;
+
+.aum-date-picker-root {
+  margin: rem(18) 0;
+  position: relative;
+  width: 100%;
+
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    --mat-mdc-form-field-label-transform: translateY(
+        calc(calc(22px + var(--mat-form-field-container-height, 56px) / 2) * -1)
+      )
+      scale(var(--mat-mdc-form-field-floating-label-scale, 0.75)) !important;
+  }
+
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mat-mdc-notch-piece {
+    border-top: 1px solid;
+  }
+  .mdc-notched-outline__leading {
+    border-right: none !important;
+  }
+  .mdc-notched-outline__notch {
+    border-right: none !important;
+  }
+  .mdc-notched-outline__trailing {
+    border-left: none !important;
+  }
+  .mdc-text-field--outlined.mdc-text-field--disabled
+    .mdc-notched-outline__notch {
+    border-top: 1px solid
+      var(
+        --mat-form-field-outlined-disabled-outline-color,
+        color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent)
+      );
+  }
+  .mdc-text-field--outlined:not(
+      .mdc-text-field--disabled
+    ).mdc-text-field--focused
+    .mdc-notched-outline
+    .mat-mdc-notch-piece {
+    border-width: var(--mat-form-field-outlined-focus-outline-width, 1px);
+  }
+  .mdc-floating-label--required:not(
+      .mdc-floating-label--hide-required-marker
+    )::after {
+    font-weight: 900;
+    margin-left: rem(4) !important;
+  }
+  .mat-mdc-form-field-infix {
+    letter-spacing: normal !important;
+    display: flex;
+    height: 24px !important;
+  }
+}
+
+//same styling as aum-input-box to change height
+.aum-date-picker-box {
+  .mat-mdc-text-field-wrapper {
+    height: 48px !important;
+  }
+  .mat-mdc-form-field-infix {
+    min-height: 48px !important;
+    height: 48px !important;
+    padding-top: var(
+      --mat-form-field-container-vertical-padding,
+      13px
+    ) !important;
+    padding-bottom: var(
+      --mat-form-field-container-vertical-padding,
+      13px
+    ) !important;
+    // input {
+    //   height: 100% !important;
+    // }
+    // .mat-mdc-icon-button {
+    //   height: 100%;
+    // }
+    // .mat-mdc-icon-button {
+    //   padding: 0 !important;
+    // }
+  }
+}
