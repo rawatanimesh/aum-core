@@ -1,0 +1,37 @@
+@use 'functions' as *;
+
+.aum-generic-dialog {
+  color: var(--mat-sys-on-surface);
+  &-header {
+    padding: rem(14) rem(16);
+    height: rem(30);
+    border-bottom: rem(1) solid #ebebeb;
+    &-title {
+      font-size: rem(18);
+    }
+  }
+  &-body {
+    padding: rem(16);
+    overflow: auto;
+    max-height: 70vh;
+    &:empty {
+      display: none;
+    }
+  }
+  &-footer {
+    padding: rem(14) rem(16);
+    border-top: rem(1) solid #ebebeb;
+    &:empty {
+      display: none;
+    }
+  }
+}
+
+//overwrites
+.aum-dialog-container.mat-mdc-dialog-panel {
+  max-width: 90vw !important;
+  width: 100%;
+}
+.mdc-dialog--open .mat-mdc-dialog-surface {
+  border-radius: rem(8) !important;
+}

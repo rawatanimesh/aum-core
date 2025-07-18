@@ -1,0 +1,28 @@
+<div class="aum-generic-dialog">
+  <!-- HEADER -->
+  <div class="aum-generic-dialog-header flex-row-space-between-center fw-600">
+    <div class="aum-generic-dialog-header-title">
+      <ng-content select="[dialog-header]" />
+    </div>
+
+    @if (showCloseButton) {
+    <aum-button
+      [type]="'icon'"
+      [icon]="'close'"
+      [tooltip]="'Close'"
+      (clickButton)="close()"
+    >
+    </aum-button>
+    }
+  </div>
+
+  <!-- BODY -->
+  <div class="aum-generic-dialog-body">
+    <ng-content select="[dialog-body]" />
+  </div>
+
+  <!-- FOOTER -->
+  <div class="aum-generic-dialog-footer">
+    <ng-content select="[dialog-footer]" />
+  </div>
+</div>

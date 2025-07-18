@@ -1,0 +1,36 @@
+<div class="aum-confirmation-dialog flex-column-center-center">
+  <mat-dialog-content>
+    <div class="aum-confirmation-dialog-content flex-column-center-center">
+      @if (data.confirmationImage) {
+      <div
+        class="aum-confirmation-dialog-content-image flex-column-center-center"
+      >
+        <img [src]="data.confirmationImage" class="w-100" alt="confirmation" />
+      </div>
+
+      } @if (data.title) {
+      <div class="text-center fw-700 margin-bottom-4">{{ data.title }}</div>
+      } @if (data.message) {
+      <div class="text-center">{{ data.message }}</div>
+      }
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="flex-row-center-center gap-16">
+      @if (data.cancelText) {
+      <aum-button
+        [type]="'outlined'"
+        [value]="data.cancelText || 'Cancel'"
+        (clickButton)="onCancel()"
+      ></aum-button>
+      } @if (data.confirmText !== '') {
+      <aum-button
+        [type]="'filled'"
+        [value]="data.confirmText || 'Ok'"
+        (clickButton)="onConfirm()"
+      ></aum-button>
+      }
+    </div>
+  </mat-dialog-actions>
+</div>
