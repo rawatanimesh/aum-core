@@ -1,11 +1,5 @@
 # Angular UI Mods - AUM
 
-## https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial
-
-## Node version -
-
-v22.17.0
-
 ## Serve
 
 ```sh
@@ -31,9 +25,9 @@ primary: #FF008C, secondary: #ffffff, tertiary: #ffffff, neutral: #ffffff, neutr
 
 Refer link - https://material-foundation.github.io/material-theme-builder/
 
-## System varialbles (for themeing)
+## Node version -
 
-https://material.angular.dev/guide/system-variables
+v22.17.0
 
 ## Important points to note
 
@@ -58,3 +52,15 @@ https://material.angular.dev/guide/system-variables
 - Use button with class unstyled-button for custom click events
 
 - Test your changes in dark mode too
+
+## Important Links
+
+- NX Angular Monorepo tutorial : https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial
+
+- Angular Material Components : https://material.angular.dev/components/categories
+
+- Angular Material system materials : https://material.angular.dev/guide/system-variables
+
+- Material fonts and icons : https://fonts.google.com/
+
+- Angular docs : https://angular.dev/overview
