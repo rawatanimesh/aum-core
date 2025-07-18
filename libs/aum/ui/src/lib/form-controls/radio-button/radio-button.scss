@@ -1,0 +1,11 @@
+@use 'functions' as *;
+
+.aum-radio-button {
+  .mat-internal-form-field {
+    letter-spacing: normal !important;
+    margin-right: rem(8);
+  }
+  .mat-internal-form-field > label {
+    padding-left: 0 !important;
+  }
+}

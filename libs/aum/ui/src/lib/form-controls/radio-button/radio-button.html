@@ -1,0 +1,15 @@
+<mat-radio-group
+  class="aum-radio-button"
+  [value]="selectedValue"
+  (change)="onChange($event)"
+>
+  @for (opt of options; track opt.value) {
+  <mat-radio-button
+    [value]="opt.value"
+    [disabled]="opt.disabled ??  false"
+    [labelPosition]="labelPosition"
+  >
+    {{ opt.label }}
+  </mat-radio-button>
+  }
+</mat-radio-group>

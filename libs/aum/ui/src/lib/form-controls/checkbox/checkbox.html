@@ -1,0 +1,11 @@
+<mat-checkbox
+  class="aum-checkbox"
+  [checked]="checked"
+  [indeterminate]="indeterminate"
+  [disabled]="disabled"
+  [labelPosition]="labelPosition"
+  (change)="onChange($event)"
+  (indeterminateChange)="onIndeterminateChange($event)"
+>
+  {{ label }}
+</mat-checkbox>
