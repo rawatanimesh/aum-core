@@ -1,0 +1,26 @@
+<aum-generic-dialog [showCloseButton]="true">
+  <div dialog-header>
+    <span>Dialog Header</span>
+  </div>
+
+  <div dialog-body>
+    @for (i of items; let index = $index; track index) {
+    <p>This is the body content #{{ index + 1 }}</p>
+    }
+  </div>
+
+  <div dialog-footer>
+    <div class="flex-row-flex-end-center gap-8">
+      <aum-button
+        [type]="'outlined'"
+        [value]="'Cancel'"
+        (clickButton)="closeDialog(false)"
+      ></aum-button>
+      <aum-button
+        [type]="'filled'"
+        [value]="'Proceed'"
+        (clickButton)="closeDialog(true)"
+      ></aum-button>
+    </div>
+  </div>
+</aum-generic-dialog>

@@ -1,1 +1,262 @@
-<p>Playground works!</p>
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <section>
+      <div class="example-label">Buttons</div>
+      <div class="example-button-row flex-row-space-between-center gap-4">
+        <aum-button
+          [type]="'outlined'"
+          [value]="'Outlined'"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'outlined'"
+          [size]="'small'"
+          [value]="'Outlined'"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'outlined'"
+          [size]="'large'"
+          [value]="'Disabled'"
+          [disabled]="true"
+          [tooltip]="'Disabled button'"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'basic'"
+          [value]="'Basic'"
+          [disabled]="false"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'basic'"
+          [value]="'Disabled'"
+          [disabled]="true"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Filled'"
+          [disabled]="false"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Filled'"
+          [size]="'small'"
+          [disabled]="false"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Disabled'"
+          [disabled]="true"
+          tooltip="Dummy tooltip"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'icon'"
+          [icon]="'more_vert'"
+          [tooltip]="'More options'"
+          (clickButton)="openMenu()"
+        ></aum-button>
+        <aum-button
+          [type]="'icon'"
+          [icon]="'open_in_new'"
+          [tooltip]="'More options'"
+          [disabled]="true"
+          (clickButton)="openMenu()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+
+    <section>
+      <div class="example-label">Dialogs</div>
+      <div class="example-button-row flex-row-flex-start-center gap-8">
+        <aum-button
+          [type]="'filled'"
+          [value]="'Confirmation Dialog'"
+          (clickButton)="openConfirmationDialog()"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Generic Dialog'"
+          (clickButton)="openGenericDialog()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="example-label">Snackbar</div>
+      <div class="example-button-row flex-row-flex-start-center gap-8">
+        <aum-button
+          [type]="'filled'"
+          [value]="'Success'"
+          (clickButton)="openSnackbar('success')"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Error'"
+          (clickButton)="openSnackbar('error')"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Warning'"
+          (clickButton)="openSnackbar('warning')"
+        ></aum-button>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Info'"
+          (clickButton)="openSnackbar('info')"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+
+    <section>
+      <div class="example-label">Checkbox & Radio</div>
+      <div class="example-button-row">
+        <section class="example-section">
+          <aum-checkbox
+            [label]="'Common Checkbox'"
+            [checked]="false"
+            [disabled]="false"
+            (checkedChange)="checkboxState('changed', $event)"
+            (indeterminateChange)="checkboxState('indeterminateChange', $event)"
+          ></aum-checkbox>
+          <aum-checkbox
+            [label]="'Common Checkbox'"
+            [indeterminate]="true"
+            [disabled]="false"
+            (checkedChange)="checkboxState('changed', $event)"
+            (indeterminateChange)="checkboxState('indeterminateChange', $event)"
+          ></aum-checkbox>
+          <aum-checkbox
+            [label]="'Common Checkbox'"
+            [checked]="true"
+            [disabled]="true"
+            (checkedChange)="checkboxState('changed', $event)"
+            (indeterminateChange)="checkboxState('indeterminateChange', $event)"
+          ></aum-checkbox>
+        </section>
+
+        <section class="example-section">
+          <div class="flex-column">
+            <aum-radio-button
+              [options]="[
+                { label: 'Option 1', value: 1, selected: false },
+                { label: 'Option 2', value: 2, selected: true },
+                { label: 'Option 3', value: 3, selected: false },
+                { label: 'Option 4', value: 4, disabled: true }
+              ]"
+              (selectionChange)="radioChange($event)"
+            ></aum-radio-button>
+            <aum-radio-button
+              [labelPosition]="'before'"
+              [options]="[
+                { label: 'Option 1', value: 1, selected: false },
+                { label: 'Option 2', value: 2, selected: true },
+                { label: 'Option 3', value: 3, selected: false },
+                { label: 'Option 4', value: 4, disabled: true }
+              ]"
+              (selectionChange)="radioChange($event)"
+            ></aum-radio-button>
+          </div>
+        </section>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="example-label">Input and Datepicker</div>
+      <div class="example-button-row">
+        <aum-input
+          [label]="'Favorite food'"
+          [placeholder]="'Ex. Pizza'"
+          [required]="true"
+          [value]="'Sushi'"
+          [disabled]="false"
+          (valueChange)="valueChange($event)"
+        ></aum-input>
+        <aum-input
+          [label]="'Favorite food'"
+          [placeholder]="'Ex. Pizza'"
+          [value]="'Sushi'"
+          [disabled]="true"
+        ></aum-input>
+        <aum-input
+          [textarea]="true"
+          [rows]="4"
+          [label]="'Leave a comment'"
+          [placeholder]="'Ex. It makes me feel...'"
+          [required]="true"
+          [value]="
+            'Ex. It makes me feel...Ex. It makes me feel...Ex. It makes me feel...'
+          "
+          [disabled]="false"
+        ></aum-input>
+        <aum-date-picker
+          [label]="'Choose a date'"
+          (dateSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a date range'"
+          [required]="true"
+          [mode]="'daterange'"
+          [disabled]="true"
+          (dateRangeSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a date range'"
+          [mode]="'daterange'"
+          (dateRangeSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a date range'"
+          [required]="true"
+          [mode]="'daterange'"
+          [disabled]="true"
+          (dateRangeSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <!-- <aum-date-picker
+          [label]="'Choose a month'"
+          [mode]="'month'"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a Year'"
+          [mode]="'year'"
+        ></aum-date-picker> -->
+        <!-- <aum-date-picker
+          [label]="'Choose Time'"
+          [mode]="'time'"
+        ></aum-date-picker> -->
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="example-label">Progress Bar</div>
+      <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="example-label">Spinner</div>
+      <mat-spinner></mat-spinner>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
+      <div class="example-label">Tab</div>
+      <mat-tab-group>
+        <mat-tab label="First"> Content 1 </mat-tab>
+        <mat-tab label="Second"> Content 2 </mat-tab>
+        <mat-tab label="Third"> Content 3 </mat-tab>
+      </mat-tab-group>
+    </section>
+    <mat-divider></mat-divider>
+  </div>
+</aum-page>

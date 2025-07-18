@@ -20,8 +20,11 @@
       "@aum/aum-template": ["libs/aum/templates/aum-template/src/index.ts"],
       "@aum/theme": ["libs/aum/theme/src/index.ts"],
       "@aum/ui/buttons": ["libs/aum/ui/src/lib/buttons/index.ts"],
+      "@aum/ui/dialogs": ["libs/aum/ui/src/lib/dialogs/index.ts"],
+      "@aum/ui/form-controls": ["libs/aum/ui/src/lib/form-controls/index.ts"],
       "@aum/ui/layout": ["libs/aum/ui/src/lib/layout/index.ts"],
       "@aum/ui/navigation": ["libs/aum/ui/src/lib/navigation/index.ts"],
+      "@aum/ui/utilities": ["libs/aum/ui/src/lib/utilities/index.ts"],
       "@aum/utils/interfaces": ["libs/aum/utils/src/lib/interfaces/index.ts"],
       "@aum/utils/services": ["libs/aum/utils/src/lib/services/index.ts"]
     }
