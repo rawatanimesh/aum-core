@@ -1,10 +1,13 @@
-<div class="aum-page">
-  <div class="aum-page-header">
+<div class="aum-template-page">
+  <div class="aum-template-page-header">
     <aum-toolbar (sideMenuToggle)="toggleSideNav()"></aum-toolbar>
   </div>
 
-  <div class="aum-page-body">
-    <mat-sidenav-container class="aum-page-body-container" [hasBackdrop]="true">
+  <div class="aum-template-page-body">
+    <mat-sidenav-container
+      class="aum-template-page-body-container"
+      [hasBackdrop]="true"
+    >
       <!-- Left Sidenav -->
       <mat-sidenav #sidenav class="navSide" mode="over">
         <aum-sidenav

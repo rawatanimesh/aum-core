@@ -36,7 +36,7 @@ export class ToolbarComponent {
   protected breadcrumbService = inject(BreadcrumbService);
   themeIcon = computed(() => this.themeService.themeIcon());
   rLogo = 'assets/svgs/R-logo.svg';
-  aumAiLogo = 'assets/svgs/aum-AI-Platform.svg';
+  aumAiLogo = 'assets/svgs/Agentic-AI-Platform.svg';
 
   toggleMenu(): void {
     this.sideMenuToggle.emit();
