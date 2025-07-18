@@ -1,0 +1,26 @@
+<div class="aum-snackbar-container padding-16 flex-row-space-between-center">
+  <div class="flex-row-flex-start-center gap-8">
+    <img [src]="icon" [alt]="data.type" />
+
+    <span class="aum-snackbar-container-message fw-600"
+      >{{ data.message }}</span
+    >
+  </div>
+
+  <div class="aum-snackbar-container-actions flex-row-flex-end-center gap-8">
+    @if (data.action) {
+
+    <button (click)="close()" class="unstyled-button dashboard-banner-lastUsed">
+      {{data.action.label}}
+    </button>
+
+    }
+    <aum-button
+      class="margin-right-8"
+      [type]="'icon'"
+      [icon]="'close'"
+      (clickButton)="close()"
+    >
+    </aum-button>
+  </div>
+</div>
