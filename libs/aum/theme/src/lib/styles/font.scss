@@ -1,0 +1,35 @@
+// _fonts.scss
+
+$noto-sans-font-path: '../../assets/resources/fonts/Noto_Sans' !default;
+
+// Regular
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('#{$noto-sans-font-path}/NotoSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Italic
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('#{$noto-sans-font-path}/NotoSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+// Bold
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('#{$noto-sans-font-path}/NotoSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+// Bold Italic
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('#{$noto-sans-font-path}/NotoSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}

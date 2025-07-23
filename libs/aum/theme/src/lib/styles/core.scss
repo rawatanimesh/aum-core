@@ -1,10 +1,11 @@
 @import './themes/theme';
+@import './font.scss';
 @import './abstracts/utilities.scss';
 
 /* Reset browser default body margin */
 body {
   margin: 0;
-  font-family: Roboto;
+  font-family: 'Noto Sans', sans-serif;
 }
 a {
   text-decoration: none;
