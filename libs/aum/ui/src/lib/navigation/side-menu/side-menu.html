@@ -1,0 +1,51 @@
+<nav class="aum-side-nav" aria-label="left navigation">
+  <ul>
+    @for (item of items; track item.value) {
+    <li
+      class="aum-side-nav-item flex-row"
+      [class.selected]="item.value === selected"
+    >
+      <a
+        href="javascript:void(0)"
+        (click)="onItemClick(item, $event)"
+        [attr.aria-expanded]="item.expanded ?? false"
+        class="aum-side-nav-item-link flex-row w-100"
+      >
+        <div class="flex-row-flex-start-center">
+          <mat-icon class="aum-side-nav-item-link-icon"
+            >{{ item.icon || 'radio_button_unchecked' }}</mat-icon
+          >
+          <span class="aum-side-nav-item-link-label">{{ item.label }}</span>
+        </div>
+
+        @if (item.children?.length) {
+        <mat-icon class="aum-side-nav-item-link-expand-icon">
+          {{ item.expanded ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+        }
+      </a>
+    </li>
+
+    @if (item.children?.length && item.expanded) {
+    <ul>
+      @for (child of item.children; track child.value) {
+      <li
+        class="aum-side-nav-item child flex-row-flex-start"
+        [class.selected]="child.value === selected"
+      >
+        <a
+          href="javascript:void(0)"
+          (click)="onItemClick(child, $event)"
+          class="aum-side-nav-item-link flex-row-flex-start-center w-100"
+        >
+          <mat-icon class="aum-side-nav-item-link-icon"
+            >{{ child.icon || 'circle' }}</mat-icon
+          >
+          <span class="aum-side-nav-item-link-label">{{ child.label }}</span>
+        </a>
+      </li>
+      }
+    </ul>
+    } }
+  </ul>
+</nav>

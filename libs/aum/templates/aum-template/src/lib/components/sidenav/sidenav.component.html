@@ -1,34 +1,5 @@
-<p>sidenav works!</p>
-<div class="navigation">
-  <div class="navigation-body">
-    <div class="navigation-children">
-      <div class="navigation-children-box" *ngIf="isDataLoaded">
-        <ng-container *ngFor="let item of currentMenu">
-          <div
-            class="navigation-children-box-item"
-            (mouseup)="selectMenu(currentMenu, item, 'child')"
-          >
-            <div *ngIf="item" class="navigation-divider-right"></div>
-            <div
-              class="navigation-menu-box-item-content"
-              [style.backgroundColor]="item ? '#E9EDF2' : null"
-              [style.border-left]="item ? '2px solid #015C9F' : null"
-              [ngClass]="item ? 'boxShadow' : ''"
-            >
-              <!-- <i
-                class="{{ item.icon }}"
-                [style.color]="item ? '#015C9F' : '#686868'"
-              ></i> -->
-              <div
-                [style.color]="item ? '#015C9F' : '#333333'"
-                [style.fontWeight]="item ? '500' : '400'"
-              >
-                {{ item.title }}
-              </div>
-            </div>
-          </div>
-        </ng-container>
-      </div>
-    </div>
-  </div>
-</div>
+<aum-side-menu
+  [items]="navItems"
+  (itemSelected)="onNavItemSelect($event)"
+  (routeChanged)="onRouteChange($event)"
+></aum-side-menu>

@@ -1,3 +1,4 @@
+@use 'functions' as *;
 @import './themes/theme';
 @import './font.scss';
 @import './abstracts/utilities.scss';
@@ -7,11 +8,24 @@ body {
   margin: 0;
   font-family: 'Noto Sans', sans-serif;
 }
+
 a {
   text-decoration: none;
+  color: inherit;
+  //:focus-visible ensures it only shows when navigating via keyboard (like pressing Tab), not on mouse click
+  &:focus-visible {
+    outline: rem(1) solid var(--mat-sys-primary);
+    outline-offset: rem(1);
+    border-radius: rem(4);
+  }
 }
 
 p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
   margin: 0;
 }
 

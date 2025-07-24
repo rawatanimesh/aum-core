@@ -2,9 +2,11 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
+import { SideMenu, SideMenuItem } from '@aum/ui/navigation';
+
 @Component({
   selector: 'aum-sidenav',
-  imports: [CommonModule],
+  imports: [CommonModule, SideMenu],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',
 })
@@ -28,83 +30,46 @@ export class SidenavComponent {
     },
   ];
 
-  selectMenu(menus: any, item: any, type: any) {
-    console.log('selectMenu called', menus, item, type);
-    this.router.navigate(['/' + item.route]);
-    this.menuItemClicked.emit(item);
-    if (type === 'child') {
-      //   this.unselectMenu(menus);
-      //   this.unselectMenu(this.menuConfig);
-      //   item.selected = true;
-      //   window.localStorage.setItem('my_learning_path', '0');
-      //   this.localStorage.setLocalStorage('selectedTabInCourses', 0);
-      //   this.localStorage.setLocalStorage('webinarTabIndex', 0);
-      //   this.localStorage.setLocalStorage('pathwayTabIndex', 0);
-      //   this.localStorage.setLocalStorage(
-      //     'mainSelectedTabOfLeapAdminGlobalRepo',
-      //     0
-      //   );
-      //   this.localStorage.setLocalStorage(
-      //     'mainSelectedTabOfLeapAdminCourseManagment',
-      //     0
-      //   );
-      //   this.localStorage.setLocalStorage(
-      //     'mainSelectedTabOfTenantAdminGlobalRepo',
-      //     0
-      //   );
-      //   this.localStorage.removeLocalStorage('userCoursesFlow');
-      //   this.localStorage.removeLocalStorage('userCertificationFlow');
-      //   this.localStorage.removeLocalStorage('userPodcastFlow');
-      //   this.localStorage.removeLocalStorage('userPathwayFlow');
-      //   this.localStorage.setLocalStorage('selectedTabAndSubTabIndex', [0, 0]);
-      //   /* added to fix select menu issue after lazy loading module implementaions */
-      //   setTimeout(() => {
-      //     this.unselectMenu(menus);
-      //     item.selected = true;
-      //   }, 1000);
-      //   if (item.name === 'global_skills_and_competencies') {
-      //     this.router.navigate([
-      //       `${this.currentMenu.route}/main/global-skills-and-competencies/0/0`,
-      //     ]);
-      //   } else if (item.name === 'community') {
-      //     this.router.navigate([
-      //       `${this.currentMenu.route}/main/community/main-page/-1`,
-      //     ]);
-      //   } else if (item.name === 'goal_setting') {
-      //     this.router.navigate([
-      //       `${this.currentMenu.route}/main/goalsetting/main-page/0/0`,
-      //     ]);
-      //   } else if (item.name === 'global_announcements') {
-      //     this.router.navigate([
-      //       `${this.currentMenu.route}/main/global-announcement/main-page/0`,
-      //     ]);
-      //   } else if (item.name === 'performance_dashboard') {
-      //     this.router.navigate([`${this.currentMenu.route}/main/cxo-dashboard`]);
-      //   } else {
-      //     this.router.navigate([`${this.currentMenu.route}/main/${item.route}`]);
-      //   }
-      //   if (this.sideNavRef && !this.common.pinnedMenu) {
-      //     this.sideNavRef.close();
-      //   }
-      // } else {
-      //   if (item.name !== 'cloudUniversity' && item.outsideApp) {
-      //     this.unselectMenu(menus);
-      //     this.unselectMenu(this.menuConfig);
-      //     window.open(item.route, '_self');
-      //     item.selected = true;
-      //   } else {
-      //     this.unselectMenu(menus);
-      //     this.unselectMenu(this.menuConfig);
-      //     item.selected = true;
-      //   }
-      // }
-      // if (item.children && item.children.length) {
-      //   const selectChild = item.children.filter((x) =>
-      //     x.rule.includes(this.loginState.userStatus)
-      //   );
-      //   if (selectChild && selectChild.length) {
-      //     selectChild[0].selected = true;
-      //   }
-    }
+  navItems: SideMenuItem[] = [
+    {
+      label: 'Dashboard',
+      value: '/dashboard',
+      icon: 'dashboard',
+      selected: true,
+    },
+    {
+      label: 'Agent Directory',
+      value: 'agent-directory',
+      icon: 'support_agent',
+      expanded: false,
+      children: [
+        {
+          label: 'My Agents',
+          value: '/agent-directory/my-agents',
+          icon: 'adb',
+        },
+        {
+          label: 'Agent List',
+          value: '/agent-directory/agent-list',
+          icon: 'smart_toy',
+        },
+      ],
+    },
+    {
+      label: 'Playground',
+      value: '/playground',
+      icon: 'close',
+      selected: false,
+    },
+  ];
+  selectedItem = '';
+
+  onNavItemSelect(item: any) {
+    this.selectedItem = item.value;
+    console.log('Selected:', item);
+  }
+  onRouteChange(item: any) {
+    console.log('Route changed, closing sidenav');
+    this.menuItemClicked.emit();
   }
 }
