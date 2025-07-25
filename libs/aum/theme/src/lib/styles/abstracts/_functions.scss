@@ -23,6 +23,9 @@
 //     <div>Item 1</div>
 //     <div>Item 2</div>
 //   </div>
-@function rem($px, $base: 16) {
-  @return ($px / $base) * 1rem;
+// @function rem($px, $base: 16) {
+//   @return ($px / $base) * 1rem;
+// }
+@function rem($px, $base: 16, $scale: var(--ui-scale)) {
+  @return calc((#{$px} / #{$base}) * 1rem * #{$scale});
 }

@@ -3,6 +3,19 @@
 @import './font.scss';
 @import './abstracts/utilities.scss';
 
+/* Global scale variables */
+:root {
+  --ui-scale: 1; // Default scale
+}
+
+body.scale-compact {
+  --ui-scale: 0.85;
+}
+
+body.scale-large {
+  --ui-scale: 1.15;
+}
+
 /* Reset browser default body margin */
 body {
   margin: 0;

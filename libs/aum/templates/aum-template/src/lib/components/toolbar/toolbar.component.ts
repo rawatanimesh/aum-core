@@ -3,6 +3,7 @@ import {
   computed,
   EventEmitter,
   inject,
+  OnInit,
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -30,13 +31,23 @@ import { BreadcrumbComponent } from '@aum/ui/navigation';
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })
-export class ToolbarComponent {
+export class ToolbarComponent implements OnInit {
   @Output() sideMenuToggle = new EventEmitter();
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
   themeIcon = computed(() => this.themeService.themeIcon());
   rLogo = 'assets/svgs/R-logo.svg';
   aumAiLogo = 'assets/svgs/Agentic-AI-Platform.svg';
+
+  ngOnInit() {
+    const savedMode = localStorage.getItem('ui-scale-mode') as
+      | 'compact'
+      | 'default'
+      | 'large';
+    if (savedMode === 'compact' || savedMode === 'large') {
+      document.body.classList.add(`scale-${savedMode}`);
+    }
+  }
 
   toggleMenu(): void {
     this.sideMenuToggle.emit();
@@ -49,5 +60,22 @@ export class ToolbarComponent {
     return localStorage.getItem('app-theme') === 'dark'
       ? 'Light mode'
       : 'Dark mode';
+  }
+
+  setUiScale(mode: 'compact' | 'default' | 'large') {
+    const body = document.body;
+
+    // Remove existing scale classes
+    body.classList.remove('scale-compact', 'scale-large');
+
+    // Only apply a class if it's not default
+    if (mode === 'compact') {
+      body.classList.add('scale-compact');
+    } else if (mode === 'large') {
+      body.classList.add('scale-large');
+    }
+
+    localStorage.setItem('ui-scale-mode', mode);
+    console.log('Setting UI scale to:', mode);
   }
 }

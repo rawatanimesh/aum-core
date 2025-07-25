@@ -5,6 +5,12 @@
   position: relative;
   width: 100%;
 
+  //update input styling
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-text-field__input {
+    font-size: rem(14) !important;
+    font-weight: 400 !important;
+  }
+
   .mdc-text-field--outlined
     .mdc-notched-outline--upgraded
     .mdc-floating-label--float-above {
@@ -12,6 +18,8 @@
         calc(calc(22px + var(--mat-form-field-container-height, 56px) / 2) * -1)
       )
       scale(var(--mat-mdc-form-field-floating-label-scale, 0.75)) !important;
+    font-size: rem(16);
+    font-weight: 400;
   }
 
   .mdc-text-field--outlined:not(.mdc-text-field--disabled)
@@ -58,19 +66,21 @@
 //same styling as aum-input-box to change height
 .aum-date-picker-box {
   .mat-mdc-text-field-wrapper {
-    height: 48px !important;
+    height: rem(48) !important;
   }
   .mat-mdc-form-field-infix {
-    min-height: 48px !important;
-    height: 48px !important;
-    padding-top: var(
-      --mat-form-field-container-vertical-padding,
-      13px
-    ) !important;
-    padding-bottom: var(
-      --mat-form-field-container-vertical-padding,
-      13px
-    ) !important;
+    min-height: rem(48) !important;
+    height: rem(48) !important;
+    display: flex;
+    align-items: center;
+    // padding-top: var(
+    //   --mat-form-field-container-vertical-padding,
+    //   13px
+    // ) !important;
+    // padding-bottom: var(
+    //   --mat-form-field-container-vertical-padding,
+    //   13px
+    // ) !important;
     // input {
     //   height: 100% !important;
     // }

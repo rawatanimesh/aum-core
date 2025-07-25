@@ -11,6 +11,13 @@
 // }
 
 .aum-button {
+  .mat-mdc-button,
+  .mat-mdc-unelevated-button,
+  .mat-mdc-outlined-button {
+    font-weight: 600;
+    font-size: rem(14);
+  }
+
   .mat-mdc-outlined-button:not(:disabled) {
     border-color: var(--mat-sys-primary);
     background-color: var(--mat-sys-surface);

@@ -1,8 +1,13 @@
+@use 'functions' as *;
+
 .aum-toolbar {
   width: 100%;
   &-left {
     width: 30%;
     // background-color: aquamarine;
+    &-appIcon {
+      height: rem(22);
+    }
   }
   &-center {
     width: 40%;
