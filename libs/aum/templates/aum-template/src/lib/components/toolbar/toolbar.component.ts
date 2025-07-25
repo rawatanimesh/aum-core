@@ -36,7 +36,7 @@ export class ToolbarComponent implements OnInit {
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
   themeIcon = computed(() => this.themeService.themeIcon());
-  rLogo = 'assets/svgs/R-logo.svg';
+  aLogo = 'assets/svgs/A-logo.svg';
   aumAiLogo = 'assets/svgs/Agentic-AI-Platform.svg';
 
   ngOnInit() {

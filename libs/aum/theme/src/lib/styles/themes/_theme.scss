@@ -1,13 +1,14 @@
 @use '@angular/material' as mat;
-@use './theme-pink/theme-pink3.scss' as pink-theme;
+@use './theme-purple/theme-purple.scss' as aum-theme;
+// @use './theme-pink/theme-pink3.scss' as aum-theme;
 // @import '../themes/theme-pink.css';
 
 html {
   @include mat.theme(
     (
       color: (
-        primary: pink-theme.$primary-palette,
-        tertiary: pink-theme.$tertiary-palette,
+        primary: aum-theme.$primary-palette,
+        tertiary: aum-theme.$tertiary-palette,
       ),
       typography: 'Noto Sans',
       density: 0,
@@ -19,8 +20,8 @@ html {
   @include mat.theme(
     (
       color: (
-        primary: pink-theme.$primary-palette,
-        tertiary: pink-theme.$tertiary-palette,
+        primary: aum-theme.$primary-palette,
+        tertiary: aum-theme.$tertiary-palette,
         theme-type: dark,
       ),
     )

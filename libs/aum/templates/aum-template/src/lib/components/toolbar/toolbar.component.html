@@ -2,7 +2,11 @@
   <div class="aum-toolbar flex-row-space-between-center h-100">
     <!-- left side of the toolbar -->
     <div class="aum-toolbar-left flex-row-flex-start-center gap-4 h-100">
-      <img class="h-100" [src]="rLogo" alt="r-logo" />
+      <img
+        class="margin-left-4 aum-toolbar-left-appLogo"
+        [src]="aLogo"
+        alt="a-logo"
+      />
       <button
         mat-icon-button
         aria-label="hamburger-icon-button"
@@ -10,8 +14,9 @@
       >
         <mat-icon>menu</mat-icon>
       </button>
-      <div class="flex-column-center-flex-start gap-4">
-        <img [src]="aumAiLogo" class="aum-toolbar-left-appIcon" alt="ai-logo" />
+      <div class="flex-column-center-flex-start gap-2">
+        <!-- <img [src]="aumAiLogo" class="aum-toolbar-left-appIcon" alt="ai-logo" /> -->
+        <span class="aum-toolbar-left-appName">Angular UI Mods</span>
         <aum-breadcrumb></aum-breadcrumb>
       </div>
     </div>

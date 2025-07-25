@@ -178,7 +178,7 @@ $justifies: (
   'space-around'
 );
 $aligns: ('stretch', 'flex-start', 'flex-end', 'center', 'baseline');
-$gaps: (4, 8, 12, 16, 24, 32, 40); // Optional gap sizes
+$gaps: (2, 4, 8, 12, 16, 24, 32, 40); // Optional gap sizes
 
 // Generate flex-direction classes
 // Generate flex utility classes for different directions, justifications, and alignments
