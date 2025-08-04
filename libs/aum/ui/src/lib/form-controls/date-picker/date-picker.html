@@ -1,108 +1,83 @@
 @switch (mode) { @case ('daterange') {
+<!-- Date Range Picker: Mat Form Field Container -->
 <mat-form-field
   class="aum-date-picker-root aum-date-picker-box"
   appearance="outline"
-  [floatLabel]="'always'"
+  floatLabel="always"
 >
   <mat-label>{{ label }}</mat-label>
 
+  <!-- Date Range Input: Binds to the formGroupForDateRange for start and end dates -->
   <mat-date-range-input
-    [required]="required"
-    [rangePicker]="rangePicker"
+    [formGroup]="formGroupForDateRange!"
+    [rangePicker]="picker"
     [min]="minDate"
     [max]="maxDate"
     [disabled]="disabled"
   >
-    <input matInput matStartDate placeholder="Start date" />
-    <input matInput matEndDate placeholder="End date" />
+    <input
+      matStartDate
+      formControlName="start"
+      [readonly]="readonly"
+      placeholder="Start date"
+    />
+    <input
+      matEndDate
+      formControlName="end"
+      [readonly]="readonly"
+      placeholder="End date"
+    />
   </mat-date-range-input>
 
-  <mat-datepicker-toggle matIconSuffix [for]="rangePicker" />
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-date-range-picker
+    #picker
+    (closed)="onRangePickerClosed()"
+  ></mat-date-range-picker>
 
-  <mat-date-range-picker #rangePicker (closed)="onDateRangeChange()">
-  </mat-date-range-picker>
+  <!-- Clear Button: Appears if a date range is selected -->
+  @if (formGroupForDateRange && (formGroupForDateRange.controls['start'].value
+  || formGroupForDateRange.controls['end'].value)) {
+  <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
+    <mat-icon>close</mat-icon>
+  </button>
+  } @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
 </mat-form-field>
 } @case ('date') {
+<!-- Single Date Picker: Mat Form Field Container -->
 <mat-form-field
   class="aum-date-picker-root aum-date-picker-box"
   appearance="outline"
-  [floatLabel]="'always'"
+  floatLabel="always"
 >
   <mat-label>{{ label }}</mat-label>
+
+  <!-- Single Date Input: Binds to the formControlForSingleDate -->
   <input
     matInput
     placeholder="Select date"
     [matDatepicker]="picker"
-    [required]="required"
-    [value]="isDate(value) ? value : null"
+    [formControl]="formControlForSingleDate!"
     [min]="minDate"
     [max]="maxDate"
     [disabled]="disabled"
-    (dateChange)="onDateChange($event)"
+    [readonly]="readonly"
+    [errorStateMatcher]="matcher"
+    (dateChange)="onSingleInputDateChange($event)"
   />
+
   <mat-datepicker-toggle matIconSuffix [for]="picker" />
   <mat-datepicker #picker />
-</mat-form-field>
-}
-<!-- @case ('month') {
-<mat-form-field
-  class="aum-date-picker-root aum-date-picker-box"
-  appearance="outline"
-  [floatLabel]="'always'"
->
-  <mat-label>{{ label }}</mat-label>
-  <input
-    matInput
-    [matDatepicker]="monthPicker"
-    [value]="isDate(value) ? value : null"
-    [min]="minDate"
-    [max]="maxDate"
-    [disabled]="disabled"
-    (dateChange)="onDateChange($event)"
-  />
-  <mat-datepicker-toggle matIconSuffix [for]="monthPicker" />
-  <mat-datepicker
-    #monthPicker
-    startView="multi-year"
-    panelClass="month-picker"
-    (monthSelected)="onDateChange($event)"
-  />
-</mat-form-field>
 
-}  -->
-<!-- @case ('year') {
-<mat-form-field
-  class="aum-date-picker-root aum-date-picker-box"
-  appearance="outline"
-  [floatLabel]="'always'"
->
-  <mat-label>{{ label }}</mat-label>
-  <input
-    matInput
-    [matDatepicker]="yearPicker"
-    [value]="isDate(value) ? value : null"
-    [min]="minDate"
-    [max]="maxDate"
-    [disabled]="disabled"
-    (dateChange)="onDateChange($event)"
-  />
-  <mat-datepicker-toggle matIconSuffix [for]="yearPicker" />
-  <mat-datepicker
-    #yearPicker
-    startView="multi-year"
-    panelClass="year-picker"
-    (yearSelected)="onDateChange($event)"
-  />
+  <!-- Clear Button: Appears if a single date is selected -->
+  @if (formControlForSingleDate && formControlForSingleDate.value) {
+  <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
+    <mat-icon>close</mat-icon>
+  </button>
+  } @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
 </mat-form-field>
-} -->
-<!-- @case ('time') {
-<input
-  matInput
-  type="time"
-  [value]="value || ''"
-  [disabled]="disabled"
-  (change)="onTimeChange($event)"
-/>
-} -->
-
-}
+} }
