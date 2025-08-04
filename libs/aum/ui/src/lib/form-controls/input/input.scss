@@ -1,7 +1,5 @@
 @use 'functions' as *;
 
-$color-red: #d80000;
-
 .aum-input-root {
   margin: rem(18) 0;
   position: relative;
@@ -73,6 +71,12 @@ $color-red: #d80000;
   //letter spacing in input field
   .mat-mdc-form-field-infix {
     letter-spacing: normal !important;
+  }
+
+  //mat hint styling
+  .mat-mdc-form-field-subscript-wrapper {
+    font-size: rem(12) !important;
+    font-weight: 400 !important;
   }
 }
 

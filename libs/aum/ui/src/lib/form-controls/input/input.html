@@ -1,42 +1,103 @@
 <mat-form-field
   class="aum-input-root"
   [ngClass]="{'aum-input-box': !textarea}"
-  [floatLabel]="'always'"
+  floatLabel="always"
   appearance="outline"
 >
   <mat-label>{{ label }}</mat-label>
-  <ng-container *ngIf="!textarea">
-    <input
-      matInput
-      autocomplete="off"
-      autocorrect="off"
-      autocapitalize="off"
-      spellcheck="false"
-      [type]="type"
-      [value]="value"
-      [required]="required"
-      [placeholder]="placeholder"
-      [disabled]="disabled"
-      (input)="onInput($event)"
-      (blur)="onBlur()"
-      (focus)="onFocus()"
-    />
-  </ng-container>
-  <ng-container *ngIf="textarea">
-    <textarea
-      matInput
-      autocomplete="off"
-      autocorrect="off"
-      autocapitalize="off"
-      spellcheck="false"
-      [value]="value"
-      [required]="required"
-      [placeholder]="placeholder"
-      [rows]="rows"
-      [disabled]="disabled"
-      (input)="onInput($event)"
-      (blur)="onBlur()"
-      (focus)="onFocus()"
-    ></textarea>
-  </ng-container>
+
+  <!-- @if for conditional rendering based on 'textarea' boolean -->
+  @if (!textarea) {
+  <!-- Reactive Forms input -->
+  @if (control) {
+  <input
+    matInput
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    [type]="type"
+    [required]="required"
+    [placeholder]="placeholder"
+    [maxlength]="maxlength"
+    [readonly]="readonly"
+    [errorStateMatcher]="matcher"
+    (ngModelChange)="onModelChange($event)"
+    [formControl]="control"
+    [attr.name]="'formControlInput'"
+  />
+  } @else {
+  <!-- ngModel/Standalone input fallback -->
+  <input
+    matInput
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    [type]="type"
+    [(ngModel)]="data"
+    [required]="required"
+    [placeholder]="placeholder"
+    [maxlength]="maxlength"
+    [readonly]="readonly"
+    [disabled]="disabled"
+    [errorStateMatcher]="matcher"
+    (ngModelChange)="onModelChange($event)"
+    [attr.name]="'ngModelFallbackInput'"
+    [ngModelOptions]="{standalone: true}"
+  />
+  } } @else {
+  <!-- @if for conditional rendering based on 'control' boolean for textarea -->
+  @if (control) {
+  <!-- Reactive Forms textarea -->
+  <textarea
+    matInput
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    [required]="required"
+    [placeholder]="placeholder"
+    [maxlength]="maxlength"
+    [readonly]="readonly"
+    [rows]="rows"
+    [errorStateMatcher]="matcher"
+    (ngModelChange)="onModelChange($event)"
+    [formControl]="control"
+    [attr.name]="'formControlTextarea'"
+  ></textarea>
+  } @else {
+  <!-- ngModel/Standalone textarea fallback -->
+  <textarea
+    matInput
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    [(ngModel)]="data"
+    [required]="required"
+    [placeholder]="placeholder"
+    [maxlength]="maxlength"
+    [readonly]="readonly"
+    [rows]="rows"
+    [disabled]="disabled"
+    [errorStateMatcher]="matcher"
+    (ngModelChange)="onModelChange($event)"
+    [attr.name]="'ngModelFallbackTextarea'"
+    [ngModelOptions]="{standalone: true}"
+  ></textarea>
+  } }
+
+  <!-- @if for conditional hints -->
+  @if (maxlength) {
+  <mat-hint align="end">
+    {{ (data !== null && data !== undefined) ? data.toString().length : 0 }} /
+    {{ maxlength }}
+  </mat-hint>
+  }
+
+  <!-- @if for conditional error messages -->
+  @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
 </mat-form-field>
