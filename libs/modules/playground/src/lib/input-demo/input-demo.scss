@@ -1,0 +1,15 @@
+.input-grid {
+  display: grid;
+  // This creates columns that are at least 280px wide.
+  // It will fit as many as possible per row, up to 4 due to the nature of auto-fit and minmax.
+  // When there isn't enough space, it will wrap to the next line.
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px; // Adjust gap as needed for spacing between inputs
+
+  // Optional: If you want to ensure the last item always takes full width when it's alone
+  // or if you have specific items that should always span multiple columns.
+  // For example, if you want the 'Notes' textarea to always take 2 columns on larger screens:
+  // aum-input[textarea] {
+  //   grid-column: span 2;
+  // }
+}

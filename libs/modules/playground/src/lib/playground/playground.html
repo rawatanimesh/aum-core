@@ -174,68 +174,14 @@
     </section>
     <mat-divider></mat-divider>
     <section>
-      <div class="example-label fs-14">Input and Datepicker</div>
+      <div class="example-label fs-14">Input/Datepicker & Forms</div>
+
       <div class="example-button-row">
-        <aum-input
-          [label]="'Favorite food'"
-          [placeholder]="'Ex. Pizza'"
-          [required]="true"
-          [value]="'Sushi'"
-          [disabled]="false"
-          (valueChange)="valueChange($event)"
-        ></aum-input>
-        <aum-input
-          [label]="'Favorite food'"
-          [placeholder]="'Ex. Pizza'"
-          [value]="'Sushi'"
-          [disabled]="true"
-        ></aum-input>
-        <aum-input
-          [textarea]="true"
-          [rows]="4"
-          [label]="'Leave a comment'"
-          [placeholder]="'Ex. It makes me feel...'"
-          [required]="true"
-          [value]="
-            'Ex. It makes me feel...Ex. It makes me feel...Ex. It makes me feel...'
-          "
-          [disabled]="false"
-        ></aum-input>
-        <aum-date-picker
-          [label]="'Choose a date'"
-          (dateSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a date range'"
-          [required]="true"
-          [mode]="'daterange'"
-          [disabled]="true"
-          (dateRangeSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a date range'"
-          [mode]="'daterange'"
-          (dateRangeSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a date range'"
-          [required]="true"
-          [mode]="'daterange'"
-          [disabled]="true"
-          (dateRangeSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <!-- <aum-date-picker
-          [label]="'Choose a month'"
-          [mode]="'month'"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a Year'"
-          [mode]="'year'"
-        ></aum-date-picker> -->
-        <!-- <aum-date-picker
-          [label]="'Choose Time'"
-          [mode]="'time'"
-        ></aum-date-picker> -->
+        <aum-button
+          [type]="'filled'"
+          [value]="'Go to Inputs Demo'"
+          (clickButton)="goToInputsDemo()"
+        ></aum-button>
       </div>
     </section>
     <mat-divider></mat-divider>

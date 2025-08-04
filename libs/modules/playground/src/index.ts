@@ -1,1 +1,1 @@
-export * from './lib/playground/playground';
+export * from './lib/playground.route';

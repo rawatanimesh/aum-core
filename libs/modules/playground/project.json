@@ -2,7 +2,7 @@
   "name": "playground",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/modules/playground/src",
-  "prefix": "aum",
+  "prefix": "playground",
   "projectType": "library",
   "tags": ["playground"],
   "targets": {

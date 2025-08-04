@@ -6,7 +6,7 @@ import { GenericDialogComponent } from '@aum/ui/dialogs';
 import { ButtonComponent } from '@aum/ui/buttons';
 
 @Component({
-  selector: 'aum-generic-dialog-demo',
+  selector: 'playground-generic-dialog-demo',
   imports: [CommonModule, GenericDialogComponent, ButtonComponent],
   templateUrl: './generic-dialog-demo.html',
   styleUrl: './generic-dialog-demo.scss',

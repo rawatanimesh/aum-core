@@ -5,22 +5,18 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
 import { ConfirmationDialogService } from '@aum/ui/dialogs';
-import {
-  InputComponent,
-  DatePickerComponent,
-  CheckboxComponent,
-  RadioButton,
-} from '@aum/ui/form-controls';
+import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService } from '@aum/ui/utilities';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 
 @Component({
-  selector: 'aum-playground',
+  selector: 'playground-home',
   imports: [
     CommonModule,
     MatDividerModule,
@@ -29,8 +25,6 @@ import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
     MatTabsModule,
     ButtonComponent,
     PageComponent,
-    InputComponent,
-    DatePickerComponent,
     CheckboxComponent,
     RadioButton,
   ],
@@ -56,9 +50,7 @@ export class Playground {
   readonly labelPosition = model<'before' | 'after'>('after');
   readonly disabled = model(false);
 
-  today = new Date();
-  month = this.today.getMonth();
-  year = this.today.getFullYear();
+  route = inject(Router);
 
   openMenu() {
     console.log('clicked');
@@ -132,16 +124,13 @@ export class Playground {
     }
   }
 
-  valueChange(ev: any) {
-    console.log('valueChange', ev);
-  }
-  dateSelected(ev: any) {
-    console.log(ev);
-  }
   checkboxState(event: any, state: any) {
     console.log(event, state);
   }
   radioChange(event: any) {
     console.log(event);
+  }
+  goToInputsDemo() {
+    this.route.navigate(['/playground/inputs']);
   }
 }

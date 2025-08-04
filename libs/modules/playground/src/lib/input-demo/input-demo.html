@@ -1,0 +1,227 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="padding-16">
+      <h2>Standalone Inputs (Not part of a Reactive Form)</h2>
+      <p class="margin-bottom-16">
+        These inputs use <code>[(ngModel)]</code> internally or simple
+        <code>[data]</code> binding.
+      </p>
+
+      <!-- ADDED: Grid container for standalone inputs -->
+      <div class="input-grid">
+        <aum-input
+          [label]="'Favorite food'"
+          [placeholder]="'Ex. Pizza'"
+          [required]="true"
+          [data]="inputValue1"
+          [maxlength]="20"
+          [disabled]="false"
+          (dataChange)="valueChange($event)"
+        ></aum-input>
+
+        <aum-input
+          [label]="'Favorite food'"
+          [placeholder]="'Ex. Pizza'"
+          [data]="inputValue2"
+          [readonly]="true"
+          (dataChange)="valueChange($event)"
+        ></aum-input>
+
+        <aum-input
+          [textarea]="true"
+          [rows]="2"
+          [label]="'Leave a comment'"
+          [placeholder]="'Ex. It makes me feel...'"
+          [required]="true"
+          [data]="inputValue3"
+          [maxlength]="300"
+          [disabled]="false"
+          (dataChange)="valueChange($event)"
+        ></aum-input>
+
+        <!-- Existing standalone date pickers, now within the grid -->
+        <aum-date-picker
+          [label]="'Choose a date'"
+          (dateSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a date range'"
+          [required]="true"
+          [mode]="'daterange'"
+          [disabled]="true"
+          (dateRangeSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a date range'"
+          [mode]="'daterange'"
+          (dateRangeSelected)="dateSelected($event)"
+        ></aum-date-picker>
+        <aum-date-picker
+          [label]="'Choose a date range'"
+          [required]="true"
+          [mode]="'daterange'"
+          [disabled]="true"
+          (dateRangeSelected)="dateSelected($event)"
+        ></aum-date-picker>
+
+        <aum-date-picker
+          label="Standalone Single Date"
+          mode="date"
+          [(data)]="standaloneSingleDate"
+          [minDate]="minAllowedDate"
+          [maxDate]="maxAllowedDate"
+        ></aum-date-picker>
+        <!-- <p>Standalone Single Date Value: {{ standaloneSingleDate | json }}</p> -->
+
+        <aum-date-picker
+          label="Standalone Date Range"
+          mode="daterange"
+          [(data)]="standaloneDateRange"
+        ></aum-date-picker>
+        <!-- <p>Standalone Date Range Value: {{ standaloneDateRange | json }}</p> -->
+      </div>
+      <!-- END ADDED: Grid container for standalone inputs -->
+
+      <div style="margin-top: 20px">
+        <aum-button
+          [type]="'filled'"
+          [value]="'Set Standalone Values Programmatically'"
+          (clickButton)="setStandaloneValues()"
+        >
+        </aum-button>
+      </div>
+
+      <div class="padding-16">
+        <h2>Reactive Form Example</h2>
+        <p class="margin-bottom-16">
+          These inputs are controlled by <code>[formControl]</code>.
+        </p>
+
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+          <!-- ADDED: Grid container for reactive form inputs -->
+          <div class="input-grid">
+            <!-- Email Input: Default value, required, email format -->
+            <aum-input
+              label="Email Address"
+              placeholder="Enter your email"
+              type="email"
+              [required]="true"
+              [control]="myForm.controls.email"
+              [customErrorMessages]="{
+               email: 'Invalid email format.',
+               required: 'Email is required!',
+               rakutenEmail: 'Email must end with @rakuten.com.'
+             }"
+            ></aum-input>
+
+            <!-- Password Input: Default disabled state, custom pattern validator -->
+            <aum-input
+              label="Password"
+              placeholder="Enter password"
+              type="password"
+              [required]="true"
+              [maxlength]="20"
+              [control]="myForm.controls.password"
+              [customErrorMessages]="{
+               minlength: 'Password must be at least 6 characters.',
+               required: 'Password is required!',
+               pattern: 'Password cannot be 123456!'
+             }"
+            ></aum-input>
+
+            <!-- Username Input: Default value, dynamically enable/disable -->
+            <aum-input
+              label="Username"
+              placeholder="Choose a username"
+              [required]="true"
+              [maxlength]="20"
+              [control]="myForm.controls.username"
+              [customErrorMessages]="{
+               minlength: 'Username must be at least 3 characters.',
+               required: 'Username is required!'
+             }"
+            ></aum-input>
+
+            <!-- Notes Textarea: Default value, maxlength -->
+            <aum-input
+              label="Notes"
+              placeholder="Your notes here..."
+              [textarea]="true"
+              [rows]="2"
+              [maxlength]="200"
+              [control]="myForm.controls.notes"
+            ></aum-input>
+
+            <!-- Reactive Form Date Pickers, now within the grid -->
+            <aum-date-picker
+              label="Select a Single Date"
+              mode="date"
+              [control]="myForm.controls.someDate"
+              [required]="true"
+              [minDate]="minAllowedDate"
+              [maxDate]="maxAllowedDate"
+              [customErrorMessages]="{
+               required: 'This single date is required!',
+               matDatepickerMin: 'Date cannot be before ' + (minAllowedDate | date:'shortDate') + '.',
+               matDatepickerMax: 'Date cannot be after ' + (maxAllowedDate | date:'shortDate') + '.',
+               matDatepickerParse: 'Invalid date format.'
+             }"
+            ></aum-date-picker>
+
+            <aum-date-picker
+              label="Select a Date Range"
+              mode="daterange"
+              [control]="myForm.controls.someDateRange"
+              [required]="true"
+              [customErrorMessages]="{
+               required: 'This date range is required!',
+               matDatepickerMin: 'Range start is too early.',
+               matDatepickerMax: 'Range end is too late.',
+               matEndDateInvalid: 'End date must be after start date.'
+             }"
+            ></aum-date-picker>
+          </div>
+          <!-- END ADDED: Grid container for reactive form inputs -->
+
+          <div class="flex-row-flex-start">
+            <!-- Button to submit the form, enabled only when form is valid -->
+            <aum-button
+              [type]="'filled'"
+              [disabled]="myForm.invalid"
+              [value]="'Submit Reactive Form'"
+              (clickButton)="onSubmit()"
+            >
+            </aum-button>
+
+            <!-- Button to dynamically toggle password field's enabled state -->
+            <aum-button
+              [type]="'outlined'"
+              [value]="'Toggle Password Enabled'"
+              (clickButton)="togglePasswordEnabled()"
+            >
+            </aum-button>
+
+            <!-- Button to patch values into the form -->
+            <aum-button
+              [type]="'outlined'"
+              [value]="'Patch Values'"
+              (clickButton)="patchFormValues()"
+            >
+            </aum-button>
+
+            <!-- Button to reset the form -->
+            <aum-button
+              [type]="'outlined'"
+              [value]="'Reset Form'"
+              (clickButton)="resetForm()"
+            >
+            </aum-button>
+          </div>
+        </form>
+
+        <pre>Form Value: {{ myForm.value | json }}</pre>
+        <pre>Form Status: {{ myForm.status | json }}</pre>
+      </div>
+    </div>
+  </div>
+</aum-page>

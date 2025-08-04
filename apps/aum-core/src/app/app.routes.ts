@@ -19,8 +19,8 @@ export const appRoutes: Route[] = [
       },
       {
         path: 'playground',
-        loadComponent: () =>
-          import('@aum-modules/playground').then((m) => m.Playground),
+        loadChildren: () =>
+          import('@aum-modules/playground').then((m) => m.playgroundRoutes),
       },
       // // Launch agent from dashboard (shortcut route)
       // {
