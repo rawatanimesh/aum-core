@@ -7,13 +7,13 @@
         [src]="aLogo"
         alt="a-logo"
       />
-      <button
-        mat-icon-button
-        aria-label="hamburger-icon-button"
-        (click)="toggleMenu()"
-      >
-        <mat-icon>menu</mat-icon>
-      </button>
+      <aum-button
+        [type]="'icon'"
+        [icon]="'menu'"
+        [tooltip]="'Menu'"
+        (clickButton)="toggleMenu()"
+      ></aum-button>
+
       <div class="flex-column-center-flex-start gap-2">
         <!-- <img [src]="aumAiLogo" class="aum-toolbar-left-appIcon" alt="ai-logo" /> -->
         <span class="aum-toolbar-left-appName fw-600">Angular UI Mods</span>
@@ -28,91 +28,32 @@
 
     <!-- right side of the toolbar -->
     <div class="aum-toolbar-right">
-      <div class="flex-row-flex-end-center gap-4 padding-right-8">
-        <button
-          mat-icon-button
-          aria-label="Toggle theme"
-          [matTooltip]="getThemeTooltip()"
-          (click)="toggleTheme()"
-        >
-          <mat-icon>{{ themeIcon() }}</mat-icon>
-        </button>
+      <div class="flex-row-flex-end-center gap-4">
+        <aum-button
+          [type]="'icon'"
+          [icon]="'more_vert'"
+          [tooltip]="'Preferences'"
+          [matMenuTriggerFor]="optionsMenu.childMenu"
+        ></aum-button>
 
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="optionsMenu"
-          aria-label="More Options"
-          [matTooltip]="'More Options'"
-        >
-          <mat-icon>more_vert</mat-icon>
-        </button>
-
-        <button
-          mat-icon-button
-          [matMenuTriggerFor]="profileMenu"
-          matTooltip="My Account"
-          aria-label="Example icon-button with a menu"
-        >
-          <mat-icon>account_circle</mat-icon>
-        </button>
+        <aum-button
+          [type]="'icon'"
+          [icon]="'account_circle'"
+          [tooltip]="'My Account'"
+          [matMenuTriggerFor]="profileMenu.childMenu"
+        ></aum-button>
       </div>
     </div>
   </div>
+  <aum-menu-list
+    #optionsMenu="aumMenu"
+    [list]="optionsMenuList"
+    (itemSelected)="onMenuSelect($event)"
+  ></aum-menu-list>
 
-  <mat-menu #optionsMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>info</mat-icon>
-      <span>About</span>
-    </button>
-    <button mat-menu-item [matMenuTriggerFor]="languagesMenu">
-      <mat-icon>language</mat-icon>
-      <span>Language</span>
-    </button>
-    <button mat-menu-item [matMenuTriggerFor]="modeMenu">
-      <mat-icon>aspect_ratio</mat-icon>
-      <span>Mode</span>
-    </button>
-  </mat-menu>
-
-  <mat-menu #profileMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>person</mat-icon>
-      <span>My Profile</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>settings</mat-icon>
-      <span>Settings</span>
-    </button>
-    <button mat-menu-item>
-      <mat-icon>logout</mat-icon>
-      <span>Logout</span>
-    </button>
-  </mat-menu>
-  <mat-menu #languagesMenu="matMenu">
-    <button mat-menu-item>
-      <mat-icon>abc</mat-icon>
-      <span>English</span>
-    </button>
-
-    <button mat-menu-item disabled>
-      <mat-icon>currency_yen</mat-icon>
-      <span>Japanese</span>
-    </button>
-  </mat-menu>
-
-  <mat-menu #modeMenu="matMenu">
-    <button mat-menu-item (click)="setUiScale('compact')">
-      <mat-icon>density_small</mat-icon>
-      <span>Compact</span>
-    </button>
-
-    <button mat-menu-item (click)="setUiScale('default')">
-      <mat-icon>density_medium</mat-icon>
-      <span>Default</span>
-    </button>
-    <button mat-menu-item (click)="setUiScale('large')">
-      <mat-icon>density_large</mat-icon>
-      <span>Large</span>
-    </button>
-  </mat-menu>
+  <aum-menu-list
+    #profileMenu="aumMenu"
+    [list]="profileMenuList"
+    (itemSelected)="onMenuSelect($event)"
+  ></aum-menu-list>
 </mat-toolbar>

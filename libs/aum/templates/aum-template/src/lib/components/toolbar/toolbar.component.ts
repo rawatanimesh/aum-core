@@ -7,26 +7,26 @@ import {
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { ThemeService } from '@aum/utils/services';
 import { BreadcrumbService } from '@aum/utils/services';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
+import { MenuList, MenuItem } from '@aum/ui/navigation';
+import { ButtonComponent } from '@aum/ui/buttons';
 
 @Component({
   selector: 'aum-toolbar',
   imports: [
     CommonModule,
-    MatIconModule,
-    MatButtonModule,
+
     MatToolbarModule,
     MatMenuModule,
-    MatTooltipModule,
+
     BreadcrumbComponent,
+    ButtonComponent,
+    MenuList,
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
@@ -39,6 +39,72 @@ export class ToolbarComponent implements OnInit {
   aLogo = 'assets/svgs/A-logo.svg';
   aumAiLogo = 'assets/svgs/Agentic-AI-Platform.svg';
 
+  optionsMenuList: MenuItem[] = [
+    // { label: 'About', value: 'about', icon: 'info' },
+    {
+      label: 'Language',
+      value: 'language',
+      icon: 'language',
+      children: [
+        {
+          label: 'English',
+          value: 'en',
+          selected: true,
+        },
+        { label: '日本語', value: 'ja', disabled: true },
+      ],
+    },
+    {
+      label: 'Theme',
+      value: 'theme',
+      icon: 'contrast',
+      children: [
+        {
+          label: 'Light',
+          value: 'light',
+          icon: 'light_mode',
+        },
+        {
+          label: 'Dark',
+          value: 'dark',
+          icon: 'dark_mode',
+        },
+        {
+          label: 'System',
+          value: 'system',
+          icon: 'computer',
+        },
+      ],
+    },
+    {
+      label: 'Display',
+      value: 'mode',
+      icon: 'aspect_ratio',
+
+      children: [
+        { label: 'Compact', value: 'compact', icon: 'density_small' },
+        { label: 'Default', value: 'default', icon: 'density_medium' },
+        { label: 'Large', value: 'large', icon: 'density_large' },
+      ],
+    },
+  ];
+
+  profileMenuList: MenuItem[] = [
+    {
+      label: 'Profile',
+      value: 'profile',
+      icon: 'person',
+      showSelection: false,
+    },
+    {
+      label: 'Settings',
+      value: 'settings',
+      icon: 'settings',
+      showSelection: false,
+    },
+    { label: 'Logout', value: 'logout', icon: 'logout', showSelection: false },
+  ];
+
   ngOnInit() {
     const savedMode = localStorage.getItem('ui-scale-mode') as
       | 'compact'
@@ -47,19 +113,43 @@ export class ToolbarComponent implements OnInit {
     if (savedMode === 'compact' || savedMode === 'large') {
       document.body.classList.add(`scale-${savedMode}`);
     }
+    // Update selected state for Display options
+    this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || 'default');
+
+    const savedTheme = localStorage.getItem('app-theme-mode') as
+      | 'light'
+      | 'dark'
+      | 'system';
+    // Update selected state for Display options
+    this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || 'light');
+  }
+  onMenuSelect(item: MenuItem) {
+    if (
+      item.value === 'compact' ||
+      item.value === 'default' ||
+      item.value === 'large'
+    ) {
+      this.setUiScale(item.value);
+    }
+    if (
+      item.value === 'light' ||
+      item.value === 'dark' ||
+      item.value === 'system'
+    ) {
+      this.themeService.setTheme(item.value);
+    }
+  }
+  setMenuSelection(menuList: MenuItem[], parent: string, value: string) {
+    const parentMenu = menuList.find((menu) => menu.value === parent);
+    if (parentMenu && parentMenu.children) {
+      parentMenu.children.forEach((child) => {
+        child.selected = child.value === value;
+      });
+    }
   }
 
   toggleMenu(): void {
     this.sideMenuToggle.emit();
-  }
-
-  toggleTheme(): void {
-    this.themeService.toggleTheme();
-  }
-  getThemeTooltip(): string {
-    return localStorage.getItem('app-theme') === 'dark'
-      ? 'Light mode'
-      : 'Dark mode';
   }
 
   setUiScale(mode: 'compact' | 'default' | 'large') {

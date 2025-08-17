@@ -3,9 +3,14 @@
 .aum-breadcrumb {
   font-size: rem(12);
   height: rem(16);
-  line-height: rem(16);
+
   &-clickable {
     cursor: pointer;
     color: var(--mat-sys-primary);
+  }
+  &-nestIcon {
+    font-size: rem(18);
+    height: rem(18) !important;
+    width: rem(18) !important;
   }
 }
