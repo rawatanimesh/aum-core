@@ -93,7 +93,7 @@
 // Mixin for Font Size Classes
 // This will generate classes like .fs-10, .fs-12, etc.
 @mixin generate-font-size($prefix: 'fs') {
-  $sizes: (10, 12, 14, 16, 18, 20, 24, 32, 40, 48, 56, 64);
+  $sizes: (10, 12, 14, 16, 18, 20, 24, 28, 32, 40, 48, 56, 64);
 
   @each $size in $sizes {
     .#{$prefix}-#{$size} {

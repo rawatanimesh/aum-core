@@ -6,12 +6,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
 import { ConfirmationDialogService } from '@aum/ui/dialogs';
 import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService } from '@aum/ui/utilities';
+import { MenuList, MenuItem } from '@aum/ui/navigation';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 
@@ -23,10 +25,12 @@ import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatMenuModule,
     ButtonComponent,
     PageComponent,
     CheckboxComponent,
     RadioButton,
+    MenuList,
   ],
   templateUrl: './playground.html',
   styleUrl: './playground.scss',
@@ -35,6 +39,7 @@ export class Playground {
   readonly dialog = inject(ConfirmationDialogService);
   readonly dialogRef = inject(MatDialog);
   readonly snackbar = inject(SnackbarService);
+  route = inject(Router);
   pageInfo = {
     breadcrumbs: [
       { title: 'Playground', route: '/playground' },
@@ -50,7 +55,56 @@ export class Playground {
   readonly labelPosition = model<'before' | 'after'>('after');
   readonly disabled = model(false);
 
-  route = inject(Router);
+  nestedMenuItems: MenuItem[] = [
+    { label: 'About', value: 'about', icon: 'info' },
+    {
+      label: 'Language',
+      value: 'language',
+      icon: 'language',
+      children: [
+        {
+          label: 'English',
+          value: 'en',
+        },
+        { label: '日本語', value: 'ja' },
+      ],
+    },
+    {
+      label: 'Mode',
+      value: 'mode',
+      icon: 'aspect_ratio',
+
+      children: [
+        { label: 'Compact', value: 'compact' },
+        { label: 'Default', value: 'default' },
+        { label: 'Large', value: 'large', disabled: true },
+      ],
+    },
+    {
+      label: 'Level 1',
+      value: 'about',
+      icon: 'info',
+
+      children: [
+        {
+          label: 'Level 2',
+          value: 'about',
+          icon: 'info',
+        },
+        {
+          label: 'Dont show selection',
+          value: 'about',
+          icon: 'info',
+          showSelection: false,
+        },
+      ],
+    },
+  ];
+  choiceMenuItems: MenuItem[] = [
+    { label: 'Yes', value: 'yes' },
+    { label: 'No', value: 'no' },
+    { label: 'Maybe', value: 'maybe' },
+  ];
 
   openMenu() {
     console.log('clicked');
@@ -132,5 +186,9 @@ export class Playground {
   }
   goToInputsDemo() {
     this.route.navigate(['/playground/inputs']);
+  }
+  onMenuSelect(item: MenuItem) {
+    console.log('selected', item);
+    console.log('updated menu list', this.choiceMenuItems);
   }
 }

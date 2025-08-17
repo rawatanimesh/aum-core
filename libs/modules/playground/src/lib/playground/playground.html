@@ -186,6 +186,36 @@
     </section>
     <mat-divider></mat-divider>
     <section>
+      <div class="example-label fs-14">Menu List</div>
+      <div class="example-button-row flex-row gap-4">
+        <aum-button
+          [type]="'filled'"
+          [value]="'Nested Menu'"
+          [matMenuTriggerFor]="dropDownMenu.childMenu"
+        ></aum-button>
+
+        <aum-menu-list
+          #dropDownMenu="aumMenu"
+          [list]="nestedMenuItems"
+          (itemSelected)="onMenuSelect($event)"
+        ></aum-menu-list>
+
+        <aum-button
+          [type]="'filled'"
+          [value]="'Simple Menu'"
+          [matMenuTriggerFor]="choiceMenu.childMenu"
+        ></aum-button>
+
+        <aum-menu-list
+          #choiceMenu="aumMenu"
+          [list]="choiceMenuItems"
+          (itemSelected)="onMenuSelect($event)"
+        ></aum-menu-list>
+      </div>
+    </section>
+
+    <mat-divider></mat-divider>
+    <section>
       <div class="example-label fs-14">Progress Bar</div>
       <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
     </section>

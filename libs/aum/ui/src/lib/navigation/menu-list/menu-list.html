@@ -1,0 +1,41 @@
+<mat-menu #menu="matMenu" class="aum-menu-list">
+  @for (item of list; track $index) {
+  <!-- Leaf menu item -->
+  @if (!item.children?.length) {
+  <button
+    mat-menu-item
+    (click)="onItemClick(item)"
+    [disabled]="item.disabled"
+    [class.selected]="shouldApplySelected(item)"
+  >
+    @if (item.icon) {
+    <mat-icon
+      class="aum-menu-list-icon"
+      [class.selected-icon]="shouldApplySelected(item)"
+      >{{ item.icon }}</mat-icon
+    >
+    } {{ item.label }}
+  </button>
+  }
+
+  <!-- Parent menu item -->
+  @if (item.children?.length) {
+  <button
+    mat-menu-item
+    [matMenuTriggerFor]="subMenu.childMenu"
+    (click)="onItemClick(item)"
+    [disabled]="item.disabled"
+  >
+    @if (item.icon) {
+    <mat-icon>{{ item.icon }}</mat-icon>
+    } {{ item.label }}
+  </button>
+
+  <!-- Recursive child menu -->
+  <aum-menu-list
+    #subMenu="aumMenu"
+    [list]="item.children || []"
+    (itemSelected)="itemSelected.emit($event)"
+  ></aum-menu-list>
+  } }
+</mat-menu>

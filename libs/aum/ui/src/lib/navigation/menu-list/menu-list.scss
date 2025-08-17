@@ -1,0 +1,45 @@
+@use 'functions' as *;
+
+.aum-menu-list {
+  // seletec state mat menu item styling and icon
+  .selected {
+    color: var(--mat-sys-primary); // Text color
+    border-left: rem(3) solid var(--mat-sys-primary);
+    padding-left: rem(9); // 3+9 to match default material spacing
+    &-icon {
+      color: var(--mat-sys-primary) !important;
+    }
+  }
+  &-icon {
+    font-size: rem(20); //size of icon
+    height: rem(20) !important; // height and width of icon containter
+    width: rem(20) !important;
+  }
+  // remove top and bottom padding of mat menu content
+  .mat-mdc-menu-content {
+    padding: 0 !important;
+    // background-color: var(--mat-sys-surface) !important;
+    // background-color: var(
+    //   --mat-sys-on-primary,
+    //   var(--mat-sys-surface-container)
+    // ) !important;
+  }
+  //style height of menu item
+  .mat-mdc-menu-item {
+    min-height: rem(42) !important;
+    .mat-mdc-menu-submenu-icon {
+    }
+  }
+  //style of label text
+  .mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text {
+    font-size: rem(13) !important;
+    font-weight: 400 !important;
+  }
+  //style highlighted menu item when child
+  .mat-mdc-menu-item:not([disabled]).mat-mdc-menu-item-highlighted {
+    background-color: var(--mat-sys-outline-variant) !important;
+  }
+  .mat-mdc-menu-item:not([disabled]):hover {
+    background-color: var(--mat-sys-primary-container);
+  }
+}
