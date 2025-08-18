@@ -1,6 +1,7 @@
 @use 'functions' as *;
 @import './themes/theme';
-@import './font.scss';
+@import './global/font.scss';
+@import './global/scroll.scss';
 @import './abstracts/utilities.scss';
 
 /* Global scale variables */

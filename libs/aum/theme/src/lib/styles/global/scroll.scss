@@ -1,0 +1,46 @@
+/* Base (light) */
+:root {
+  --scrollbar-size: 10px;
+  --scrollbar-track-color: #fafafa;
+  --scrollbar-thumb-color: #c1c1c1; /* default */
+  --scrollbar-thumb-hover-color: #7d7d7d; /* hover */
+  --scrollbar-thumb-active-color: #7d7d7d; /* dragging */
+}
+
+/* Dark mode */
+body.dark-mode {
+  --scrollbar-track-color: #2c2c2c;
+  --scrollbar-thumb-color: #6b6b6b;
+  --scrollbar-thumb-hover-color: #939393;
+  --scrollbar-thumb-active-color: #939393;
+}
+
+/* WebKit (Chrome/Safari/Edge) — apply to all scrollable elements */
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color);
+  // background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color);
+  border-radius: 10px;
+  border: 2px solid var(--scrollbar-track-color); /* creates spacing */
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color);
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background: var(--scrollbar-thumb-active-color);
+}
+// * {
+//   scrollbar-width: thin;
+// }
