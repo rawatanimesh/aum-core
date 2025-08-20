@@ -13,6 +13,10 @@ body.scale-compact {
   --ui-scale: 0.85;
 }
 
+body.scale-default {
+  --ui-scale: 1;
+}
+
 body.scale-large {
   --ui-scale: 1.15;
 }

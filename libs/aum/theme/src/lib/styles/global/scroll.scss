@@ -7,6 +7,10 @@
   --scrollbar-thumb-active-color: #7d7d7d; /* dragging */
 }
 
+body.scale-large {
+  --scrollbar-size: 12px;
+}
+
 /* Dark mode */
 body.dark-mode {
   --scrollbar-track-color: #2c2c2c;

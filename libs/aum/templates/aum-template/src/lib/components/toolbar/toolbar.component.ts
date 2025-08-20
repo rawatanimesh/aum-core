@@ -110,7 +110,11 @@ export class ToolbarComponent implements OnInit {
       | 'compact'
       | 'default'
       | 'large';
-    if (savedMode === 'compact' || savedMode === 'large') {
+    if (
+      savedMode === 'compact' ||
+      savedMode === 'large' ||
+      savedMode === 'default'
+    ) {
       document.body.classList.add(`scale-${savedMode}`);
     }
     // Update selected state for Display options
@@ -156,13 +160,15 @@ export class ToolbarComponent implements OnInit {
     const body = document.body;
 
     // Remove existing scale classes
-    body.classList.remove('scale-compact', 'scale-large');
+    body.classList.remove('scale-compact', 'scale-large', 'scale-default');
 
     // Only apply a class if it's not default
     if (mode === 'compact') {
       body.classList.add('scale-compact');
     } else if (mode === 'large') {
       body.classList.add('scale-large');
+    } else if (mode === 'default') {
+      body.classList.add('scale-default');
     }
 
     localStorage.setItem('ui-scale-mode', mode);
