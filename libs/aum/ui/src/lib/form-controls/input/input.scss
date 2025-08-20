@@ -26,7 +26,7 @@
   //add border to input after moving label above
   .mdc-text-field--outlined:not(.mdc-text-field--disabled)
     .mat-mdc-notch-piece {
-    border-top: 1px solid;
+    border-top: 1px solid var(--mat-sys-outline);
   }
   .mdc-notched-outline__leading {
     // border-top: 1px solid !important;

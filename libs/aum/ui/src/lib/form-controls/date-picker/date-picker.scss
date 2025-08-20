@@ -24,7 +24,7 @@
 
   .mdc-text-field--outlined:not(.mdc-text-field--disabled)
     .mat-mdc-notch-piece {
-    border-top: 1px solid;
+    border-top: 1px solid var(--mat-sys-outline);
   }
   .mdc-notched-outline__leading {
     border-right: none !important;
