@@ -40,6 +40,14 @@
     background-color: var(--mat-sys-outline-variant) !important;
   }
   .mat-mdc-menu-item:not([disabled]):hover {
-    background-color: var(--mat-sys-primary-container);
+    background-color: var(--mat-sys-primary-container) !important;
+  }
+}
+.light-mode {
+  .mat-mdc-menu-panel {
+    box-shadow: var(--mat-sys-level3) !important;
+  }
+  .mat-mdc-menu-item {
+    background-color: var(--mat-sys-surface) !important;
   }
 }

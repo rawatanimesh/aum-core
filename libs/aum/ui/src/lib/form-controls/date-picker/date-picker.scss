@@ -79,22 +79,15 @@
     height: rem(48) !important;
     display: flex;
     align-items: center;
-    // padding-top: var(
-    //   --mat-form-field-container-vertical-padding,
-    //   13px
-    // ) !important;
-    // padding-bottom: var(
-    //   --mat-form-field-container-vertical-padding,
-    //   13px
-    // ) !important;
-    // input {
-    //   height: 100% !important;
-    // }
-    // .mat-mdc-icon-button {
-    //   height: 100%;
-    // }
-    // .mat-mdc-icon-button {
-    //   padding: 0 !important;
-    // }
   }
+}
+// styling for datepicker popup in light mode
+.light-mode .mat-datepicker-content {
+  background-color: var(--mat-sys-surface) !important;
+  box-shadow: var(--mat-sys-level3) !important;
+}
+// to adjust width of calendar popup based on display mode
+.mat-datepicker-content .mat-calendar {
+  width: rem(300) !important;
+  height: rem(370) !important;
 }
