@@ -9,6 +9,22 @@
 
       <!-- ADDED: Grid container for standalone inputs -->
       <div class="input-grid">
+        <aum-select-box
+          [label]="'Fruit Opitons'"
+          [placeholder]="'Select Fruit'"
+          [data]="selectedFruit"
+          [optionList]="fruitOptions"
+          (dataChange)="selectValueChange($event)"
+        ></aum-select-box>
+        <aum-select-box
+          [label]="'Color Opitons'"
+          [placeholder]="'Select Colors'"
+          [multiple]="true"
+          [data]="selectedColors"
+          [optionList]="colorOptions"
+          (dataChange)="selectValueChange($event)"
+        ></aum-select-box>
+
         <aum-input
           [label]="'Favorite food'"
           [placeholder]="'Ex. Pizza'"
@@ -180,6 +196,28 @@
                matEndDateInvalid: 'End date must be after start date.'
              }"
             ></aum-date-picker>
+            <aum-select-box
+              [label]="'Country'"
+              [placeholder]="'Select your country'"
+              [required]="true"
+              [control]="myForm.controls.country"
+              [optionList]="countryOptions"
+              [customErrorMessages]="{
+       required: 'Country selection is required!',
+       pattern: 'Please select USA, Canada, or Mexico.'
+     }"
+            ></aum-select-box>
+            <aum-select-box
+              [label]="'Hobbies'"
+              [placeholder]="'Select your hobbies'"
+              [multiple]="true"
+              [required]="true"
+              [control]="myForm.controls.multiSelectHobbies"
+              [optionList]="hobbyOptions"
+              [customErrorMessages]="{
+       required: 'Please select at least one hobby!'
+     }"
+            ></aum-select-box>
           </div>
           <!-- END ADDED: Grid container for reactive form inputs -->
 

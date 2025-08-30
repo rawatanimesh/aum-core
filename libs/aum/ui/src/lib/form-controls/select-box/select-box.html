@@ -1,0 +1,59 @@
+<mat-form-field
+  class="aum-select-box-root aum-select-box"
+  [floatLabel]="'always'"
+  subscriptSizing="dynamic"
+  appearance="outline"
+>
+  <mat-label>{{ label }}</mat-label>
+
+  <!-- Reactive Forms Select -->
+  @if (control) {
+  <mat-select
+    panelClass="aum-select-box-panel"
+    [formControl]="control"
+    [required]="required"
+    [placeholder]="placeholder"
+    [multiple]="multiple"
+    [errorStateMatcher]="matcher"
+    [compareWith]="compareWith!"
+    (selectionChange)="onSelectionChange($event)"
+    [attr.name]="'formControlSelect'"
+    [disabled]=" disabled"
+  >
+    @for (option of optionList; track option.value) {
+    <mat-option
+      [value]="option.value"
+      [disabled]="option.disabled"
+      [ngClass]="{'aum-select-single-mode': !multiple}"
+      >{{ option.text }}</mat-option
+    >
+    }
+  </mat-select>
+  } @else {
+  <!-- ngModel/Standalone Select fallback -->
+  <mat-select
+    panelClass="aum-select-box-panel"
+    [(ngModel)]="data"
+    [required]="required"
+    [placeholder]="placeholder"
+    [multiple]="multiple"
+    [errorStateMatcher]="matcher"
+    [compareWith]="compareWith!"
+    (selectionChange)="onSelectionChange($event)"
+    [attr.name]="'ngModelFallbackSelect'"
+    [ngModelOptions]="{standalone: true}"
+    [disabled]=" disabled"
+  >
+    @for (option of optionList; track option.value) {
+    <mat-option [value]="option.value" [disabled]="option.disabled"
+      >{{ option.text }}</mat-option
+    >
+    }
+  </mat-select>
+  }
+
+  <!-- @if for conditional error messages -->
+  @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
+</mat-form-field>

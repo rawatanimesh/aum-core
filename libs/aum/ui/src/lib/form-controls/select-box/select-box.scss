@@ -1,0 +1,140 @@
+@use 'functions' as *;
+.aum-select-box-root {
+  margin: em(18) 0;
+  position: relative;
+  width: 100%;
+
+  //update input styling
+  .mat-mdc-select-value-text,
+  .mat-mdc-select-placeholder {
+    font-size: rem(14) !important;
+    font-weight: 400 !important;
+  }
+
+  //move the label above the input
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    --mat-mdc-form-field-label-transform: translateY(
+        calc(calc(22px + var(--mat-form-field-container-height, 56px) / 2) * -1)
+      )
+      scale(var(--mat-mdc-form-field-floating-label-scale, 0.75)) !important;
+    font-size: rem(16) !important;
+    font-weight: 400 !important;
+  }
+
+  //add border to input after moving label above
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mat-mdc-notch-piece {
+    border-top: 1px solid var(--mat-sys-outline);
+  }
+  .mdc-notched-outline__leading {
+    // border-top: 1px solid !important;
+    border-right: none !important;
+  }
+  .mdc-notched-outline__notch {
+    // border-top: 1px solid rgba(0, 0, 0, 0) !important;
+    border-right: none !important;
+  }
+  .mdc-notched-outline__trailing {
+    // border-top: 1px solid !important;
+    border-left: none !important;
+  }
+  // border in disabled state
+  .mdc-text-field--outlined.mdc-text-field--disabled
+    .mdc-notched-outline__notch {
+    border-top: 1px solid
+      var(
+        --mat-form-field-outlined-disabled-outline-color,
+        color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent)
+      );
+  }
+  //add border to input after moving label above end
+
+  //update border width on focus
+  .mdc-text-field--outlined:not(
+      .mdc-text-field--disabled
+    ).mdc-text-field--focused
+    .mdc-notched-outline
+    .mat-mdc-notch-piece {
+    border-width: var(--mat-form-field-outlined-focus-outline-width, 1px);
+  }
+
+  //update required styling
+  .mdc-floating-label--required:not(
+      .mdc-floating-label--hide-required-marker
+    )::after {
+    font-weight: 900;
+    margin-left: rem(4) !important;
+  }
+
+  //letter spacing in input field
+  .mat-mdc-form-field-infix {
+    letter-spacing: normal !important;
+  }
+
+  //mat hint styling
+  .mat-mdc-form-field-subscript-wrapper {
+    font-size: rem(12) !important;
+    font-weight: 400 !important;
+  }
+}
+
+//styling to change height of input from 56px to 48px
+.aum-select-box {
+  .mat-mdc-text-field-wrapper {
+    height: rem(48) !important;
+  }
+  .mat-mdc-form-field-infix {
+    min-height: rem(48) !important;
+    height: rem(48) !important;
+    display: flex;
+    align-items: center;
+  }
+}
+//styling for mat select panel in light mode
+.light-mode .aum-select-box-panel {
+  background-color: var(--mat-sys-surface) !important;
+  box-shadow: var(--mat-sys-level3) !important;
+}
+
+//styling for single select mode
+.aum-select-box-panel:not([aria-multiselectable='true'])
+  .mat-mdc-option.mat-mdc-option-active.mdc-list-item {
+  border-left: rem(2) solid var(--mat-sys-primary) !important;
+  padding-left: rem(14) !important; // 2+14 to match default material spacing
+}
+
+//styling mat options
+
+// change font size and height of options
+.mat-mdc-option {
+  font-size: rem(13) !important;
+  font-weight: 400 !important;
+  min-height: rem(42) !important;
+}
+// change color of selected option text in single select mode
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  )
+  .mdc-list-item__primary-text {
+  color: var(--mat-sys-primary) !important;
+}
+
+.mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: var(--mat-sys-primary-container) !important;
+}
+.mat-mdc-select-panel {
+  padding: 0 !important;
+}
+.mat-mdc-option .mat-pseudo-checkbox-minimal {
+  display: none;
+}
+// override background color of selected option in single/multi select mode
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  ),
+.mat-mdc-option.mat-mdc-option-active.mdc-list-item {
+  // background-color: var(--mat-sys-surface) !important;
+  background: rgba(0, 0, 0, 0) !important;
+}

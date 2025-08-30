@@ -10,7 +10,12 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { PageComponent } from '@aum/ui/layout';
-import { InputComponent, DatePickerComponent } from '@aum/ui/form-controls';
+import {
+  InputComponent,
+  DatePickerComponent,
+  SelectBox,
+  SelectOption,
+} from '@aum/ui/form-controls';
 import { ButtonComponent } from '@aum/ui/buttons';
 
 // Define a type for your form structure for better type safety
@@ -25,6 +30,8 @@ type LoginForm = FormGroup<{
     start: FormControl<Date | null>;
     end: FormControl<Date | null>;
   }>;
+  country: FormControl<string>;
+  multiSelectHobbies: FormControl<string[]>;
 }>;
 
 @Component({
@@ -35,6 +42,7 @@ type LoginForm = FormGroup<{
     PageComponent,
     InputComponent,
     DatePickerComponent,
+    SelectBox,
     ButtonComponent,
   ],
   templateUrl: './input-demo.html',
@@ -47,6 +55,34 @@ export class InputDemo implements OnInit, OnDestroy {
       { title: 'Inputs', route: '/playground/inputs' },
     ],
   };
+  fruitOptions: SelectOption[] = [
+    { value: 'apple', text: 'Apple' },
+    { value: 'banana', text: 'Banana', disabled: true },
+    { value: 'orange', text: 'Orange' },
+  ];
+  colorOptions: SelectOption[] = [
+    { value: 'red', text: 'Red' },
+    { value: 'blue', text: 'Blue', disabled: true },
+    { value: 'green', text: 'Green' },
+  ];
+  selectedFruit = 'banana';
+  selectedColors = ['red', 'blue'];
+
+  countryOptions: SelectOption[] = [
+    { value: '', text: 'Select a Country' }, // Optional: a default disabled option
+    { value: 'USA', text: 'United States' },
+    { value: 'Canada', text: 'Canada' },
+    { value: 'Mexico', text: 'Mexico' },
+    { value: 'UK', text: 'United Kingdom' },
+    { value: 'Germany', text: 'Germany' },
+  ];
+
+  hobbyOptions: SelectOption[] = [
+    { value: 'reading', text: 'Reading' },
+    { value: 'hiking', text: 'Hiking' },
+    { value: 'gaming', text: 'Gaming' },
+    { value: 'cooking', text: 'Cooking' },
+  ];
 
   today = new Date();
   month = this.today.getMonth();
@@ -101,6 +137,19 @@ export class InputDemo implements OnInit, OnDestroy {
     someDateRange: new FormGroup({
       start: new FormControl<Date | null>(null, [Validators.required]),
       end: new FormControl<Date | null>(null, [Validators.required]),
+    }),
+    country: new FormControl<string>('USA', {
+      // 'USA' as initial value
+      nonNullable: true,
+      validators: [
+        Validators.required,
+        Validators.pattern(/^(USA|Canada|Mexico)$/),
+      ], // Example pattern validator
+    }),
+    multiSelectHobbies: new FormControl<string[]>([], {
+      // Example for multiple select
+      nonNullable: true,
+      validators: [Validators.required, Validators.min(1)],
     }),
   });
   constructor() {
@@ -163,6 +212,8 @@ export class InputDemo implements OnInit, OnDestroy {
       notes: '',
       someDate: null,
       someDateRange: { start: null, end: null },
+      country: '',
+      multiSelectHobbies: [],
     });
     this.standaloneSingleDate = null;
     this.standaloneDateRange = null;
@@ -171,6 +222,8 @@ export class InputDemo implements OnInit, OnDestroy {
   setStandaloneValues(): void {
     this.standaloneSingleDate = new Date(2024, 10, 25); // November 25, 2024
     this.standaloneDateRange = [new Date(2024, 11, 1), new Date(2024, 11, 25)]; // December 2024
+    this.selectedFruit = 'apple';
+    this.selectedColors = ['green', 'red'];
   }
 
   togglePasswordEnabled(): void {
@@ -197,9 +250,14 @@ export class InputDemo implements OnInit, OnDestroy {
         start: new Date(2024, 8, 1),
         end: new Date(2024, 8, 10),
       },
+      country: 'Canada',
+      multiSelectHobbies: ['hiking', 'cooking'],
     });
   }
   dateSelected(ev: any) {
+    console.log(ev);
+  }
+  selectValueChange(ev: any) {
     console.log(ev);
   }
 }
