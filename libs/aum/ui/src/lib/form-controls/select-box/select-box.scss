@@ -121,7 +121,16 @@
   color: var(--mat-sys-primary) !important;
 }
 
+// change background color of option on hover
 .mat-mdc-option:hover:not(.mdc-list-item--disabled) {
+  background-color: var(--mat-sys-primary-container) !important;
+}
+
+// change background color of selected option on hover in single/multiple select mode
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(
+    .mat-mdc-option-multiple
+  ):hover,
+.mat-mdc-option.mat-mdc-option-active.mdc-list-item:hover {
   background-color: var(--mat-sys-primary-container) !important;
 }
 .mat-mdc-select-panel {
