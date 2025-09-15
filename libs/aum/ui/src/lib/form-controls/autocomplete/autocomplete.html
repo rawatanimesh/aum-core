@@ -1,0 +1,63 @@
+<mat-form-field
+  class="aum-autocomplete-root"
+  [floatLabel]="'always'"
+  subscriptSizing="dynamic"
+  appearance="outline"
+>
+  <mat-label>{{ label }}</mat-label>
+
+  <!-- Reactive Forms Input with Autocomplete -->
+  @if (control) {
+  <input
+    matInput
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    [formControl]="control"
+    [required]="required"
+    [placeholder]="placeholder"
+    [errorStateMatcher]="matcher"
+    [matAutocomplete]="auto"
+    (input)="onInput($event)"
+    [attr.name]="'formControlAutocomplete'"
+    [disabled]="disabled"
+    [readonly]="readonly"
+  />
+  } @else {
+  <!-- ngModel/Standalone Input with Autocomplete fallback -->
+  <input
+    matInput
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    [(ngModel)]="data"
+    [required]="required"
+    [placeholder]="placeholder"
+    [errorStateMatcher]="matcher"
+    [matAutocomplete]="auto"
+    (input)="onInput($event)"
+    [attr.name]="'ngModelFallbackAutocomplete'"
+    [ngModelOptions]="{standalone: true}"
+    [disabled]="disabled"
+    [readonly]="readonly"
+  />
+  }
+
+  <mat-autocomplete
+    class="aum-autocomplete-panel"
+    #auto="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="onOptionSelection($event)"
+  >
+    @for (option of filteredOptions | async; track option.value) {
+    <mat-option [value]="option.value"> {{ option.text }} </mat-option>
+    }
+  </mat-autocomplete>
+
+  <!-- @if for conditional error messages -->
+  @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
+</mat-form-field>

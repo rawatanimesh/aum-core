@@ -9,6 +9,12 @@
 
       <!-- ADDED: Grid container for standalone inputs -->
       <div class="input-grid">
+        <aum-autocomplete
+          label="Search Country Capital"
+          [(data)]="selectedCapital"
+          [optionList]="capitalOptions"
+          [placeholder]="'e.g., Paris'"
+        ></aum-autocomplete>
         <aum-select-box
           [label]="'Fruit Opitons'"
           [placeholder]="'Select Fruit'"
@@ -218,6 +224,31 @@
        required: 'Please select at least one hobby!'
      }"
             ></aum-select-box>
+            <aum-autocomplete
+              [label]="'Programming Language'"
+              [placeholder]="'Type to search language'"
+              [required]="true"
+              [control]="myForm.controls.programmingLanguage"
+              [optionList]="programmingLanguageOptions"
+              [customErrorMessages]="{
+             required: 'Language is required!',
+              invalidOption: 'Please select a valid language from the list.'
+
+           }"
+            ></aum-autocomplete>
+
+            <!--  Autocomplete for Product (Object Value) -->
+            <aum-autocomplete
+              [label]="'Select Product'"
+              [placeholder]="'Type to search product'"
+              [required]="true"
+              [control]="myForm.controls.selectedProduct"
+              [optionList]="productOptions"
+              [customErrorMessages]="{
+               required: 'Product selection is required!',
+
+             }"
+            ></aum-autocomplete>
           </div>
           <!-- END ADDED: Grid container for reactive form inputs -->
 

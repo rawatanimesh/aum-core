@@ -15,8 +15,15 @@ import {
   DatePickerComponent,
   SelectBox,
   SelectOption,
+  Autocomplete,
 } from '@aum/ui/form-controls';
 import { ButtonComponent } from '@aum/ui/buttons';
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+}
 
 // Define a type for your form structure for better type safety
 type LoginForm = FormGroup<{
@@ -32,6 +39,8 @@ type LoginForm = FormGroup<{
   }>;
   country: FormControl<string>;
   multiSelectHobbies: FormControl<string[]>;
+  programmingLanguage: FormControl<string | null>;
+  selectedProduct: FormControl<Product | null>;
 }>;
 
 @Component({
@@ -43,6 +52,7 @@ type LoginForm = FormGroup<{
     InputComponent,
     DatePickerComponent,
     SelectBox,
+    Autocomplete,
     ButtonComponent,
   ],
   templateUrl: './input-demo.html',
@@ -102,6 +112,48 @@ export class InputDemo implements OnInit, OnDestroy {
     new Date(2024, 0, 15),
   ];
 
+  selectedCapital: string | null = null;
+  capitalOptions: SelectOption[] = [
+    { value: 'Paris', text: 'Paris' },
+    { value: 'Tokyo', text: 'Tokyo' },
+    { value: 'London', text: 'London' },
+    { value: 'Berlin', text: 'Berlin' },
+    { value: 'Rome', text: 'Rome' },
+  ];
+
+  programmingLanguageOptions: SelectOption[] = [
+    { value: 'JavaScript', text: 'JavaScript' },
+    { value: 'Python', text: 'Python' },
+    { value: 'Java', text: 'Java' },
+    { value: 'C#', text: 'C#' },
+    { value: 'TypeScript', text: 'TypeScript' },
+    { value: 'Ruby', text: 'Ruby' },
+    { value: 'Go', text: 'Go' },
+  ];
+
+  productOptions: SelectOption[] = [
+    {
+      value: { id: 101, name: 'Laptop', category: 'Electronics' },
+      text: 'Laptop (Electronics)',
+    },
+    {
+      value: { id: 102, name: 'Mouse', category: 'Electronics' },
+      text: 'Mouse (Electronics)',
+    },
+    {
+      value: { id: 201, name: 'T-Shirt', category: 'Apparel' },
+      text: 'T-Shirt (Apparel)',
+    },
+    {
+      value: { id: 301, name: 'Smartphone', category: 'Mobile' },
+      text: 'Smartphone (Mobile)',
+    },
+    {
+      value: { id: 401, name: 'Book', category: 'Books' },
+      text: 'Book (Books)',
+    },
+  ];
+
   private destroy$ = new Subject<void>();
   readonly myForm: LoginForm = new FormGroup({
     email: new FormControl('', {
@@ -151,6 +203,14 @@ export class InputDemo implements OnInit, OnDestroy {
       nonNullable: true,
       validators: [Validators.required, Validators.min(1)],
     }),
+    programmingLanguage: new FormControl<string | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    selectedProduct: new FormControl<Product | null>(null, {
+      nonNullable: true,
+      validators: [Validators.required], // Make it required
+    }),
   });
   constructor() {
     // Example: Watch value changes of the daterange form group
@@ -184,6 +244,8 @@ export class InputDemo implements OnInit, OnDestroy {
     // Set initial values for standalone (Template-Driven)
     this.standaloneSingleDate = new Date(2024, 8, 5);
     this.standaloneDateRange = [new Date(2024, 9, 10), new Date(2024, 9, 20)];
+
+    this.selectedCapital = 'Tokyo'; // Primitive initial value
   }
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -214,6 +276,8 @@ export class InputDemo implements OnInit, OnDestroy {
       someDateRange: { start: null, end: null },
       country: '',
       multiSelectHobbies: [],
+      programmingLanguage: null,
+      selectedProduct: null,
     });
     this.standaloneSingleDate = null;
     this.standaloneDateRange = null;
@@ -224,6 +288,7 @@ export class InputDemo implements OnInit, OnDestroy {
     this.standaloneDateRange = [new Date(2024, 11, 1), new Date(2024, 11, 25)]; // December 2024
     this.selectedFruit = 'apple';
     this.selectedColors = ['green', 'red'];
+    this.selectedCapital = 'Paris';
   }
 
   togglePasswordEnabled(): void {
@@ -252,6 +317,8 @@ export class InputDemo implements OnInit, OnDestroy {
       },
       country: 'Canada',
       multiSelectHobbies: ['hiking', 'cooking'],
+      programmingLanguage: 'Python',
+      selectedProduct: this.productOptions[0].value,
     });
   }
   dateSelected(ev: any) {
