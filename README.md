@@ -1,66 +1,210 @@
 # Angular UI Mods - AUM
 
-## Serve
+A modern Angular component library built with NX monorepo architecture, featuring Material Design 3 theming, standalone components, and comprehensive UI components.
 
-```sh
-npx nx run agentic-ai-app
-or
-nx run agentic-ai-app:serve:development
+## 📚 Documentation
+
+- **[📋 Best Practices](./BEST_PRACTICES.md)** - Coding standards, conventions, and development guidelines
+- **[🏗️ Architecture](./ARCHITECTURE.md)** - Technical architecture, design decisions, and project structure
+- **[🚀 Getting Started](#getting-started)** - Quick start guide and development setup
+- **[📖 Component Guide](#component-library)** - Available components and usage examples
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js**: v22.17.0
+- **npm**: Latest version
+- **Angular CLI**: v20.x
+- **NX CLI**: v21.x (optional but recommended)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd aum-core
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run serve
+# or using NX
+nx serve aum-core
 ```
 
-## Build
+## 🏃‍♂️ Development Commands
 
-```sh
-nx run agentic-ai-app:build:production
-nx run agentic-ai-app:build:development
+### Serve
+
+```bash
+# Development server
+nx serve aum-core
+# or
+nx run aum-core:serve:development
 ```
 
-## Generate Theme
+### Build
 
-```sh
+```bash
+# Production build
+nx build aum-core --configuration=production
+
+# Development build
+nx build aum-core --configuration=development
+```
+
+### Testing
+
+```bash
+# Run tests
+nx test aum-core
+
+# Run tests with coverage
+nx test aum-core --coverage
+
+# Run linting
+nx lint aum-core
+```
+
+## 📖 Component Library
+
+### Available Components
+
+#### Buttons & Actions
+
+- **ButtonComponent** - Multi-variant buttons with icon support
+- **MenuListComponent** - Dropdown menus with nested options
+
+#### Form Controls
+
+- **InputComponent** - Text input with validation
+- **CheckboxComponent** - Checkbox with indeterminate state
+- **RadioButtonComponent** - Radio button groups
+- **DatePickerComponent** - Date selection with calendar
+- **SelectBoxComponent** - Single and multi-select dropdowns
+- **AutocompleteComponent** - Auto-completing input field
+
+#### Layout & Navigation
+
+- **PageComponent** - Standard page layout with breadcrumbs
+- **CardComponent** - Content container with shadow
+- **BreadcrumbComponent** - Navigation breadcrumbs
+
+#### Feedback & Dialogs
+
+- **ConfirmationDialogComponent** - Yes/No confirmation dialogs
+- **GenericDialogComponent** - Customizable modal dialogs
+- **SnackbarService** - Toast notifications
+
+### Usage Example
+
+```typescript
+import { ButtonComponent } from '@aum/ui/buttons';
+import { CardComponent } from '@aum/ui/layout';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [ButtonComponent, CardComponent],
+  template: `
+    <aum-card>
+      <div card-body>
+        <h2>Welcome to AUM UI</h2>
+        <aum-button type="filled" value="Get Started" (buttonClick)="handleClick()"> </aum-button>
+      </div>
+    </aum-card>
+  `,
+})
+export class ExampleComponent {
+  handleClick() {
+    console.log('Button clicked!');
+  }
+}
+```
+
+## 🎨 Theming
+
+### Generate Custom Theme
+
+```bash
 npx nx g @angular/material:theme-color --project=aum-core
 ```
 
-primary: #FF008C, secondary: #ffffff, tertiary: #ffffff, neutral: #ffffff, neutral variant: #ffffff, error: #DF0101
+**Default Theme Colors:**
 
-Refer link - https://material-foundation.github.io/material-theme-builder/
+- Primary: `#6E57E0` (Purple)
+- Secondary: `#ffffff` (White)
+- Error: `#DF0101` (Red)
 
-## Node version -
+**Theme Builder:** [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
 
-v22.17.0
+### Using Theme Variables
 
-## Important points to note
+```scss
+.my-component {
+  color: var(--mat-sys-on-surface);
+  background-color: var(--mat-sys-surface);
+  border: 1px solid var(--mat-sys-outline-variant);
+}
+```
 
-- libs/aum is only for generic/common utilities and components (prefix aum)
+## 📁 Project Structure
 
-- App related code to be written inside libs/modules (prefix aum-modules)
+```
+aum-core/
+├── apps/aum-core/              # Main application (lightweight)
+├── libs/
+│   ├── aum/                    # Core AUM libraries (prefix: aum)
+│   │   ├── ui/                 # Reusable UI components
+│   │   ├── theme/              # Styles, themes, assets
+│   │   ├── utils/              # Services, interfaces, models
+│   │   └── templates/          # Template components
+│   └── modules/                # App modules (prefix: aum-modules)
+│       ├── dashboard/          # Dashboard feature module
+│       └── playground/         # Component playground
+└── docs/                       # Documentation files
+```
 
-- Put aum library related assets like svgs, icons, fonts inside libs/aum/theme/src/assets folder
+## 🛠️ Technology Stack
 
-- Use of stanalone components (no module files)
+- **Angular 20** - Modern framework with standalone components
+- **NX 21** - Monorepo tooling and build system
+- **Material Design 3** - Consistent theming system
+- **TypeScript 5.8** - Type safety and modern JavaScript features
+- **RxJS 7.8** - Reactive programming
+- **Jest 29** - Testing framework
 
-- Use of signals and inject
+## 📖 Additional Resources
 
-- Use latest angular code schema (@for @if etc)
+### Learning Resources
 
-- Use of material system variables
+- [NX Angular Monorepo Tutorial](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial)
+- [Angular Documentation](https://angular.dev/overview)
+- [Angular Material Components](https://material.angular.dev/components/categories)
+- [Material Design System](https://material.angular.dev/guide/system-variables)
 
-- Use of rem() function to give styling
+### Design Resources
 
-- Use of helper css classes (utilities.scss)
+- [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
+- [Google Fonts & Icons](https://fonts.google.com/)
+- [Material Design Guidelines](https://material.io/design)
 
-- Use button with class unstyled-button for custom click events
+## 🤝 Contributing
 
-- Test your changes in dark mode too
+1. Read the [Best Practices Guide](./BEST_PRACTICES.md)
+2. Understand the [Architecture](./ARCHITECTURE.md)
+3. Follow the development workflow
+4. Test your changes in both light and dark modes
+5. Submit a pull request with clear description
 
-## Important Links
+## 📄 License
 
-- NX Angular Monorepo tutorial : https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial
+MIT License - see LICENSE file for details.
 
-- Angular Material Components : https://material.angular.dev/components/categories
+---
 
-- Angular Material system materials : https://material.angular.dev/guide/system-variables
+**Quick Start:** `npm install && nx serve aum-core`
 
-- Material fonts and icons : https://fonts.google.com/
-
-- Angular docs : https://angular.dev/overview
+For detailed information, see our [documentation](#-documentation) above.
