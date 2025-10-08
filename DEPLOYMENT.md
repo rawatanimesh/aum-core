@@ -4,13 +4,14 @@ This document outlines the deployment process, environment configuration, and CI
 
 ## 📋 Table of Contents
 
-- [Environment Setup](#environment-setup)
-- [Build Process](#build-process)
-- [Deployment Strategies](#deployment-strategies)
-- [CI/CD Pipeline](#cicd-pipeline)
-- [Production Checklist](#production-checklist)
-- [Monitoring](#monitoring)
-- [Rollback Procedures](#rollback-procedures)
+- [🌍 Environment Setup](#-environment-setup)
+- [🏗️ Build Process](#️-build-process)
+- [🚀 Deployment Strategies](#-deployment-strategies)
+- [🔄 CI/CD Pipeline](#-cicd-pipeline)
+- [✅ Production Checklist](#-production-checklist)
+- [📊 Monitoring](#-monitoring)
+- [⏪ Rollback Procedures](#-rollback-procedures)
+- [🔐 Security Considerations](#-security-considerations)
 
 ---
 
@@ -511,7 +512,7 @@ export class HealthCheckService {
 
 ---
 
-## 🔄 Rollback Procedures
+## ⏪ Rollback Procedures
 
 ### Automated Rollback
 

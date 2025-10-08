@@ -6,8 +6,14 @@ A modern Angular component library built with NX monorepo architecture, featurin
 
 - **[📋 Best Practices](./BEST_PRACTICES.md)** - Coding standards, conventions, and development guidelines
 - **[🏗️ Architecture](./ARCHITECTURE.md)** - Technical architecture, design decisions, and project structure
-- **[🚀 Getting Started](#getting-started)** - Quick start guide and development setup
-- **[📖 Component Guide](#component-library)** - Available components and usage examples
+- **[🤝 Contributing](./CONTRIBUTING.md)** - Developer contribution guide and workflow
+- **[🚀 Deployment](./DEPLOYMENT.md)** - Production deployment and CI/CD guide
+- **[📝 Changelog](./CHANGELOG.md)** - Version history and release notes
+- **[🚀 Getting Started](#-getting-started)** - Quick start guide and development setup
+- **[📖 Component Guide](#-component-library)** - Available components and usage examples
+- **[🎨 Theming](#-theming)** - Theme customization and usage
+- **[📁 Project Structure](#-project-structure)** - Directory organization
+- **[🤝 Contributing](#-contributing)** - How to contribute to the project
 
 ## 🚀 Getting Started
 

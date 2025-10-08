@@ -4,13 +4,17 @@ Thank you for your interest in contributing to AUM UI! This guide will help you 
 
 ## 📋 Table of Contents
 
-- [Getting Started](#getting-started)
-- [Development Setup](#development-setup)
-- [Contribution Workflow](#contribution-workflow)
-- [Component Development](#component-development)
-- [Testing Guidelines](#testing-guidelines)
-- [Documentation](#documentation)
-- [Code Review Process](#code-review-process)
+- [🚀 Getting Started](#-getting-started)
+- [🛠️ Development Setup](#️-development-setup)
+- [🔄 Contribution Workflow](#-contribution-workflow)
+- [🧩 Component Development](#-component-development)
+- [🧪 Testing Guidelines](#-testing-guidelines)
+- [📚 Documentation](#-documentation)
+- [👀 Code Review Process](#-code-review-process)
+- [🚨 Common Issues & Solutions](#-common-issues--solutions)
+- [📞 Getting Help](#-getting-help)
+- [🎯 Contribution Types](#-contribution-types)
+- [📜 Code of Conduct](#-code-of-conduct)
 
 ---
 

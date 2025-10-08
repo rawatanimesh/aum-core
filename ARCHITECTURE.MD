@@ -4,14 +4,18 @@ This document provides a comprehensive overview of the AUM UI project architectu
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Component Architecture](#component-architecture)
-- [State Management](#state-management)
-- [Styling Architecture](#styling-architecture)
-- [Build & Deployment](#build--deployment)
-- [Development Workflow](#development-workflow)
+- [🏗️ Overview](#️-overview)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [📁 Project Structure](#-project-structure)
+- [🧩 Component Architecture](#-component-architecture)
+- [📊 State Management](#-state-management)
+- [🎨 Styling Architecture](#-styling-architecture)
+- [🎨 UI Scaling & Theming Architecture](#-ui-scaling--theming-architecture)
+- [🔄 Build & Deployment](#-build--deployment)
+- [🚀 Development Workflow](#-development-workflow)
+- [📈 Performance Considerations](#-performance-considerations)
+- [🔒 Security Considerations](#-security-considerations)
+- [📊 Monitoring & Analytics](#-monitoring--analytics)
 
 ---
 

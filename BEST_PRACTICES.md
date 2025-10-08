@@ -4,14 +4,14 @@ This document outlines the best practices, coding standards, and conventions for
 
 ## 📋 Table of Contents
 
-- [Project Structure](#project-structure)
-- [Component Development](#component-development)
-- [Styling Guidelines](#styling-guidelines)
-- [TypeScript Standards](#typescript-standards)
-- [Testing Practices](#testing-practices)
-- [Performance Guidelines](#performance-guidelines)
-- [Accessibility Standards](#accessibility-standards)
-- [Code Quality](#code-quality)
+- [🏗️ Project Structure](#️-project-structure)
+- [🧩 Component Development](#-component-development)
+- [🎨 Styling Guidelines](#-styling-guidelines)
+- [📝 TypeScript Standards](#-typescript-standards)
+- [🧪 Testing Practices](#-testing-practices)
+- [⚡ Performance Guidelines](#-performance-guidelines)
+- [♿ Accessibility Standards](#-accessibility-standards)
+- [🔍 Code Quality](#-code-quality)
 
 ---
 
