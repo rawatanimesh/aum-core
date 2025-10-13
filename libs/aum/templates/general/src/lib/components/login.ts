@@ -69,6 +69,7 @@ type LoginForm = FormGroup<{
             [value]="'Login'"
             [disabled]="myForm.invalid"
             [htmlType]="'submit'"
+            [width]="'100%'"
           ></aum-button>
         </form>
         <div class="margin-top-32 margin-bottom-16">Sign in with</div>
