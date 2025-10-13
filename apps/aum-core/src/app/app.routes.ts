@@ -1,7 +1,28 @@
-import { Route } from '@angular/router';
-// import { KeycloakAuthGuardService } from './keycloak.service';
+import { inject } from '@angular/core';
+import { Route, Router } from '@angular/router';
+import { AuthGuardService } from './auth-gaurd.service';
+import { AuthService } from '@aum/utils/services';
 
 export const appRoutes: Route[] = [
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('@aum/general-templates').then((m) => m.LoginComponent),
+    // login to avoid flashing of login page before auth state is checked and then routed
+    canActivate: [
+      () => {
+        const auth = inject(AuthService);
+        const router = inject(Router);
+        if (auth.isAuthenticated()) {
+          const redirectUrl = auth.getLastAttemptedRoute() ?? '/dashboard';
+          router.navigateByUrl(redirectUrl);
+          return false; // block login page
+        }
+        return true; // allow
+      },
+    ],
+  },
+
   {
     path: '',
     redirectTo: 'dashboard',
@@ -10,7 +31,7 @@ export const appRoutes: Route[] = [
   {
     path: '',
     loadComponent: () => import('@aum/aum-template').then((m) => m.AumTemplate), // Common layout
-    // canActivate: [KeycloakAuthGuardService],
+    canActivate: [AuthGuardService],
     children: [
       {
         path: 'dashboard',

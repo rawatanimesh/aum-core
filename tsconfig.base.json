@@ -18,6 +18,7 @@
       "@aum-modules/dashboard": ["libs/modules/dashboard/src/index.ts"],
       "@aum-modules/playground": ["libs/modules/playground/src/index.ts"],
       "@aum/aum-template": ["libs/aum/templates/aum-template/src/index.ts"],
+      "@aum/general-templates": ["libs/aum/templates/general/src/index.ts"],
       "@aum/theme": ["libs/aum/theme/src/index.ts"],
       "@aum/ui/buttons": ["libs/aum/ui/src/lib/buttons/index.ts"],
       "@aum/ui/dialogs": ["libs/aum/ui/src/lib/dialogs/index.ts"],

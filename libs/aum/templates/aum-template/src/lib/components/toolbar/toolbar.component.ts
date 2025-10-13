@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,15 +16,14 @@ import { BreadcrumbService } from '@aum/utils/services';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { ButtonComponent } from '@aum/ui/buttons';
+import { AuthService } from '@aum/utils/services';
 
 @Component({
   selector: 'aum-toolbar',
   imports: [
     CommonModule,
-
     MatToolbarModule,
     MatMenuModule,
-
     BreadcrumbComponent,
     ButtonComponent,
     MenuList,
@@ -35,6 +35,8 @@ export class ToolbarComponent implements OnInit {
   @Output() sideMenuToggle = new EventEmitter();
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
+  private auth = inject(AuthService);
+  private router = inject(Router);
   themeIcon = computed(() => this.themeService.themeIcon());
   aLogo = 'assets/svgs/A-logo.svg';
   aumAiLogo = 'assets/svgs/Agentic-AI-Platform.svg';
@@ -142,6 +144,9 @@ export class ToolbarComponent implements OnInit {
     ) {
       this.themeService.setTheme(item.value);
     }
+    if (item.value === 'logout') {
+      this.logout();
+    }
   }
   setMenuSelection(menuList: MenuItem[], parent: string, value: string) {
     const parentMenu = menuList.find((menu) => menu.value === parent);
@@ -173,5 +178,10 @@ export class ToolbarComponent implements OnInit {
 
     localStorage.setItem('ui-scale-mode', mode);
     console.log('Setting UI scale to:', mode);
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

@@ -24,6 +24,11 @@
             "glob": "**/*",
             "input": "libs/aum/theme/src/assets/resources/svgs",
             "output": "assets/svgs"
+          },
+          {
+            "glob": "**/*",
+            "input": "libs/aum/theme/src/assets/resources/images",
+            "output": "assets/images"
           }
         ],
         "styles": ["apps/aum-core/src/styles.scss"],
