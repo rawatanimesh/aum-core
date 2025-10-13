@@ -25,6 +25,7 @@ export class ButtonComponent {
   @Input() icon = ''; // for icon name
   @Input() disabled = false;
   @Input() tooltip = '';
+  @Input() htmlType: 'button' | 'submit' | 'reset' = 'button';
   @Output() clickButton = new EventEmitter<MouseEvent>();
 
   get sizeClass() {

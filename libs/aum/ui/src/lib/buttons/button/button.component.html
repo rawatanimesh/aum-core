@@ -2,6 +2,7 @@
   @switch (type) { @case ('outlined') {
   <button
     matButton="outlined"
+    [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
     [matTooltip]="tooltip"
@@ -13,6 +14,7 @@
   } @case ('filled') {
   <button
     matButton="filled"
+    [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
     [matTooltip]="tooltip"
@@ -24,6 +26,7 @@
   } @case ('basic') {
   <button
     matButton
+    [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
     [matTooltip]="tooltip"
@@ -35,6 +38,7 @@
   } @case ('icon') {
   <button
     matIconButton
+    [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
     [matTooltip]="tooltip"
