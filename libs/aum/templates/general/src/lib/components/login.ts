@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
@@ -63,21 +63,13 @@ type LoginForm = FormGroup<{
            }"
           ></aum-input>
 
-          <!-- <aum-button
-           class="text-left"
-           [type]="'filled'"
-           [value]="'Login'"
-           (clickButton)="login()"
-         ></aum-button> -->
-          <button
-            mat-flat-button
-            color="primary"
+          <aum-button
+            class="text-left"
+            [type]="'filled'"
+            [value]="'Login'"
             [disabled]="myForm.invalid"
-            style="width: 100%;"
-            (click)="login()"
-          >
-            Login
-          </button>
+            [htmlType]="'submit'"
+          ></aum-button>
         </form>
         <div class="margin-top-32 margin-bottom-16">Sign in with</div>
         <div class="flex-row-flex-start w-50">
@@ -103,6 +95,13 @@ type LoginForm = FormGroup<{
   `,
   styles: [
     `
+      :host {
+        background-color: var(--mat-sys-background);
+        color: var(--mat-sys-on-background);
+        display: block;
+        min-height: 100vh;
+      }
+
       .image-block {
         height: 100vh;
         background-image: url('/assets/images/login-banner.jpg');
@@ -129,16 +128,10 @@ export class LoginComponent {
   constructor() {
     //  Clear all classes on body tag
     document.body.className = '';
-    // if logged in redirect immediately
-    if (this.auth.isAuthenticated()) {
-      const redirectUrl = this.auth.getLastAttemptedRoute() ?? '/dashboard';
-      this.router.navigateByUrl(redirectUrl);
-    }
 
     //delete later
     this.myForm.patchValue({
       email: 'animesh@mail.com',
-      //  password: 'newpassword',
     });
   }
 
@@ -147,6 +140,7 @@ export class LoginComponent {
       this.myForm.valid &&
       this.auth.login(this.myForm.value.email, this.myForm.value.password)
     ) {
+      // After successful login, redirect to the last attempted route or dashboard
       const redirectUrl = this.auth.getLastAttemptedRoute() ?? '/dashboard';
       this.auth.clearLastAttemptedRoute();
       this.router.navigateByUrl(redirectUrl);
