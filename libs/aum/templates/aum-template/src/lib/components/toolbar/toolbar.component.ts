@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 
-import { ThemeService } from '@aum/utils/services';
+import { ThemeService, AppConfigService } from '@aum/utils/services';
 import { BreadcrumbService } from '@aum/utils/services';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
@@ -35,11 +35,33 @@ export class ToolbarComponent implements OnInit {
   @Output() sideMenuToggle = new EventEmitter();
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
+  protected appConfigService = inject(AppConfigService);
   private auth = inject(AuthService);
   private router = inject(Router);
   themeIcon = computed(() => this.themeService.themeIcon());
-  aLogo = 'assets/svgs/A-logo.svg';
-  aumAiLogo = 'assets/svgs/Agentic-AI-Platform.svg';
+
+  // Get logos from config service
+  get brandLogo(): string {
+    return this.appConfigService.config.brandLogo;
+  }
+
+  get appLogo(): string {
+    return this.appConfigService.config.appLogo;
+  }
+
+  get appName(): string {
+    return this.appConfigService.config.appName;
+  }
+
+  // Check if appLogo should be shown (has a valid non-empty path)
+  get shouldShowAppLogo(): boolean {
+    return !!this.appLogo && this.appLogo.trim() !== '';
+  }
+
+  // Check if appName should be shown (only when logo is not available)
+  get shouldShowAppName(): boolean {
+    return !this.shouldShowAppLogo && !!this.appName && this.appName.trim() !== '';
+  }
 
   optionsMenuList: MenuItem[] = [
     // { label: 'About', value: 'about', icon: 'info' },

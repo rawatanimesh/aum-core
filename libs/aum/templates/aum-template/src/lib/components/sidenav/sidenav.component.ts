@@ -2,7 +2,8 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { SideMenu, SideMenuItem } from '@aum/ui/navigation';
+import { SideMenu, SideMenuItem  } from '@aum/ui/navigation';
+import { AppConfigService } from '@aum/utils/services';
 
 @Component({
   selector: 'aum-sidenav',
@@ -12,56 +13,15 @@ import { SideMenu, SideMenuItem } from '@aum/ui/navigation';
 })
 export class SidenavComponent {
   private router = inject(Router);
+  private appConfigService = inject(AppConfigService);
   @Output() menuItemClicked = new EventEmitter();
   isDataLoaded = true;
-  currentMenu = [
-    {
-      name: 'dashboard',
-      title: 'Dashboard',
-      route: 'dashboard',
-      // icon: 'side-panel-icon-v2 side-panel-icondashboard',
-      // rule: ['trainee', 'admin'],
-      // description: 'Browse all available learning material',
-    },
-    {
-      name: 'playground',
-      title: 'Playground',
-      route: 'playground',
-    },
-  ];
 
-  navItems: SideMenuItem[] = [
-    {
-      label: 'Dashboard',
-      value: '/dashboard',
-      icon: 'dashboard',
-      selected: true,
-    },
-    {
-      label: 'Agent Directory',
-      value: 'agent-directory',
-      icon: 'support_agent',
-      expanded: false,
-      children: [
-        {
-          label: 'My Agents',
-          value: '/agent-directory/my-agents',
-          icon: 'adb',
-        },
-        {
-          label: 'Agent List',
-          value: '/agent-directory/agent-list',
-          icon: 'smart_toy',
-        },
-      ],
-    },
-    {
-      label: 'Playground',
-      value: '/playground',
-      icon: 'close',
-      selected: false,
-    },
-  ];
+  // Get navigation items from config service
+  get navItems(): SideMenuItem [] {
+    return this.appConfigService.config.navItems;
+  }
+
   selectedItem = '';
 
   onNavItemSelect(item: any) {

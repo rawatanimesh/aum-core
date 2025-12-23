@@ -5,11 +5,14 @@
   &-left {
     width: 30%;
     // background-color: aquamarine;
-    &-appLogo {
+    &-brandLogo {
       height: rem(45);
     }
     &-appName {
       font-size: rem(18);
+    }
+    &-appIcon {
+      height: rem(22);
     }
   }
   &-center {
