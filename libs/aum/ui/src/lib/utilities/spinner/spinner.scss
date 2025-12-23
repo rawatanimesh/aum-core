@@ -1,0 +1,91 @@
+@use 'functions' as *;
+
+// Page Mode: Full screen overlay
+.aum-spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  // background-color: var(--mat-sys-scrim);
+   background-color: var(--mat-sys-surface);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  transition: opacity 0.3s ease;
+}
+
+.aum-spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aum-spinner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem(24);
+  // background-color: var(--mat-sys-surface);
+  border-radius: rem(12);
+  box-shadow: var(--mat-sys-elevation-level3);
+
+  &.vertical {
+    flex-direction: column;
+    gap: rem(16);
+  }
+
+  &.horizontal {
+    flex-direction: row;
+    gap: rem(16);
+  }
+}
+
+// Element Mode: Inline spinner
+.aum-spinner-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.vertical {
+    flex-direction: column;
+    gap: rem(12);
+  }
+
+  &.horizontal {
+    flex-direction: row;
+    gap: rem(12);
+  }
+}
+
+// Text positioning
+.aum-spinner-text {
+  opacity: 1;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-size: rem(14);
+  font-weight: 500;
+  text-align: center;
+
+  &.top,
+  &.bottom {
+    display: block;
+  }
+
+  &.left,
+  &.right {
+    display: inline-block;
+  }
+}
+
+// Override Material spinner colors to use theme
+::ng-deep {
+  .aum-spinner-overlay,
+  .aum-spinner-inline {
+    mat-spinner circle {
+      stroke: var(--mat-sys-primary);
+    }
+  }
+}

@@ -1,5 +1,13 @@
 <aum-page [pageInfo]="pageInfo">
   <div aum-page-body>
+    <!-- Page Mode Spinner Overlay -->
+    @if (showPageSpinner) {
+    <aum-spinner
+      [mode]="'page'"
+      [text]="'Loading, please wait...'"
+      [diameter]="60"
+    ></aum-spinner>
+    }
     <section>
       <div class="example-label fs-14">Buttons</div>
       <div class="example-button-row flex-row-space-between-center gap-4">
@@ -230,7 +238,100 @@
     <mat-divider></mat-divider>
     <section>
       <div class="example-label fs-14">Spinner</div>
-      <mat-spinner></mat-spinner>
+
+      <!-- Page Mode Demo -->
+      <div class="mb-4">
+        <h3 class="fs-16 mb-2">Page Mode (Full Screen Overlay)</h3>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Show Page Spinner (3 seconds)'"
+          (clickButton)="showPageModeSpinner()"
+        ></aum-button>
+      </div>
+
+      <!-- Element Mode Demos -->
+      <div class="mb-4">
+        <h3 class="fs-16 mb-2">Element Mode (Inline Spinners)</h3>
+
+        <!-- Text Position Demos -->
+        <div class="mb-3">
+          <h4 class="fs-14 mb-2">Text Position:</h4>
+          <div class="flex-row gap-8 flex-wrap mb-3">
+            <div class="spinner-demo-item">
+              <p class="fs-12 mb-1">Bottom Text</p>
+              <aum-spinner
+                [mode]="'element'"
+                [text]="'Loading...'"
+                [textPosition]="'bottom'"
+                [diameter]="50"
+              ></aum-spinner>
+            </div>
+
+            <div class="spinner-demo-item">
+              <p class="fs-12 mb-1">Right Text</p>
+              <aum-spinner
+                [mode]="'element'"
+                [text]="'Please wait'"
+                [textPosition]="'right'"
+                [diameter]="50"
+              ></aum-spinner>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diameter Variations -->
+        <div class="mb-3">
+          <h4 class="fs-14 mb-2">Size (Diameter):</h4>
+          <div class="flex-row gap-8 flex-wrap mb-3 align-items-end">
+            <div class="spinner-demo-item">
+              <p class="fs-12 mb-1">Small (40px)</p>
+              <aum-spinner
+                [mode]="'element'"
+                [text]="'Small'"
+                [diameter]="40"
+                [strokeWidth]="4"
+              ></aum-spinner>
+            </div>
+
+            <div class="spinner-demo-item">
+              <p class="fs-12 mb-1">Large (70px)</p>
+              <aum-spinner
+                [mode]="'element'"
+                [text]="'Large'"
+                [diameter]="70"
+                [strokeWidth]="5"
+              ></aum-spinner>
+            </div>
+          </div>
+        </div>
+
+        <!-- Type Variations -->
+        <div class="mb-3">
+          <h4 class="fs-14 mb-2">Type:</h4>
+          <div class="flex-row gap-8 flex-wrap mb-3">
+            <div class="spinner-demo-item">
+              <p class="fs-12 mb-1">Indeterminate</p>
+              <aum-spinner
+                [mode]="'element'"
+                [type]="'indeterminate'"
+                [text]="'Loading...'"
+                [diameter]="50"
+              ></aum-spinner>
+            </div>
+
+            <div class="spinner-demo-item">
+              <p class="fs-12 mb-1">Determinate (60%)</p>
+              <aum-spinner
+                [mode]="'element'"
+                [type]="'determinate'"
+                [progress]="60"
+                [text]="'60%'"
+                [diameter]="50"
+              ></aum-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
     <mat-divider></mat-divider>
     <section>

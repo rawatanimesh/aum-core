@@ -12,7 +12,7 @@ import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
 import { ConfirmationDialogService } from '@aum/ui/dialogs';
 import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
-import { SnackbarService } from '@aum/ui/utilities';
+import { SnackbarService, Spinner } from '@aum/ui/utilities';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
@@ -31,6 +31,7 @@ import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
     CheckboxComponent,
     RadioButton,
     MenuList,
+    Spinner
   ],
   templateUrl: './playground.html',
   styleUrl: './playground.scss',
@@ -105,6 +106,9 @@ export class Playground {
     { label: 'No', value: 'no' },
     { label: 'Maybe', value: 'maybe' },
   ];
+
+  // For Spinner demo
+  showPageSpinner = false;
 
   openMenu() {
     console.log('clicked');
@@ -190,5 +194,12 @@ export class Playground {
   onMenuSelect(item: MenuItem) {
     console.log('selected', item);
     console.log('updated menu list', this.choiceMenuItems);
+  }
+
+  showPageModeSpinner() {
+    this.showPageSpinner = true;
+    setTimeout(() => {
+      this.showPageSpinner = false;
+    }, 3000);
   }
 }

@@ -1,0 +1,63 @@
+@if (isPageMode) {
+  <!-- Page Mode: Full screen overlay with spinner in center -->
+  <div class="aum-spinner-overlay" [style.opacity]="overlayOpacity">
+    <div class="aum-spinner-container">
+      <div class="aum-spinner-content"
+           [class.vertical]="isTextTop || isTextBottom"
+           [class.horizontal]="isTextLeft || isTextRight">
+
+        @if (text && isTextTop) {
+          <div class="aum-spinner-text top">{{ text }}</div>
+        }
+
+        @if (text && isTextLeft) {
+          <div class="aum-spinner-text left">{{ text }}</div>
+        }
+
+        <mat-spinner
+          [mode]="type"
+          [value]="progress"
+          [diameter]="diameter"
+          [strokeWidth]="strokeWidth">
+        </mat-spinner>
+
+        @if (text && isTextRight) {
+          <div class="aum-spinner-text right">{{ text }}</div>
+        }
+
+        @if (text && isTextBottom) {
+          <div class="aum-spinner-text bottom">{{ text }}</div>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <!-- Element Mode: Inline spinner -->
+  <div class="aum-spinner-inline"
+       [class.vertical]="isTextTop || isTextBottom"
+       [class.horizontal]="isTextLeft || isTextRight">
+
+    @if (text && isTextTop) {
+      <div class="aum-spinner-text top">{{ text }}</div>
+    }
+
+    @if (text && isTextLeft) {
+      <div class="aum-spinner-text left">{{ text }}</div>
+    }
+
+    <mat-spinner
+      [mode]="type"
+      [value]="progress"
+      [diameter]="diameter"
+      [strokeWidth]="strokeWidth">
+    </mat-spinner>
+
+    @if (text && isTextRight) {
+      <div class="aum-spinner-text right">{{ text }}</div>
+    }
+
+    @if (text && isTextBottom) {
+      <div class="aum-spinner-text bottom">{{ text }}</div>
+    }
+  </div>
+}
