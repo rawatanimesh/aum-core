@@ -1,0 +1,33 @@
+.error-test-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.test-section {
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 1.5rem;
+  background-color: var(--surface-color, #ffffff);
+}
+
+.text-secondary {
+  color: var(--text-secondary, #666);
+  font-size: 0.9rem;
+}
+
+.bg-surface {
+  background-color: var(--surface-alt, #f5f5f5);
+  border-radius: 8px;
+}
+
+.instructions {
+  border-left: 4px solid var(--primary-color, #1976d2);
+}
+
+.instructions ul {
+  list-style-type: disc;
+}
+
+.instructions li {
+  line-height: 1.6;
+}

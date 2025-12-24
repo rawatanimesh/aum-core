@@ -202,6 +202,18 @@
     </section>
     <mat-divider></mat-divider>
     <section>
+      <div class="example-label fs-14">Error Handlers</div>
+
+      <div class="example-button-row">
+        <aum-button
+          [type]="'filled'"
+          [value]="'Test Error Handlers'"
+          (clickButton)="goToErrorTest()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
       <div class="example-label fs-14">Menu List</div>
       <div class="example-button-row flex-row gap-4">
         <aum-button

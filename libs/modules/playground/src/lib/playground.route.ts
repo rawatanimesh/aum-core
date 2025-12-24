@@ -12,4 +12,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./input-demo/input-demo').then((m) => m.InputDemo),
   },
+
+  {
+    path: 'error-test',
+    loadComponent: () =>
+      import('./error-test/error-test.component').then((m) => m.ErrorTestComponent),
+  },
 ];

@@ -1,0 +1,118 @@
+<aum-page>
+  <div aum-page-body class="error-test-container padding-8">
+    <h1 class="margin-bottom-6">Error Handler Test Suite</h1>
+    <p class="margin-bottom-8 text-secondary">
+      Click the buttons below to test different error scenarios. Check the console and watch for snackbar notifications.
+    </p>
+
+    <!-- Global Error Handler Tests -->
+    <section class="test-section margin-bottom-8">
+      <h2 class="margin-bottom-4">Global Error Handler Tests</h2>
+      <p class="margin-bottom-4 text-secondary">
+        These tests trigger JavaScript errors that should be caught by the GlobalErrorHandler.
+      </p>
+
+      <div class="flex-row-flex-start-center gap-4 flex-wrap">
+        <aum-button
+          [value]="'Test 1: Throw JS Error'"
+          [type]="'outlined'"
+      
+          (clickButton)="triggerJavaScriptError()"
+        ></aum-button>
+
+        <aum-button
+          [value]="'Test 2: Undefined Property'"
+          [type]="'outlined'"
+      
+          (clickButton)="triggerUndefinedError()"
+        ></aum-button>
+      </div>
+    </section>
+
+    <!-- HTTP Error Interceptor Tests -->
+    <section class="test-section margin-bottom-8">
+      <h2 class="margin-bottom-4">HTTP Error Interceptor Tests</h2>
+      <p class="margin-bottom-4 text-secondary">
+        These tests trigger various HTTP errors that should be caught by the httpErrorInterceptor.
+      </p>
+
+      <div class="flex-row-flex-start-center gap-4 flex-wrap">
+        <aum-button
+          [value]="'Test 3: 404 Not Found'"
+          [type]="'outlined'"
+         
+          (clickButton)="trigger404Error()"
+        ></aum-button>
+
+        <aum-button
+          [value]="'Test 4: 401 Unauthorized'"
+          [type]="'outlined'"
+          
+          (clickButton)="trigger401Error()"
+        ></aum-button>
+
+        <aum-button
+          [value]="'Test 5: 500 Server Error'"
+          [type]="'outlined'"
+          
+          (clickButton)="trigger500Error()"
+        ></aum-button>
+
+        <aum-button
+          [value]="'Test 6: Network Error'"
+          [type]="'outlined'"
+          
+          (clickButton)="triggerNetworkError()"
+        ></aum-button>
+
+        <aum-button
+          [value]="'Test 7: 403 Forbidden'"
+          [type]="'outlined'"
+          
+          (clickButton)="trigger403Error()"
+        ></aum-button>
+
+        <aum-button
+          [value]="'Test 8: 400 Bad Request'"
+          [type]="'outlined'"
+          
+          (clickButton)="trigger400Error()"
+        ></aum-button>
+      </div>
+    </section>
+
+    <!-- Successful Request Test -->
+    <section class="test-section">
+      <h2 class="margin-bottom-4">Success Test</h2>
+      <p class="margin-bottom-4 text-secondary">
+        This test makes a successful HTTP request (no errors expected).
+      </p>
+
+      <aum-button
+        [value]="'Test 9: Successful Request'"
+        [type]="'outlined'"
+        
+        (clickButton)="triggerSuccessRequest()"
+      ></aum-button>
+    </section>
+
+    <!-- Instructions -->
+    <section class="instructions margin-top-8 padding-6 bg-surface">
+      <h3 class="margin-bottom-4">Expected Results:</h3>
+      <ul class="margin-left-6">
+        <li class="margin-bottom-2">
+          <strong>Tests 1-2 (Global Error Handler):</strong> Should show a generic error snackbar and log detailed errors to console.
+        </li>
+        <li class="margin-bottom-2">
+          <strong>Tests 3-8 (HTTP Interceptor):</strong> Should show specific HTTP error messages in snackbar based on status codes.
+        </li>
+        <li class="margin-bottom-2">
+          <strong>Test 9 (Success):</strong> Should complete successfully with data logged to console and no error snackbar.
+        </li>
+        <li class="margin-bottom-2">
+          <strong>Console:</strong> All errors should be logged with detailed information for debugging.
+        </li>
+      </ul>
+    </section>
+  </div>
+</aum-page>
