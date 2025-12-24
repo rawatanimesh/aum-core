@@ -61,6 +61,11 @@ export const appRoutes: Route[] = [
       //   ],
       // },
       //more child routes here
+      {
+        path: '**',
+        loadComponent: () =>
+          import('@aum/general-templates').then((m) => m.PageNotFoundComponent),
+      },
     ],
   },
 ];
