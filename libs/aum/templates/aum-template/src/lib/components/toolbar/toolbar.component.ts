@@ -12,7 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 
 import { ThemeService, AppConfigService } from '@aum/utils/services';
-import { BreadcrumbService } from '@aum/utils/services';
+import { BreadcrumbService } from '@aum/ui/navigation';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { ButtonComponent } from '@aum/ui/buttons';

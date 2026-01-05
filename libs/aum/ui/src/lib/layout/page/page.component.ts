@@ -8,7 +8,7 @@ import {
   Output,
 } from '@angular/core';
 
-import { BreadcrumbService } from '@aum/utils/services';
+import { BreadcrumbService } from '@aum/ui/navigation';
 import { Subject } from 'rxjs';
 @Component({
   standalone: true,

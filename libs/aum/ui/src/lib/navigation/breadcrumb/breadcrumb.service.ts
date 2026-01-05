@@ -1,7 +1,7 @@
 // breadcrumb.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { BreadcrumbItem } from '../../interfaces/breadcrumb';
+import { BreadcrumbItem } from './breadcrumb';
 
 @Injectable({ providedIn: 'root' })
 export class BreadcrumbService {

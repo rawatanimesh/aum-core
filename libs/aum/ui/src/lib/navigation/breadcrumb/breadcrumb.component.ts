@@ -4,8 +4,8 @@ import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 
-import { BreadcrumbService } from '@aum/utils/services';
-import { BreadcrumbItem } from '@aum/utils/interfaces';
+import { BreadcrumbService } from './breadcrumb.service';
+import { BreadcrumbItem } from './breadcrumb';
 
 @Component({
   selector: 'aum-breadcrumb',
