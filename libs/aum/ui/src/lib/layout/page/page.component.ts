@@ -3,22 +3,28 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDrawer } from '@angular/material/sidenav';
 
-import { BreadcrumbService } from '@aum/ui/navigation';
 import { Subject } from 'rxjs';
+import { BreadcrumbService } from '../../navigation/breadcrumb/breadcrumb.service';
 @Component({
   standalone: true,
   selector: 'aum-page',
-  imports: [],
+  imports: [MatSidenavModule],
   templateUrl: './page.component.html',
   styleUrl: './page.component.scss',
   exportAs: 'PageComponent',
 })
-export class PageComponent implements OnInit, OnDestroy {
+export class PageComponent implements OnInit, OnDestroy, OnChanges {
+  @ViewChild('Drawer') Drawer!: MatDrawer;
   protected breadcrumbService = inject(BreadcrumbService);
   private destroy$ = new Subject<void>();
   // @Input() icons = {
@@ -51,6 +57,22 @@ export class PageComponent implements OnInit, OnDestroy {
   // @Output() clickBreadCrumb = new EventEmitter<any>();
   // @Output() clickMenuItem = new EventEmitter<any>();
   @Output() clickBackButton = new EventEmitter<any>();
+  @Input() drawerWidth = 25;
+  @Input() drawerPosition: 'start' | 'end' = 'end';
+  @Input() drawerMode: 'over' | 'push' | 'side' = 'over';
+  @Output() toggleDrawer = new EventEmitter<true | false>();
+
+  @Input() openDrawer?: boolean;
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['openDrawer'] && this.Drawer) {
+      if (this.openDrawer) {
+        this.Drawer?.open();
+      } else {
+        this.Drawer?.close();
+      }
+    }
+  }
 
   ngOnInit() {
     if (this.pageInfo?.breadcrumbs) {

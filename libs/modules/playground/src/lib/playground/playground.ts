@@ -110,6 +110,9 @@ export class Playground {
   // For Spinner demo
   showPageSpinner = false;
 
+  // For Drawer demo
+  isDrawerOpen = false;
+
   openMenu() {
     console.log('clicked');
   }
@@ -204,5 +207,9 @@ export class Playground {
     setTimeout(() => {
       this.showPageSpinner = false;
     }, 3000);
+  }
+
+  toggleDrawer() {
+    this.isDrawerOpen = !this.isDrawerOpen;
   }
 }

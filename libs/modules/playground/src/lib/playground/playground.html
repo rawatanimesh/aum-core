@@ -1,4 +1,10 @@
-<aum-page [pageInfo]="pageInfo">
+<aum-page
+  [pageInfo]="pageInfo"
+  [openDrawer]="isDrawerOpen"
+  [drawerWidth]="30"
+  [drawerPosition]="'end'"
+  [drawerMode]="'over'"
+>
   <div aum-page-body>
     <!-- Page Mode Spinner Overlay -->
     @if (showPageSpinner) {
@@ -355,5 +361,27 @@
       </mat-tab-group>
     </section>
     <mat-divider></mat-divider>
+    <section>
+      <div class="flex-row-flex-start-center gap-32">
+        <div class="fs-14">Drawer</div>
+        <aum-button
+          [type]="'filled'"
+          [value]="'Drawer'"
+          (clickButton)="toggleDrawer()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+  </div>
+  <div plm-drawer-content>
+    <div class="flex-row-space-between-center">
+      <h2>Drawer Title</h2>
+      <aum-button
+        [type]="'icon'"
+        [icon]="'close'"
+        [tooltip]="'Close'"
+        (clickButton)="toggleDrawer()"
+      ></aum-button>
+    </div>
   </div>
 </aum-page>
