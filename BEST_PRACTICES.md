@@ -608,6 +608,143 @@ export const environment = {
 
 ---
 
+## 🌐 Internationalization (i18n) Best Practices
+
+### Translation Key Usage
+
+```typescript
+// ✅ Use translate pipe in templates
+<h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
+<button [tooltip]="'MENU' | translate"></button>
+
+// ✅ Use instant() for TypeScript code
+export class MyComponent {
+  private languageService = inject(LanguageTranslationService);
+
+  getTranslatedLabel(): string {
+    return this.languageService.instant('BUTTON_LABEL');
+  }
+}
+```
+
+### Translation Key Naming
+
+```typescript
+// ✅ Use UPPER_CASE_SNAKE_CASE for translation keys
+{
+  "WELCOME_MESSAGE": "Welcome to AUM",
+  "EMAIL_IS_REQUIRED": "Email is required!",
+  "PROFILE_UPDATED_SUCCESSFULLY": "Profile updated successfully"
+}
+
+// ❌ Don't use camelCase or lowercase
+{
+  "welcomeMessage": "Welcome",  // ❌ Wrong format
+  "email_required": "Email!"     // ❌ Wrong format
+}
+```
+
+### Language Options Display
+
+```typescript
+// ✅ Display language options in readable format for all users
+const languageOptions = [
+  { label: 'English', value: 'en' },           // Always in English
+  { label: '日本語 (Japanese)', value: 'ja' },  // Native + English
+  { label: 'हिन्दी (Hindi)', value: 'hi' }     // Native + English
+];
+
+// ❌ Don't translate language option labels
+const languageOptions = [
+  { label: this.translate.instant('ENGLISH'), value: 'en' }, // ❌ Unreadable in other languages
+];
+```
+
+### Component Translation Integration
+
+```typescript
+// ✅ Import TranslateModule in standalone components
+@Component({
+  selector: 'aum-my-component',
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
+  templateUrl: './my-component.html',
+})
+export class MyComponent {
+  // Component logic
+}
+```
+
+### Reactive Language Changes
+
+```typescript
+// ✅ Use Angular effects to react to language changes
+export class MenuComponent {
+  private languageService = inject(LanguageTranslationService);
+
+  constructor() {
+    // Rebuild menu when language changes
+    effect(() => {
+      const currentLang = this.languageService.getLanguage();
+      this.buildMenus();
+    });
+  }
+}
+```
+
+### Event Handler Order for Language Switching
+
+```typescript
+// ✅ CRITICAL: Language switching must be AFTER other operations
+onMenuSelect(item: MenuItem) {
+  // Handle UI Scale first
+  if (item.value === 'compact' || item.value === 'default' || item.value === 'large') {
+    this.setUiScale(item.value);
+  }
+
+  // Handle Theme second
+  if (item.value === 'light' || item.value === 'dark' || item.value === 'system') {
+    this.themeService.setTheme(item.value);
+  }
+
+  // Handle Language LAST - allows effect() to trigger properly
+  if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
+    this.languageService.setLanguage(item.value);
+  }
+}
+
+// ❌ Don't put language switching first
+onMenuSelect(item: MenuItem) {
+  // Language first prevents effect() from working correctly
+  if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
+    this.languageService.setLanguage(item.value);  // ❌ Wrong order
+  }
+  // ... other operations
+}
+```
+
+### Translation File Structure
+
+```json
+// ✅ Organize keys by feature/component
+{
+  // Authentication
+  "EMAIL_ADDRESS": "Email Address",
+  "PASSWORD": "Password",
+  "LOGIN": "Login",
+
+  // Navigation
+  "DASHBOARD": "Dashboard",
+  "SETTINGS": "Settings",
+
+  // Messages
+  "PROFILE_UPDATED_SUCCESSFULLY": "Profile updated successfully",
+  "AN_ERROR_OCCURRED_TRY_AGAIN": "An error occurred. Please try again."
+}
+```
+
+---
+
 ## 📚 Additional Resources
 
 - [Angular Style Guide](https://angular.dev/style-guide)

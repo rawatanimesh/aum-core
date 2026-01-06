@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Internationalization (i18n)**: Full multi-language support with English, Japanese (日本語), and Hindi (हिन्दी) translations
+- **LanguageTranslationService**: Signal-based reactive language switching with localStorage persistence
+- **DrawerComponent**: Side panel component integrated with page component for additional content
+- **SpinnerComponent**: Loading indicators with page mode (full screen overlay) and element mode (inline spinners)
+- **Global Error Handling**: Structured error logging with HTTP error interceptor
+- **ApplicationConfigService**: Centralized configuration management for navigation and settings
+- **Page Not Found Component**: 404 error page with proper routing fallback
 - Comprehensive documentation system with best practices and architecture guides
 - Enhanced dashboard component with welcome section, component showcase, and feature roadmap
 - Revamped playground component with organized tabbed interface
@@ -16,15 +23,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **Upgraded to Angular 21**: Migrated entire codebase to latest Angular version with enhanced features
+- **Upgraded to NX 22.3.3**: Updated monorepo tooling for better performance
+- **Dashboard Redesign**: Clean welcome message layout with proper SCSS using rem() function
+- **Toolbar Enhancement**: Language selection dropdown with readable language options (English, 日本語, हिन्दी)
+- **Sidenav Translation**: All navigation items now support multi-language translation
+- **Breadcrumb Service**: Moved service and interface for better modularity
 - Updated dashboard to use card-based layout with proper content projection
 - Restructured playground with better component categorization and responsive design
 - Improved project documentation with detailed setup and development guides
 
 ### Fixed
 
+- **Toolbar Menu Translation Lag**: Fixed critical issue where menu items weren't translating on first language toggle by reordering event handler operations
+- Attempted route navigation not working on login
 - Card component content projection issues
 - TypeScript type errors in playground component
 - Theme color consistency across all components
+- Scoped style rules in select-box component
 
 ## [0.1.0] - 2024-10-08
 

@@ -103,6 +103,15 @@ nx lint aum-core
 - **ConfirmationDialogComponent** - Yes/No confirmation dialogs
 - **GenericDialogComponent** - Customizable modal dialogs
 - **SnackbarService** - Toast notifications
+- **DrawerComponent** - Side panel for additional content
+- **SpinnerComponent** - Loading indicators (page and element modes)
+
+#### Services
+
+- **LanguageTranslationService** - Multi-language support with English, Japanese, and Hindi
+- **ErrorHandlerService** - Global error handling with structured logging
+- **AuthService** - Authentication and route protection
+- **ApplicationConfigService** - Centralized application configuration
 
 ### Usage Example
 
@@ -173,14 +182,63 @@ aum-core/
 └── docs/                       # Documentation files
 ```
 
+## 🌐 Internationalization (i18n)
+
+AUM Core includes comprehensive internationalization support with multiple languages:
+
+### Supported Languages
+
+- **English (en)** - Default language
+- **日本語 (ja)** - Japanese
+- **हिन्दी (hi)** - Hindi
+
+### Usage
+
+```typescript
+import { TranslateModule } from '@ngx-translate/core';
+
+@Component({
+  selector: 'app-example',
+  standalone: true,
+  imports: [TranslateModule],
+  template: `
+    <h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
+    <p>{{ 'WELCOME_SUBTITLE' | translate }}</p>
+  `,
+})
+export class ExampleComponent {}
+```
+
+### Language Switching
+
+```typescript
+import { LanguageTranslationService } from '@aum/utils';
+
+export class MyComponent {
+  private languageService = inject(LanguageTranslationService);
+
+  switchLanguage(lang: 'en' | 'ja' | 'hi') {
+    this.languageService.setLanguage(lang);
+  }
+}
+```
+
+### Translation Files
+
+Translation files are located in `libs/aum/theme/src/assets/i18n/`:
+- `en.json` - English translations
+- `ja.json` - Japanese translations
+- `hi.json` - Hindi translations
+
 ## 🛠️ Technology Stack
 
-- **Angular 20** - Modern framework with standalone components
-- **NX 21** - Monorepo tooling and build system
+- **Angular 21** - Modern framework with standalone components
+- **NX 22** - Monorepo tooling and build system
 - **Material Design 3** - Consistent theming system
 - **TypeScript 5.8** - Type safety and modern JavaScript features
 - **RxJS 7.8** - Reactive programming
 - **Jest 29** - Testing framework
+- **ngx-translate** - Internationalization library
 
 ## 📖 Additional Resources
 
