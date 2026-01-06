@@ -1,0 +1,112 @@
+# Claude Configuration for AUM Core
+
+## 📋 MANDATORY: Read These Files First
+
+Before making ANY changes to this codebase, you MUST read and follow:
+
+1. **[BEST_PRACTICES.md](./BEST_PRACTICES.md)** - Complete coding standards and guidelines
+2. **[README.md](./README.md)** - Project documentation and setup
+3. **[CHANGELOG.md](./CHANGELOG.md)** - Recent changes and features
+
+---
+
+## 🚨 CRITICAL RULES (Never Violate)
+
+### Styling Rules (MANDATORY)
+```scss
+// ✅ ALWAYS use Material Design system variables
+background-color: var(--mat-sys-surface);
+color: var(--mat-sys-on-surface);
+
+// ✅ ALWAYS use rem() function for ALL dimensions
+padding: rem(16);
+font-size: rem(14);
+
+// ❌ NEVER use hardcoded colors or pixel values
+background-color: #ffffff;  // ❌ FORBIDDEN
+padding: 16px;              // ❌ FORBIDDEN
+
+// ❌ NEVER use inline styles
+<div style="padding: 20px">  // ❌ FORBIDDEN
+```
+
+### Angular 21+ Patterns (MANDATORY)
+```typescript
+// ✅ ALWAYS use standalone components
+@Component({ standalone: true })
+
+// ✅ ALWAYS use inject() function
+private service = inject(MyService);
+
+// ✅ ALWAYS use signals for state
+count = signal(0);
+
+// ✅ ALWAYS use new control flow syntax
+@if (condition) { }
+@for (item of items(); track item.id) { }
+```
+
+### Internationalization (MANDATORY)
+```html
+<!-- ✅ ALWAYS use translate pipe for ALL text -->
+<h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
+
+<!-- ❌ NEVER hardcode text -->
+<h1>Welcome to AUM</h1>  <!-- ❌ FORBIDDEN -->
+```
+
+### Language Switching Order (CRITICAL)
+```typescript
+// ✅ Language switching must be LAST in event handlers
+onMenuSelect(item: MenuItem) {
+  if (item.value === 'compact') { /* UI Scale first */ }
+  if (item.value === 'light') { /* Theme second */ }
+  if (item.value === 'en') { /* Language LAST */ }
+}
+```
+
+---
+
+## 🎯 Quick Reference
+
+### Supported Languages
+- English (en) - Default
+- 日本語 (ja) - Japanese
+- हिन्दी (hi) - Hindi
+
+### Technology Stack
+- Angular 21
+- NX 22.3.3
+- Material Design 3
+- TypeScript 5.8
+- ngx-translate 15.0.0
+
+### Translation Key Format
+```json
+{
+  "WELCOME_MESSAGE": "...",  // ✅ UPPER_CASE_SNAKE_CASE
+  "EMAIL_IS_REQUIRED": "..." // ✅ CORRECT
+}
+```
+
+---
+
+## ✅ Pre-Commit Checklist
+
+Before committing code, verify:
+- [ ] **No hardcoded colors** - only var(--mat-sys-*)
+- [ ] **No pixel values** - only rem() function
+- [ ] **No inline styles**
+- [ ] Standalone component with imports
+- [ ] Uses inject() for dependencies
+- [ ] Uses signals for state
+- [ ] Uses new control flow (@if, @for)
+- [ ] Imports TranslateModule
+- [ ] All text uses translate pipe
+- [ ] Translation keys in UPPER_CASE_SNAKE_CASE
+- [ ] Language switching is LAST in event handlers
+- [ ] Works in both light and dark modes
+
+---
+
+**For complete details, see [BEST_PRACTICES.md](./BEST_PRACTICES.md)**
