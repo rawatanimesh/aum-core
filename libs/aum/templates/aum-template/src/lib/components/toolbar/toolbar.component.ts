@@ -5,13 +5,16 @@ import {
   inject,
   OnInit,
   Output,
+  effect,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { ThemeService, AppConfigService } from '@aum/utils/services';
+import { ThemeService, AppConfigService, LanguageTranslationService } from '@aum/utils/services';
 import { BreadcrumbService } from '@aum/ui/navigation';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
@@ -27,6 +30,7 @@ import { AuthService } from '@aum/utils/services';
     BreadcrumbComponent,
     ButtonComponent,
     MenuList,
+    TranslateModule,
   ],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
@@ -36,9 +40,23 @@ export class ToolbarComponent implements OnInit {
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
   protected appConfigService = inject(AppConfigService);
+  protected languageService = inject(LanguageTranslationService);
   private auth = inject(AuthService);
   private router = inject(Router);
+  private cdr = inject(ChangeDetectorRef);
   themeIcon = computed(() => this.themeService.themeIcon());
+  private menusInitialized = false;
+
+  constructor() {
+    // React to language changes using signal effect
+    effect(() => {
+      this.languageService.currentLanguage();
+      if (this.menusInitialized) {
+        this.buildMenus();
+        this.cdr.markForCheck();
+      }
+    });
+  }
 
   // Get logos from config service
   get brandLogo(): string {
@@ -63,95 +81,131 @@ export class ToolbarComponent implements OnInit {
     return !this.shouldShowAppLogo && !!this.appName && this.appName.trim() !== '';
   }
 
-  optionsMenuList: MenuItem[] = [
-    // { label: 'About', value: 'about', icon: 'info' },
-    {
-      label: 'Language',
-      value: 'language',
-      icon: 'language',
-      children: [
-        {
-          label: 'English',
-          value: 'en',
-          selected: true,
-        },
-        { label: '日本語', value: 'ja', disabled: true },
-      ],
-    },
-    {
-      label: 'Theme',
-      value: 'theme',
-      icon: 'contrast',
-      children: [
-        {
-          label: 'Light',
-          value: 'light',
-          icon: 'light_mode',
-        },
-        {
-          label: 'Dark',
-          value: 'dark',
-          icon: 'dark_mode',
-        },
-        {
-          label: 'System',
-          value: 'system',
-          icon: 'computer',
-        },
-      ],
-    },
-    {
-      label: 'Display',
-      value: 'mode',
-      icon: 'aspect_ratio',
+  optionsMenuList: MenuItem[] = [];
+  profileMenuList: MenuItem[] = [];
 
-      children: [
-        { label: 'Compact', value: 'compact', icon: 'density_small' },
-        { label: 'Default', value: 'default', icon: 'density_medium' },
-        { label: 'Large', value: 'large', icon: 'density_large' },
-      ],
-    },
-  ];
+  private buildMenus(): void {
+    this.optionsMenuList = [
+      {
+        label: this.languageService.instant('LANGUAGE'),
+        value: 'language',
+        icon: 'language',
+        children: [
+          {
+            label: 'English',
+            value: 'en',
+            selected: this.languageService.getLanguage() === 'en',
+          },
+          {
+            label: '日本語 (Japanese)',
+            value: 'ja',
+            selected: this.languageService.getLanguage() === 'ja',
+          },
+          {
+            label: 'हिन्दी (Hindi)',
+            value: 'hi',
+            selected: this.languageService.getLanguage() === 'hi',
+          },
+        ],
+      },
+      {
+        label: this.languageService.instant('THEME'),
+        value: 'theme',
+        icon: 'contrast',
+        children: [
+          {
+            label: this.languageService.instant('LIGHT'),
+            value: 'light',
+            icon: 'light_mode',
+          },
+          {
+            label: this.languageService.instant('DARK'),
+            value: 'dark',
+            icon: 'dark_mode',
+          },
+          {
+            label: this.languageService.instant('SYSTEM'),
+            value: 'system',
+            icon: 'computer',
+          },
+        ],
+      },
+      {
+        label: this.languageService.instant('DISPLAY'),
+        value: 'mode',
+        icon: 'aspect_ratio',
+        children: [
+          {
+            label: this.languageService.instant('COMPACT'),
+            value: 'compact',
+            icon: 'density_small',
+          },
+          {
+            label: this.languageService.instant('DEFAULT'),
+            value: 'default',
+            icon: 'density_medium',
+          },
+          {
+            label: this.languageService.instant('LARGE'),
+            value: 'large',
+            icon: 'density_large',
+          },
+        ],
+      },
+    ];
 
-  profileMenuList: MenuItem[] = [
-    {
-      label: 'Profile',
-      value: 'profile',
-      icon: 'person',
-      showSelection: false,
-    },
-    {
-      label: 'Settings',
-      value: 'settings',
-      icon: 'settings',
-      showSelection: false,
-    },
-    { label: 'Logout', value: 'logout', icon: 'logout', showSelection: false },
-  ];
+    this.profileMenuList = [
+      {
+        label: this.languageService.instant('PROFILE'),
+        value: 'profile',
+        icon: 'person',
+        showSelection: false,
+      },
+      {
+        label: this.languageService.instant('SETTINGS'),
+        value: 'settings',
+        icon: 'settings',
+        showSelection: false,
+      },
+      {
+        label: this.languageService.instant('LOGOUT'),
+        value: 'logout',
+        icon: 'logout',
+        showSelection: false,
+      },
+    ];
+  }
 
   ngOnInit() {
-    const savedMode = localStorage.getItem('ui-scale-mode') as
-      | 'compact'
-      | 'default'
-      | 'large';
-    if (
-      savedMode === 'compact' ||
-      savedMode === 'large' ||
-      savedMode === 'default'
-    ) {
-      document.body.classList.add(`scale-${savedMode}`);
-    }
-    // Update selected state for Display options
-    this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || 'default');
+    // Wait for translations before building menus
+    this.languageService.get('LANGUAGE').subscribe(() => {
+      this.buildMenus();
+      this.menusInitialized = true;
 
-    const savedTheme = localStorage.getItem('app-theme-mode') as
-      | 'light'
-      | 'dark'
-      | 'system';
-    // Update selected state for Display options
-    this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || 'light');
+      const savedMode = localStorage.getItem('ui-scale-mode') as
+        | 'compact'
+        | 'default'
+        | 'large';
+      if (
+        savedMode === 'compact' ||
+        savedMode === 'large' ||
+        savedMode === 'default'
+      ) {
+        document.body.classList.add(`scale-${savedMode}`);
+      }
+      // Update selected state for Display options
+      this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || 'default');
+
+      const savedTheme = localStorage.getItem('app-theme-mode') as
+        | 'light'
+        | 'dark'
+        | 'system';
+      // Update selected state for Theme options
+      this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || 'light');
+    });
   }
   onMenuSelect(item: MenuItem) {
+    // UI Scale
     if (
       item.value === 'compact' ||
       item.value === 'default' ||
@@ -159,6 +213,7 @@ export class ToolbarComponent implements OnInit {
     ) {
       this.setUiScale(item.value);
     }
+    // Theme
     if (
       item.value === 'light' ||
       item.value === 'dark' ||
@@ -166,6 +221,11 @@ export class ToolbarComponent implements OnInit {
     ) {
       this.themeService.setTheme(item.value);
     }
+    // Language switching - must be after other actions
+    if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
+      this.languageService.setLanguage(item.value);
+    }
+    // Logout
     if (item.value === 'logout') {
       this.logout();
     }

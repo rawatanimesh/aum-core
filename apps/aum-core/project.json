@@ -29,6 +29,11 @@
             "glob": "**/*",
             "input": "libs/aum/theme/src/assets/resources/images",
             "output": "assets/images"
+          },
+          {
+            "glob": "**/*.json",
+            "input": "libs/aum/theme/src/assets/i18n",
+            "output": "assets/i18n"
           }
         ],
         "styles": ["apps/aum-core/src/styles.scss"],

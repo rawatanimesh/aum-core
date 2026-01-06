@@ -1,9 +1,26 @@
 @use 'functions' as *;
 
-.agentic-dashboard {
-  &-header {
+.dashboard-welcome {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: rem(32);
+
+  &-container {
+    text-align: center;
+    max-width: rem(600);
   }
-  &-trending {
-    background-color: #f7f7f7;
+
+  &-title {
+    font-size: rem(32);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  &-subtitle {
+    font-size: rem(16);
+    margin-top: rem(16);
+    color: var(--text-secondary);
   }
 }

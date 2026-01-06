@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
@@ -14,6 +15,7 @@ import { ConfirmationDialogService } from '@aum/ui/dialogs';
 import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService, Spinner } from '@aum/ui/utilities';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
+import { LanguageTranslationService } from '@aum/utils/services';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 
@@ -31,7 +33,8 @@ import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
     CheckboxComponent,
     RadioButton,
     MenuList,
-    Spinner
+    Spinner,
+    TranslateModule
   ],
   templateUrl: './playground.html',
   styleUrl: './playground.scss',
@@ -40,12 +43,13 @@ export class Playground {
   readonly dialog = inject(ConfirmationDialogService);
   readonly dialogRef = inject(MatDialog);
   readonly snackbar = inject(SnackbarService);
+  readonly languageService = inject(LanguageTranslationService);
   route = inject(Router);
   pageInfo = {
     breadcrumbs: [
-      { title: 'Playground', route: '/playground' },
-      { title: 'Child A', route: '/dashboard' },
-      { title: 'Child A2', route: '/dashboard' },
+      { title: 'PLAYGROUND', route: '/playground' },
+      { title: 'CHILD_A', route: '/dashboard' },
+      { title: 'CHILD_A2', route: '/dashboard' },
       // { title: 'Child A3', route: '/dashboard' },
       // { title: 'Child A4', route: '/A/childA4' },
       // { title: 'Child A5', route: '/dashboard' },
@@ -120,11 +124,10 @@ export class Playground {
     this.dialog
       .open({
         confirmationImage: 'assets/svgs/confirmation/info.svg',
-        title: 'Note:',
-        message:
-          'By logging in, you authorize the Agent to access your personal and official details (including confidential data) for the purpose of summarizing & generating results .',
-        confirmText: 'Yes',
-        cancelText: 'No',
+        title: this.languageService.instant('NOTE'),
+        message: this.languageService.instant('AUTHORIZATION_MESSAGE'),
+        confirmText: this.languageService.instant('YES'),
+        cancelText: this.languageService.instant('NO'),
       })
       .afterClosed()
       .subscribe((result) => {
@@ -151,11 +154,11 @@ export class Playground {
     dialogRef2.afterClosed().subscribe((result) => {
       if (result) {
         console.log('User confirmed the action');
-        this.snackbar.success('Profile updated successfully', 700000);
+        this.snackbar.success(this.languageService.instant('PROFILE_UPDATED_SUCCESSFULLY'), 700000);
       } else {
         console.log('User canceled the action');
-        this.snackbar.error('Failed to save changes', 5000, {
-          label: 'Retry',
+        this.snackbar.error(this.languageService.instant('FAILED_TO_SAVE_CHANGES'), 5000, {
+          label: this.languageService.instant('RETRY'),
           callback: () => {
             console.log('snackbar open error');
           },
@@ -166,21 +169,21 @@ export class Playground {
   openSnackbar(state: string) {
     switch (state) {
       case 'success':
-        this.snackbar.success('Profile updated successfully');
+        this.snackbar.success(this.languageService.instant('PROFILE_UPDATED_SUCCESSFULLY'));
         break;
       case 'error':
-        this.snackbar.error('Profile not updated', 5000, {
-          label: 'Retry',
+        this.snackbar.error(this.languageService.instant('PROFILE_NOT_UPDATED'), 5000, {
+          label: this.languageService.instant('RETRY'),
           callback: () => {
             console.log('Snackbar retry method');
           },
         });
         break;
       case 'warning':
-        this.snackbar.warning('Duplicate entry saved');
+        this.snackbar.warning(this.languageService.instant('DUPLICATE_ENTRY_SAVED'));
         break;
       case 'info':
-        this.snackbar.info('Profile change will reflect shortly');
+        this.snackbar.info(this.languageService.instant('PROFILE_CHANGE_WILL_REFLECT_SHORTLY'));
         break;
     }
   }

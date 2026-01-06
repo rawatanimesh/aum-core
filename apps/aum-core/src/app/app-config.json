@@ -4,31 +4,31 @@
   "appName": "Angular UI Mods",
   "navItems": [
     {
-      "label": "Dashboard",
+      "label": "DASHBOARD",
       "value": "/dashboard",
       "icon": "dashboard",
       "selected": true
     },
     {
-      "label": "Agent Directory",
+      "label": "AGENT_DIRECTORY",
       "value": "agent-directory",
       "icon": "support_agent",
       "expanded": false,
       "children": [
         {
-          "label": "My Agents",
+          "label": "MY_AGENTS",
           "value": "/agent-directory/my-agents",
           "icon": "adb"
         },
         {
-          "label": "Agent List",
+          "label": "AGENT_LIST",
           "value": "/agent-directory/agent-list",
           "icon": "smart_toy"
         }
       ]
     },
     {
-      "label": "Playground",
+      "label": "PLAYGROUND",
       "value": "/playground",
       "icon": "close",
       "selected": false

@@ -15,7 +15,7 @@
           <mat-icon class="aum-side-nav-item-link-icon"
             >{{ item.icon || 'radio_button_unchecked' }}</mat-icon
           >
-          <span class="aum-side-nav-item-link-label">{{ item.label }}</span>
+          <span class="aum-side-nav-item-link-label">{{ item.label | translate }}</span>
         </div>
 
         @if (item.children?.length) {
@@ -41,7 +41,7 @@
           <mat-icon class="aum-side-nav-item-link-icon"
             >{{ child.icon || 'circle' }}</mat-icon
           >
-          <span class="aum-side-nav-item-link-label">{{ child.label }}</span>
+          <span class="aum-side-nav-item-link-label">{{ child.label | translate }}</span>
         </a>
       </li>
       }

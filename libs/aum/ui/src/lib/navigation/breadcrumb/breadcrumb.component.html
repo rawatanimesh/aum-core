@@ -2,16 +2,16 @@
 <nav class="aum-breadcrumb flex-row-flex-start-center">
   @if (breadcrumbs!.length <= 2) { @for (item of breadcrumbs!;track $index; let
   last = $last) { @if (breadcrumbs!.length === 1 || last) {
-  <span>{{ item.title }}</span>
+  <span>{{ item.title | translate }}</span>
   } @else {
   <a [routerLink]="item.route" class="aum-breadcrumb-clickable">
-    {{ item.title }}
+    {{ item.title | translate }}
   </a>
   <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="chevron_right"></mat-icon>
   } } } @else {
   <!-- First breadcrumb -->
   <a [routerLink]="breadcrumbs![0].route" class="aum-breadcrumb-clickable">
-    {{ breadcrumbs![0].title }}
+    {{ breadcrumbs![0].title | translate }}
   </a>
   <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="chevron_right"></mat-icon>
 
@@ -26,14 +26,14 @@
   <mat-menu #breadcrumbMenu="matMenu" class="aum-menu-list">
     @for (item of breadcrumbs!.slice(1, breadcrumbs!.length - 1);track $index) {
     <button mat-menu-item [routerLink]="item.route">
-      {{ item.title }}
+      {{ item.title | translate }}
     </button>
     }
   </mat-menu>
   <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="chevron_right"></mat-icon>
 
   <!-- Last breadcrumb -->
-  <span>{{ breadcrumbs![breadcrumbs!.length - 1].title }}</span>
+  <span>{{ breadcrumbs![breadcrumbs!.length - 1].title | translate }}</span>
   }
 </nav>
 }

@@ -10,6 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 export interface SideMenuItem {
   label: string;
@@ -22,7 +23,7 @@ export interface SideMenuItem {
 
 @Component({
   selector: 'aum-side-menu',
-  imports: [CommonModule, MatIconModule, RouterModule],
+  imports: [CommonModule, MatIconModule, RouterModule, TranslateModule],
   templateUrl: './side-menu.html',
   styleUrl: './side-menu.scss',
   encapsulation: ViewEncapsulation.None,
