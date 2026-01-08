@@ -10,7 +10,7 @@
       <aum-button
         [type]="'icon'"
         [icon]="'menu'"
-        [tooltip]="'MENU' | translate"
+        [tooltip]="menuTooltip"
         (clickButton)="toggleMenu()"
       ></aum-button>
 
@@ -39,15 +39,17 @@
         <aum-button
           [type]="'icon'"
           [icon]="'more_vert'"
-          [tooltip]="'PREFERENCES' | translate"
+          [tooltip]="preferencesTooltip"
           [matMenuTriggerFor]="optionsMenu.childMenu"
+          (clickButton)="onMenuOpening()"
         ></aum-button>
 
         <aum-button
           [type]="'icon'"
           [icon]="'account_circle'"
-          [tooltip]="'MY_ACCOUNT' | translate"
+          [tooltip]="myAccountTooltip"
           [matMenuTriggerFor]="profileMenu.childMenu"
+          (clickButton)="onMenuOpening()"
         ></aum-button>
       </div>
     </div>

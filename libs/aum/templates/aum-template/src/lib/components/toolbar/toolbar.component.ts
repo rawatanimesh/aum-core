@@ -19,6 +19,7 @@ import { BreadcrumbService } from '@aum/ui/navigation';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { ButtonComponent } from '@aum/ui/buttons';
+import { SnackbarService } from '@aum/ui/utilities';
 import { AuthService } from '@aum/utils/services';
 
 @Component({
@@ -44,15 +45,16 @@ export class ToolbarComponent implements OnInit {
   private auth = inject(AuthService);
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
+  private snackbarService = inject(SnackbarService);
   themeIcon = computed(() => this.themeService.themeIcon());
   private menusInitialized = false;
 
   constructor() {
-    // React to language changes using signal effect
+    // Track language changes for triggering change detection
+    // Menu content will be rebuilt when menu opens (see onMenuOpening)
     effect(() => {
       this.languageService.currentLanguage();
       if (this.menusInitialized) {
-        this.buildMenus();
         this.cdr.markForCheck();
       }
     });
@@ -79,6 +81,19 @@ export class ToolbarComponent implements OnInit {
   // Check if appName should be shown (only when logo is not available)
   get shouldShowAppName(): boolean {
     return !this.shouldShowAppLogo && !!this.appName && this.appName.trim() !== '';
+  }
+
+  // Tooltip translations
+  get menuTooltip(): string {
+    return this.languageService.instant('MENU');
+  }
+
+  get preferencesTooltip(): string {
+    return this.languageService.instant('PREFERENCES');
+  }
+
+  get myAccountTooltip(): string {
+    return this.languageService.instant('MY_ACCOUNT');
   }
 
   optionsMenuList: MenuItem[] = [];
@@ -181,6 +196,8 @@ export class ToolbarComponent implements OnInit {
     this.languageService.get('LANGUAGE').subscribe(() => {
       this.buildMenus();
       this.menusInitialized = true;
+      // Trigger change detection after initial menu build
+      this.cdr.markForCheck();
 
       const savedMode = localStorage.getItem('ui-scale-mode') as
         | 'compact'
@@ -223,7 +240,19 @@ export class ToolbarComponent implements OnInit {
     }
     // Language switching - must be after other actions
     if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
-      this.languageService.setLanguage(item.value);
+      const currentLanguage = this.languageService.getLanguage();
+      // Only change language if it's different from current
+      if (currentLanguage !== item.value) {
+        this.languageService.setLanguage(item.value);
+        // Show success snackbar after language change
+        // Use setTimeout to ensure translations are loaded
+        setTimeout(() => {
+          this.snackbarService.success(
+            this.languageService.instant('LANGUAGE_CHANGED_SUCCESSFULLY'),
+            3000
+          );
+        }, 100);
+      }
     }
     // Logout
     if (item.value === 'logout') {
@@ -241,6 +270,14 @@ export class ToolbarComponent implements OnInit {
 
   toggleMenu(): void {
     this.sideMenuToggle.emit();
+  }
+
+  onMenuOpening(): void {
+    // Rebuild menus when the menu is opened to ensure translations are up-to-date
+    // This fixes the issue where language changes don't update menu on first switch
+    if (this.menusInitialized) {
+      this.buildMenus();
+    }
   }
 
   setUiScale(mode: 'compact' | 'default' | 'large') {

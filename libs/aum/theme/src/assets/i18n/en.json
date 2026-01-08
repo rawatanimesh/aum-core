@@ -111,5 +111,6 @@
   "RESOURCE_NOT_FOUND": "The requested resource was not found.",
   "REQUEST_TIMEOUT": "Request timeout. Please try again.",
   "SERVER_ERROR_TRY_LATER": "Server error. Please try again later.",
-  "SERVICE_UNAVAILABLE": "Service temporarily unavailable. Please try again later."
+  "SERVICE_UNAVAILABLE": "Service temporarily unavailable. Please try again later.",
+  "LANGUAGE_CHANGED_SUCCESSFULLY": "Language changed successfully"
 }

@@ -111,5 +111,6 @@
   "RESOURCE_NOT_FOUND": "要求されたリソースが見つかりません。",
   "REQUEST_TIMEOUT": "リクエストがタイムアウトしました。もう一度お試しください。",
   "SERVER_ERROR_TRY_LATER": "サーバーエラー。後でもう一度お試しください。",
-  "SERVICE_UNAVAILABLE": "サービスは一時的に利用できません。後でもう一度お試しください。"
+  "SERVICE_UNAVAILABLE": "サービスは一時的に利用できません。後でもう一度お試しください。",
+  "LANGUAGE_CHANGED_SUCCESSFULLY": "言語が正常に変更されました"
 }
