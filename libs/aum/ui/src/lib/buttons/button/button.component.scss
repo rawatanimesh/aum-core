@@ -42,6 +42,13 @@
     // Remove any default Material button sizes
     line-height: 0 !important;
 
+    // Theme-appropriate icon color change on hover
+    &:hover:not(:disabled) {
+      .material-icons {
+        color: var(--mat-sys-primary) !important;
+      }
+    }
+
     // Disable ripple effects for icon buttons only
     .mat-mdc-button-persistent-ripple,
     .mdc-icon-button__ripple,
