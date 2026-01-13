@@ -1,6 +1,5 @@
 {
   "brandLogo": "assets/svgs/A-logo.svg",
-  "appLogo": "",
   "appName": "Angular UI Mods",
   "navItems": [
     {
@@ -30,8 +29,42 @@
     {
       "label": "PLAYGROUND",
       "value": "/playground",
-      "icon": "close",
+      "icon": "science",
       "selected": false
     }
-  ]
+  ],
+  "toolbarMenus": {
+    "profile": {
+      "show": true,
+      "disabled": false,
+      "items": {
+        "profile": {
+          "show": true,
+          "disabled": true
+        },
+        "settings": {
+          "show": true,
+          "disabled": true
+        },
+        "logout": {
+          "show": true,
+          "disabled": false
+        }
+      }
+    },
+    "preferences": {
+      "show": true,
+      "disabled": false,
+      "items": {
+        "language": {
+          "show": true,
+          "disabled": false
+        },
+        "theme": {
+          "show": true,
+          "disabled": false
+        }
+      }
+    }
+  }
 }

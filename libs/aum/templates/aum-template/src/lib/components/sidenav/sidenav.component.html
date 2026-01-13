@@ -1,5 +1,5 @@
 <aum-side-menu
-  [items]="navItems"
+  [items]="navItems()"
   (itemSelected)="onNavItemSelect($event)"
   (routeChanged)="onRouteChange($event)"
 ></aum-side-menu>

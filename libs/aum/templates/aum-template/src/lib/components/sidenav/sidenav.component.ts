@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { SideMenu, SideMenuItem  } from '@aum/ui/navigation';
+import { SideMenu } from '@aum/ui/navigation';
 import { AppConfigService } from '@aum/utils/services';
 
 @Component({
@@ -17,10 +17,8 @@ export class SidenavComponent {
   @Output() menuItemClicked = new EventEmitter();
   isDataLoaded = true;
 
-  // Get navigation items from config service
-  get navItems(): SideMenuItem [] {
-    return this.appConfigService.config.navItems;
-  }
+  // Get navigation items from config service (reactive signal)
+  navItems = this.appConfigService.navItems;
 
   selectedItem = '';
 

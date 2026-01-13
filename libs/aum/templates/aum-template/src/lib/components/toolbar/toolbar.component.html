@@ -4,7 +4,7 @@
     <div class="aum-toolbar-left flex-row-flex-start-center gap-4 h-100">
       <img
         class="margin-left-4 aum-toolbar-left-brandLogo"
-        [src]="brandLogo"
+        [src]="brandLogo()"
         alt="brand-logo"
       />
       <aum-button
@@ -15,14 +15,14 @@
       ></aum-button>
 
       <div class="flex-column-center-flex-start">
-        @if (shouldShowAppLogo) {
+        @if (shouldShowAppLogo()) {
           <img
-            [src]="appLogo"
+            [src]="appLogo()"
             class="aum-toolbar-left-appIcon"
             alt="app-logo"
           />
-        } @else if (shouldShowAppName) {
-          <span class="aum-toolbar-left-appName fw-600">{{appName}}</span>
+        } @else if (shouldShowAppName()) {
+          <span class="aum-toolbar-left-appName fw-600">{{appName()}}</span>
         }
         <aum-breadcrumb></aum-breadcrumb>
       </div>
@@ -36,21 +36,27 @@
     <!-- right side of the toolbar -->
     <div class="aum-toolbar-right">
       <div class="flex-row-flex-end-center gap-4">
-        <aum-button
-          [type]="'icon'"
-          [icon]="'more_vert'"
-          [tooltip]="preferencesTooltip"
-          [matMenuTriggerFor]="optionsMenu.childMenu"
-          (clickButton)="onMenuOpening()"
-        ></aum-button>
+        @if (shouldShowPreferencesMenu()) {
+          <aum-button
+            [type]="'icon'"
+            [icon]="'more_vert'"
+            [tooltip]="preferencesTooltip"
+            [matMenuTriggerFor]="optionsMenu.childMenu"
+            [disabled]="isPreferencesMenuDisabled()"
+            (clickButton)="onMenuOpening()"
+          ></aum-button>
+        }
 
-        <aum-button
-          [type]="'icon'"
-          [icon]="'account_circle'"
-          [tooltip]="myAccountTooltip"
-          [matMenuTriggerFor]="profileMenu.childMenu"
-          (clickButton)="onMenuOpening()"
-        ></aum-button>
+        @if (shouldShowProfileMenu()) {
+          <aum-button
+            [type]="'icon'"
+            [icon]="'account_circle'"
+            [tooltip]="myAccountTooltip"
+            [matMenuTriggerFor]="profileMenu.childMenu"
+            [disabled]="isProfileMenuDisabled()"
+            (clickButton)="onMenuOpening()"
+          ></aum-button>
+        }
       </div>
     </div>
   </div>
