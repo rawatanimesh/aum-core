@@ -208,6 +208,18 @@
     </section>
     <mat-divider></mat-divider>
     <section>
+      <div class="example-label fs-14">Charts</div>
+
+      <div class="example-button-row">
+        <aum-button
+          [type]="'filled'"
+          [value]="'Go to Charts Demo'"
+          (clickButton)="goToChartsDemo()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+    <section>
       <div class="example-label fs-14">{{ 'ERROR_HANDLERS' | translate }}</div>
 
       <div class="example-button-row">

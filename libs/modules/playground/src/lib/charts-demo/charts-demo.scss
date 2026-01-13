@@ -1,0 +1,32 @@
+@use 'functions' as *;
+
+.charts-demo-container {
+  padding: rem(24);
+  max-width: rem(1400);
+  margin: 0 auto;
+
+  .page-title {
+    font-size: rem(24);
+    font-weight: 600;
+    margin-bottom: rem(24);
+    color: var(--mat-sys-on-surface);
+  }
+
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(rem(500), 1fr));
+    gap: rem(24);
+    margin-bottom: rem(24);
+  }
+
+  .chart-card {
+    background: var(--mat-sys-surface-container);
+    border-radius: rem(8);
+    padding: rem(24);
+    box-shadow: 0 rem(1) rem(3) rgba(0, 0, 0, 0.1);
+
+    &.full-width {
+      grid-column: 1 / -1;
+    }
+  }
+}

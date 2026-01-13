@@ -200,6 +200,9 @@ export class Playground {
   goToErrorTest() {
     this.route.navigate(['/playground/error-test']);
   }
+  goToChartsDemo() {
+    this.route.navigate(['/playground/charts']);
+  }
   onMenuSelect(item: MenuItem) {
     console.log('selected', item);
     console.log('updated menu list', this.choiceMenuItems);

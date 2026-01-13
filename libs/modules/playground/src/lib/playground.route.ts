@@ -18,4 +18,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./error-test/error-test.component').then((m) => m.ErrorTestComponent),
   },
+
+  {
+    path: 'charts',
+    loadComponent: () =>
+      import('./charts-demo/charts-demo').then((m) => m.ChartsDemo),
+  },
 ];

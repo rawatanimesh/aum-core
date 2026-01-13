@@ -1,0 +1,24 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="charts-demo-container">
+      <h1 class="page-title">Charts Demo</h1>
+
+      <div class="charts-grid">
+        <!-- Bar Chart -->
+        <div class="chart-card">
+          <aum-chart [config]="barChartConfig"></aum-chart>
+        </div>
+
+        <!-- Pie Chart -->
+        <div class="chart-card">
+          <aum-chart [config]="pieChartConfig"></aum-chart>
+        </div>
+      </div>
+
+      <!-- Line Chart (Full Width) -->
+      <div class="chart-card full-width">
+        <aum-chart [config]="lineChartConfig"></aum-chart>
+      </div>
+    </div>
+  </div>
+</aum-page>

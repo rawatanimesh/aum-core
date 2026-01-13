@@ -21,6 +21,7 @@
       "@aum/general-templates": ["libs/aum/templates/general/src/index.ts"],
       "@aum/theme": ["libs/aum/theme/src/index.ts"],
       "@aum/ui/buttons": ["libs/aum/ui/src/lib/buttons/index.ts"],
+      "@aum/ui/charts": ["libs/aum/ui/src/lib/charts/index.ts"],
       "@aum/ui/dialogs": ["libs/aum/ui/src/lib/dialogs/index.ts"],
       "@aum/ui/form-controls": ["libs/aum/ui/src/lib/form-controls/index.ts"],
       "@aum/ui/layout": ["libs/aum/ui/src/lib/layout/index.ts"],
