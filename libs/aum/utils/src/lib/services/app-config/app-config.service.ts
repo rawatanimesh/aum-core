@@ -81,6 +81,9 @@ export interface AppConfig {
 
   /** Toolbar menu configuration (optional) */
   toolbarMenus?: ToolbarMenuConfig;
+
+  /** Whether to disable ripple effect globally for all Material components (default: false) */
+  disableRipple?: boolean;
 }
 
 /**
@@ -126,6 +129,9 @@ export class AppConfigService {
 
   /** Computed signal for navigation items */
   readonly navItems = computed(() => this._config().navItems);
+
+  /** Computed signal for ripple disabled state */
+  readonly disableRipple = computed(() => this._config().disableRipple ?? false);
 
   /**
    * Updates the entire configuration

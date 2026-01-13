@@ -3,11 +3,14 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
   ErrorHandler,
-  importProvidersFrom
+  importProvidersFrom,
+  provideAppInitializer,
+  inject
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http';
-import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor  } from '@aum/utils/services';
+import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
+import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService  } from '@aum/utils/services';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { appRoutes } from './app.routes';
@@ -46,5 +49,17 @@ export const appConfig: ApplicationConfig = {
       provide: APP_CONFIG,
       useValue: appConfiguration,
     },
+    // Material ripple global options
+    {
+      provide: MAT_RIPPLE_GLOBAL_OPTIONS,
+      useValue: {
+        disabled: appConfiguration.disableRipple ?? false,
+      } as RippleGlobalOptions,
+    },
+    // Initialize ripple config service to sync with app config changes
+    provideAppInitializer(() => {
+      // Inject the service to instantiate it and trigger the effect that watches for config changes
+      inject(RippleConfigService);
+    }),
   ],
 };
