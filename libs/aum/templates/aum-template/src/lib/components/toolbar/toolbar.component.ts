@@ -54,6 +54,12 @@ export class ToolbarComponent implements OnInit {
   appName = this.appConfigService.appName;
   toolbarMenusConfig = this.appConfigService.toolbarMenus;
 
+  // Logo validation - check if logo paths are valid
+  protected hasBrandLogo = computed(() => {
+    const logo = this.brandLogo();
+    return logo && logo.trim().length > 0;
+  });
+
   // Check if appLogo should be shown (has a valid non-empty path)
   shouldShowAppLogo = computed(() => {
     const logo = this.appLogo();
