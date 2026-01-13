@@ -3,7 +3,7 @@ import { ChartComponent, ChartConfig } from '@aum/ui/charts';
 import { PageComponent } from '@aum/ui/layout';
 
 @Component({
-  selector: 'aum-charts-demo',
+  selector: 'playground-charts-demo',
   standalone: true,
   imports: [ChartComponent, PageComponent],
   templateUrl: './charts-demo.html',

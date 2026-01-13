@@ -5,7 +5,7 @@ import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
 
 @Component({
-  selector: 'aum-error-test',
+  selector: 'playground-error-test',
   imports: [CommonModule, ButtonComponent, PageComponent],
   templateUrl: './error-test.component.html',
   styleUrl: './error-test.component.scss',
