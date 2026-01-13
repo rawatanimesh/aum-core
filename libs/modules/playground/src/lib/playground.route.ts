@@ -24,4 +24,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./charts-demo/charts-demo').then((m) => m.ChartsDemo),
   },
+
+  {
+    path: 'tabs',
+    loadComponent: () =>
+      import('./tabs-demo/tabs-demo').then((m) => m.TabsDemo),
+  },
 ];

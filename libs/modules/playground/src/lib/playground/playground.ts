@@ -203,6 +203,9 @@ export class Playground {
   goToChartsDemo() {
     this.route.navigate(['/playground/charts']);
   }
+  goToTabsDemo() {
+    this.route.navigate(['/playground/tabs']);
+  }
   onMenuSelect(item: MenuItem) {
     console.log('selected', item);
     console.log('updated menu list', this.choiceMenuItems);

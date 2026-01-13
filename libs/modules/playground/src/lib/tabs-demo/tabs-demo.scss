@@ -1,0 +1,81 @@
+@use 'functions' as *;
+
+.tabs-demo-container {
+  padding: rem(24);
+  max-width: rem(1400);
+  margin: 0 auto;
+
+  .page-title {
+    font-size: rem(24);
+    font-weight: 600;
+    margin-bottom: rem(32);
+    color: var(--mat-sys-on-surface);
+  }
+
+  .demo-section {
+    margin-bottom: rem(48);
+    // background-color: var(--mat-sys-surface-container-low);
+    border-radius: rem(8);
+    padding: rem(24);
+    border: rem(1) solid var(--mat-sys-outline-variant);
+
+    .section-title {
+      font-size: rem(18);
+      font-weight: 600;
+      margin-bottom: rem(16);
+      color: var(--mat-sys-on-surface);
+    }
+
+    .section-description {
+      font-size: rem(14);
+      margin-bottom: rem(16);
+      color: var(--mat-sys-on-surface-variant);
+      line-height: 1.5;
+    }
+  }
+
+  .controls {
+    display: flex;
+    gap: rem(12);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .dynamic-tab-content {
+    padding: rem(16);
+  }
+
+  // Scrollable tabs container with fixed height
+  .scrollable-tabs-container {
+    .tab-scroll-content {
+      max-height: rem(400);
+      overflow-y: auto;
+      padding: rem(16);
+
+      p {
+        margin-bottom: rem(12);
+      }
+    }
+  }
+
+  // Demo input styling
+  .demo-input {
+    width: 100%;
+    max-width: rem(400);
+    padding: rem(12);
+    border: rem(1) solid var(--mat-sys-outline);
+    border-radius: rem(4);
+    font-size: rem(14);
+    color: var(--mat-sys-on-surface);
+    background-color: var(--mat-sys-surface);
+
+    &:focus {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(2);
+    }
+
+    &::placeholder {
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+}

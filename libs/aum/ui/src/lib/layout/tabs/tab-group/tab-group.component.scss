@@ -1,0 +1,54 @@
+@use 'functions' as *;
+
+.aum-tab-group {
+  width: 100%;
+
+  // Tab button sizing and typography
+  .mat-mdc-tab {
+    min-width: rem(60);
+    height: rem(48);
+    padding: 0 rem(16);
+    flex-grow: 0 !important; // Override stretch tabs behavior
+    flex-shrink: 0; // Prevent shrinking below min-width
+
+    .mdc-tab__text-label {
+      font-size: rem(14);
+      font-weight: 400;
+      line-height: rem(20);
+    }
+  }
+
+  // Active tab label color matches ink bar (primary color)
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: var(--mat-sys-primary);
+  }
+
+  // Inactive tab label color
+  .mat-mdc-tab:not(.mdc-tab--active) .mdc-tab__text-label {
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  // Disabled tab styling
+  .mat-mdc-tab.mat-mdc-tab-disabled {
+    .mdc-tab__text-label {
+      color: var(--mat-sys-on-surface);
+      opacity: 0.38;
+    }
+    cursor: not-allowed;
+  }
+
+  // Ink bar (active indicator)
+  .mat-mdc-tab-header {
+    .mat-mdc-tab-header-pagination {
+      // Pagination arrow buttons
+      .mat-mdc-tab-header-pagination-chevron {
+        border-color: var(--mat-sys-on-surface-variant);
+      }
+    }
+  }
+
+  // Tab body content area - prevent unnecessary scrollbars
+  .mat-mdc-tab-body-content {
+    overflow: visible; // Override Material's default overflow: auto
+  }
+}

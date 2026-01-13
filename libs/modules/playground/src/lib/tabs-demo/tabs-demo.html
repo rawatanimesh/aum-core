@@ -1,0 +1,153 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="tabs-demo-container">
+      <h1 class="page-title">Tabs Demo</h1>
+
+      <!-- Basic Tabs -->
+      <section class="demo-section">
+        <h2 class="section-title">Basic Tabs</h2>
+        <aum-tab-group
+          [selectedIndex]="selectedTab"
+          (selectedTabChange)="onTabChange($event)">
+          <aum-tab label="{{'ACTIVE' | translate}}">
+            <h3>Active Content</h3>
+            <p>This is the active tab content.</p>
+          </aum-tab>
+          <aum-tab label="{{'DRAFT' | translate}}">
+            <h3>Draft Content</h3>
+            <p>This is the draft tab content.</p>
+          </aum-tab>
+          <aum-tab label="{{'ARCHIVED' | translate}}" [disabled]="true">
+            <h3>Archived Content (Disabled)</h3>
+            <p>This tab is disabled.</p>
+          </aum-tab>
+        </aum-tab-group>
+      </section>
+
+      <!-- Custom Label Templates -->
+      <section class="demo-section">
+        <h2 class="section-title">Custom Label Templates</h2>
+        <aum-tab-group>
+          <aum-tab>
+            <ng-template aum-tab-label>
+              <mat-icon>mail</mat-icon>
+              <span class="fs-14 margin-left-8">{{'INBOX' | translate}} (5)</span>
+            </ng-template>
+            <h3>Inbox</h3>
+            <p>Inbox content with unread count badge.</p>
+          </aum-tab>
+
+          <aum-tab>
+            <ng-template aum-tab-label>
+              <mat-icon>person</mat-icon>
+              <span class="fs-14 margin-left-8">{{'DRAFTS' | translate}}</span>
+            </ng-template>
+            <h3>Drafts</h3>
+            <p>Draft emails content.</p>
+          </aum-tab>
+        </aum-tab-group>
+      </section>
+
+      <!-- Dynamic Tabs -->
+      <section class="demo-section">
+        <h2 class="section-title">Dynamic Tabs</h2>
+
+        <div class="controls margin-bottom-16">
+          <aum-button
+            [type]="'filled'"
+            [value]="'ADD_TAB' | translate"
+            (clickButton)="addTab()">
+          </aum-button>
+          <aum-button
+            [type]="'outlined'"
+            [value]="'TOGGLE_ANIMATION' | translate"
+            (clickButton)="toggleAnimation()">
+          </aum-button>
+        </div>
+
+        <aum-tab-group
+          [animationDuration]="animationDuration">
+          @for (tab of dynamicTabs; track tab.label; let i = $index) {
+            <aum-tab
+              [label]="tab.label | translate"
+              [disabled]="tab.disabled ?? false">
+              <div class="dynamic-tab-content">
+                <h3>{{tab.label | translate}}</h3>
+                <p>{{tab.content}}</p>
+                <aum-button
+                  [type]="'basic'"
+                  [value]="'REMOVE_TAB' | translate"
+                  (clickButton)="removeTab(i)">
+                </aum-button>
+              </div>
+            </aum-tab>
+          }
+        </aum-tab-group>
+      </section>
+
+      <!-- Configuration Options -->
+      <section class="demo-section">
+        <h2 class="section-title">Header Position: Below</h2>
+        <aum-tab-group [headerPosition]="'below'">
+          <aum-tab label="{{'TAB_ONE' | translate}}">
+            Content 1 - Header is below
+          </aum-tab>
+          <aum-tab label="{{'TAB_TWO' | translate}}">
+            Content 2 - Header is below
+          </aum-tab>
+        </aum-tab-group>
+      </section>
+
+      <!-- Different Heights with Scroll -->
+      <section class="demo-section">
+        <h2 class="section-title">Different Heights with Scroll & Preserve Content</h2>
+        <p class="section-description">
+          Tabs with varying content heights. Content taller than 400px will scroll vertically.
+          Toggle preserve content to see how scroll position is maintained.
+        </p>
+
+        <div class="controls margin-bottom-16">
+          <aum-button
+            [type]="preserveScrollContent ? 'filled' : 'outlined'"
+            [value]="preserveScrollContent ? ('PRESERVE_ON' | translate) : ('PRESERVE_OFF' | translate)"
+            (clickButton)="togglePreserveScrollContent()">
+          </aum-button>
+          <span class="fs-14 margin-left-16">
+            Preserve Content: <strong>{{preserveScrollContent ? 'Enabled' : 'Disabled'}}</strong>
+          </span>
+        </div>
+
+        <div class="scrollable-tabs-container">
+          <aum-tab-group [preserveContent]="preserveScrollContent">
+            <aum-tab label="{{'SHORT_CONTENT' | translate}}">
+              <div class="tab-scroll-content">
+                <h3>Short Content</h3>
+                <p>This tab has minimal content that doesn't need scrolling.</p>
+              </div>
+            </aum-tab>
+            <aum-tab label="{{'MEDIUM_CONTENT' | translate}}">
+              <div class="tab-scroll-content">
+                <h3>Medium Content</h3>
+                <p>This tab has moderate content.</p>
+                @for (item of [1,2,3,4,5]; track item) {
+                  <p>Paragraph {{item}}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                }
+              </div>
+            </aum-tab>
+            <aum-tab label="{{'LONG_CONTENT' | translate}}">
+              <div class="tab-scroll-content">
+                <h3>Long Content (Scrollable)</h3>
+                <p><strong>Instructions:</strong> Scroll down to the bottom, then switch to another tab and come back.</p>
+                <p><strong>With preserve OFF:</strong> Scroll position resets to top (content is recreated).</p>
+                <p><strong>With preserve ON:</strong> Scroll position is maintained (content stays in DOM).</p>
+                @for (item of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; track item) {
+                  <p>Paragraph {{item}}: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                }
+              </div>
+            </aum-tab>
+          </aum-tab-group>
+        </div>
+      </section>
+    </div>
+  </div>
+</aum-page>
