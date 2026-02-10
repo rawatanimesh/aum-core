@@ -1,0 +1,200 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="expansion-panel-demo-container padding-16">
+      <h1 class="page-title fs-24 mb-4">Expansion Panel Component Demo</h1>
+      <p class="fs-14 mb-8">
+        Comprehensive demonstration of the expansion panel component with multiple usage patterns.
+      </p>
+
+      <!-- Demo 1: Basic Usage - Text Content -->
+      <section class="demo-section mb-8">
+        <h2 class="fs-18 mb-2">{{ 'BASIC_USAGE' | translate }}</h2>
+        <p class="fs-12 mb-3 text-muted">
+          Simple text content with translation support. No custom templates needed.
+        </p>
+        <aum-expansion-panel
+          [items]="basicItems"
+          [width]="'600px'"
+          [multi]="false">
+        </aum-expansion-panel>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Demo 2: Content Projection - Simple -->
+      <section class="demo-section mb-8 mt-8">
+        <h2 class="fs-18 mb-2">{{ 'CONTENT_PROJECTION' | translate }} - Simple</h2>
+        <p class="fs-12 mb-3 text-muted">
+          Using content projection with index-based conditional rendering. No ViewChild or TypeScript setup needed.
+        </p>
+        <aum-expansion-panel
+          [items]="projectionSimpleItems"
+          [width]="'600px'">
+          <ng-template aumExpansionPanelContent let-item let-index="index">
+            @if (index === 0) {
+              <div class="flex-row-flex-start-center gap-8">
+                <aum-button [type]="'filled'" [value]="'Button 1'" (clickButton)="handleButtonClick('Button 1')"></aum-button>
+                <aum-button [type]="'outlined'" [value]="'Button 2'" (clickButton)="handleButtonClick('Button 2')"></aum-button>
+                <aum-button [type]="'basic'" [value]="'Button 3'" (clickButton)="handleButtonClick('Button 3')"></aum-button>
+              </div>
+            } @else if (index === 1) {
+              <div class="flex-row-flex-start-center gap-8">
+                <aum-checkbox
+                  [label]="'Option 1'"
+                  [checked]="false"
+                  [disabled]="false"
+                  (checkedChange)="checkboxState('changed', $event)"
+                ></aum-checkbox>
+                <aum-checkbox
+                  [label]="'Option 2'"
+                  [checked]="true"
+                  [disabled]="false"
+                  (checkedChange)="checkboxState('changed', $event)"
+                ></aum-checkbox>
+                <aum-checkbox
+                  [label]="'Option 3'"
+                  [checked]="false"
+                  [disabled]="true"
+                  (checkedChange)="checkboxState('changed', $event)"
+                ></aum-checkbox>
+              </div>
+            } @else {
+              <div class="flex-column gap-8">
+                <aum-input
+                  [label]="'Name'"
+                  [placeholder]="'Enter your name'"
+                ></aum-input>
+                <aum-input
+                  [label]="'Email'"
+                  [placeholder]="'Enter your email'"
+                  [type]="'email'"
+                ></aum-input>
+              </div>
+            }
+          </ng-template>
+        </aum-expansion-panel>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Demo 3: Multi-Mode Accordion -->
+      <section class="demo-section mb-8 mt-8">
+        <h2 class="fs-18 mb-2">{{ 'MULTI_MODE_DEMO' | translate }}</h2>
+        <p class="fs-12 mb-3 text-muted">
+          Multiple panels can be expanded at once. Use Expand/Collapse All controls for programmatic management.
+        </p>
+        <div class="flex-row-flex-start-center gap-8 mb-3">
+          <aum-button
+            [type]="'filled'"
+            [value]="'EXPAND_ALL' | translate"
+            (clickButton)="expandAll()">
+          </aum-button>
+          <aum-button
+            [type]="'outlined'"
+            [value]="'COLLAPSE_ALL' | translate"
+            (clickButton)="collapseAll()">
+          </aum-button>
+        </div>
+        <aum-expansion-panel
+          #multiModePanel
+          [items]="multiModeItems"
+          [width]="'600px'"
+          [multi]="true">
+        </aum-expansion-panel>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Demo 4: Single-Mode -->
+      <section class="demo-section mb-8 mt-8">
+        <h2 class="fs-18 mb-2">{{ 'SINGLE_MODE_DEMO' | translate }}</h2>
+        <p class="fs-12 mb-3 text-muted">
+          Only one panel can be expanded at a time. Opening a panel automatically closes others.
+        </p>
+        <aum-expansion-panel
+          [items]="singleModeItems"
+          [width]="'600px'"
+          [multi]="false">
+        </aum-expansion-panel>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Demo 5: Advanced - Per-Item Templates -->
+      <section class="demo-section mb-8 mt-8">
+        <h2 class="fs-18 mb-2">{{ 'ADVANCED_TEMPLATES' | translate }}</h2>
+        <p class="fs-12 mb-3 text-muted">
+          Using per-item contentTemplate property for different templates per panel. Useful when panels need completely different content.
+        </p>
+        <aum-expansion-panel
+          [items]="advancedTemplateItems"
+          [width]="'600px'">
+        </aum-expansion-panel>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- Demo 6: Disabled States -->
+      <section class="demo-section mb-8 mt-8">
+        <h2 class="fs-18 mb-2">{{ 'DISABLED_STATES' | translate }}</h2>
+        <p class="fs-12 mb-3 text-muted">
+          Panels can be disabled to prevent user interaction.
+        </p>
+        <aum-expansion-panel
+          [items]="[
+            { header: 'Enabled Panel', content: 'This panel is enabled and can be expanded.', expanded: true },
+            { header: 'Disabled Panel', content: 'This panel is disabled.', disabled: true },
+            { header: 'Another Enabled Panel', content: 'This panel is also enabled.' }
+          ]"
+          [width]="'600px'">
+        </aum-expansion-panel>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Templates for Advanced Demo (Demo 5) -->
+  <ng-template #buttonsTemplate>
+    <div class="flex-row-flex-start-center gap-8 flex-wrap">
+      <aum-button [type]="'filled'" [value]="'FILLED' | translate"></aum-button>
+      <aum-button [type]="'outlined'" [value]="'OUTLINED' | translate"></aum-button>
+      <aum-button [type]="'basic'" [value]="'BASIC' | translate"></aum-button>
+      <aum-button [type]="'filled'" [value]="'DISABLED' | translate" [disabled]="true"></aum-button>
+    </div>
+  </ng-template>
+
+  <ng-template #checkboxesTemplate>
+    <div class="flex-column gap-8">
+      <aum-checkbox
+        [label]="'Accept terms and conditions'"
+        [checked]="false"
+        (checkedChange)="checkboxState('changed', $event)"
+      ></aum-checkbox>
+      <aum-checkbox
+        [label]="'Subscribe to newsletter'"
+        [checked]="true"
+        (checkedChange)="checkboxState('changed', $event)"
+      ></aum-checkbox>
+      <aum-checkbox
+        [label]="'Enable notifications'"
+        [indeterminate]="true"
+        (checkedChange)="checkboxState('changed', $event)"
+      ></aum-checkbox>
+    </div>
+  </ng-template>
+
+  <ng-template #inputsTemplate>
+    <div class="flex-column gap-12">
+      <aum-input
+        [label]="'Username'"
+        [placeholder]="'Enter username'"
+      ></aum-input>
+      <aum-input
+        [label]="'Password'"
+        [type]="'password'"
+        [placeholder]="'Enter password'"
+      ></aum-input>
+      <aum-button [type]="'filled'" [value]="'Submit'"></aum-button>
+    </div>
+  </ng-template>
+</aum-page>

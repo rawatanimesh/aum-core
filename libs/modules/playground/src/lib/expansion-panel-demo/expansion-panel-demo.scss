@@ -1,0 +1,22 @@
+@use 'functions' as *;
+
+.expansion-panel-demo-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-weight: 500;
+  color: var(--mat-sys-on-surface);
+}
+
+.demo-section {
+  h2 {
+    font-weight: 500;
+    color: var(--mat-sys-on-surface);
+  }
+
+  .text-muted {
+    color: var(--mat-sys-on-surface-variant);
+  }
+}

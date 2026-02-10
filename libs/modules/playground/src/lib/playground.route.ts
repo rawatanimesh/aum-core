@@ -30,4 +30,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./tabs-demo/tabs-demo').then((m) => m.TabsDemo),
   },
+
+  {
+    path: 'expansion-panels',
+    loadComponent: () =>
+      import('./expansion-panel-demo/expansion-panel-demo').then((m) => m.ExpansionPanelDemo),
+  },
 ];

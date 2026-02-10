@@ -234,6 +234,20 @@
       </div>
     </section>
     <mat-divider></mat-divider>
+    <!-- Expansion Panel Demo -->
+    <section>
+      <div class="example-label fs-14">{{ 'EXPANSION_PANEL' | translate }}
+        
+      </div>
+      <div class="example-button-row mb-3">
+        <aum-button
+          [type]="'filled'"
+          [value]="'GO_TO_EXPANSION_PANELS_DEMO' | translate"
+          (clickButton)="goToExpansionPanelsDemo()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
     <section>
       <div class="example-label fs-14">{{ 'ERROR_HANDLERS' | translate }}</div>
 

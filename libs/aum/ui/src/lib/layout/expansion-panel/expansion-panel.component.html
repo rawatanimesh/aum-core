@@ -1,0 +1,35 @@
+<mat-accordion
+  class="aum-expansion-panel"
+  [style.width]="width"
+  [multi]="multi">
+  @for (item of items; track item; let index = $index) {
+  <mat-expansion-panel
+    class="aum-expansion-panel-item"
+    [expanded]="item.expanded && !item.disabled"
+    [disabled]="item.disabled || false"
+    (expandedChange)="item.expanded = $event"
+    hideToggle>
+    <mat-expansion-panel-header
+      class="aum-expansion-panel-item-header">
+      <mat-panel-title>
+        <ng-container>{{ item.header | translate }}</ng-container>
+      </mat-panel-title>
+      <span class="aum-expansion-panel-item-header-icon">
+        @if(item.expanded && !item.disabled){<mat-icon>expand_less</mat-icon>}
+        @else{<mat-icon>expand_more</mat-icon>}
+      </span>
+    </mat-expansion-panel-header>
+    <div
+      class="aum-expansion-panel-item-body"
+      role="region">
+      @if(item.contentTemplate) {
+        <ng-container *ngTemplateOutlet="item.contentTemplate;"></ng-container>
+      } @else if (projectedContent) {
+        <ng-container *ngTemplateOutlet="projectedContent; context: { $implicit: item, index: index }"></ng-container>
+      } @else {
+        {{ item.content | translate }}
+      }
+    </div>
+  </mat-expansion-panel>
+  }
+</mat-accordion>
