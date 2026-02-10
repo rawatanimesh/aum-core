@@ -140,5 +140,14 @@
   "CREATE_NEW_ITEM": "Create new item",
   "CREATE_BUTTON_CLICKED": "Create button clicked!",
   "EXPORT_DATA": "Export Data",
-  "EXPORT_STARTED": "Export started"
+  "EXPORT_STARTED": "Export started",
+  "BROWSER_NAVIGATION_PROTECTION": "Browser Navigation Protection",
+  "BROWSER_NAVIGATION_PROTECTION_DESC": "When enabled, you will be warned before leaving the page (refresh, back, or forward navigation). Useful for forms with unsaved changes.",
+  "ENABLE_PROTECTION": "Enable Protection",
+  "DISABLE_PROTECTION": "Disable Protection",
+  "PROTECTION_STATUS": "Protection Status",
+  "BROWSER_NAVIGATION_PROTECTION_ENABLED": "Browser navigation protection enabled",
+  "BROWSER_NAVIGATION_PROTECTION_DISABLED": "Browser navigation protection disabled",
+  "BROWSER_NAVIGATION_DETECTED": "Browser navigation detected!",
+  "UNSAVED_CHANGES_WARNING": "You have unsaved changes. Are you sure you want to leave?"
 }

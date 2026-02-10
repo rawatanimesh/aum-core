@@ -4,6 +4,9 @@
   [drawerWidth]="30"
   [drawerPosition]="'end'"
   [drawerMode]="'over'"
+  [enableBrowserNavigation]="enableBrowserNavigationProtection"
+  [navigationWarningMessage]="'UNSAVED_CHANGES_WARNING' | translate"
+  (beforeBrowserNavigation)="handleBrowserNavigation($event)"
 >
   <div aum-page-body>
     <!-- Page Mode Spinner Overlay -->
@@ -393,6 +396,32 @@
           [value]="'DRAWER' | translate"
           (clickButton)="toggleDrawer()"
         ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
+
+    <!-- Browser Navigation Protection Demo -->
+    <section>
+      <div class="flex-column-flex-start-flex-start gap-16">
+        <div class="fs-14">{{ 'BROWSER_NAVIGATION_PROTECTION' | translate }}</div>
+        <div class="fs-12 text-muted">
+          {{ 'BROWSER_NAVIGATION_PROTECTION_DESC' | translate }}
+        </div>
+        <div class="flex-row-flex-start-center gap-16">
+          <aum-button
+            [type]="enableBrowserNavigationProtection ? 'filled' : 'outlined'"
+            [value]="enableBrowserNavigationProtection
+              ? ('DISABLE_PROTECTION' | translate)
+              : ('ENABLE_PROTECTION' | translate)"
+            (clickButton)="toggleBrowserNavigationProtection()"
+          ></aum-button>
+          <div class="fs-12">
+            {{ 'PROTECTION_STATUS' | translate }}:
+            <strong>{{ enableBrowserNavigationProtection
+              ? ('ENABLED' | translate)
+              : ('DISABLED' | translate) }}</strong>
+          </div>
+        </div>
       </div>
     </section>
     <mat-divider></mat-divider>

@@ -141,5 +141,16 @@
   "CREATE_NEW_ITEM": "नई वस्तु बनाएं",
   "CREATE_BUTTON_CLICKED": "बनाएं बटन क्लिक किया गया!",
   "EXPORT_DATA": "डेटा निर्यात करें",
-  "EXPORT_STARTED": "निर्यात शुरू हुआ"
+  "EXPORT_STARTED": "निर्यात शुरू हुआ",
+  "BROWSER_NAVIGATION_PROTECTION": "ब्राउज़र नेविगेशन सुरक्षा",
+  "BROWSER_NAVIGATION_PROTECTION_DESC": "सक्षम होने पर, पृष्ठ छोड़ने से पहले आपको चेतावनी दी जाएगी (ताज़ा करें, पीछे, या आगे नेविगेशन)। बिना सहेजे गए परिवर्तनों वाले फ़ॉर्म के लिए उपयोगी।",
+  "ENABLE_PROTECTION": "सुरक्षा सक्षम करें",
+  "DISABLE_PROTECTION": "सुरक्षा अक्षम करें",
+  "PROTECTION_STATUS": "सुरक्षा स्थिति",
+  "BROWSER_NAVIGATION_PROTECTION_ENABLED": "ब्राउज़र नेविगेशन सुरक्षा सक्षम की गई",
+  "BROWSER_NAVIGATION_PROTECTION_DISABLED": "ब्राउज़र नेविगेशन सुरक्षा अक्षम की गई",
+  "BROWSER_NAVIGATION_DETECTED": "ब्राउज़र नेविगेशन का पता चला!",
+  "UNSAVED_CHANGES_WARNING": "आपके पास बिना सहेजे गए परिवर्तन हैं। क्या आप वाकई छोड़ना चाहते हैं?",
+  "ENABLED": "सक्षम",
+  "DISABLED": "अक्षम"
 }

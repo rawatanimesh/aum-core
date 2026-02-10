@@ -119,6 +119,9 @@ export class Playground implements OnInit, OnDestroy {
   // For Drawer demo
   isDrawerOpen = false;
 
+  // For Browser Navigation Protection demo
+  enableBrowserNavigationProtection = false;
+
   openMenu() {
     console.log('clicked');
   }
@@ -222,6 +225,26 @@ export class Playground implements OnInit, OnDestroy {
 
   toggleDrawer() {
     this.isDrawerOpen = !this.isDrawerOpen;
+  }
+
+  toggleBrowserNavigationProtection() {
+    this.enableBrowserNavigationProtection =
+      !this.enableBrowserNavigationProtection;
+    const status = this.enableBrowserNavigationProtection ? 'enabled' : 'disabled';
+    this.snackbar.info(
+      this.languageService.instant(`BROWSER_NAVIGATION_PROTECTION_${status.toUpperCase()}`),
+      3000
+    );
+  }
+
+  handleBrowserNavigation(event: {
+    event: BeforeUnloadEvent | PopStateEvent;
+    type: 'refresh' | 'back' | 'forward';
+  }) {
+    // Event handler for browser navigation
+    // The page component handles showing the confirmation dialog automatically
+    // This handler can be used for custom logic if needed
+    console.log('Browser navigation detected:', event.type);
   }
 
   ngOnInit(): void {

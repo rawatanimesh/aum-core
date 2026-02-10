@@ -140,5 +140,16 @@
   "CREATE_NEW_ITEM": "新しいアイテムを作成",
   "CREATE_BUTTON_CLICKED": "作成ボタンがクリックされました！",
   "EXPORT_DATA": "データをエクスポート",
-  "EXPORT_STARTED": "エクスポートが開始されました"
+  "EXPORT_STARTED": "エクスポートが開始されました",
+  "BROWSER_NAVIGATION_PROTECTION": "ブラウザナビゲーション保護",
+  "BROWSER_NAVIGATION_PROTECTION_DESC": "有効にすると、ページを離れる前に警告されます（更新、戻る、進むナビゲーション）。未保存の変更があるフォームに便利です。",
+  "ENABLE_PROTECTION": "保護を有効にする",
+  "DISABLE_PROTECTION": "保護を無効にする",
+  "PROTECTION_STATUS": "保護ステータス",
+  "BROWSER_NAVIGATION_PROTECTION_ENABLED": "ブラウザナビゲーション保護が有効になりました",
+  "BROWSER_NAVIGATION_PROTECTION_DISABLED": "ブラウザナビゲーション保護が無効になりました",
+  "BROWSER_NAVIGATION_DETECTED": "ブラウザナビゲーションが検出されました！",
+  "UNSAVED_CHANGES_WARNING": "保存されていない変更があります。本当に離れますか？",
+  "ENABLED": "有効",
+  "DISABLED": "無効"
 }

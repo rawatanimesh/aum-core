@@ -330,8 +330,8 @@ export class MyComponent {
 }
 ```
 
-## Examples from PLM Core
+## Examples from AUM Core
 
-For more examples, refer to the PLM Core implementation:
+For more examples, refer to the AUM Core implementation:
 - `libs/modules/playground/playground.component.ts` - Demonstration of page-specific actions
-- `libs/plm-core/app-template/src/lib/components/toolbar/toolbar.component.ts` - Toolbar integration
+- `libs/aum/templates/app-template/src/lib/components/toolbar/toolbar.component.ts` - Toolbar integration
