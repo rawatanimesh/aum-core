@@ -55,7 +55,36 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/aum-core/src/environments/environment.ts",
+              "with": "apps/aum-core/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "staging": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kb",
+              "maximumError": "8kb"
+            }
+          ],
+          "outputHashing": "all",
+          "optimization": true,
+          "sourceMap": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/aum-core/src/environments/environment.ts",
+              "with": "apps/aum-core/src/environments/environment.staging.ts"
+            }
+          ]
         },
         "development": {
           "optimization": false,
@@ -71,6 +100,9 @@
       "configurations": {
         "production": {
           "buildTarget": "aum-core:build:production"
+        },
+        "staging": {
+          "buildTarget": "aum-core:build:staging"
         },
         "development": {
           "buildTarget": "aum-core:build:development"
