@@ -150,6 +150,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     // Theme item
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'theme')) {
+      const savedTheme = localStorage.getItem('app-theme-mode') || 'light';
       preferencesMenuItems.push({
         label: this.languageService.instant('THEME'),
         value: 'theme',
@@ -160,31 +161,50 @@ export class ToolbarComponent implements OnInit, OnDestroy {
             label: this.languageService.instant('LIGHT'),
             value: 'light',
             icon: 'light_mode',
+            selected: savedTheme === 'light',
           },
           {
             label: this.languageService.instant('DARK'),
             value: 'dark',
             icon: 'dark_mode',
+            selected: savedTheme === 'dark',
           },
           {
             label: this.languageService.instant('SYSTEM'),
             value: 'system',
             icon: 'computer',
+            selected: savedTheme === 'system',
           },
         ],
       });
     }
 
     // Display mode
+    const savedMode = localStorage.getItem('ui-scale-mode') || 'default';
     preferencesMenuItems.push({
       label: this.languageService.instant('DISPLAY'),
       value: 'mode',
       icon: 'aspect_ratio',
       disabled: MenuConfigHelper.isPreferencesMenuDisabled(config),
       children: [
-        { label: this.languageService.instant('COMPACT'), value: 'compact', icon: 'density_small' },
-        { label: this.languageService.instant('DEFAULT'), value: 'default', icon: 'density_medium' },
-        { label: this.languageService.instant('LARGE'), value: 'large', icon: 'density_large' },
+        {
+          label: this.languageService.instant('COMPACT'),
+          value: 'compact',
+          icon: 'density_small',
+          selected: savedMode === 'compact',
+        },
+        {
+          label: this.languageService.instant('DEFAULT'),
+          value: 'default',
+          icon: 'density_medium',
+          selected: savedMode === 'default',
+        },
+        {
+          label: this.languageService.instant('LARGE'),
+          value: 'large',
+          icon: 'density_large',
+          selected: savedMode === 'large',
+        },
       ],
     });
 
@@ -275,6 +295,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       item.value === 'large'
     ) {
       this.setUiScale(item.value);
+      this.setMenuSelection(this.optionsMenuList, 'mode', item.value);
     }
     // Theme
     if (
@@ -283,6 +304,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       item.value === 'system'
     ) {
       this.themeService.setTheme(item.value);
+      this.setMenuSelection(this.optionsMenuList, 'theme', item.value);
     }
     // Language switching - must be after other actions
     if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
@@ -290,6 +312,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       // Only change language if it's different from current
       if (currentLanguage !== item.value) {
         this.languageService.setLanguage(item.value);
+        this.setMenuSelection(this.optionsMenuList, 'language', item.value);
         // Show success snackbar after language change
         // Use setTimeout to ensure translations are loaded
         setTimeout(() => {
