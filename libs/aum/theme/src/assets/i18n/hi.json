@@ -132,5 +132,14 @@
   "LONG_CONTENT": "लंबी सामग्री",
   "PRESERVE_ON": "संरक्षित: चालू",
   "PRESERVE_OFF": "संरक्षित: बंद",
-  "TABS": "टैब"
+  "TABS": "टैब",
+  "HELP": "मदद",
+  "PROVIDE_FEEDBACK": "प्रतिक्रिया दें",
+  "HELP_DIALOG_OPENED": "सहायता संवाद खोला गया",
+  "FEEDBACK_DIALOG_OPENED": "प्रतिक्रिया संवाद खोला गया",
+  "CREATE": "बनाएं",
+  "CREATE_NEW_ITEM": "नई वस्तु बनाएं",
+  "CREATE_BUTTON_CLICKED": "बनाएं बटन क्लिक किया गया!",
+  "EXPORT_DATA": "डेटा निर्यात करें",
+  "EXPORT_STARTED": "निर्यात शुरू हुआ"
 }

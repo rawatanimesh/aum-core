@@ -15,6 +15,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { appRoutes } from './app.routes';
 import appConfiguration from './app-config.json';
+import { GlobalAppInitService } from './services/global-app-init.service';
 
 // Factory function for translation loader
 export function HttpLoaderFactory(http: HttpClient) {
@@ -60,6 +61,11 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       // Inject the service to instantiate it and trigger the effect that watches for config changes
       inject(RippleConfigService);
+    }),
+    // Initialize global app service for toolbar actions and other app-wide features
+    provideAppInitializer(() => {
+      // Inject the service to instantiate it and register global toolbar actions
+      inject(GlobalAppInitService);
     }),
   ],
 };

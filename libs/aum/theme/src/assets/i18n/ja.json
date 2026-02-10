@@ -131,5 +131,14 @@
   "LONG_CONTENT": "長いコンテンツ",
   "PRESERVE_ON": "保持: オン",
   "PRESERVE_OFF": "保持: オフ",
-  "TABS": "タブ"
+  "TABS": "タブ",
+  "HELP": "ヘルプ",
+  "PROVIDE_FEEDBACK": "フィードバックを提供",
+  "HELP_DIALOG_OPENED": "ヘルプダイアログを開きました",
+  "FEEDBACK_DIALOG_OPENED": "フィードバックダイアログを開きました",
+  "CREATE": "作成",
+  "CREATE_NEW_ITEM": "新しいアイテムを作成",
+  "CREATE_BUTTON_CLICKED": "作成ボタンがクリックされました！",
+  "EXPORT_DATA": "データをエクスポート",
+  "EXPORT_STARTED": "エクスポートが開始されました"
 }

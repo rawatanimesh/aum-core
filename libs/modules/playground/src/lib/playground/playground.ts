@@ -1,4 +1,4 @@
-import { Component, model, inject } from '@angular/core';
+import { Component, model, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -16,6 +16,7 @@ import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService, Spinner } from '@aum/ui/utilities';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { LanguageTranslationService } from '@aum/utils/services';
+import { ToolbarContentService } from '@aum/aum-template';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 
@@ -39,11 +40,12 @@ import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
   templateUrl: './playground.html',
   styleUrl: './playground.scss',
 })
-export class Playground {
+export class Playground implements OnInit, OnDestroy {
   readonly dialog = inject(ConfirmationDialogService);
   readonly dialogRef = inject(MatDialog);
   readonly snackbar = inject(SnackbarService);
   readonly languageService = inject(LanguageTranslationService);
+  private toolbarContentService = inject(ToolbarContentService);
   route = inject(Router);
   pageInfo = {
     breadcrumbs: [
@@ -220,5 +222,41 @@ export class Playground {
 
   toggleDrawer() {
     this.isDrawerOpen = !this.isDrawerOpen;
+  }
+
+  ngOnInit(): void {
+    console.log('🎮 Playground: Registering page-specific toolbar actions');
+
+    // Register page-specific Create action (only visible on playground page)
+    // Pass translation keys, not translated strings - the toolbar component will handle translation
+    this.toolbarContentService.registerGlobalAction(
+      {
+        id: 'playground-create',
+        icon: 'add_circle_outline',
+        value: 'CREATE',
+        tooltip: 'CREATE_NEW_ITEM',
+        type: 'filled',
+        order: 0,  // Higher order to appear after global actions
+      },
+      () => this.handleCreate()
+    );
+
+    console.log('✅ Playground: Page-specific actions registered');
+  }
+
+  handleCreate(): void {
+    console.log('Create button clicked from playground');
+    this.snackbar.success(
+      this.languageService.instant('CREATE_BUTTON_CLICKED'),
+      3000
+    );
+  }
+
+  ngOnDestroy(): void {
+    console.log('🎮 Playground: Cleaning up page-specific toolbar actions');
+    // Unregister toolbar actions when leaving the page
+    this.toolbarContentService.unregisterGlobalAction('playground-create');
+    this.toolbarContentService.unregisterGlobalAction('playground-export');
+    console.log('✅ Playground: Page-specific actions removed');
   }
 }

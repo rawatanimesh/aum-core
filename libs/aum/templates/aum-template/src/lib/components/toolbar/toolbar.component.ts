@@ -7,12 +7,14 @@ import {
   Output,
   effect,
   ChangeDetectorRef,
+  OnDestroy,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 import { ThemeService, AppConfigService, LanguageTranslationService, MenuConfigHelper } from '@aum/utils/services';
 import { BreadcrumbService } from '@aum/ui/navigation';
@@ -21,6 +23,8 @@ import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { ButtonComponent } from '@aum/ui/buttons';
 import { SnackbarService } from '@aum/ui/utilities';
 import { AuthService } from '@aum/utils/services';
+import { AppEventBusService, AppEventType } from '../../services/app-event-bus.service';
+import { ToolbarContentService, ToolbarAction } from '../../services/toolbar-content.service';
 
 @Component({
   selector: 'aum-toolbar',
@@ -36,7 +40,7 @@ import { AuthService } from '@aum/utils/services';
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
   @Output() sideMenuToggle = new EventEmitter();
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
@@ -46,6 +50,8 @@ export class ToolbarComponent implements OnInit {
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
   private snackbarService = inject(SnackbarService);
+  private eventBus = inject(AppEventBusService);
+  private toolbarContentService = inject(ToolbarContentService);
 
   // Computed signals for reactive config
   themeIcon = computed(() => this.themeService.themeIcon());
@@ -104,6 +110,10 @@ export class ToolbarComponent implements OnInit {
 
   optionsMenuList: MenuItem[] = [];
   profileMenuList: MenuItem[] = [];
+
+  // Dynamic toolbar actions
+  globalActions: ToolbarAction[] = [];
+  private globalActionsSubscription?: Subscription;
 
   private buildMenus(): void {
     const config = this.toolbarMenusConfig();
@@ -248,6 +258,14 @@ export class ToolbarComponent implements OnInit {
       // Update selected state for Theme options
       this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || 'light');
     });
+
+    // Subscribe to global toolbar actions
+    this.globalActionsSubscription = this.toolbarContentService
+      .getGlobalActions()
+      .subscribe((actions) => {
+        this.globalActions = actions;
+        this.cdr.markForCheck();
+      });
   }
   onMenuSelect(item: MenuItem) {
     // UI Scale
@@ -328,7 +346,17 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
+    // Emit logout event through event bus for any component to handle
+    this.eventBus.emit(AppEventType.LOGOUT);
     this.auth.logout();
     this.router.navigate(['/login']);
+  }
+
+  onGlobalActionClick(actionId: string): void {
+    this.toolbarContentService.executeAction(actionId);
+  }
+
+  ngOnDestroy(): void {
+    this.globalActionsSubscription?.unsubscribe();
   }
 }

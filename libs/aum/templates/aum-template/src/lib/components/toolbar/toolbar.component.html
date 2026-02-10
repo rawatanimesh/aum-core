@@ -38,6 +38,17 @@
     <!-- right side of the toolbar -->
     <div class="aum-toolbar-right">
       <div class="flex-row-flex-end-center gap-4">
+        <!-- Dynamic global toolbar actions -->
+        @for (action of globalActions; track action.id) {
+          <aum-button
+            [type]="action.type || 'icon'"
+            [icon]="action.icon"
+            [value]="(action.value || '') | translate"
+            [tooltip]="(action.tooltip || '') | translate"
+            (clickButton)="onGlobalActionClick(action.id)"
+          ></aum-button>
+        }
+
         @if (shouldShowPreferencesMenu()) {
           <aum-button
             [type]="'icon'"

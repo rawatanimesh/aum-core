@@ -131,5 +131,14 @@
   "LONG_CONTENT": "Long Content",
   "PRESERVE_ON": "Preserve: ON",
   "PRESERVE_OFF": "Preserve: OFF",
-  "TABS": "Tabs"
+  "TABS": "Tabs",
+  "HELP": "Help",
+  "PROVIDE_FEEDBACK": "Provide Feedback",
+  "HELP_DIALOG_OPENED": "Help dialog opened",
+  "FEEDBACK_DIALOG_OPENED": "Feedback dialog opened",
+  "CREATE": "Create",
+  "CREATE_NEW_ITEM": "Create new item",
+  "CREATE_BUTTON_CLICKED": "Create button clicked!",
+  "EXPORT_DATA": "Export Data",
+  "EXPORT_STARTED": "Export started"
 }
