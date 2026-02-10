@@ -61,13 +61,13 @@ export class ToolbarComponent implements OnInit {
   });
 
   // Check if appLogo should be shown (has a valid non-empty path)
-  shouldShowAppLogo = computed(() => {
+  protected shouldShowAppLogo = computed(() => {
     const logo = this.appLogo();
     return !!logo && logo.trim() !== '';
   });
 
   // Check if appName should be shown (only when logo is not available)
-  shouldShowAppName = computed(() => {
+  protected shouldShowAppName = computed(() => {
     const name = this.appName();
     return !this.shouldShowAppLogo() && !!name && name.trim() !== '';
   });
@@ -100,19 +100,6 @@ export class ToolbarComponent implements OnInit {
         this.cdr.markForCheck();
       }
     });
-  }
-
-  // Tooltip translations
-  get menuTooltip(): string {
-    return this.languageService.instant('MENU');
-  }
-
-  get preferencesTooltip(): string {
-    return this.languageService.instant('PREFERENCES');
-  }
-
-  get myAccountTooltip(): string {
-    return this.languageService.instant('MY_ACCOUNT');
   }
 
   optionsMenuList: MenuItem[] = [];

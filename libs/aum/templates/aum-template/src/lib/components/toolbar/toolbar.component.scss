@@ -8,11 +8,11 @@
     &-brandLogo {
       height: rem(45);
     }
-    &-appName {
-      font-size: rem(18);
-    }
     &-appIcon {
       height: rem(22);
+    }
+    &-appName {
+      color: var(--mat-toolbar-container-text-color);
     }
   }
   &-center {
