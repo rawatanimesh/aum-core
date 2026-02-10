@@ -16,7 +16,7 @@ import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService, Spinner } from '@aum/ui/utilities';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { LanguageTranslationService } from '@aum/utils/services';
-import { ToolbarContentService } from '@aum/aum-template';
+import { ToolbarContentService } from '@aum/templates/aum-template';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 

@@ -33,7 +33,7 @@ To see this feature in action, check out the **Playground** page in the demo app
 
 ```typescript
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
-import { ToolbarContentService } from '@aum/aum-template';
+import { ToolbarContentService } from '@aum/templates/aum-template';
 
 @Component({
   selector: 'app-my-page',
@@ -163,7 +163,7 @@ this.toolbarContentService.clearAllGlobalActions();
 ```typescript
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolbarContentService, AppEventBusService, AppEventType } from '@aum/aum-template';
+import { ToolbarContentService, AppEventBusService, AppEventType } from '@aum/templates/aum-template';
 import { SnackbarService } from '@aum/ui/utilities';
 
 @Component({
@@ -310,7 +310,7 @@ interface ToolbarAction {
 The toolbar also integrates with the `AppEventBusService` for application-wide events:
 
 ```typescript
-import { AppEventBusService, AppEventType } from '@aum/aum-template';
+import { AppEventBusService, AppEventType } from '@aum/templates/aum-template';
 
 export class MyComponent {
   private eventBus = inject(AppEventBusService);

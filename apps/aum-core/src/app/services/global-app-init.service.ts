@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ToolbarContentService } from '@aum/aum-template';
+import { ToolbarContentService } from '@aum/templates/aum-template';
 import { SnackbarService } from '@aum/ui/utilities';
 import { LanguageTranslationService } from '@aum/utils/services';
 
