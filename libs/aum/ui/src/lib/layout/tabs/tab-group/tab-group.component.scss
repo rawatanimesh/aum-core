@@ -49,6 +49,7 @@
 
   // Tab body content area - prevent unnecessary scrollbars
   .mat-mdc-tab-body-content {
+    height: auto; // Override Material's default height: 100%
     overflow: visible; // Override Material's default overflow: auto
   }
 }
