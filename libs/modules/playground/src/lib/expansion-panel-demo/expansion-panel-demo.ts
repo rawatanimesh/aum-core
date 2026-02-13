@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { Subject } from 'rxjs';
 
-import { PageComponent, ExpansionPanelComponent, ExpansionPanelItem, ExpansionPanelContentDirective } from '@aum/ui/layout';
+import { PageComponent, ExpansionPanel, ExpansionPanelItem, ExpansionPanelContentDirective } from '@aum/ui/layout';
 import { ButtonComponent } from '@aum/ui/buttons';
 import { CheckboxComponent, InputComponent } from '@aum/ui/form-controls';
 import { LanguageTranslationService } from '@aum/utils/services';
@@ -17,7 +17,7 @@ import { LanguageTranslationService } from '@aum/utils/services';
     CommonModule,
     MatDividerModule,
     PageComponent,
-    ExpansionPanelComponent,
+    ExpansionPanel,
     ExpansionPanelContentDirective,
     ButtonComponent,
     CheckboxComponent,
@@ -40,7 +40,7 @@ export class ExpansionPanelDemo implements OnInit, OnDestroy {
   };
 
   // Reference to multi-mode panel for expand/collapse all
-  @ViewChild('multiModePanel') multiModePanel!: ExpansionPanelComponent;
+  @ViewChild('multiModePanel') multiModePanel!: ExpansionPanel;
 
   // Templates for advanced usage demo
   @ViewChild('buttonsTemplate', { static: true }) buttonsTemplate!: TemplateRef<any>;

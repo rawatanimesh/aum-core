@@ -21,7 +21,7 @@ export interface ExpansionPanelItem {
   styleUrl: './expansion-panel.component.scss',
   encapsulation: ViewEncapsulation.None,
 })
-export class ExpansionPanelComponent implements AfterContentInit {
+export class ExpansionPanel implements AfterContentInit {
   @Input() items: ExpansionPanelItem[] = [];
   @Input() width: string = '100%';
   @Input() multi: boolean = false;
