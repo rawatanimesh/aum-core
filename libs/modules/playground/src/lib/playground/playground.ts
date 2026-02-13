@@ -205,6 +205,9 @@ export class Playground implements OnInit, OnDestroy {
   goToExpansionPanelsDemo() {
     this.route.navigate(['/playground/expansion-panels']);
   }
+  goToSlideToggleDemo() {
+    this.route.navigate(['/playground/slide-toggle']);
+  }
   goToErrorTest() {
     this.route.navigate(['/playground/error-test']);
   }

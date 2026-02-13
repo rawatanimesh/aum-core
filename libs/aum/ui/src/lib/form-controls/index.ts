@@ -5,3 +5,4 @@ export { RadioButton } from './radio-button/radio-button';
 export { SelectBox } from './select-box/select-box';
 export type { SelectOption } from './select-box/select-box';
 export { Autocomplete } from './autocomplete/autocomplete';
+export { SlideToggle } from './slide-toggle/slide-toggle';

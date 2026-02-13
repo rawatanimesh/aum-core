@@ -36,4 +36,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./expansion-panel-demo/expansion-panel-demo').then((m) => m.ExpansionPanelDemo),
   },
+
+  {
+    path: 'slide-toggle',
+    loadComponent: () =>
+      import('./slide-toggle-demo/slide-toggle-demo').then((m) => m.SlideToggleDemo),
+  },
 ];

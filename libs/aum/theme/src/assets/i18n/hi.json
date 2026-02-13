@@ -182,5 +182,13 @@
   "ADVANCED_TEMPLATES": "उन्नत टेम्पलेट",
   "MULTI_MODE_DEMO": "मल्टी-मोड डेमो",
   "SINGLE_MODE_DEMO": "सिंगल-मोड डेमो",
-  "DISABLED_STATES": "अक्षम अवस्थाएं"
+  "DISABLED_STATES": "अक्षम अवस्थाएं",
+  "SLIDE_TOGGLE": "स्लाइड टॉगल",
+  "GO_TO_SLIDE_TOGGLE_DEMO": "स्लाइड टॉगल डेमो पर जाएं",
+  "SLIDE_TOGGLE_DEMO": "स्लाइड टॉगल डेमो",
+  "SLIDE_TOGGLE_DESCRIPTION": "स्लाइड टॉगल एक मूल्य को चालू या बंद करने का एक त्वरित तरीका है।",
+  "BASIC_SLIDE_TOGGLES": "बेसिक स्लाइड टॉगल",
+  "LABEL_POSITIONS": "लेबल स्थिति",
+  "WITHOUT_LABELS": "बिना लेबल",
+  "BACK_TO_PLAYGROUND": "प्लेग्राउंड पर वापस जाएं"
 }

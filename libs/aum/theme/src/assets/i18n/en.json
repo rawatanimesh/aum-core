@@ -179,5 +179,13 @@
   "ADVANCED_TEMPLATES": "Advanced Templates",
   "MULTI_MODE_DEMO": "Multi-Mode Demo",
   "SINGLE_MODE_DEMO": "Single-Mode Demo",
-  "DISABLED_STATES": "Disabled States"
+  "DISABLED_STATES": "Disabled States",
+  "SLIDE_TOGGLE": "Slide Toggle",
+  "GO_TO_SLIDE_TOGGLE_DEMO": "Go to Slide Toggle Demo",
+  "SLIDE_TOGGLE_DEMO": "Slide Toggle Demo",
+  "SLIDE_TOGGLE_DESCRIPTION": "Slide toggles are a quick way to toggle a single value on or off.",
+  "BASIC_SLIDE_TOGGLES": "Basic Slide Toggles",
+  "LABEL_POSITIONS": "Label Positions",
+  "WITHOUT_LABELS": "Without Labels",
+  "BACK_TO_PLAYGROUND": "Back to Playground"
 }

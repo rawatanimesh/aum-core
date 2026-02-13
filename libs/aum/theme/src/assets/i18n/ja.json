@@ -181,5 +181,13 @@
   "ADVANCED_TEMPLATES": "高度なテンプレート",
   "MULTI_MODE_DEMO": "マルチモードデモ",
   "SINGLE_MODE_DEMO": "シングルモードデモ",
-  "DISABLED_STATES": "無効状態"
+  "DISABLED_STATES": "無効状態",
+  "SLIDE_TOGGLE": "スライドトグル",
+  "GO_TO_SLIDE_TOGGLE_DEMO": "スライドトグルデモへ移動",
+  "SLIDE_TOGGLE_DEMO": "スライドトグルデモ",
+  "SLIDE_TOGGLE_DESCRIPTION": "スライドトグルは、単一の値をオン/オフに切り替えるための素早い方法です。",
+  "BASIC_SLIDE_TOGGLES": "基本的なスライドトグル",
+  "LABEL_POSITIONS": "ラベル位置",
+  "WITHOUT_LABELS": "ラベルなし",
+  "BACK_TO_PLAYGROUND": "プレイグラウンドに戻る"
 }
