@@ -24,10 +24,8 @@ export class SlideToggle {
   @Input() label = '';
   @Input() labelPosition: 'before' | 'after' = 'after';
   @Output() checkedChange = new EventEmitter<boolean>();
-  @Output() toggled = new EventEmitter();
 
   changeValue(event: any) {
     this.checkedChange.emit(event.checked);
-    this.toggled.emit(event);
   }
 }

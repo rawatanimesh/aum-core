@@ -13,7 +13,7 @@
         <aum-slide-toggle
           [(checked)]="basicToggleChecked"
           label="Basic Toggle"
-          (toggled)="onToggleChange($event, 'Basic Toggle')"
+          (checkedChange)="onToggleChange($event, 'Basic Toggle')"
         ></aum-slide-toggle>
 
         <aum-slide-toggle
@@ -40,14 +40,14 @@
           [(checked)]="labelBeforeChecked"
           label="Label Before"
           labelPosition="before"
-          (toggled)="onToggleChange($event, 'Label Before')"
+          (checkedChange)="onToggleChange($event, 'Label Before')"
         ></aum-slide-toggle>
 
         <aum-slide-toggle
           [(checked)]="labelAfterChecked"
           label="Label After"
           labelPosition="after"
-          (toggled)="onToggleChange($event, 'Label After')"
+          (checkedChange)="onToggleChange($event, 'Label After')"
         ></aum-slide-toggle>
       </div>
     </section>
@@ -61,7 +61,7 @@
       <div class="demo-content">
         <aum-slide-toggle
           [(checked)]="noLabelChecked"
-          (toggled)="onToggleChange($event, 'No Label')"
+          (checkedChange)="onToggleChange($event, 'No Label')"
         ></aum-slide-toggle>
       </div>
     </section>

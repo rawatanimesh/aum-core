@@ -45,8 +45,8 @@ export class SlideToggleDemo implements OnDestroy {
   // Demo 3: Without labels
   noLabelChecked = false;
 
-  onToggleChange(event: any, toggleName: string): void {
-    console.log(`${toggleName} changed:`, event.checked);
+  onToggleChange(checked: boolean, toggleName: string): void {
+    console.log(`${toggleName} changed:`, checked);
   }
 
   ngOnDestroy(): void {
