@@ -260,6 +260,18 @@
       </div>
     </section>
     <mat-divider></mat-divider>
+    <!-- Carousel Demo -->
+    <section>
+      <div class="example-label fs-14">{{ 'CAROUSEL' | translate }}</div>
+      <div class="example-button-row">
+        <aum-button
+          [type]="'filled'"
+          [value]="'GO_TO_CAROUSEL_DEMO' | translate"
+          (clickButton)="goToCarouselsDemo()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
     <section>
       <div class="example-label fs-14">{{ 'ERROR_HANDLERS' | translate }}</div>
 

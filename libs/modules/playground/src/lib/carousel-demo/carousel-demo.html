@@ -1,0 +1,229 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="carousels-demo-container">
+      <h1 class="page-title">Carousel Component Demo</h1>
+      <p class="page-description">
+        Explore the features and configurations of the Carousel component.
+      </p>
+
+      <!-- Basic Carousel -->
+      <section class="demo-section">
+        <h2 class="section-title">1. Basic Carousel</h2>
+        <p class="section-description">
+          Default carousel with navigation arrows. Click any card to select it.
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems"
+          [itemHeight]="'150px'"
+          [itemWidth]="'300px'">
+        </aum-carousel>
+      </section>
+
+      <!-- Custom Event Handling -->
+      <section class="demo-section">
+        <h2 class="section-title">2. Custom Event Handling</h2>
+        <p class="section-description">
+          Carousel with custom event handlers for card clicks.
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems"
+          [itemHeight]="'150px'"
+          [itemWidth]="'300px'"
+          (cardClick)="onCardClick($event)">
+        </aum-carousel>
+
+        <div class="event-log">
+          <div class="log-header">
+            <span class="log-title">Event Log</span>
+            <aum-button
+              [type]="'outlined'"
+              [size]="'small'"
+              [value]="'Clear'"
+              (clickButton)="clearLog()">
+            </aum-button>
+          </div>
+          @if(eventLog.length === 0) {
+            <div class="log-empty">No events yet. Click a card to see events.</div>
+          } @else {
+            @for(log of eventLog; track $index) {
+              <div class="log-entry">{{ log }}</div>
+            }
+          }
+        </div>
+      </section>
+
+      <!-- Full Features -->
+      <section class="demo-section">
+        <h2 class="section-title">3. Carousel with Descriptions</h2>
+        <p class="section-description">
+          Carousel displaying items with titles and descriptions.
+        </p>
+        <aum-carousel
+          [carouselItems]="fullFeatureItems">
+        </aum-carousel>
+      </section>
+
+      <!-- Without Navigation Arrows -->
+      <section class="demo-section">
+        <h2 class="section-title">4. Without Navigation Arrows</h2>
+        <p class="section-description">
+          Carousel with <code>showArrows="false"</code> - users can only scroll manually.
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems"
+          [showArrows]="false">
+        </aum-carousel>
+        <div class="feature-note">
+          👆 Scroll with mouse, trackpad, or touch gestures
+        </div>
+      </section>
+
+      <!-- Infinite Scroll -->
+      <section class="demo-section">
+        <h2 class="section-title">5. Infinite Scroll (Default Speed)</h2>
+        <p class="section-description">
+          Carousel with <code>[infiniteScroll]="true"</code> - automatically scrolls continuously.
+          Default animation duration is 20 seconds.
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems"
+          [itemHeight]="'200px'"
+          [itemWidth]="'300px'"
+          [infiniteScroll]="true">
+        </aum-carousel>
+        <div class="feature-note">
+          👆 Hover to pause the animation (20s duration)
+        </div>
+      </section>
+
+      <section class="demo-section">
+        <h2 class="section-title">6. Infinite Scroll (Custom Speed)</h2>
+        <p class="section-description">
+          Control animation speed using <code>[animationDuration]="10"</code>.
+          This carousel scrolls twice as fast (10 seconds).
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems"
+          [itemHeight]="'200px'"
+          [itemWidth]="'300px'"
+          [infiniteScroll]="true"
+          [animationDuration]="10">
+        </aum-carousel>
+        <div class="feature-note">
+          👆 Faster animation (10s duration)
+        </div>
+      </section>
+
+      <!-- Scroll Mode Demos -->
+      <section class="demo-section">
+        <h2 class="section-title">7. Scroll by Item (Default)</h2>
+        <p class="section-description">
+          Navigation scrolls one item at a time. This is the default <code>scrollMode="item"</code>.
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems1"
+          [itemHeight]="'150px'"
+          [itemWidth]="'300px'"
+          [scrollMode]="'item'">
+        </aum-carousel>
+      </section>
+
+      <section class="demo-section">
+        <h2 class="section-title">8. Scroll by Viewport</h2>
+        <p class="section-description">
+          Navigation scrolls by visible width with <code>scrollMode="viewport"</code>.
+          Allows scrolling multiple items at once.
+        </p>
+        <aum-carousel
+          [carouselItems]="basicItems1"
+          [itemHeight]="'150px'"
+          [itemWidth]="'300px'"
+          [scrollMode]="'viewport'">
+        </aum-carousel>
+      </section>
+
+      <!-- API Reference -->
+      <section class="demo-section api-reference">
+        <h2 class="section-title">API Reference</h2>
+
+        <div class="api-table">
+          <h3 class="api-section-title">Inputs</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Input</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>carouselItems</code></td>
+                <td>CarouselItem[]</td>
+                <td>[]</td>
+                <td>Array of items to display</td>
+              </tr>
+              <tr>
+                <td><code>showArrows</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Show/hide navigation arrows</td>
+              </tr>
+              <tr>
+                <td><code>scrollMode</code></td>
+                <td>'item' | 'viewport'</td>
+                <td>'item'</td>
+                <td>Scroll behavior: 'item' scrolls one item at a time, 'viewport' scrolls by visible width</td>
+              </tr>
+              <tr>
+                <td><code>infiniteScroll</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Enable automatic infinite scrolling animation</td>
+              </tr>
+              <tr>
+                <td><code>animationDuration</code></td>
+                <td>number</td>
+                <td>20</td>
+                <td>Duration in seconds for infinite scroll animation (only applies when infiniteScroll is true)</td>
+              </tr>
+              <tr>
+                <td><code>itemHeight</code></td>
+                <td>string</td>
+                <td>'calc(25rem * var(--ui-scale))'</td>
+                <td>Height of carousel items</td>
+              </tr>
+              <tr>
+                <td><code>itemWidth</code></td>
+                <td>string</td>
+                <td>'calc(25rem * var(--ui-scale))'</td>
+                <td>Width of carousel items</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="api-table">
+          <h3 class="api-section-title">Outputs</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Output</th>
+                <th>Event Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>cardClick</code></td>
+                <td>CarouselCardClickEvent</td>
+                <td>Emitted when a card is clicked</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</aum-page>

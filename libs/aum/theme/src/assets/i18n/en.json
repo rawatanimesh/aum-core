@@ -187,5 +187,7 @@
   "BASIC_SLIDE_TOGGLES": "Basic Slide Toggles",
   "LABEL_POSITIONS": "Label Positions",
   "WITHOUT_LABELS": "Without Labels",
-  "BACK_TO_PLAYGROUND": "Back to Playground"
+  "BACK_TO_PLAYGROUND": "Back to Playground",
+  "CAROUSEL": "Carousel",
+  "GO_TO_CAROUSEL_DEMO": "Go to Carousel Demo"
 }

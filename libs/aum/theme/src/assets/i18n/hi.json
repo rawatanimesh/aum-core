@@ -190,5 +190,7 @@
   "BASIC_SLIDE_TOGGLES": "बेसिक स्लाइड टॉगल",
   "LABEL_POSITIONS": "लेबल स्थिति",
   "WITHOUT_LABELS": "बिना लेबल",
-  "BACK_TO_PLAYGROUND": "प्लेग्राउंड पर वापस जाएं"
+  "BACK_TO_PLAYGROUND": "प्लेग्राउंड पर वापस जाएं",
+  "CAROUSEL": "कैरोसेल",
+  "GO_TO_CAROUSEL_DEMO": "कैरोसेल डेमो पर जाएं"
 }

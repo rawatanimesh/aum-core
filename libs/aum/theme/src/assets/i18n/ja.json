@@ -189,5 +189,7 @@
   "BASIC_SLIDE_TOGGLES": "基本的なスライドトグル",
   "LABEL_POSITIONS": "ラベル位置",
   "WITHOUT_LABELS": "ラベルなし",
-  "BACK_TO_PLAYGROUND": "プレイグラウンドに戻る"
+  "BACK_TO_PLAYGROUND": "プレイグラウンドに戻る",
+  "CAROUSEL": "カルーセル",
+  "GO_TO_CAROUSEL_DEMO": "カルーセルデモへ移動"
 }

@@ -42,4 +42,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./slide-toggle-demo/slide-toggle-demo').then((m) => m.SlideToggleDemo),
   },
+
+  {
+    path: 'carousels',
+    loadComponent: () =>
+      import('./carousel-demo/carousel-demo').then((m) => m.CarouselDemo),
+  },
 ];

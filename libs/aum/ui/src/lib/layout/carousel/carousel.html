@@ -1,0 +1,71 @@
+<div class="aum-carousel-container">
+    <div class="aum-carousel-wrapper">
+        @if(showArrows && hasOverflow){
+        <div class="aum-carousel-button left" [class.disabled]="!canScrollLeft">
+            <aum-button [icon]="'chevron_left'" [type]="'icon'"
+                        (clickButton)="scrollLeft()" [disabled]="!canScrollLeft"></aum-button>
+        </div>
+        }
+        <div class="aum-carousel-content-wrapper"
+             [ngClass]="infiniteScroll ? 'animate-scroll hover-pause' : ''"
+             [style.--animation-duration]="infiniteScroll ? getAnimationDuration() : null">
+            <div class="aum-carousel-scroll" #carouselContent [ngClass]="infiniteScroll ? 'infinite-scroll-content' : ''">
+                @for(item of carouselItems; track $index){
+                    <div class="aum-carousel-card"
+                         #carouselCard
+                         [style.height]="getImageHeight()"
+                         [style.width]="getImageWidth()"
+                         (click)="onCardClick($index)"
+                         (keyup.enter)="onCardClick($index)"
+                         (keyup.space)="onCardClick($index)"
+                         tabindex="0"
+                         role="button">
+                        <img [src]="item.imgUrl" [alt]="item.title || 'Carousel image'" />
+                        @if(item.title) {
+                            <div class="aum-carousel-card-title"
+                                [class.has-description]="item.description"
+                                 >{{ item.title }}</div>
+                        }
+                        @if(item.description){
+                            <div class="aum-carousel-card-description"
+                                 [matTooltip]="item.description"
+                                 >{{item.description}}</div>
+                        }
+                    </div>
+                }
+                @if(infiniteScroll) {
+                    @for(item of carouselItems; track $index){
+                        <div class="aum-carousel-card"
+                             #carouselCard
+                             [style.height]="getImageHeight()"
+                             [style.width]="getImageWidth()"
+                             (click)="onCardClick($index)"
+                             (keyup.enter)="onCardClick($index)"
+                             (keyup.space)="onCardClick($index)"
+                             tabindex="0"
+                             role="button"
+                             aria-hidden="true">
+                            <img [src]="item.imgUrl" [alt]="item.title || 'Carousel image'" />
+                            @if(item.title) {
+                                <div class="aum-carousel-card-title"
+                                     [class.has-description]="item.description"
+                                     >{{ item.title }}</div>
+                            }
+                            @if(item.description){
+                            <div class="aum-carousel-card-description"
+                                 [matTooltip]="item.description"
+                                 >{{item.description}}</div>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        @if(showArrows && hasOverflow){
+        <div class="aum-carousel-button right" [class.disabled]="!canScrollRight">
+            <aum-button [icon]="'chevron_right'" [type]="'icon'"
+                        (clickButton)="scrollRight()" [disabled]="!canScrollRight"></aum-button>
+        </div>
+        }
+    </div>
+</div>
