@@ -1,0 +1,13 @@
+@use 'functions' as *;
+
+.aum-checkbox {
+  .mat-internal-form-field {
+    letter-spacing: normal !important;
+    margin-right: rem(8);
+  }
+  .mat-internal-form-field > label {
+    padding-left: 0 !important;
+    font-weight: 400;
+    font-size: rem(13);
+  }
+}

@@ -1,0 +1,93 @@
+@use 'functions' as *;
+
+.aum-date-picker-root {
+  margin: rem(18) 0;
+  position: relative;
+  width: 100%;
+
+  //update input styling
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-text-field__input {
+    font-size: rem(14) !important;
+    font-weight: 400 !important;
+  }
+
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    --mat-mdc-form-field-label-transform: translateY(
+        calc(calc(22px + var(--mat-form-field-container-height, 56px) / 2) * -1)
+      )
+      scale(var(--mat-mdc-form-field-floating-label-scale, 0.75)) !important;
+    font-size: rem(16);
+    font-weight: 400;
+  }
+
+  .mdc-text-field--outlined:not(.mdc-text-field--disabled)
+    .mat-mdc-notch-piece {
+    border-top: 1px solid var(--mat-sys-outline);
+  }
+  .mdc-notched-outline__leading {
+    border-right: none !important;
+  }
+  .mdc-notched-outline__notch {
+    border-right: none !important;
+  }
+  .mdc-notched-outline__trailing {
+    border-left: none !important;
+  }
+  .mdc-text-field--outlined.mdc-text-field--disabled
+    .mdc-notched-outline__notch {
+    border-top: 1px solid
+      var(
+        --mat-form-field-outlined-disabled-outline-color,
+        color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent)
+      );
+  }
+  .mdc-text-field--outlined:not(
+      .mdc-text-field--disabled
+    ).mdc-text-field--focused
+    .mdc-notched-outline
+    .mat-mdc-notch-piece {
+    border-width: var(--mat-form-field-outlined-focus-outline-width, 1px);
+  }
+  .mdc-floating-label--required:not(
+      .mdc-floating-label--hide-required-marker
+    )::after {
+    font-weight: 900;
+    margin-left: rem(4) !important;
+  }
+  .mat-mdc-form-field-infix {
+    letter-spacing: normal !important;
+    display: flex;
+    height: 24px !important;
+  }
+
+  //mat hint styling
+  .mat-mdc-form-field-subscript-wrapper {
+    font-size: rem(12) !important;
+    font-weight: 400 !important;
+  }
+}
+
+//same styling as aum-input-box to change height
+.aum-date-picker-box {
+  .mat-mdc-text-field-wrapper {
+    height: rem(48) !important;
+  }
+  .mat-mdc-form-field-infix {
+    min-height: rem(48) !important;
+    height: rem(48) !important;
+    display: flex;
+    align-items: center;
+  }
+}
+// styling for datepicker popup in light mode
+.light-mode .mat-datepicker-content {
+  background-color: var(--mat-sys-surface) !important;
+  box-shadow: var(--mat-sys-level3) !important;
+}
+// to adjust width of calendar popup based on display mode
+.mat-datepicker-content .mat-calendar {
+  width: rem(300) !important;
+  height: rem(370) !important;
+}

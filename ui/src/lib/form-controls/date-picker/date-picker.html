@@ -1,0 +1,83 @@
+@switch (mode) { @case ('daterange') {
+<!-- Date Range Picker: Mat Form Field Container -->
+<mat-form-field
+  class="aum-date-picker-root aum-date-picker-box"
+  appearance="outline"
+  floatLabel="always"
+>
+  <mat-label>{{ label }}</mat-label>
+
+  <!-- Date Range Input: Binds to the formGroupForDateRange for start and end dates -->
+  <mat-date-range-input
+    [formGroup]="formGroupForDateRange!"
+    [rangePicker]="picker"
+    [min]="minDate"
+    [max]="maxDate"
+    [disabled]="disabled"
+  >
+    <input
+      matStartDate
+      formControlName="start"
+      [readonly]="readonly"
+      placeholder="Start date"
+    />
+    <input
+      matEndDate
+      formControlName="end"
+      [readonly]="readonly"
+      placeholder="End date"
+    />
+  </mat-date-range-input>
+
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-date-range-picker
+    #picker
+    (closed)="onRangePickerClosed()"
+  ></mat-date-range-picker>
+
+  <!-- Clear Button: Appears if a date range is selected -->
+  @if (formGroupForDateRange && (formGroupForDateRange.controls['start'].value
+  || formGroupForDateRange.controls['end'].value)) {
+  <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
+    <mat-icon>close</mat-icon>
+  </button>
+  } @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
+</mat-form-field>
+} @case ('date') {
+<!-- Single Date Picker: Mat Form Field Container -->
+<mat-form-field
+  class="aum-date-picker-root aum-date-picker-box"
+  appearance="outline"
+  floatLabel="always"
+>
+  <mat-label>{{ label }}</mat-label>
+
+  <!-- Single Date Input: Binds to the formControlForSingleDate -->
+  <input
+    matInput
+    placeholder="Select date"
+    [matDatepicker]="picker"
+    [formControl]="formControlForSingleDate!"
+    [min]="minDate"
+    [max]="maxDate"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [errorStateMatcher]="matcher"
+    (dateChange)="onSingleInputDateChange($event)"
+  />
+
+  <mat-datepicker-toggle matIconSuffix [for]="picker" />
+  <mat-datepicker #picker />
+
+  <!-- Clear Button: Appears if a single date is selected -->
+  @if (formControlForSingleDate && formControlForSingleDate.value) {
+  <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
+    <mat-icon>close</mat-icon>
+  </button>
+  } @if (showError) {
+  <mat-error>{{ getErrorMessage() }}</mat-error>
+  }
+</mat-form-field>
+} }

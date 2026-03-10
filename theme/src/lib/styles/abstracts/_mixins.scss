@@ -1,0 +1,9 @@
+/*
+  Global mixins for application goes here
+ */
+
+@mixin flex-content($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}

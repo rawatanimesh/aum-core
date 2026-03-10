@@ -1,0 +1,49 @@
+@use 'functions' as *;
+
+.aum-side-nav {
+  width: 100%;
+  padding: rem(12) 0;
+  &-item {
+    padding: rem(8) rem(16);
+    border-left: rem(3) solid transparent;
+    cursor: pointer;
+    font-size: rem(14);
+    font-weight: 400;
+    &.selected {
+      border-left: rem(3) solid var(--mat-sys-primary);
+      background-color: #e9edf2;
+      color: var(--mat-sys-primary);
+      // font-weight: 600;
+    }
+
+    &:hover {
+      background-color: var(--mat-sys-primary-container);
+    }
+    &-link {
+      &-icon {
+        margin-right: rem(8);
+      }
+      &-label {
+      }
+      &-expand-icon {
+        margin-left: auto;
+      }
+    }
+  }
+  .child {
+    padding-left: rem(40);
+
+    &.selected {
+      border-left: rem(3) solid var(--mat-sys-primary);
+    }
+  }
+}
+.dark-mode {
+  .aum-side-nav {
+    &-item {
+      &.selected {
+        background-color: color-mix(in srgb, #e9edf2 30%, black) !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<div
+  class="br-16 aum-card"
+  [ngClass]="{
+    'padding-16': padding,
+    'aum-card-shadow': boxShadow
+  }"
+  [ngStyle]="{ height: height, width: width }"
+>
+  <ng-content select="[card-header]"></ng-content>
+
+  <ng-content select="[card-body]"></ng-content>
+</div>

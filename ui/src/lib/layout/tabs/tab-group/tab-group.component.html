@@ -1,0 +1,26 @@
+<mat-tab-group
+  [selectedIndex]="selectedIndex"
+  [animationDuration]="animationDuration"
+  [headerPosition]="headerPosition"
+  [preserveContent]="preserveContent"
+  (selectedTabChange)="onSelectedTabChange($event)"
+  class="aum-tab-group">
+
+  @for (tab of tabs; track tab) {
+    <mat-tab
+      [label]="tab.label"
+      [disabled]="tab.disabled"
+      [attr.aria-label]="tab.label">
+
+      <!-- Custom label template (if provided) -->
+      @if (tab.customLabel) {
+        <ng-template mat-tab-label>
+          <ng-container *ngTemplateOutlet="tab.customLabel"></ng-container>
+        </ng-template>
+      }
+
+      <!-- Tab content -->
+      <ng-container *ngTemplateOutlet="tab.content"></ng-container>
+    </mat-tab>
+  }
+</mat-tab-group>

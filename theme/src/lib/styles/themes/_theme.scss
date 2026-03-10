@@ -1,0 +1,29 @@
+@use '@angular/material' as mat;
+@use './theme-purple/theme-purple.scss' as aum-theme;
+// @use './theme-pink/theme-pink3.scss' as aum-theme;
+// @import '../themes/theme-pink.css';
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: aum-theme.$primary-palette,
+        tertiary: aum-theme.$tertiary-palette,
+      ),
+      typography: 'Noto Sans',
+      density: 0,
+    )
+  );
+}
+
+.dark-mode {
+  @include mat.theme(
+    (
+      color: (
+        primary: aum-theme.$primary-palette,
+        tertiary: aum-theme.$tertiary-palette,
+        theme-type: dark,
+      ),
+    )
+  );
+}

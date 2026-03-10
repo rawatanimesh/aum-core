@@ -1,0 +1,26 @@
+@use 'functions' as *;
+
+.aum-toolbar {
+  width: 100%;
+  &-left {
+    width: 30%;
+    // background-color: aquamarine;
+    &-brandLogo {
+      height: rem(45);
+    }
+    &-appIcon {
+      height: rem(22);
+    }
+    &-appName {
+      color: var(--mat-toolbar-container-text-color);
+    }
+  }
+  &-center {
+    width: 40%;
+    // background-color: lightcoral;
+  }
+  &-right {
+    width: 30%;
+    // background-color: lightblue;
+  }
+}

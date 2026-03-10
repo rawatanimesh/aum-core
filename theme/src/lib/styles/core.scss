@@ -1,0 +1,53 @@
+@use 'functions' as *;
+@import './themes/theme';
+@import './global/font.scss';
+@import './global/scroll.scss';
+@import './abstracts/utilities.scss';
+
+/* Global scale variables */
+:root {
+  --ui-scale: 1; // Default scale
+}
+
+body.scale-compact {
+  --ui-scale: 0.85;
+}
+
+body.scale-default {
+  --ui-scale: 1;
+}
+
+body.scale-large {
+  --ui-scale: 1.15;
+}
+
+/* Reset browser default body margin */
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  //:focus-visible ensures it only shows when navigating via keyboard (like pressing Tab), not on mouse click
+  &:focus-visible {
+    outline: rem(1) solid var(--mat-sys-primary);
+    outline-offset: rem(1);
+    border-radius: rem(4);
+  }
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.unstyled-button {
+  all: unset; // removes default button styles
+  cursor: pointer;
+}

@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@use 'functions' as *;
+
+:root {
+  @include mat.dialog-overrides(
+    (
+      container-max-width: rem(430),
+      container-min-width: rem(430),
+      content-padding: rem(24) rem(24) rem(24) rem(0),
+      actions-padding: rem(24) rem(24) rem(50) rem(24),
+    )
+  );
+}
+
+.aum-confirmation-dialog {
+  &-content {
+    &-image {
+      width: rem(200);
+      height: rem(200);
+    }
+    &-message {
+      // font-size: rem(16);
+    }
+  }
+}
+.mdc-dialog--open .mat-mdc-dialog-surface {
+  border-radius: rem(8);
+}
