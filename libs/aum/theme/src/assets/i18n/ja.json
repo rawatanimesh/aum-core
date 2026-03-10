@@ -191,5 +191,10 @@
   "WITHOUT_LABELS": "ラベルなし",
   "BACK_TO_PLAYGROUND": "プレイグラウンドに戻る",
   "CAROUSEL": "カルーセル",
-  "GO_TO_CAROUSEL_DEMO": "カルーセルデモへ移動"
+  "GO_TO_CAROUSEL_DEMO": "カルーセルデモへ移動",
+  "CONTACT_US": "お問い合わせ",
+  "HELP_TITLE": "ヘルプとドキュメント",
+  "HELP_MESSAGE": "AUM - Angular UI Modsへようこそ！これは、最新のAngularアプリケーション向けに構築された包括的なコンポーネントライブラリです。プレイグラウンドを閲覧して、利用可能なすべてのコンポーネントを探索するか、詳細な使用ガイドについてはドキュメントをご確認ください。サポートが必要な場合は、お問い合わせオプションをご利用ください。",
+  "CONTACT_US_TITLE": "お問い合わせ",
+  "CONTACT_US_MESSAGE": "ヘルプが必要ですか、またはご質問がありますか？お気軽にお問い合わせください！サポートチームまでご連絡ください：support@aum-ui.com。通常24時間以内に返信いたします。"
 }

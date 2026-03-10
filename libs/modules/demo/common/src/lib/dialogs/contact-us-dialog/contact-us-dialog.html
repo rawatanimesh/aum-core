@@ -1,0 +1,19 @@
+<aum-generic-dialog [showCloseButton]="true">
+  <div dialog-header>
+    <span>{{ 'CONTACT_US_TITLE' | translate }}</span>
+  </div>
+
+  <div dialog-body>
+    <p class="dialog-message">{{ 'CONTACT_US_MESSAGE' | translate }}</p>
+  </div>
+
+  <div dialog-footer>
+    <div class="dialog-actions">
+      <aum-button
+        [type]="'filled'"
+        [value]="'CLOSE' | translate"
+        (clickButton)="closeDialog()"
+      ></aum-button>
+    </div>
+  </div>
+</aum-generic-dialog>

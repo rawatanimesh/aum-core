@@ -24,7 +24,7 @@ import { ButtonComponent } from '@aum/ui/buttons';
 import { SnackbarService } from '@aum/ui/utilities';
 import { AuthService } from '@aum/utils/services';
 import { AppEventBusService, AppEventType } from '../../services/app-event-bus.service';
-import { ToolbarContentService, ToolbarAction } from '../../services/toolbar-content.service';
+import { ToolbarContentService, ToolbarAction, ToolbarCustomTemplate } from '../../services/toolbar-content.service';
 
 @Component({
   selector: 'aum-toolbar',
@@ -114,6 +114,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   // Dynamic toolbar actions
   globalActions: ToolbarAction[] = [];
   private globalActionsSubscription?: Subscription;
+
+  // Custom toolbar templates
+  customTemplates: ToolbarCustomTemplate[] = [];
+  private customTemplatesSubscription?: Subscription;
 
   private buildMenus(): void {
     const config = this.toolbarMenusConfig();
@@ -286,6 +290,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         this.globalActions = actions;
         this.cdr.markForCheck();
       });
+
+    // Subscribe to custom toolbar templates
+    this.customTemplatesSubscription = this.toolbarContentService
+      .getCustomTemplates()
+      .subscribe((templates) => {
+        this.customTemplates = templates;
+        this.cdr.markForCheck();
+      });
   }
   onMenuSelect(item: MenuItem) {
     // UI Scale
@@ -381,5 +393,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.globalActionsSubscription?.unsubscribe();
+    this.customTemplatesSubscription?.unsubscribe();
   }
 }

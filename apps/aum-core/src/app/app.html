@@ -1,1 +1,17 @@
+<!-- Custom toolbar menu template -->
+<ng-template #moreOptionsMenu>
+  <aum-button
+    [type]="'icon'"
+    [icon]="'more_vert'"
+    [tooltip]="'MORE_OPTIONS' | translate"
+    [matMenuTriggerFor]="moreMenu.childMenu"
+  ></aum-button>
+
+  <aum-menu-list
+    #moreMenu="aumMenu"
+    [list]="moreOptionsMenuItems"
+    (itemSelected)="onMoreOptionsSelect($event)"
+  ></aum-menu-list>
+</ng-template>
+
 <router-outlet></router-outlet>

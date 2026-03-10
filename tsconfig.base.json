@@ -17,6 +17,7 @@
     "paths": {
       "@aum-modules/dashboard": ["libs/modules/dashboard/src/index.ts"],
       "@aum-modules/playground": ["libs/modules/playground/src/index.ts"],
+      "@demo/common": ["libs/modules/demo/common/src/index.ts"],
       "@aum/templates/aum-template": ["libs/aum/templates/aum-template/src/index.ts"],
       "@aum/general-templates": ["libs/aum/templates/general/src/index.ts"],
       "@aum/theme": ["libs/aum/theme/src/index.ts"],

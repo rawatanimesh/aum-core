@@ -7,6 +7,7 @@ import { filter, map } from 'rxjs/operators';
  */
 export enum AppEventType {
   LOGOUT = 'LOGOUT',
+  CUSTOM_MENU_ACTION = 'CUSTOM_MENU_ACTION',
   // Add more event types as needed
 }
 
@@ -16,6 +17,15 @@ export enum AppEventType {
 export interface AppEvent<T = any> {
   type: AppEventType;
   payload?: T;
+}
+
+/**
+ * Custom menu action payload interface
+ */
+export interface CustomMenuActionPayload {
+  menuId: string;
+  actionId: string;
+  data?: any;
 }
 
 /**

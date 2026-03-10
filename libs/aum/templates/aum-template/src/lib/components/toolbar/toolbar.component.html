@@ -49,10 +49,15 @@
           ></aum-button>
         }
 
+        <!-- Custom templates -->
+        @for (template of customTemplates; track template.id) {
+          <ng-container *ngTemplateOutlet="template.template"></ng-container>
+        }
+
         @if (shouldShowPreferencesMenu()) {
           <aum-button
             [type]="'icon'"
-            [icon]="'more_vert'"
+            [icon]="'tune'"
             [tooltip]="'PREFERENCES' | translate"
             [matMenuTriggerFor]="optionsMenu.childMenu"
             [disabled]="isPreferencesMenuDisabled()"

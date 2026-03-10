@@ -189,5 +189,10 @@
   "WITHOUT_LABELS": "Without Labels",
   "BACK_TO_PLAYGROUND": "Back to Playground",
   "CAROUSEL": "Carousel",
-  "GO_TO_CAROUSEL_DEMO": "Go to Carousel Demo"
+  "GO_TO_CAROUSEL_DEMO": "Go to Carousel Demo",
+  "CONTACT_US": "Contact Us",
+  "HELP_TITLE": "Help & Documentation",
+  "HELP_MESSAGE": "Welcome to AUM - Angular UI Mods! This is a comprehensive component library built for modern Angular applications. Browse through our playground to explore all available components, or check the documentation for detailed usage guides. If you need assistance, please use the Contact Us option.",
+  "CONTACT_US_TITLE": "Contact Us",
+  "CONTACT_US_MESSAGE": "Need help or have questions? We're here to assist you! Feel free to reach out to our support team at: support@aum-ui.com. We typically respond within 24 hours."
 }
