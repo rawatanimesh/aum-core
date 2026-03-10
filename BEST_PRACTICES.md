@@ -21,14 +21,14 @@ This document outlines the best practices, coding standards, and conventions for
 
 ```
 libs/
-├── aum/                    # Core AUM libraries (prefix: aum)
+├── aum-core/              # Core AUM framework libraries (prefix: aum)
 │   ├── ui/                # Reusable UI components
 │   ├── theme/             # Material themes, styles, assets
 │   ├── utils/             # Services, interfaces, models
 │   └── templates/         # Template components
-└── modules/               # App modules (prefix: aum-modules)
-   ├── dashboard/         # Dashboard module
-   └── playground/        # Component playground
+└── modules/demo/          # Demo modules (prefix: demo)
+    ├── dashboard/         # Dashboard module
+    └── playground/        # Component playground & demos
 ```
 
 ### ✅ Do's
@@ -588,11 +588,11 @@ export class ButtonComponent {
 
 ```bash
 # ✅ Production builds
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # ✅ Analyze bundle size
-nx build aum-core --stats-json
-npx webpack-bundle-analyzer dist/apps/aum-core/stats.json
+nx build demo-app --stats-json
+npx webpack-bundle-analyzer dist/apps/demo-app/stats.json
 ```
 
 ### Environment Configuration

@@ -80,14 +80,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ```
 aum-core/
-├── apps/aum-core/          # Main application
+├── apps/demo-app/          # Main demo application
 ├── libs/
-│   ├── aum/                # Core AUM libraries
+│   ├── aum-core/           # Core AUM framework libraries
 │   │   ├── ui/             # UI component library
 │   │   ├── theme/          # Theming and styling
 │   │   ├── utils/          # Utilities and services
 │   │   └── templates/      # Template components
-│   └── modules/            # Application modules
+│   └── modules/demo/       # Demo modules
 │       ├── dashboard/      # Dashboard feature
 │       └── playground/     # Component showcase
 ```

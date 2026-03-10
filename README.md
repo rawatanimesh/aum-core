@@ -37,7 +37,7 @@ npm install
 # Start development server
 npm run serve
 # or using NX
-nx serve aum-core
+nx serve demo-app
 ```
 
 ## 🏃‍♂️ Development Commands
@@ -46,32 +46,32 @@ nx serve aum-core
 
 ```bash
 # Development server
-nx serve aum-core
+nx serve demo-app
 # or
-nx run aum-core:serve:development
+nx run demo-app:serve:development
 ```
 
 ### Build
 
 ```bash
 # Production build
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # Development build
-nx build aum-core --configuration=development
+nx build demo-app --configuration=development
 ```
 
 ### Testing
 
 ```bash
 # Run tests
-nx test aum-core
+nx test demo-app
 
 # Run tests with coverage
-nx test aum-core --coverage
+nx test demo-app --coverage
 
 # Run linting
-nx lint aum-core
+nx lint demo-app
 ```
 
 ## 📖 Component Library
@@ -169,16 +169,16 @@ npx nx g @angular/material:theme-color --project=aum-core
 
 ```
 aum-core/
-├── apps/aum-core/              # Main application (lightweight)
+├── apps/demo-app/              # Main demo application (lightweight)
 ├── libs/
-│   ├── aum/                    # Core AUM libraries (prefix: aum)
+│   ├── aum-core/               # Core AUM framework libraries (prefix: aum)
 │   │   ├── ui/                 # Reusable UI components
 │   │   ├── theme/              # Styles, themes, assets
 │   │   ├── utils/              # Services, interfaces, models
 │   │   └── templates/          # Template components
-│   └── modules/                # App modules (prefix: aum-modules)
+│   └── modules/demo/           # Demo modules (prefix: demo)
 │       ├── dashboard/          # Dashboard feature module
-│       └── playground/         # Component playground
+│       └── playground/         # Component playground & demos
 └── docs/                       # Documentation files
 ```
 
@@ -225,7 +225,7 @@ export class MyComponent {
 
 ### Translation Files
 
-Translation files are located in `libs/aum/theme/src/assets/i18n/`:
+Translation files are located in `libs/aum-core/theme/src/assets/i18n/`:
 - `en.json` - English translations
 - `ja.json` - Japanese translations
 - `hi.json` - Hindi translations
@@ -269,6 +269,6 @@ MIT License - see LICENSE file for details.
 
 ---
 
-**Quick Start:** `npm install && nx serve aum-core`
+**Quick Start:** `npm install && nx serve demo-app`
 
 For detailed information, see our [documentation](#-documentation) above.

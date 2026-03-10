@@ -117,7 +117,7 @@ import {
 } from '@aum/templates/aum-template';
 import { ButtonComponent } from '@aum/ui/buttons';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
-import { HelpDialog, ContactUsDialog } from '@demo/common';
+import { HelpDialog, ContactUsDialog } from '@demo/playground';
 
 @Component({
   imports: [RouterModule, MatMenuModule, ButtonComponent, MenuList, TranslateModule],
@@ -504,7 +504,7 @@ libs/aum/templates/aum-template/
         ├── toolbar.component.ts      (Subscribes to templates)
         └── toolbar.component.html    (Renders templates with @for loop)
 
-apps/aum-core/
+apps/demo-app/
 └── app/
     ├── app.ts                        (Registers templates via ViewChild)
     └── app.html                      (Defines ng-template)

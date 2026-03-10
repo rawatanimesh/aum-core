@@ -24,7 +24,7 @@ This document outlines the deployment process, environment configuration, and CI
 ```bash
 # Local development
 npm install
-nx serve aum-core
+nx serve demo-app
 
 # Environment variables
 NODE_ENV=development
@@ -36,7 +36,7 @@ ENABLE_DEBUG=true
 
 ```bash
 # Staging build
-nx build aum-core --configuration=staging
+nx build demo-app --configuration=staging
 
 # Environment variables
 NODE_ENV=staging
@@ -49,7 +49,7 @@ ENABLE_ANALYTICS=false
 
 ```bash
 # Production build
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # Environment variables
 NODE_ENV=production
@@ -104,26 +104,26 @@ export const environment = {
 
 ```bash
 # Standard development build
-nx build aum-core
+nx build demo-app
 
 # Development build with file watching
-nx build aum-core --watch
+nx build demo-app --watch
 
 # Development build with source maps
-nx build aum-core --source-map
+nx build demo-app --source-map
 ```
 
 ### Production Build
 
 ```bash
 # Optimized production build
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # Production build with bundle analysis
-nx build aum-core --configuration=production --stats-json
+nx build demo-app --configuration=production --stats-json
 
 # Analyze bundle size
-npx webpack-bundle-analyzer dist/apps/aum-core/stats.json
+npx webpack-bundle-analyzer dist/apps/demo-app/stats.json
 ```
 
 ### Build Optimization
@@ -186,10 +186,10 @@ npx webpack-bundle-analyzer dist/apps/aum-core/stats.json
 
 ```bash
 # Build command
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # Publish directory
-dist/apps/aum-core
+dist/apps/demo-app
 
 # Redirects (_redirects file)
 /*    /index.html   200
@@ -205,7 +205,7 @@ dist/apps/aum-core
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "buildCommand": "nx build aum-core --configuration=production"
+        "buildCommand": "nx build demo-app --configuration=production"
       }
     }
   ],
@@ -244,13 +244,13 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: nx build aum-core --configuration=production --base-href=/aum-core/
+        run: nx build demo-app --configuration=production --base-href=/aum-core/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/apps/aum-core
+          publish_dir: ./dist/apps/demo-app
 ```
 
 ### 2. Container Deployment
@@ -266,13 +266,13 @@ COPY package*.json ./
 RUN npm ci --only=production
 
 COPY . .
-RUN nx build aum-core --configuration=production
+RUN nx build demo-app --configuration=production
 
 # Production stage
 FROM nginx:alpine
 
 # Copy built application
-COPY --from=builder /app/dist/apps/aum-core /usr/share/nginx/html
+COPY --from=builder /app/dist/apps/demo-app /usr/share/nginx/html
 
 # Copy nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -344,13 +344,13 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: nx lint aum-core
+        run: nx lint demo-app
 
       - name: Test
-        run: nx test aum-core --coverage --watch=false
+        run: nx test demo-app --coverage --watch=false
 
       - name: Build
-        run: nx build aum-core --configuration=production
+        run: nx build demo-app --configuration=production
 
       - name: Upload coverage
         uses: codecov/codecov-action@v3
@@ -373,7 +373,7 @@ jobs:
         run: npm ci
 
       - name: Build for staging
-        run: nx build aum-core --configuration=staging
+        run: nx build demo-app --configuration=staging
 
       - name: Deploy to staging
         run: |
@@ -398,7 +398,7 @@ jobs:
         run: npm ci
 
       - name: Build for production
-        run: nx build aum-core --configuration=production
+        run: nx build demo-app --configuration=production
 
       - name: Deploy to production
         run: |

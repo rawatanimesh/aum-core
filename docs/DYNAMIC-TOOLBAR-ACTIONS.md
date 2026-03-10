@@ -9,7 +9,7 @@ To see this feature in action, check out the **Playground** page in the demo app
 ### Global Actions (Always Visible)
 - **Help** button (icon: `help_outline`) - Available on all pages
 - **Feedback** button (icon: `feedback`) - Available on all pages
-- These are registered in [`global-app-init.service.ts`](../../../../apps/aum-core/src/app/services/global-app-init.service.ts)
+- These are registered in [`global-app-init.service.ts`](../../../../apps/demo-app/src/app/services/global-app-init.service.ts)
 
 ### Page-Specific Actions (Only on Playground)
 - **Create** button (filled style) - Only visible when on `/playground` route
@@ -333,5 +333,5 @@ export class MyComponent {
 ## Examples from AUM Core
 
 For more examples, refer to the AUM Core implementation:
-- `libs/modules/playground/playground.component.ts` - Demonstration of page-specific actions
-- `libs/aum/templates/app-template/src/lib/components/toolbar/toolbar.component.ts` - Toolbar integration
+- `libs/modules/demo/playground/src/lib/playground/playground.ts` - Demonstration of page-specific actions
+- `libs/aum-core/templates/aum-template/src/lib/components/toolbar/toolbar.component.ts` - Toolbar integration

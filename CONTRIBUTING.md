@@ -55,7 +55,7 @@ npm install
 5. **Start development server**:
 
 ```bash
-nx serve aum-core
+nx serve demo-app
 ```
 
 ---
@@ -189,7 +189,7 @@ export class MyComponent {
 3. **Add to public API**:
 
 ```typescript
-// libs/aum/ui/src/index.ts
+// libs/aum-core/ui/src/index.ts
 export * from './lib/my-component/my-component';
 ```
 
@@ -361,13 +361,13 @@ Run the following checks:
 
 ```bash
 # Lint code
-nx lint aum-core
+nx lint demo-app
 
 # Run tests
-nx test aum-core
+nx test demo-app
 
 # Build project
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # Check formatting
 npm run prettier:check
