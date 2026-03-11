@@ -5,10 +5,8 @@ A modern Angular component library built with NX monorepo architecture, featurin
 ## 📚 Documentation
 
 - **[📋 Best Practices](./BEST_PRACTICES.md)** - Coding standards, conventions, and development guidelines
-- **[🏗️ Architecture](./ARCHITECTURE.md)** - Technical architecture, design decisions, and project structure
+- **[🏗️ Architecture](./docs/ARCHITECTURE.MD)** - Technical architecture, design decisions, and project structure
 - **[🤝 Contributing](./CONTRIBUTING.md)** - Developer contribution guide and workflow
-- **[🚀 Deployment](./DEPLOYMENT.md)** - Production deployment and CI/CD guide
-- **[📝 Changelog](./CHANGELOG.md)** - Version history and release notes
 - **[🚀 Getting Started](#-getting-started)** - Quick start guide and development setup
 - **[📖 Component Guide](#-component-library)** - Available components and usage examples
 - **[🎨 Theming](#-theming)** - Theme customization and usage
@@ -258,7 +256,7 @@ Translation files are located in `libs/aum-core/theme/src/assets/i18n/`:
 ## 🤝 Contributing
 
 1. Read the [Best Practices Guide](./BEST_PRACTICES.md)
-2. Understand the [Architecture](./ARCHITECTURE.md)
+2. Understand the [Architecture](./docs/ARCHITECTURE.MD)
 3. Follow the development workflow
 4. Test your changes in both light and dark modes
 5. Submit a pull request with clear description
