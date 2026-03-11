@@ -3,7 +3,7 @@
     <img [src]="icon" [alt]="data.type" />
 
     <span class="aum-snackbar-container-message fw-600"
-      >{{ data.message }}</span
+      >{{ data.message | translate }}</span
     >
   </div>
 
@@ -11,7 +11,7 @@
     @if (data.action) {
 
     <button (click)="close()" class="unstyled-button dashboard-banner-lastUsed">
-      {{data.action.label}}
+      {{data.action.label | translate}}
     </button>
 
     }
