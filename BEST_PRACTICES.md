@@ -23,7 +23,8 @@ This document outlines the best practices, coding standards, and conventions for
 libs/
 ├── aum-core/              # Core AUM framework libraries (prefix: aum)
 │   ├── ui/                # Reusable UI components
-│   ├── theme/             # Material themes, styles, assets
+│   ├── common/            # Shared assets (SVGs, i18n) and common components
+│   ├── theme/             # Material themes, styles, and fonts
 │   ├── utils/             # Services, interfaces, models
 │   └── templates/         # Template components
 └── modules/demo/          # Demo modules (prefix: demo)
@@ -36,7 +37,7 @@ libs/
 - **Keep apps folder light** - Business logic goes in `libs/modules`
 - **Use proper prefixes** - `aum` for core libraries, `aum-modules` for app modules
 - **Modular architecture** - Each feature as a separate NX library
-- **Asset organization** - Put shared assets in `libs/aum/theme/src/assets`
+- **Asset organization** - Put shared assets (SVGs, i18n) in `libs/aum-core/common/src/assets`; app-specific assets (logo, images) in `apps/<app>/src/assets`
 
 ### ❌ Don'ts
 

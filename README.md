@@ -171,7 +171,8 @@ aum-core/
 ├── libs/
 │   ├── aum-core/               # Core AUM framework libraries (prefix: aum)
 │   │   ├── ui/                 # Reusable UI components
-│   │   ├── theme/              # Styles, themes, assets
+│   │   ├── common/             # Shared assets (SVGs, i18n) and common components (login, page-not-found)
+│   │   ├── theme/              # Styles, themes, and fonts
 │   │   ├── utils/              # Services, interfaces, models
 │   │   └── templates/          # Template components
 │   └── modules/demo/           # Demo modules (prefix: demo)
@@ -223,7 +224,7 @@ export class MyComponent {
 
 ### Translation Files
 
-Translation files are located in `libs/aum-core/theme/src/assets/i18n/`:
+Translation files are located in `libs/aum-core/common/src/assets/i18n/`:
 - `en.json` - English translations
 - `ja.json` - Japanese translations
 - `hi.json` - Hindi translations
