@@ -8,6 +8,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
@@ -16,7 +18,7 @@ import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService, Spinner } from '@aum/ui/utilities';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { LanguageTranslationService } from '@aum/utils/services';
-import { ToolbarContentService } from '@aum/templates/aum-template';
+import { ToolbarContentService, AppEventBusService, AppEventType, ThemeChangedPayload, UiScaleChangedPayload, LanguageChangedPayload } from '@aum/templates/aum-template';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 
@@ -46,6 +48,8 @@ export class Playground implements OnInit, OnDestroy {
   readonly snackbar = inject(SnackbarService);
   readonly languageService = inject(LanguageTranslationService);
   private toolbarContentService = inject(ToolbarContentService);
+  private eventBus = inject(AppEventBusService);
+  private destroy$ = new Subject<void>();
   route = inject(Router);
   pageInfo = {
     breadcrumbs: [
@@ -257,6 +261,39 @@ export class Playground implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Listen for theme change events
+    this.eventBus.on<ThemeChangedPayload>(AppEventType.THEME_CHANGED)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(payload => {
+        if (!payload) return;
+        console.log('🎨 Playground detected theme change:', {
+          from: payload.previousTheme,
+          to: payload.theme
+        });
+      });
+
+    // Listen for UI scale change events
+    this.eventBus.on<UiScaleChangedPayload>(AppEventType.UI_SCALE_CHANGED)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(payload => {
+        if (!payload) return;
+        console.log('📏 Playground detected UI scale change:', {
+          from: payload.previousScale,
+          to: payload.scale
+        });
+      });
+
+    // Listen for language change events
+    this.eventBus.on<LanguageChangedPayload>(AppEventType.LANGUAGE_CHANGED)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(payload => {
+        if (!payload) return;
+        console.log('🌐 Playground detected language change:', {
+          from: payload.previousLanguage,
+          to: payload.language
+        });
+      });
+
     console.log('🎮 Playground: Registering page-specific toolbar actions');
 
     // Register page-specific Create action (only visible on playground page)
@@ -285,6 +322,8 @@ export class Playground implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
     console.log('🎮 Playground: Cleaning up page-specific toolbar actions');
     // Unregister toolbar actions when leaving the page
     this.toolbarContentService.unregisterGlobalAction('playground-create');

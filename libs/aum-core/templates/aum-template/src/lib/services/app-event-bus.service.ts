@@ -8,6 +8,9 @@ import { filter, map } from 'rxjs/operators';
 export enum AppEventType {
   LOGOUT = 'LOGOUT',
   CUSTOM_MENU_ACTION = 'CUSTOM_MENU_ACTION',
+  THEME_CHANGED = 'THEME_CHANGED',
+  UI_SCALE_CHANGED = 'UI_SCALE_CHANGED',
+  LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',
   // Add more event types as needed
 }
 
@@ -26,6 +29,33 @@ export interface CustomMenuActionPayload {
   menuId: string;
   actionId: string;
   data?: any;
+}
+
+/**
+ * Payload interface for theme change events
+ * Emitted when user changes the application theme
+ */
+export interface ThemeChangedPayload {
+  theme: 'light' | 'dark' | 'system';
+  previousTheme?: 'light' | 'dark' | 'system';
+}
+
+/**
+ * Payload interface for UI scale change events
+ * Emitted when user changes the display scale/size
+ */
+export interface UiScaleChangedPayload {
+  scale: 'compact' | 'default' | 'large';
+  previousScale?: 'compact' | 'default' | 'large';
+}
+
+/**
+ * Payload interface for language change events
+ * Emitted when user changes the application language
+ */
+export interface LanguageChangedPayload {
+  language: string;
+  previousLanguage?: string;
 }
 
 /**

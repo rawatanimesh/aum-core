@@ -315,8 +315,15 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       item.value === 'dark' ||
       item.value === 'system'
     ) {
+      const previousTheme = this.themeService.getTheme();
       this.themeService.setTheme(item.value);
       this.setMenuSelection(this.optionsMenuList, 'theme', item.value);
+
+      // Emit theme changed event
+      this.eventBus.emit(AppEventType.THEME_CHANGED, {
+        theme: item.value,
+        previousTheme,
+      });
     }
     // Language switching - must be after other actions
     if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
@@ -325,6 +332,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       if (currentLanguage !== item.value) {
         this.languageService.setLanguage(item.value);
         this.setMenuSelection(this.optionsMenuList, 'language', item.value);
+
+        // Emit language changed event
+        this.eventBus.emit(AppEventType.LANGUAGE_CHANGED, {
+          language: item.value,
+          previousLanguage: currentLanguage,
+        });
+
         // Show success snackbar after language change
         // Use setTimeout to ensure translations are loaded
         setTimeout(() => {
@@ -362,6 +376,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   setUiScale(mode: 'compact' | 'default' | 'large') {
+    const previousScale = (localStorage.getItem('ui-scale-mode') || 'default') as 'compact' | 'default' | 'large';
     const body = document.body;
 
     // Remove existing scale classes
@@ -377,7 +392,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     localStorage.setItem('ui-scale-mode', mode);
-    console.log('Setting UI scale to:', mode);
+
+    // Emit UI scale changed event
+    this.eventBus.emit(AppEventType.UI_SCALE_CHANGED, {
+      scale: mode,
+      previousScale,
+    });
   }
 
   logout() {
