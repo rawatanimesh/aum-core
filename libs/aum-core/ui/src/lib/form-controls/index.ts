@@ -6,3 +6,6 @@ export { SelectBox } from './select-box/select-box';
 export type { SelectOption } from './select-box/select-box';
 export { Autocomplete } from './autocomplete/autocomplete';
 export { SlideToggle } from './slide-toggle/slide-toggle';
+export { UploadBoxComponent, FileUploadState } from './upload-box/upload-box';
+export type { UploadedFile, FileUploadConfig } from './upload-box/upload-box';
+export { filesRequiredValidator, maxFilesValidator, fileTypeValidator, fileSizeValidator, uploadsCompleteValidator } from './upload-box/upload-box-validators';

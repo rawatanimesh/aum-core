@@ -1,0 +1,309 @@
+@use 'functions' as *;
+
+.aum-upload-box-root {
+  margin: em(18) 0;
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+
+  // Label styling
+  .aum-upload-box-label {
+    display: block;
+    font-size: rem(16);
+    font-weight: 400;
+    color: var(--mat-sys-on-surface);
+    margin-bottom: rem(8);
+
+    .aum-upload-box-required {
+      color: var(--mat-sys-error);
+      margin-left: rem(4);
+      font-weight: 900;
+    }
+  }
+
+  // Hidden file input
+  .aum-upload-box-input {
+    display: none;
+  }
+
+  // Dropzone container
+  .aum-upload-box-dropzone {
+    min-height: rem(200);
+    border-radius: rem(4);
+    padding: rem(16);
+    border: rem(2) dashed var(--mat-sys-outline);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    outline: none;
+
+    // Compact variant
+    &--compact {
+      min-height: rem(60);
+      padding: rem(8) rem(12);
+    }
+
+    // Dragging state
+    &--dragging {
+      border-color: var(--mat-sys-primary);
+      border-style: solid;
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-primary) 10%,
+        var(--mat-sys-surface)
+      );
+    }
+
+    // Disabled state
+    &--disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-on-surface) 5%,
+        var(--mat-sys-surface)
+      );
+    }
+
+    // Readonly state
+    &--readonly {
+      cursor: default;
+    }
+
+    // Error state
+    &--error {
+      border-color: var(--mat-sys-error);
+    }
+  }
+
+  // Material icon size helpers
+  .aum-upload-icon--md {
+    font-size: rem(24);
+    width: rem(24);
+    height: rem(24);
+    color: var(--mat-sys-outline);
+  }
+
+  .aum-upload-icon--lg {
+    font-size: rem(36);
+    width: rem(36);
+    height: rem(36);
+    color: var(--mat-sys-outline);
+  }
+
+  .aum-upload-icon--xl {
+    font-size: rem(48);
+    width: rem(48);
+    height: rem(48);
+    color: var(--mat-sys-outline);
+  }
+
+  // Single file layouts
+  .aum-upload-box-single-file {
+    width: 100%;
+    height: 100%;
+    padding: rem(16);
+  }
+
+  .aum-upload-box-single-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+
+    .aum-upload-box-preview-image {
+      height: rem(300);
+      object-fit: contain;
+      border-radius: rem(4);
+    }
+
+    .aum-upload-box-single-file-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: rem(8);
+      padding: 0 rem(8);
+
+      > span {
+        flex: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  // Compact layout
+  .aum-upload-box-compact-layout {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: rem(16);
+    width: 100%;
+
+    mat-icon {
+      flex-shrink: 0;
+      color: var(--mat-sys-outline);
+    }
+
+    .aum-upload-box-compact-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: rem(4);
+      min-width: 0;
+
+      .aum-upload-box-placeholder {
+        margin: 0;
+        font-size: rem(14);
+        font-weight: 600;
+        color: var(--mat-sys-on-surface);
+      }
+
+      > span.fs-12 {
+        color: var(--mat-sys-on-surface-variant);
+      }
+    }
+
+    .aum-upload-box-compact-divider {
+      flex-shrink: 0;
+      color: var(--mat-sys-on-surface-variant);
+    }
+
+    aum-button {
+      flex-shrink: 0;
+    }
+  }
+
+  // Files list
+  .aum-upload-box-files-list {
+    width: 100%;
+    max-height: rem(220);
+    overflow-y: auto;
+
+    .aum-upload-items {
+      border: rem(1) solid var(--mat-sys-outline-variant);
+      padding: rem(10);
+    }
+  }
+
+  // File item states
+  .aum-upload-box-file-item {
+    display: flex;
+    align-items: center;
+    gap: rem(12);
+    padding: rem(12);
+    border-radius: rem(8);
+    border: rem(1) solid var(--mat-sys-outline-variant);
+
+    &--uploading {
+      border-color: var(--mat-sys-primary);
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-primary) 5%,
+        var(--mat-sys-surface-container)
+      );
+    }
+
+    &--success {
+      border-color: color-mix(in srgb, #4caf50 50%, var(--mat-sys-outline));
+      background-color: color-mix(in srgb, #4caf50 5%, var(--mat-sys-surface-container));
+    }
+
+    &--error {
+      border-color: var(--mat-sys-error);
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-error) 5%,
+        var(--mat-sys-surface-container)
+      );
+    }
+  }
+
+  // File info
+  .aum-upload-box-file-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: rem(4);
+    min-width: 0;
+
+    > span.fw-600 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .aum-upload-box-file-error {
+      font-size: rem(12);
+      color: var(--mat-sys-error);
+    }
+  }
+
+  // Progress bar
+  mat-progress-bar {
+    width: 100%;
+    margin-top: rem(4);
+  }
+
+  // File actions
+  .aum-upload-box-file-actions {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+  }
+
+  // Error message
+  .aum-upload-box-error {
+    font-size: rem(12);
+    color: var(--mat-sys-error);
+    margin-top: rem(4);
+  }
+
+  // Hint message
+  .aum-upload-box-hint {
+    font-size: rem(12);
+    color: var(--mat-sys-on-surface-variant);
+    margin-top: rem(4);
+  }
+}
+
+// Dark mode support
+.dark-mode {
+  .aum-upload-box-dropzone {
+    &:hover:not(&--disabled):not(&--readonly) {
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-primary) 8%,
+        var(--mat-sys-surface)
+      );
+    }
+  }
+
+  .aum-upload-box-file-item {
+    &--uploading {
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-primary) 8%,
+        var(--mat-sys-surface-container)
+      );
+    }
+
+    &--success {
+      background-color: color-mix(in srgb, #4caf50 8%, var(--mat-sys-surface-container));
+    }
+
+    &--error {
+      background-color: color-mix(
+        in srgb,
+        var(--mat-sys-error) 8%,
+        var(--mat-sys-surface-container)
+      );
+    }
+  }
+}

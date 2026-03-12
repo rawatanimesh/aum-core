@@ -1,0 +1,57 @@
+@use 'functions' as *;
+
+.upload-box-demo-container {
+  max-width: rem(1200);
+  margin: 0 auto;
+  padding: rem(32);
+
+  h1 {
+    margin: 0 0 rem(16) 0;
+    font-weight: 500;
+  }
+
+  h2 {
+    margin: 0 0 rem(8) 0;
+    font-weight: 500;
+  }
+
+  h3 {
+    margin: 0 0 rem(4) 0;
+    font-weight: 500;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+.demo-section {
+  padding: rem(32) 0;
+
+  &:first-of-type {
+    padding-top: rem(16);
+  }
+}
+
+// Spacing utilities
+.mb-1 { margin-bottom: rem(4); }
+.mb-2 { margin-bottom: rem(8); }
+.mb-3 { margin-bottom: rem(16); }
+.mb-4 { margin-bottom: rem(24); }
+.mt-3 { margin-top: rem(16); }
+
+// Responsive adjustments
+@media (max-width: rem(768)) {
+  .upload-box-demo-container {
+    padding: rem(16);
+  }
+
+  .flex-row {
+    flex-direction: column !important;
+
+    > div {
+      width: 100% !important;
+    }
+  }
+}

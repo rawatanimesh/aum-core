@@ -1,0 +1,160 @@
+<div class="aum-upload-box-root">
+  <!-- Label -->
+  @if (label) {
+    <label class="aum-upload-box-label">
+      {{ label }}
+      @if (required) {
+        <span class="aum-upload-box-required">*</span>
+      }
+    </label>
+  }
+
+  <!-- Hidden File Input -->
+  <input
+    #fileInput
+    type="file"
+    class="aum-upload-box-input"
+    [accept]="accept"
+    [multiple]="multiple"
+    [disabled]="disabled || readonly"
+    (change)="onFileSelect($event)"
+    aria-hidden="true"
+    tabindex="-1"
+  />
+
+  <!-- Upload Drop Zone -->
+  <div
+    class="aum-upload-box-dropzone"
+    [ngClass]="{
+      'aum-upload-box-dropzone--dragging': isDragging,
+      'aum-upload-box-dropzone--disabled': disabled,
+      'aum-upload-box-dropzone--readonly': readonly,
+      'aum-upload-box-dropzone--error': showError,
+      'aum-upload-box-dropzone--compact': variant === 'compact'
+    }"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
+  >
+    <!-- Show placeholder when no files or multiple mode with files -->
+    @if (internalFiles.length === 0 || multiple) {
+      <!-- Default variant (vertical layout) -->
+      @if (variant === 'default') {
+        <div class="flex-column-center-center gap-8">
+          <mat-icon class="aum-upload-icon--lg">cloud_upload</mat-icon>
+          <span class="aum-upload-box-placeholder fw-600 fs-14">Drag and drop here</span>
+          <span class="fs-14">or</span>
+          <aum-button type="outlined" value="Browse File" [disabled]="disabled || readonly" (clickButton)="onBrowseClick()"></aum-button>
+          <p class="flex-column">
+            @if (maxFileSize) {
+              <span class="fs-12">Maximum file size is {{ formatFileSize(maxFileSize) }}</span>
+            }
+          </p>
+        </div>
+      }
+
+      <!-- Compact variant (horizontal layout) -->
+      @if (variant === 'compact') {
+        <div class="aum-upload-box-compact-layout">
+          <mat-icon class="aum-upload-icon--md">cloud_upload</mat-icon>
+          <div class="aum-upload-box-compact-content">
+            <span class="aum-upload-box-placeholder fw-600 fs-14">Drag and drop here</span>
+            @if (maxFileSize) {
+              <span class="fs-12">Maximum file size is {{ formatFileSize(maxFileSize) }}</span>
+            }
+          </div>
+          <span class="fs-14 aum-upload-box-compact-divider">or</span>
+          <aum-button type="outlined" value="Browse File" [disabled]="disabled || readonly" (clickButton)="onBrowseClick()"></aum-button>
+        </div>
+      }
+    }
+
+    <!-- Show single file inside dropzone -->
+    @if (internalFiles.length === 1 && !multiple) {
+      @let file = internalFiles[0];
+
+      <!-- Image file layout -->
+      @if (file.type.startsWith('image/') && file.preview) {
+        <div class="aum-upload-box-single-image">
+          <img [src]="file.preview" [alt]="file.name" class="aum-upload-box-preview-image" />
+          <div class="aum-upload-box-single-file-footer">
+            <span class="fw-600 fs-14" [title]="file.name">{{ file.name }}</span>
+            @if (!disabled && !readonly) {
+              <div class="flex-row-center-center">
+                <aum-button type="icon" icon="delete" (clickButton)="removeFile(file.id)"></aum-button>
+              </div>
+            }
+          </div>
+        </div>
+      }
+
+      <!-- Non-image file layout -->
+      @if (!file.type.startsWith('image/') || !file.preview) {
+        <div class="aum-upload-box-single-file flex-column-center-center gap-8">
+          <mat-icon class="aum-upload-icon--xl">{{ getFileIconName(file.type) }}</mat-icon>
+          <span class="fw-600 fs-14" [title]="file.name">{{ file.name }}</span>
+          @if (!disabled && !readonly) {
+            <aum-button type="icon" icon="delete" (clickButton)="removeFile(file.id)"></aum-button>
+          }
+        </div>
+      }
+    }
+  </div>
+
+  @if (internalFiles.length === 0 || multiple) {
+    <div class="flex-row-space-between-center padding-horizontal-8">
+      <span class="fs-12">File Type: {{ filetype }}</span>
+      <aum-button value="Download Template" type="basic" size="small"></aum-button>
+    </div>
+  }
+
+  <!-- Files List (Below the box) - Only show for multiple mode -->
+  @if (internalFiles.length > 0 && multiple) {
+    <div class="aum-upload-box-files-list flex-column gap-8">
+      @for (file of internalFiles; track file.id) {
+        <div class="aum-upload-items flex-row-space-between-center gap-8 br-4">
+          <mat-icon>{{ getFileIconName(file.type) }}</mat-icon>
+          <div class="aum-upload-box-file-info">
+            <span class="fw-600 fs-14" [title]="file.name">{{ file.name }}</span>
+            <div class="flex-row gap-8">
+              <span class="fs-12">{{ file.addedAt ? formatFileDateTime(file.addedAt) : '' }}</span>
+              <span class="fs-12">{{ formatFileSize(file.size) }}</span>
+            </div>
+            <!-- Upload Progress -->
+            @if (file.state === FileUploadState.UPLOADING && showProgressBar) {
+              <mat-progress-bar mode="determinate" [value]="file.progress"></mat-progress-bar>
+              <span class="fs-12">{{ file.progress }}%</span>
+            }
+            <!-- Error State -->
+            @if (file.state === FileUploadState.ERROR && file.error) {
+              <span class="aum-upload-box-file-error">{{ file.error }}</span>
+            }
+          </div>
+          <!-- Actions -->
+          <div class="aum-upload-box-file-actions">
+            @if (file.state === FileUploadState.ERROR && !disabled) {
+              <aum-button type="icon" icon="refresh" (clickButton)="retryUpload(file.id)"></aum-button>
+            }
+            @if (!disabled && !readonly) {
+              <aum-button type="icon" icon="delete" (clickButton)="removeFile(file.id)"></aum-button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Error Message -->
+  @if (showError) {
+    <div class="aum-upload-box-error">
+      {{ getErrorMessage() }}
+    </div>
+  }
+
+  <!-- File Count Hint -->
+  @if (!showError && internalFiles.length > 0 && maxFiles) {
+    <div class="aum-upload-box-hint">
+      {{ internalFiles.length }} / {{ maxFiles }} files selected
+    </div>
+  }
+</div>

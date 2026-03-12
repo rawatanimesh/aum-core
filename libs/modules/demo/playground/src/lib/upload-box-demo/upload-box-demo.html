@@ -1,0 +1,271 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="upload-box-demo-container">
+      <h1 class="fs-24 mb-4">Upload Box Component</h1>
+      <p class="fs-14 mb-4" style="color: var(--mat-sys-on-surface-variant);">
+        A comprehensive file upload component with drag-and-drop, validation, progress tracking, and forms integration.
+      </p>
+
+      <!-- 1. Basic Auto-Upload with Reactive Forms -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">1. Reactive Forms with Auto-Upload</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Upload documents with automatic upload on selection. Max 5 files, 5MB each. Integrated with Angular Reactive Forms.
+        </p>
+        <form [formGroup]="uploadForm">
+          <aum-upload-box
+            label="Upload Documents"
+            accept=".pdf,application/pdf"
+            filetype="PDF"
+            maxFileSize="5mb"
+            [maxFiles]="5"
+            [required]="true"
+            [autoUpload]="true"
+            [showProgressBar]="true"
+            [control]="documentsControl"
+            [uploadFn]="mockUpload.bind(this)"
+            (filesSelected)="onFilesSelected($event)"
+            (uploadComplete)="onUploadComplete($event)"
+            (uploadError)="onUploadError($event)"
+            (validationError)="onValidationError($event)"
+            [customErrorMessages]="{
+              required: 'Please upload at least one document',
+              maxFiles: 'You can only upload up to 5 documents'
+            }"
+          ></aum-upload-box>
+        </form>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 2. Standalone Mode with Manual Upload -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">2. Standalone Mode with Manual Upload</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Select multiple files and upload manually. Max 10 files. Uses two-way data binding with [(data)].
+        </p>
+        <aum-upload-box
+          label="Upload Images"
+          accept="image/*"
+          filetype="JPG, PNG, GIF"
+          [multiple]="true"
+          [maxFiles]="10"
+          maxFileSize="5mb"
+          [showPreview]="true"
+          [autoUpload]="false"
+          [(data)]="standaloneFiles"
+          [uploadFn]="mockUpload.bind(this)"
+          (filesSelected)="onFilesSelected($event)"
+          (uploadComplete)="onUploadComplete($event)"
+          (uploadError)="onUploadError($event)"
+          (uploadProgress)="onUploadProgress($event)"
+        ></aum-upload-box>
+        <aum-button value="Upload Files" (clickButton)="uploadStandaloneFiles()" [disabled]="!standaloneFiles.length"></aum-button>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 3. Single File Mode -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">3. Single File Mode (Profile Picture)</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Upload a single image file with preview. Max 2MB. Perfect for profile pictures and avatars.
+        </p>
+        <aum-upload-box
+          label="Profile Picture"
+          accept="*/*"
+          filetype="Any"
+          [multiple]="false"
+          maxFileSize="2mb"
+          [showPreview]="true"
+          [autoUpload]="true"
+          [required]="true"
+          [(data)]="singleFileMode"
+          [uploadFn]="mockUpload.bind(this)"
+          (fileRemoved)="onFileRemoved($event)"
+          (uploadComplete)="onUploadComplete($event)"
+          (validationError)="onValidationError($event)"
+          [customErrorMessages]="{
+            required: 'Please select a profile picture',
+            fileSize: 'Profile picture must be less than 2MB'
+          }"
+        ></aum-upload-box>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 4. Custom Validation & Manual Upload -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">4. Custom Validation & Manual Upload</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Select files with custom validation (no "temp" in filename), manually upload them, then submit the form once all uploads are complete.
+        </p>
+        <form [formGroup]="uploadForm">
+          <aum-upload-box
+            label="Required Upload with Validation"
+            accept="*/*"
+            [maxFiles]="3"
+            [required]="true"
+            [autoUpload]="false"
+            [showProgressBar]="true"
+            [control]="requiredUploadControl"
+            [uploadFn]="mockUpload.bind(this)"
+            [customValidator]="customFileValidator"
+            (uploadComplete)="onUploadComplete($event)"
+            (validationError)="onValidationError($event)"
+            [customErrorMessages]="{
+              required: 'At least one file is required',
+              uploadsIncomplete: 'Please complete all uploads before submitting'
+            }"
+          ></aum-upload-box>
+          <div class="mt-3 flex-row gap-8">
+            <aum-button
+              value="Upload Files"
+              [disabled]="!requiredUploadControl.value?.length"
+              (clickButton)="uploadRequiredFiles()"
+            ></aum-button>
+            <aum-button
+              type="filled"
+              value="Submit Form"
+              [disabled]="uploadForm.invalid"
+              (clickButton)="submitUploadForm()"
+            ></aum-button>
+          </div>
+        </form>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 5. Disabled & Readonly States -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">5. Disabled & Readonly States</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Demonstrate different interaction states for the upload component.
+        </p>
+        <div class="flex-row gap-16 mb-3">
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Disabled State</h3>
+            <aum-upload-box
+              label="Disabled Upload"
+              [disabled]="true"
+              [(data)]="uploadedDocuments"
+            ></aum-upload-box>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Readonly State</h3>
+            <aum-upload-box
+              label="Readonly Upload"
+              [readonly]="true"
+              [(data)]="uploadedDocuments"
+            ></aum-upload-box>
+          </div>
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 6. Layout Variants -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">6. Layout Variants (Default vs Compact)</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Compare the default vertical layout with the compact horizontal layout for space-constrained designs.
+        </p>
+        <div class="flex-row gap-16">
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Default Variant (Vertical)</h3>
+            <aum-upload-box
+              label="Upload Files"
+              accept="*/*"
+              filetype="Any"
+              maxFileSize="100mb"
+              [autoUpload]="false"
+              [uploadFn]="mockUpload.bind(this)"
+            ></aum-upload-box>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Compact Variant (Horizontal)</h3>
+            <aum-upload-box
+              label="Upload Files"
+              variant="compact"
+              accept="*/*"
+              filetype="Any"
+              maxFileSize="100mb"
+              [autoUpload]="false"
+              [uploadFn]="mockUpload.bind(this)"
+            ></aum-upload-box>
+          </div>
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 7. Specific File Type Restrictions -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">7. Specific File Type Restrictions</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Restrict uploads to specific file types using the accept attribute.
+        </p>
+        <div class="flex-row gap-16">
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Only PDFs</h3>
+            <aum-upload-box
+              label="PDF Documents"
+              accept=".pdf,application/pdf"
+              filetype="PDF"
+              [autoUpload]="false"
+              [uploadFn]="mockUpload.bind(this)"
+            ></aum-upload-box>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Only Excel Files</h3>
+            <aum-upload-box
+              label="Excel Files"
+              accept=".xlsx,.xls,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              filetype="Excel"
+              [autoUpload]="false"
+              [uploadFn]="mockUpload.bind(this)"
+            ></aum-upload-box>
+          </div>
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+
+      <!-- 8. User-Friendly File Size Formats -->
+      <section class="demo-section">
+        <h2 class="fs-18 mb-2">8. User-Friendly File Size Formats</h2>
+        <p class="fs-12 mb-3" style="color: var(--mat-sys-on-surface-variant);">
+          Use string-based file size formats like "10mb", "5gb", or "500kb" instead of calculating bytes.
+        </p>
+        <div class="flex-row gap-16 mb-3">
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Small Files (500KB)</h3>
+            <aum-upload-box
+              label="Upload Small Files"
+              accept="*/*"
+              filetype="Any"
+              maxFileSize="500kb"
+              [autoUpload]="false"
+              [uploadFn]="mockUpload.bind(this)"
+              (validationError)="onValidationError($event)"
+            ></aum-upload-box>
+          </div>
+          <div style="flex: 1;">
+            <h3 class="fs-14 mb-2">Large Files (100MB)</h3>
+            <aum-upload-box
+              label="Upload Large Files"
+              accept="*/*"
+              filetype="Any"
+              maxFileSize="100mb"
+              [autoUpload]="false"
+              [uploadFn]="mockUpload.bind(this)"
+              (validationError)="onValidationError($event)"
+            ></aum-upload-box>
+          </div>
+        </div>
+      </section>
+
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</aum-page>

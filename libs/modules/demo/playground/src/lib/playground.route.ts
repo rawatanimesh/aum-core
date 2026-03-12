@@ -48,4 +48,10 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./carousel-demo/carousel-demo').then((m) => m.CarouselDemo),
   },
+
+  {
+    path: 'upload-box',
+    loadComponent: () =>
+      import('./upload-box-demo/upload-box-demo').then((m) => m.UploadBoxDemo),
+  },
 ];
