@@ -4,7 +4,8 @@
       "Bash(cd:*)",
       "Bash(npx nx build:*)",
       "Bash(npm run lint:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Read(//Users/animesh.rawat/Documents/Code/Agentic AI/plm-frontend-core/libs/**)"
     ]
   }
 }

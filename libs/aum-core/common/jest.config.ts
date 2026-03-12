@@ -1,8 +1,8 @@
 export default {
-  displayName: 'general',
-  preset: '../../../../jest.preset.js',
+  displayName: 'common',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../../../coverage/libs/aum/templates/general',
+  coverageDirectory: '../../../coverage/libs/aum/common',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

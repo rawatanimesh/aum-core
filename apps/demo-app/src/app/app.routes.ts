@@ -5,7 +5,7 @@ export const appRoutes: Route[] = [
   {
     path: 'login',
     loadComponent: () =>
-      import('@aum/general-templates').then((m) => m.LoginComponent),
+      import('@aum/common').then((m) => m.LoginComponent),
   },
 
   {
@@ -64,7 +64,7 @@ export const appRoutes: Route[] = [
       {
         path: '**',
         loadComponent: () =>
-          import('@aum/general-templates').then((m) => m.PageNotFoundComponent),
+          import('@aum/common').then((m) => m.PageNotFoundComponent),
       },
     ],
   },

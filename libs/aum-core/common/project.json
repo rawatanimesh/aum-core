@@ -1,16 +1,16 @@
 {
-  "name": "general",
-  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/aum-core/templates/general/src",
+  "name": "common",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/aum-core/common/src",
   "prefix": "aum",
   "projectType": "library",
-  "tags": ["general"],
+  "tags": ["common"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/aum-core/templates/general/jest.config.ts"
+        "jestConfig": "libs/aum-core/common/jest.config.ts"
       }
     },
     "lint": {

@@ -27,17 +27,12 @@
           },
           {
             "glob": "**/*",
-            "input": "libs/aum-core/theme/src/assets/resources/svgs",
+            "input": "libs/aum-core/common/src/assets/resources/svgs",
             "output": "assets/svgs"
           },
-          {
-            "glob": "**/*",
-            "input": "libs/aum-core/theme/src/assets/resources/images",
-            "output": "assets/images"
-          },
-          {
+{
             "glob": "**/*.json",
-            "input": "libs/aum-core/theme/src/assets/i18n",
+            "input": "libs/aum-core/common/src/assets/i18n",
             "output": "assets/i18n"
           }
         ],
