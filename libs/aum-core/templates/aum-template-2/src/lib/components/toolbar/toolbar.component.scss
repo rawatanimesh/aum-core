@@ -1,0 +1,31 @@
+@use 'functions' as *;
+
+$bp-mobile-max: 699px;
+$bp-tablet:     700px;
+
+.aum-toolbar-2 {
+  width: 100%;
+
+  &__brand-logo { height: rem(45); }
+  &__app-icon   { height: rem(22); }
+  &__app-name   { color: var(--mat-sys-on-surface); }
+
+  &__left  { width: 30%; }
+  &__center { width: 40%; }
+  &__right { width: 30%; }
+}
+
+// Hamburger: mobile only
+.aum-t2-hamburger {
+  @media (min-width: $bp-tablet) {
+    display: none !important;
+  }
+}
+
+// Preferences + profile buttons: tablet + desktop only
+// On mobile the drawer sidebar shows them instead
+.aum-t2-toolbar-utility {
+  @media (max-width: $bp-mobile-max) {
+    display: none !important;
+  }
+}

@@ -1,0 +1,73 @@
+@use 'functions' as *;
+
+.aum-tab-nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  overflow-x: auto;
+  // Hide scrollbar while still allowing scroll
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: rem(6);
+    padding: 0 rem(16);
+    height: 100%;
+    text-decoration: none;
+    color: var(--mat-sys-on-surface-variant);
+    white-space: nowrap;
+    border-bottom: rem(2) solid transparent;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+    }
+
+    &:focus-visible {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(-2);
+    }
+
+    &.active {
+      border-bottom-color: var(--mat-sys-primary);
+      color: var(--mat-sys-primary);
+      font-weight: 600;
+    }
+  }
+
+  &__icon {
+    font-size: rem(18);
+    width: rem(18);
+    height: rem(18);
+    line-height: rem(18);
+  }
+
+  &__label {
+    font-size: rem(13);
+    max-width: rem(80);
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+// Dark mode: tone down hover to avoid over-saturation
+.dark-mode {
+  .aum-tab-nav__item {
+    &:hover,
+    &.active {
+      background-color: color-mix(in srgb, var(--mat-sys-primary-container) 30%, black);
+    }
+  }
+}

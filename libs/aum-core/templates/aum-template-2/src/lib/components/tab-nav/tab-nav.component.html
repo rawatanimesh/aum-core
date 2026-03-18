@@ -1,0 +1,16 @@
+<div class="aum-tab-nav">
+  @for (item of navItems(); track item.value) {
+    <a
+      class="aum-tab-nav__item"
+      [routerLink]="item.value"
+      routerLinkActive="active"
+      [matTooltip]="item.label"
+      matTooltipPosition="below"
+    >
+      @if (item.icon) {
+        <mat-icon class="aum-tab-nav__icon">{{ item.icon }}</mat-icon>
+      }
+      <span class="aum-tab-nav__label">{{ item.label | translate }}</span>
+    </a>
+  }
+</div>

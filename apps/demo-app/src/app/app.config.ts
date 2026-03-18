@@ -7,7 +7,7 @@ import {
   provideAppInitializer,
   inject
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http';
 import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
 import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, CspService  } from '@aum/utils/services';
@@ -27,7 +27,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    provideRouter(appRoutes, withComponentInputBinding()),
     // Translation module (must be before HttpClient)
     importProvidersFrom(
       TranslateModule.forRoot({

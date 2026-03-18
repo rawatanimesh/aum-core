@@ -15,7 +15,8 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    loadComponent: () => import('@aum/templates/aum-template').then((m) => m.AumTemplate), // Common layout
+    loadComponent: () => import('@aum/templates/aum-template-2').then((m) => m.AumTemplate2), // Common layout
+    data: { drawerWidth: '200px' },
     canActivate: [AuthGuardService],
     children: [
       {

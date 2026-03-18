@@ -1,0 +1,85 @@
+<mat-toolbar>
+  <div class="aum-toolbar-2 flex-row-space-between-center h-100">
+
+    <!-- Left: brand logo + hamburger (mobile only) + app identity -->
+    <div class="aum-toolbar-2__left flex-row-flex-start-center gap-4 h-100">
+      @if (hasBrandLogo()) {
+        <img class="margin-left-4 aum-toolbar-2__brand-logo" [src]="brandLogo()" alt="brand-logo" />
+      }
+
+      <!-- Hamburger: hidden on tablet + desktop via CSS -->
+      <aum-button
+        class="aum-t2-hamburger"
+        [type]="'icon'"
+        [icon]="'menu'"
+        [tooltip]="'MENU' | translate"
+        (clickButton)="toggleMenu()"
+      ></aum-button>
+
+      @if (shouldShowAppLogo()) {
+        <img [src]="appLogo()" class="aum-toolbar-2__app-icon" alt="app-logo" />
+      } @else if (shouldShowAppName()) {
+        <span class="aum-toolbar-2__app-name fw-600 fs-18">{{ appName() }}</span>
+      }
+    </div>
+
+    <!-- Center: optional search bar slot -->
+    <div class="aum-toolbar-2__center">
+      <ng-content select="[toolbar-center]"></ng-content>
+    </div>
+
+    <!-- Right: global actions + preferences + profile (hidden on mobile via CSS) -->
+    <div class="aum-toolbar-2__right flex-row-flex-end-center gap-4">
+      @for (action of globalActions; track action.id) {
+        <aum-button
+          [type]="action.type || 'icon'"
+          [icon]="action.icon"
+          [value]="(action.value || '') | translate"
+          [tooltip]="(action.tooltip || '') | translate"
+          (clickButton)="onGlobalActionClick(action.id)"
+        ></aum-button>
+      }
+
+      @for (template of customTemplates; track template.id) {
+        <ng-container *ngTemplateOutlet="template.template"></ng-container>
+      }
+
+      <!-- Preferences + profile: hidden on mobile (drawer has them instead) -->
+      <div class="aum-t2-toolbar-utility flex-row-flex-end-center gap-4">
+        @if (shouldShowPreferencesMenu()) {
+          <aum-button
+            [type]="'icon'"
+            [icon]="'tune'"
+            [tooltip]="'PREFERENCES' | translate"
+            [matMenuTriggerFor]="optionsMenu.childMenu"
+            [disabled]="isPreferencesMenuDisabled()"
+            (clickButton)="onMenuOpening()"
+          ></aum-button>
+        }
+
+        @if (shouldShowProfileMenu()) {
+          <aum-button
+            [type]="'icon'"
+            [icon]="'account_circle'"
+            [tooltip]="'MY_ACCOUNT' | translate"
+            [matMenuTriggerFor]="profileMenu.childMenu"
+            [disabled]="isProfileMenuDisabled()"
+            (clickButton)="onMenuOpening()"
+          ></aum-button>
+        }
+      </div>
+    </div>
+  </div>
+
+  <aum-menu-list
+    #optionsMenu="aumMenu"
+    [list]="optionsMenuList"
+    (itemSelected)="onMenuSelect($event)"
+  ></aum-menu-list>
+
+  <aum-menu-list
+    #profileMenu="aumMenu"
+    [list]="profileMenuList"
+    (itemSelected)="onMenuSelect($event)"
+  ></aum-menu-list>
+</mat-toolbar>
