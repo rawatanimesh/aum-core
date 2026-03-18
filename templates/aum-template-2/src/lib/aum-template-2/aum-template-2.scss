@@ -1,0 +1,115 @@
+@use '@angular/material' as mat;
+@use 'functions' as *;
+
+$bp-tablet:            700px;
+$sidebar-width:        rem(120);
+$mobile-header-height: rem(52);
+
+.aum-t2 {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+
+  // ── Mobile-only header (hamburger + app identity) ────────
+  &__mobile-header {
+    display: flex;
+    align-items: center;
+    gap: rem(8);
+    height: $mobile-header-height;
+    padding: 0 rem(12);
+    flex-shrink: 0;
+    background-color: var(--mat-sys-surface);
+    color: var(--mat-sys-on-surface);
+    border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+
+    // Hidden on tablet + desktop (sidebar is always present)
+    @media (min-width: $bp-tablet) {
+      display: none;
+    }
+  }
+
+  &__hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: rem(4);
+    border-radius: rem(4);
+    color: var(--mat-sys-on-surface);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+    }
+
+    &:focus-visible {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(2);
+    }
+
+    mat-icon {
+      font-size: rem(24);
+      width: rem(24);
+      height: rem(24);
+      line-height: rem(24);
+    }
+  }
+
+  &__mobile-brand-logo { height: rem(36); }
+  &__mobile-logo { height: rem(22); }
+  &__mobile-name {
+    font-size: rem(16);
+    font-weight: 600;
+    color: var(--mat-sys-on-surface);
+  }
+
+  // ── Body: sidebar + content ──────────────────────────────
+  &__body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  // ── Persistent sidebar: tablet + desktop ─────────────────
+  &__sidebar {
+    display: none;
+    flex-shrink: 0;
+
+    @media (min-width: $bp-tablet) {
+      display: flex;
+      flex-direction: column;
+      width: $sidebar-width;
+      border-inline-end: rem(1) solid var(--mat-sys-outline-variant);
+    }
+  }
+
+  // ── Content area ─────────────────────────────────────────
+  &__content {
+    flex: 1;
+    height: 100%;
+
+    .mat-drawer:not(.mat-drawer-side) {
+      box-shadow: 0 0 rem(6) var(--mat-sys-shadow);
+      border-radius: 0;
+    }
+  }
+
+  // ── Mobile drawer ────────────────────────────────────────
+  &__drawer {
+    width: rem(200);
+  }
+}
+
+// Dark mode: tone down hamburger hover to avoid over-saturation
+.dark-mode {
+  .aum-t2__hamburger {
+    &:hover {
+      background-color: color-mix(in srgb, var(--mat-sys-primary-container) 30%, black);
+    }
+  }
+}

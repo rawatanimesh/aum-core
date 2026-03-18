@@ -1,0 +1,39 @@
+<div class="aum-t2">
+
+  <!-- Mobile-only minimal header (brand logo + hamburger + app identity) -->
+  <header class="aum-t2__mobile-header">
+    @if (hasBrandLogo()) {
+      <img [src]="brandLogo()" class="aum-t2__mobile-brand-logo" alt="brand-logo" />
+    }
+    <button class="aum-t2__hamburger" (click)="mobileDrawer.toggle()" aria-label="Open navigation">
+      <mat-icon>menu</mat-icon>
+    </button>
+    @if (shouldShowAppLogo()) {
+      <img [src]="appLogo()" class="aum-t2__mobile-logo" alt="app-logo" />
+    } @else if (shouldShowAppName()) {
+      <span class="aum-t2__mobile-name">{{ appName() }}</span>
+    }
+  </header>
+
+  <!-- Body: sidebar (desktop + tablet) + content -->
+  <div class="aum-t2__body">
+
+    <!-- Persistent sidebar: visible on tablet + desktop -->
+    <aside class="aum-t2__sidebar">
+      <aum-sidebar-2></aum-sidebar-2>
+    </aside>
+
+    <!-- Content area + mobile drawer -->
+    <mat-sidenav-container class="aum-t2__content" [hasBackdrop]="true">
+      <mat-sidenav #mobileDrawer mode="over" class="aum-t2__drawer" [style.width]="drawerWidth">
+        <!-- Brand logo is in the mobile header, so hide it inside the drawer -->
+        <aum-sidebar-2 [showBrandLogo]="false" [showAppIdentity]="false" (menuItemClicked)="mobileDrawer.close()"></aum-sidebar-2>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+
+  </div>
+</div>
