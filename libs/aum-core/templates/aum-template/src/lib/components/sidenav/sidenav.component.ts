@@ -2,7 +2,7 @@ import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-import { SideMenu } from '@aum/ui/navigation';
+import { SideMenu } from '../side-menu/side-menu';
 import { AppConfigService } from '@aum/utils/services';
 
 @Component({
