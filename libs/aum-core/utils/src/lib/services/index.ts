@@ -20,3 +20,5 @@ export { httpErrorInterceptor } from './error-handler/http-error.interceptor';
 export { LanguageTranslationService } from './language-translation/language-translation.service';
 export { CspService } from './csp/csp.service';
 export type { CspConfig } from './csp/csp.service';
+export { ViewportService } from './viewport/viewport.service';
+export type { Viewport } from './viewport/viewport.service';
