@@ -1,8 +1,33 @@
 <aum-page [pageInfo]="pageInfo">
-  <div aum-page-body class="dashboard-welcome">
-    <div class="dashboard-welcome-container">
-      <h1 class="dashboard-welcome-title">{{ 'WELCOME_MESSAGE' | translate }}</h1>
-      <p class="dashboard-welcome-subtitle">{{ 'WELCOME_SUBTITLE' | translate }}</p>
+  <div aum-page-body class="aum-dashboard">
+    <div class="aum-dashboard-banner">
+      <div class="aum-dashboard-banner-content text-center">
+        <h1 class="fw-600 aum-dashboard-banner-title">{{ 'WELCOME_MESSAGE' | translate }}</h1>
+        <p class="fs-18 aum-dashboard-banner-subtitle">{{ 'WELCOME_SUBTITLE' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="margin-40 text-center">
+      <span class="fw-600 fs-28">{{ 'CORE_FEATURES' | translate }}</span>
+      <p class="margin-top-8 fs-18 aum-dashboard-subtitle">
+        {{ 'CORE_FEATURES_SUBTITLE' | translate }}
+      </p>
+    </div>
+
+    <div class="aum-dashboard-feature-list">
+      @for (feature of featureList; track feature.title) {
+        <aum-card [width]="'100%'" class="aum-dashboard-feature-card">
+          <div card-body class="aum-dashboard-feature-card-body" [matTooltip]="feature.description | translate">
+            <div class="aum-dashboard-feature-card-header">
+              <mat-icon class="aum-dashboard-feature-icon">{{ feature.icon }}</mat-icon>
+              <span class="fw-600 fs-20">{{ feature.title | translate }}</span>
+            </div>
+            <div class="truncate-multiline">
+              <span class="fw-400 fs-14">{{ feature.description | translate }}</span>
+            </div>
+          </div>
+        </aum-card>
+      }
     </div>
   </div>
 </aum-page>

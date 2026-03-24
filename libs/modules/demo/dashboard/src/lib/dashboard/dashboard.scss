@@ -1,26 +1,111 @@
 @use 'functions' as *;
 
-.dashboard-welcome {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.aum-dashboard {
   padding: rem(32);
 
-  &-container {
-    text-align: center;
-    max-width: rem(600);
-  }
+  &-banner {
+    border-radius: rem(16);
+    background: var(--mat-sys-primary);
+    padding: rem(48) rem(32);
+    margin-bottom: rem(8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  &-title {
-    font-size: rem(32);
-    font-weight: 600;
-    margin: 0;
+    &-content {
+      max-width: rem(700);
+    }
+
+    &-title {
+      font-size: rem(36);
+      margin: 0;
+      color: var(--mat-sys-on-primary);
+    }
+
+    &-subtitle {
+      margin-top: rem(12);
+      color: var(--mat-sys-on-primary);
+      opacity: 0.85;
+    }
   }
 
   &-subtitle {
-    font-size: rem(16);
-    margin-top: rem(16);
-    color: var(--text-secondary);
+    color: var(--mat-sys-on-surface-variant);
+    margin: 0;
   }
+
+  &-feature-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, rem(380));
+    justify-content: center;
+    gap: rem(24);
+    padding: rem(0) rem(40) rem(40);
+  }
+
+  &-feature-card {
+    cursor: default;
+    transition: box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 rem(6) rem(20) rgba(0, 0, 0, 0.12);
+    }
+
+    &-body {
+      display: flex;
+      flex-direction: column;
+      min-height: rem(120);
+    }
+
+    &-header {
+      display: flex;
+      align-items: flex-start;
+      gap: rem(10);
+      flex-shrink: 0;
+    }
+  }
+
+  &-feature-icon {
+    color: var(--mat-sys-primary);
+    margin-top: rem(2);
+  }
+
+  // Tablet: full-width single column
+  @media (max-width: 60rem) {
+    &-feature-list {
+      grid-template-columns: 1fr;
+      justify-content: unset;
+      padding: rem(0) rem(16) rem(32);
+    }
+  }
+
+  // Mobile
+  @media (max-width: 37.5rem) {
+    padding: rem(16);
+
+    &-banner {
+      padding: rem(32) rem(16);
+
+      &-title {
+        font-size: rem(24);
+      }
+    }
+
+    &-feature-list {
+      padding: 0 0 rem(24);
+      gap: rem(16);
+    }
+  }
+}
+
+.truncate-multiline {
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  // Prevent overflow when header is tall — fill remaining flex space and clip
+  flex: 1;
+  min-height: 0;
 }
