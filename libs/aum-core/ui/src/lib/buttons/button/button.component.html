@@ -10,7 +10,7 @@
     [style.width]="width"
     (click)="clickButton.emit()"
   >
-    {{ value }}
+    {{ value | translate }}
   </button>
   } @case ('filled') {
   <button
@@ -23,7 +23,7 @@
     [style.width]="width"
     (click)="clickButton.emit()"
   >
-    {{ value }}
+    {{ value | translate }}
   </button>
   } @case ('basic') {
   <button
@@ -36,7 +36,7 @@
     [style.width]="width"
     (click)="clickButton.emit()"
   >
-    {{ value }}
+    {{ value | translate }}
   </button>
   } @case ('icon') {
   <button

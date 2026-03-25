@@ -22,49 +22,49 @@
       <div class="example-button-row flex-row-space-between-center gap-4">
         <aum-button
           [type]="'outlined'"
-          [value]="'OUTLINED' | translate"
+          [value]="'OUTLINED'"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           (clickButton)="openMenu()"
         ></aum-button>
         <aum-button
           [type]="'outlined'"
           [size]="'small'"
-          [value]="'OUTLINED' | translate"
+          [value]="'OUTLINED'"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           (clickButton)="openMenu()"
         ></aum-button>
         <aum-button
           [type]="'outlined'"
           [size]="'large'"
-          [value]="'DISABLED' | translate"
+          [value]="'DISABLED'"
           [disabled]="true"
           [tooltip]="'DISABLED_BUTTON' | translate"
           (clickButton)="openMenu()"
         ></aum-button>
         <aum-button
           [type]="'basic'"
-          [value]="'BASIC' | translate"
+          [value]="'BASIC'"
           [disabled]="false"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           (clickButton)="openMenu()"
         ></aum-button>
         <aum-button
           [type]="'basic'"
-          [value]="'DISABLED' | translate"
+          [value]="'DISABLED'"
           [disabled]="true"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           (clickButton)="openMenu()"
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'FILLED' | translate"
+          [value]="'FILLED'"
           [disabled]="false"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           (clickButton)="openMenu()"
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'FILLED' | translate"
+          [value]="'FILLED'"
           [size]="'small'"
           [disabled]="false"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
@@ -72,7 +72,7 @@
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'DISABLED' | translate"
+          [value]="'DISABLED'"
           [disabled]="true"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           (clickButton)="openMenu()"
@@ -92,7 +92,7 @@
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'FILLED' | translate"
+          [value]="'FILLED'"
           [disabled]="false"
           [tooltip]="'DUMMY_TOOLTIP' | translate"
           [width]="'20rem'"
@@ -107,12 +107,12 @@
       <div class="example-button-row flex-row-flex-start-center gap-8">
         <aum-button
           [type]="'filled'"
-          [value]="'CONFIRMATION_DIALOG' | translate"
+          [value]="'CONFIRMATION_DIALOG'"
           (clickButton)="openConfirmationDialog()"
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'GENERIC_DIALOG' | translate"
+          [value]="'GENERIC_DIALOG'"
           (clickButton)="openGenericDialog()"
         ></aum-button>
       </div>
@@ -123,22 +123,22 @@
       <div class="example-button-row flex-row-flex-start-center gap-8">
         <aum-button
           [type]="'filled'"
-          [value]="'SUCCESS' | translate"
+          [value]="'SUCCESS'"
           (clickButton)="openSnackbar('success')"
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'ERROR' | translate"
+          [value]="'ERROR'"
           (clickButton)="openSnackbar('error')"
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'WARNING' | translate"
+          [value]="'WARNING'"
           (clickButton)="openSnackbar('warning')"
         ></aum-button>
         <aum-button
           [type]="'filled'"
-          [value]="'INFO' | translate"
+          [value]="'INFO'"
           (clickButton)="openSnackbar('info')"
         ></aum-button>
       </div>
@@ -204,19 +204,19 @@
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'GO_TO_INPUTS_DEMO' | translate"
+          [value]="'GO_TO_INPUTS_DEMO'"
           (clickButton)="goToInputsDemo()"
         ></aum-button>
       </div>
     </section>
     <mat-divider></mat-divider>
     <section>
-      <div class="example-label fs-14">Charts</div>
+      <div class="example-label fs-14">{{ 'CHARTS' | translate }}</div>
 
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'Go to Charts Demo'"
+          [value]="'GO_TO_CHARTS_DEMO'"
           (clickButton)="goToChartsDemo()"
         ></aum-button>
       </div>
@@ -228,7 +228,7 @@
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'GO_TO_TABS_DEMO' | translate"
+          [value]="'GO_TO_TABS_DEMO'"
           (clickButton)="goToTabsDemo()"
         ></aum-button>
       </div>
@@ -242,7 +242,7 @@
       <div class="example-button-row mb-3">
         <aum-button
           [type]="'filled'"
-          [value]="'GO_TO_EXPANSION_PANELS_DEMO' | translate"
+          [value]="'GO_TO_EXPANSION_PANELS_DEMO'"
           (clickButton)="goToExpansionPanelsDemo()"
         ></aum-button>
       </div>
@@ -254,7 +254,7 @@
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'GO_TO_SLIDE_TOGGLE_DEMO' | translate"
+          [value]="'GO_TO_SLIDE_TOGGLE_DEMO'"
           (clickButton)="goToSlideToggleDemo()"
         ></aum-button>
       </div>
@@ -266,7 +266,7 @@
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'GO_TO_CAROUSEL_DEMO' | translate"
+          [value]="'GO_TO_CAROUSEL_DEMO'"
           (clickButton)="goToCarouselsDemo()"
         ></aum-button>
       </div>
@@ -274,11 +274,11 @@
     <mat-divider></mat-divider>
     <!-- Upload Box Demo -->
     <section>
-      <div class="example-label fs-14">Upload Box</div>
+      <div class="example-label fs-14">{{ 'UPLOAD_BOX' | translate }}</div>
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          value="Go to Upload Box Demo"
+          [value]="'GO_TO_UPLOAD_BOX_DEMO'"
           (clickButton)="goToUploadBoxDemo()"
         ></aum-button>
       </div>
@@ -290,7 +290,7 @@
       <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'TEST_ERROR_HANDLERS' | translate"
+          [value]="'TEST_ERROR_HANDLERS'"
           (clickButton)="goToErrorTest()"
         ></aum-button>
       </div>
@@ -301,7 +301,7 @@
       <div class="example-button-row flex-row gap-4">
         <aum-button
           [type]="'filled'"
-          [value]="'NESTED_MENU' | translate"
+          [value]="'NESTED_MENU'"
           [matMenuTriggerFor]="dropDownMenu.childMenu"
         ></aum-button>
 
@@ -313,7 +313,7 @@
 
         <aum-button
           [type]="'filled'"
-          [value]="'SIMPLE_MENU' | translate"
+          [value]="'SIMPLE_MENU'"
           [matMenuTriggerFor]="choiceMenu.childMenu"
         ></aum-button>
 
@@ -339,7 +339,7 @@
         <h3 class="fs-16 mb-2">{{ 'PAGE_MODE_FULL_SCREEN_OVERLAY' | translate }}</h3>
         <aum-button
           [type]="'filled'"
-          [value]="'SHOW_PAGE_SPINNER_3_SECONDS' | translate"
+          [value]="'SHOW_PAGE_SPINNER_3_SECONDS'"
           (clickButton)="showPageModeSpinner()"
         ></aum-button>
       </div>
@@ -443,7 +443,7 @@
         <div class="fs-14">{{ 'DRAWER' | translate }}</div>
         <aum-button
           [type]="'filled'"
-          [value]="'DRAWER' | translate"
+          [value]="'DRAWER'"
           (clickButton)="toggleDrawer()"
         ></aum-button>
       </div>
@@ -460,9 +460,7 @@
         <div class="flex-row-flex-start-center gap-16">
           <aum-button
             [type]="enableBrowserNavigationProtection ? 'filled' : 'outlined'"
-            [value]="enableBrowserNavigationProtection
-              ? ('DISABLE_PROTECTION' | translate)
-              : ('ENABLE_PROTECTION' | translate)"
+            [value]="enableBrowserNavigationProtection ? 'DISABLE_PROTECTION' : 'ENABLE_PROTECTION'"
             (clickButton)="toggleBrowserNavigationProtection()"
           ></aum-button>
           <div class="fs-12">

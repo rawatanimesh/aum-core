@@ -43,7 +43,7 @@
           <aum-button
             [type]="action.type || 'icon'"
             [icon]="action.icon"
-            [value]="(action.value || '') | translate"
+            [value]="action.value || ''"
             [tooltip]="(action.tooltip || '') | translate"
             (clickButton)="onGlobalActionClick(action.id)"
           ></aum-button>

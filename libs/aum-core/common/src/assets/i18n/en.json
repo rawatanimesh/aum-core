@@ -215,5 +215,9 @@
   "PRODUCTION_QUALITY_DESC": "WCAG 2.1 AA accessibility with keyboard navigation.\nScreen reader support with proper ARIA labels.\nOnPush change detection and performance optimization.\nVirtual scrolling and efficient rendering strategies.",
   "RESPONSIVE_DESIGN_TITLE": "Responsive Design System",
   "RESPONSIVE_DESIGN_DESC": "Centralized SCSS breakpoint mixins — no scattered magic numbers.\nViewportService signal for TypeScript-based conditional rendering.\nBreakpoints aligned with Angular Material CDK (600px, 960px).\nPure CSS media queries, zero runtime cost for styling.",
-  "EXPLORE_PLAYGROUND": "Explore Playground"
+  "EXPLORE_PLAYGROUND": "Explore Playground",
+  "CHARTS": "Charts",
+  "GO_TO_CHARTS_DEMO": "Go to Charts Demo",
+  "UPLOAD_BOX": "Upload Box",
+  "GO_TO_UPLOAD_BOX_DEMO": "Go to Upload Box Demo"
 }
