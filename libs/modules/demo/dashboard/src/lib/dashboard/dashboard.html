@@ -24,7 +24,7 @@
 
     <div class="aum-dashboard-feature-list">
       @for (feature of featureList; track feature.title) {
-        <aum-card [width]="'100%'" class="aum-dashboard-feature-card">
+        <aum-card class="aum-dashboard-feature-card">
           <div card-body class="aum-dashboard-feature-card-body" [matTooltip]="feature.description | translate">
             <div class="aum-dashboard-feature-card-header">
               <mat-icon class="aum-dashboard-feature-icon">{{ feature.icon }}</mat-icon>

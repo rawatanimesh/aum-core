@@ -12,5 +12,5 @@ export class CardComponent {
   @Input() padding = true;
   @Input() boxShadow = true;
   @Input() height = 'auto';
-  @Input() width = '21.875em';
+  @Input() width = '100%';
 }
