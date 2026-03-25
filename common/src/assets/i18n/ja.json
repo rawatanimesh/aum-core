@@ -214,5 +214,8 @@
   "MODERN_ARCHITECTURE_TITLE": "モダンAngularアーキテクチャ",
   "MODERN_ARCHITECTURE_DESC": "シグナルリアクティビティを備えたAngularスタンドアロンコンポーネント。\nパフォーマンス向上のための新しい制御フロー構文（@if、@for）。\n認証、ログ、エラー処理のためのHTTPインターセプター。\n最適なバンドルサイズのための遅延読み込みとコード分割。",
   "PRODUCTION_QUALITY_TITLE": "本番環境対応品質",
-  "PRODUCTION_QUALITY_DESC": "キーボードナビゲーション対応のWCAG 2.1 AAアクセシビリティ。\n適切なARIAラベルによるスクリーンリーダーサポート。\nOnPush変更検出とパフォーマンス最適化。\n仮想スクロールと効率的なレンダリング戦略。"
+  "PRODUCTION_QUALITY_DESC": "キーボードナビゲーション対応のWCAG 2.1 AAアクセシビリティ。\n適切なARIAラベルによるスクリーンリーダーサポート。\nOnPush変更検出とパフォーマンス最適化。\n仮想スクロールと効率的なレンダリング戦略。",
+  "EXPLORE_PLAYGROUND": "プレイグラウンドを探索する",
+  "RESPONSIVE_DESIGN_TITLE": "レスポンシブデザインシステム",
+  "RESPONSIVE_DESIGN_DESC": "集中管理されたSCSSブレークポイントミックスイン — 散在するマジックナンバーなし。\nTypeScriptベースの条件付きレンダリング用ViewportServiceシグナル。\nAngular Material CDK準拠のブレークポイント（600px、960px）。\nスタイリングにランタイムコストなしの純粋なCSSメディアクエリ。"
 }
