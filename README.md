@@ -6,12 +6,16 @@ A modern Angular component library built with NX monorepo architecture, featurin
 
 - **[📋 Best Practices](./BEST_PRACTICES.md)** - Coding standards, conventions, and development guidelines
 - **[🏗️ Architecture](./docs/ARCHITECTURE.MD)** - Technical architecture, design decisions, and project structure
+- **[🆕 New App Setup](./docs/NEW-APP-SETUP.md)** - Step-by-step guide to scaffold a new app in this workspace
+- **[📐 Dev Guidelines](./docs/DEV-GUIDELINES.md)** - High-level development and architecture standards
+- **[📱 Responsive Design](./docs/RESPONSIVE-DESIGN.md)** - SCSS breakpoint mixins and ViewportService usage
+- **[🔧 Dynamic Toolbar Actions](./docs/DYNAMIC-TOOLBAR-ACTIONS.md)** - Register/unregister toolbar buttons at runtime
+- **[🎛️ Custom Toolbar Menus](./docs/CUSTOM_TOOLBAR_MENU_USAGE.md)** - Add custom dropdown menus to the toolbar
 - **[🤝 Contributing](./CONTRIBUTING.md)** - Developer contribution guide and workflow
 - **[🚀 Getting Started](#-getting-started)** - Quick start guide and development setup
 - **[📖 Component Guide](#-component-library)** - Available components and usage examples
 - **[🎨 Theming](#-theming)** - Theme customization and usage
 - **[📁 Project Structure](#-project-structure)** - Directory organization
-- **[🤝 Contributing](#-contributing)** - How to contribute to the project
 
 ## 🚀 Getting Started
 
@@ -96,6 +100,11 @@ nx lint demo-app
 - **CardComponent** - Content container with shadow
 - **BreadcrumbComponent** - Navigation breadcrumbs
 
+#### Application Shell Templates
+
+- **AumTemplate** (`@aum/templates/aum-template`) - Toolbar-first layout with collapsible overlay sidenav
+- **AumTemplate2** (`@aum/templates/aum-template-2`) - Sidebar-first layout with persistent sidebar on desktop/tablet and responsive mobile drawer
+
 #### Feedback & Dialogs
 
 - **ConfirmationDialogComponent** - Yes/No confirmation dialogs
@@ -109,7 +118,8 @@ nx lint demo-app
 - **LanguageTranslationService** - Multi-language support with English, Japanese, and Hindi
 - **ErrorHandlerService** - Global error handling with structured logging
 - **AuthService** - Authentication and route protection
-- **ApplicationConfigService** - Centralized application configuration
+- **AppConfigService** - Centralized application configuration (nav items, toolbar menus, branding)
+- **ViewportService** - Reactive signal-based viewport detection (`mobile` | `tablet` | `desktop`)
 
 ### Usage Example
 

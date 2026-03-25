@@ -24,7 +24,7 @@ This document provides a comprehensive overview of the AUM UI project architectu
 AUM UI is a modern Angular component library built using:
 
 - **NX Monorepo** for scalable development and code organization
-- **Angular 20** with standalone components and signals
+- **Angular 21** with standalone components and signals
 - **Material Design 3** for consistent theming
 - **TypeScript** for type safety and developer experience
 
@@ -44,10 +44,10 @@ AUM UI is a modern Angular component library built using:
 
 | Technology       | Version | Purpose              |
 | ---------------- | ------- | -------------------- |
-| Angular          | 20.x    | Frontend framework   |
-| NX               | 21.x    | Monorepo tooling     |
+| Angular          | 21.x    | Frontend framework   |
+| NX               | 22.x    | Monorepo tooling     |
 | TypeScript       | 5.8.x   | Language             |
-| Angular Material | 20.x    | UI components        |
+| Angular Material | 21.x    | UI components        |
 | RxJS             | 7.8.x   | Reactive programming |
 | Jest             | 29.x    | Testing framework    |
 
@@ -67,42 +67,49 @@ AUM UI is a modern Angular component library built using:
 ```
 aum-core/
 ├── apps/
-│   └── aum-core/                 # Main application
+│   └── demo-app/                 # Demo application (lightweight entry point)
 │       ├── src/
 │       │   ├── app/
 │       │   │   ├── app.component.ts
-│       │   │   ├── app.routes.ts  # Route configuration
-│       │   │   └── app.config.ts  # App configuration
+│       │   │   ├── app.routes.ts    # Route configuration
+│       │   │   ├── app.config.ts    # App providers & bootstrap config
+│       │   │   └── app-config.json  # UI/nav/toolbar configuration
 │       │   └── main.ts
-│       └── public/               # Static assets
+│       └── public/                 # Static assets (favicon, logos)
 ├── libs/
-│   ├── aum/                     # Core AUM libraries
-│   │   ├── ui/                  # Reusable UI components
+│   ├── aum-core/                  # Core AUM framework libraries
+│   │   ├── ui/                    # Reusable UI components
 │   │   │   ├── buttons/
 │   │   │   ├── form-controls/
 │   │   │   ├── layout/
 │   │   │   ├── navigation/
 │   │   │   ├── dialogs/
 │   │   │   └── utilities/
-│   │   ├── theme/               # Theming & styling
+│   │   ├── common/                # Shared assets (i18n, SVGs) and common components
+│   │   │   └── src/assets/i18n/   # Translation files (en.json, ja.json, hi.json)
+│   │   ├── theme/                 # Theming & styling
 │   │   │   ├── src/
 │   │   │   │   ├── styles/
+│   │   │   │   │   ├── abstracts/ # _variables.scss, _mixins.scss, functions.scss
+│   │   │   │   │   └── themes/    # Material theme definitions
 │   │   │   │   └── assets/
-│   │   ├── utils/               # Services & utilities
-│   │   └── templates/           # Template components
-│   └── modules/                 # Application modules
-│       ├── dashboard/           # Dashboard feature
-│       └── playground/          # Component showcase
-├── docs/                       # Documentation
-├── tools/                      # Build tools & scripts
+│   │   ├── utils/                 # Services & interfaces
+│   │   └── templates/             # Application shell templates
+│   │       ├── aum-template/      # Template 1 - toolbar-first layout
+│   │       └── aum-template-2/    # Template 2 - sidebar-first responsive layout
+│   └── modules/                   # Demo/feature modules
+│       └── demo/
+│           ├── dashboard/         # Dashboard feature
+│           └── playground/        # Component showcase
+├── docs/                          # Documentation
 └── package.json
 ```
 
 ### Library Organization
 
-#### Core Libraries (`libs/aum/`)
+#### Core Libraries (`libs/aum-core/`)
 
-**UI Components (`libs/aum/ui/`)**
+**UI Components (`libs/aum-core/ui/`)**
 
 ```
 ui/
@@ -129,23 +136,40 @@ ui/
    └── snackbar/
 ```
 
-**Theme System (`libs/aum/theme/`)**
+**Theme System (`libs/aum-core/theme/`)**
 
 ```
 theme/
 ├── src/
 │   ├── styles/
-│   │   ├── themes/
-│   │   │   └── theme-purple/
-│   │   ├── utilities.scss
-│   │   └── functions.scss
+│   │   ├── abstracts/
+│   │   │   ├── _variables.scss  # Breakpoint values, spacing tokens
+│   │   │   ├── _mixins.scss     # Responsive mixins (mobile/tablet/desktop)
+│   │   │   └── functions.scss   # rem() function
+│   │   └── themes/
+│   │       └── theme-purple/
 │   └── assets/
 │       ├── icons/
 │       ├── images/
 │       └── svgs/
 ```
 
-#### Application Modules (`libs/modules/`)
+**Templates (`libs/aum-core/templates/`)**
+
+Two ready-to-use application shell templates are available. Choose one per app.
+
+| Template | Selector | Import | Best for |
+|---|---|---|---|
+| `AumTemplate` | `<aum-template>` | `@aum/templates/aum-template` | Toolbar-first layout with overlay sidenav |
+| `AumTemplate2` | `<aum-template-2>` | `@aum/templates/aum-template-2` | Sidebar-first layout with responsive mobile drawer |
+
+**AumTemplate** — classic toolbar + collapsible overlay sidenav. The toolbar is always visible; the sidenav slides in over the content. Configured entirely through `AppConfigService`/`app-config.json`.
+
+**AumTemplate2** — persistent sidebar on tablet/desktop, auto-hides to a mobile drawer on narrow screens. No dedicated top toolbar; identity (logo, app name) lives in the sidebar. Accepts a `drawerWidth` input. Recommended for new apps.
+
+See [DYNAMIC-TOOLBAR-ACTIONS.md](./DYNAMIC-TOOLBAR-ACTIONS.md) and [CUSTOM_TOOLBAR_MENU_USAGE.md](./CUSTOM_TOOLBAR_MENU_USAGE.md) for toolbar customisation patterns (applies to `AumTemplate`).
+
+#### Application Modules (`libs/modules/demo/`)
 
 **Dashboard Module**
 
@@ -456,14 +480,14 @@ The rem() function supports three display modes:
 
 ```json
 {
-  "name": "aum-ui",
+  "name": "demo-app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "options": {
-        "outputPath": "dist/apps/aum-core",
-        "index": "apps/aum-core/src/index.html",
-        "main": "apps/aum-core/src/main.ts"
+        "outputPath": "dist/apps/demo-app",
+        "index": "apps/demo-app/src/index.html",
+        "main": "apps/demo-app/src/main.ts"
       }
     },
     "serve": {
@@ -487,16 +511,16 @@ The rem() function supports three display modes:
 
 ```bash
 # Development server
-nx serve aum-core
+nx serve demo-app
 
 # Production build
-nx build aum-core --configuration=production
+nx build demo-app --configuration=production
 
 # Run tests
-nx test aum-core
+nx test demo-app
 
 # Lint code
-nx lint aum-core
+nx lint demo-app
 ```
 
 ---
