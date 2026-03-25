@@ -2,7 +2,12 @@
   "name": "@aum/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "serve": "nx serve demo-app",
+    "build": "nx build demo-app",
+    "test": "nx test demo-app",
+    "publish-core": "./scripts/publish-aum-core.sh"
+  },
   "private": true,
   "dependencies": {
     "@angular/cdk": "^21.0.5",
