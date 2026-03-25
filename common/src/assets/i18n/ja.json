@@ -217,5 +217,9 @@
   "PRODUCTION_QUALITY_DESC": "キーボードナビゲーション対応のWCAG 2.1 AAアクセシビリティ。\n適切なARIAラベルによるスクリーンリーダーサポート。\nOnPush変更検出とパフォーマンス最適化。\n仮想スクロールと効率的なレンダリング戦略。",
   "EXPLORE_PLAYGROUND": "プレイグラウンドを探索する",
   "RESPONSIVE_DESIGN_TITLE": "レスポンシブデザインシステム",
-  "RESPONSIVE_DESIGN_DESC": "集中管理されたSCSSブレークポイントミックスイン — 散在するマジックナンバーなし。\nTypeScriptベースの条件付きレンダリング用ViewportServiceシグナル。\nAngular Material CDK準拠のブレークポイント（600px、960px）。\nスタイリングにランタイムコストなしの純粋なCSSメディアクエリ。"
+  "RESPONSIVE_DESIGN_DESC": "集中管理されたSCSSブレークポイントミックスイン — 散在するマジックナンバーなし。\nTypeScriptベースの条件付きレンダリング用ViewportServiceシグナル。\nAngular Material CDK準拠のブレークポイント（600px、960px）。\nスタイリングにランタイムコストなしの純粋なCSSメディアクエリ。",
+  "CHARTS": "チャート",
+  "GO_TO_CHARTS_DEMO": "チャートデモへ移動",
+  "UPLOAD_BOX": "アップロードボックス",
+  "GO_TO_UPLOAD_BOX_DEMO": "アップロードボックスデモへ移動"
 }
