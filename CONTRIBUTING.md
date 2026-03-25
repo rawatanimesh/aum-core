@@ -27,8 +27,8 @@ Before contributing, ensure you have:
 - **Node.js**: v22.17.0
 - **npm**: Latest version
 - **Git**: Latest version
-- **Angular CLI**: v20.x
-- **NX CLI**: v21.x (recommended)
+- **Angular CLI**: v21.x
+- **NX CLI**: v22.x (recommended)
 
 ### Project Setup
 
@@ -43,7 +43,7 @@ cd aum-core
 3. **Add upstream remote**:
 
 ```bash
-git remote add upstream https://github.com/original-owner/aum-core.git
+git remote add upstream https://github.com/rawatanimesh/aum-core.git
 ```
 
 4. **Install dependencies**:
@@ -138,7 +138,17 @@ git commit -m "feat: add new button component with icon support"
 - `test:` - Adding or updating tests
 - `chore:` - Maintenance tasks
 
-### 4. Push and Create Pull Request
+### 4. Publish core (if you changed `libs/aum-core/`)
+
+If your changes are inside `libs/aum-core/`, run the publish script after your commit so consuming app repos can pull the update:
+
+```bash
+npm run publish-core
+```
+
+See [docs/DISTRIBUTION.md](./docs/DISTRIBUTION.md) for details.
+
+### 5. Push and Create Pull Request
 
 ```bash
 git push origin feature/component-name
