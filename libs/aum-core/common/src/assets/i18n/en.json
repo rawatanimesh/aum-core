@@ -212,5 +212,8 @@
   "MODERN_ARCHITECTURE_TITLE": "Modern Angular Architecture",
   "MODERN_ARCHITECTURE_DESC": "Angular standalone components with signals reactivity.\nNew control flow syntax (@if, @for) for better performance.\nHTTP interceptors for auth, logging, and error handling.\nLazy loading and code splitting for optimal bundle size.",
   "PRODUCTION_QUALITY_TITLE": "Production-Ready Quality",
-  "PRODUCTION_QUALITY_DESC": "WCAG 2.1 AA accessibility with keyboard navigation.\nScreen reader support with proper ARIA labels.\nOnPush change detection and performance optimization.\nVirtual scrolling and efficient rendering strategies."
+  "PRODUCTION_QUALITY_DESC": "WCAG 2.1 AA accessibility with keyboard navigation.\nScreen reader support with proper ARIA labels.\nOnPush change detection and performance optimization.\nVirtual scrolling and efficient rendering strategies.",
+  "RESPONSIVE_DESIGN_TITLE": "Responsive Design System",
+  "RESPONSIVE_DESIGN_DESC": "Centralized SCSS breakpoint mixins — no scattered magic numbers.\nViewportService signal for TypeScript-based conditional rendering.\nBreakpoints aligned with Angular Material CDK (600px, 960px).\nPure CSS media queries, zero runtime cost for styling.",
+  "EXPLORE_PLAYGROUND": "Explore Playground"
 }

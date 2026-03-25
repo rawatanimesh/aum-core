@@ -1,4 +1,5 @@
 @use 'functions' as *;
+@use 'mixins' as *;
 
 .aum-dashboard {
   padding: rem(32);
@@ -26,6 +27,14 @@
       margin-top: rem(12);
       color: var(--mat-sys-on-primary);
       opacity: 0.85;
+    }
+
+    &-actions {
+      margin-top: rem(24);
+
+      // Make the outlined button visible on the primary-colored banner background
+      --mdc-outlined-button-label-text-color: var(--mat-sys-on-primary);
+      --mdc-outlined-button-outline-color: var(--mat-sys-on-primary);
     }
   }
 
@@ -69,8 +78,7 @@
     margin-top: rem(2);
   }
 
-  // Tablet: full-width single column
-  @media (max-width: 60rem) {
+  @include tablet {
     &-feature-list {
       grid-template-columns: 1fr;
       justify-content: unset;
@@ -78,8 +86,7 @@
     }
   }
 
-  // Mobile
-  @media (max-width: 37.5rem) {
+  @include mobile {
     padding: rem(16);
 
     &-banner {

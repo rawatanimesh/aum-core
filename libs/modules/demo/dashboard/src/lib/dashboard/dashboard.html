@@ -4,6 +4,14 @@
       <div class="aum-dashboard-banner-content text-center">
         <h1 class="fw-600 aum-dashboard-banner-title">{{ 'WELCOME_MESSAGE' | translate }}</h1>
         <p class="fs-18 aum-dashboard-banner-subtitle">{{ 'WELCOME_SUBTITLE' | translate }}</p>
+        <div class="aum-dashboard-banner-actions">
+          <aum-button
+            [type]="'outlined'"
+            [value]="'EXPLORE_PLAYGROUND' | translate"
+            [icon]="'play_arrow'"
+            (clickButton)="navigateToPlayground()"
+          />
+        </div>
       </div>
     </div>
 
