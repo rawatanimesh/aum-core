@@ -12,6 +12,8 @@ export interface ToolbarAction {
   type?: 'outlined' | 'filled' | 'basic' | 'icon';
   value?: string;
   order?: number;
+  /** When true, the action is grouped into the overflow (more_vert) menu on desktop and shown as a row in the mobile settings drawer */
+  overflow?: boolean;
 }
 
 /**
@@ -30,6 +32,8 @@ export interface ToolbarCustomTemplate {
   id: string;
   template: TemplateRef<unknown>;
   order?: number;
+  /** Label shown alongside the template in the settings drawer (mobile). Use a translation key. */
+  label?: string;
 }
 
 /**

@@ -1,6 +1,9 @@
 <div class="aum-template-page">
   <div class="aum-template-page-header">
-    <aum-toolbar (sideMenuToggle)="toggleSideNav()"></aum-toolbar>
+    <aum-toolbar
+      (sideMenuToggle)="toggleSideNav()"
+      (settingsDrawerToggle)="toggleSettingsDrawer()"
+    ></aum-toolbar>
   </div>
 
   <div class="aum-template-page-body">
@@ -8,30 +11,20 @@
       class="aum-template-page-body-container"
       [hasBackdrop]="true"
     >
-      <!-- Left Sidenav -->
+      <!-- Left Sidenav: navigation -->
       <mat-sidenav #sidenav class="navSide" mode="over">
         <aum-sidenav
           (menuItemClicked)="updateBreadCrumbs($event); toggleSideNav()"
         ></aum-sidenav>
       </mat-sidenav>
 
-      <!-- Right Empty Sidenav (optional) -->
-      <mat-sidenav mode="over" position="end" opened="false"> </mat-sidenav>
+      <!-- Right Sidenav: settings drawer (mobile only) -->
+      <mat-sidenav #settingsDrawer class="settingsSide" mode="over" position="end">
+        <aum-settings-drawer></aum-settings-drawer>
+      </mat-sidenav>
 
       <!-- Main Content -->
       <mat-sidenav-content>
-        <!-- <div
-        class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing"
-        [style.display]="'none'"
-        id="application-loader-with-overlay"
-      >
-        <app-overlay-loader class="create_loader"></app-overlay-loader>
-      </div> -->
-        <!-- <app-overlay-loader
-        class="create_loader"
-        id="application-loader"
-        [style.display]="isAppMount ? 'block' : 'none'"
-      ></app-overlay-loader> -->
         <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>

@@ -1,10 +1,11 @@
 @use 'functions' as *;
+@use 'mixins.scss' as *;
+@use 'variables.scss' as *;
 
 .aum-toolbar {
   width: 100%;
   &-left {
     width: 30%;
-    // background-color: aquamarine;
     &-brandLogo {
       height: rem(45);
     }
@@ -17,10 +18,24 @@
   }
   &-center {
     width: 40%;
-    // background-color: lightcoral;
   }
   &-right {
     width: 30%;
-    // background-color: lightblue;
+  }
+}
+
+// Desktop/tablet: all individual action icons visible
+// Mobile: hidden — right settings drawer shows them instead
+.aum-t1-desktop-actions {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+// Mobile only: tune icon that opens the right settings drawer
+// Hidden on tablet + desktop where the individual icons are shown directly
+.aum-t1-settings-trigger {
+  @media (min-width: ($breakpoint-mobile + 1px)) {
+    display: none !important;
   }
 }

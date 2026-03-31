@@ -2,9 +2,10 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { MatButtonModule } from '@angular/material/button';
+
 import { ToolbarComponent } from '../components/toolbar/toolbar.component';
 import { SidenavComponent } from '../components/sidenav/sidenav.component';
+import { SettingsDrawerComponent } from '../components/settings-drawer/settings-drawer.component';
 
 @Component({
   selector: 'aum-template',
@@ -12,9 +13,9 @@ import { SidenavComponent } from '../components/sidenav/sidenav.component';
     RouterModule,
     CommonModule,
     MatSidenavModule,
-    MatButtonModule,
     ToolbarComponent,
     SidenavComponent,
+    SettingsDrawerComponent,
   ],
   templateUrl: './aum-template.html',
   styleUrl: './aum-template.scss',
@@ -22,14 +23,19 @@ import { SidenavComponent } from '../components/sidenav/sidenav.component';
 })
 export class AumTemplate {
   @ViewChild('sidenav') sidenav!: MatSidenav;
-  public sideNav = false;
-  public subMenuHide = false;
+  @ViewChild('settingsDrawer') settingsDrawer!: MatSidenav;
 
   toggleSideNav(): void {
+    this.settingsDrawer?.close();
     this.sidenav.toggle();
   }
+
+  toggleSettingsDrawer(): void {
+    this.sidenav?.close();
+    this.settingsDrawer.toggle();
+  }
+
   updateBreadCrumbs(event: any) {
-    // Logic to update breadcrumbs based on the event
     console.log('Breadcrumbs updated with event:', event);
   }
 }

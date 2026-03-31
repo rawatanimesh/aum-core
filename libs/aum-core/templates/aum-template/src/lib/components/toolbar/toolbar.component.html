@@ -38,43 +38,70 @@
     <!-- right side of the toolbar -->
     <div class="aum-toolbar-right">
       <div class="flex-row-flex-end-center gap-4">
-        <!-- Dynamic global toolbar actions -->
-        @for (action of globalActions; track action.id) {
-          <aum-button
-            [type]="action.type || 'icon'"
-            [icon]="action.icon"
-            [value]="action.value || ''"
-            [tooltip]="(action.tooltip || '') | translate"
-            (clickButton)="onGlobalActionClick(action.id)"
-          ></aum-button>
-        }
 
-        <!-- Custom templates -->
-        @for (template of customTemplates; track template.id) {
-          <ng-container *ngTemplateOutlet="template.template"></ng-container>
-        }
+        <!-- Desktop/tablet: direct actions, custom templates, preferences, profile -->
+        <div class="aum-t1-desktop-actions flex-row-flex-end-center gap-4">
+          @for (action of toolbarActions; track action.id) {
+            <aum-button
+              [type]="action.type || 'icon'"
+              [icon]="action.icon"
+              [value]="action.value || ''"
+              [tooltip]="(action.tooltip || '') | translate"
+              (clickButton)="onGlobalActionClick(action.id)"
+            ></aum-button>
+          }
 
-        @if (shouldShowPreferencesMenu()) {
-          <aum-button
-            [type]="'icon'"
-            [icon]="'tune'"
-            [tooltip]="'PREFERENCES' | translate"
-            [matMenuTriggerFor]="optionsMenu.childMenu"
-            [disabled]="isPreferencesMenuDisabled()"
-            (clickButton)="onMenuOpening()"
-          ></aum-button>
-        }
+          @for (template of customTemplates; track template.id) {
+            <ng-container *ngTemplateOutlet="template.template"></ng-container>
+          }
 
-        @if (shouldShowProfileMenu()) {
-          <aum-button
-            [type]="'icon'"
-            [icon]="'account_circle'"
-            [tooltip]="'MY_ACCOUNT' | translate"
-            [matMenuTriggerFor]="profileMenu.childMenu"
-            [disabled]="isProfileMenuDisabled()"
-            (clickButton)="onMenuOpening()"
-          ></aum-button>
-        }
+          @if (overflowActions.length) {
+            <aum-button
+              [type]="'icon'"
+              [icon]="'more_vert'"
+              [tooltip]="'MORE_OPTIONS' | translate"
+              [matMenuTriggerFor]="overflowMenu.childMenu"
+              (clickButton)="onMenuOpening()"
+            ></aum-button>
+            <aum-menu-list
+              #overflowMenu="aumMenu"
+              [list]="overflowMenuList"
+              (itemSelected)="onOverflowMenuSelect($event)"
+            ></aum-menu-list>
+          }
+
+          @if (shouldShowPreferencesMenu()) {
+            <aum-button
+              [type]="'icon'"
+              [icon]="'tune'"
+              [tooltip]="'PREFERENCES' | translate"
+              [matMenuTriggerFor]="optionsMenu.childMenu"
+              [disabled]="isPreferencesMenuDisabled()"
+              (clickButton)="onMenuOpening()"
+            ></aum-button>
+          }
+
+          @if (shouldShowProfileMenu()) {
+            <aum-button
+              [type]="'icon'"
+              [icon]="'account_circle'"
+              [tooltip]="'MY_ACCOUNT' | translate"
+              [matMenuTriggerFor]="profileMenu.childMenu"
+              [disabled]="isProfileMenuDisabled()"
+              (clickButton)="onMenuOpening()"
+            ></aum-button>
+          }
+        </div>
+
+        <!-- Mobile only: tune icon opens the right settings drawer -->
+        <aum-button
+          class="aum-t1-settings-trigger"
+          [type]="'icon'"
+          [icon]="'tune'"
+          [tooltip]="'PREFERENCES' | translate"
+          (clickButton)="openSettingsDrawer()"
+        ></aum-button>
+
       </div>
     </div>
   </div>

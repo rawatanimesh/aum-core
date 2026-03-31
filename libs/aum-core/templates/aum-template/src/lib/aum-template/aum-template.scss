@@ -9,13 +9,12 @@
   width: 100%;
   overflow: hidden;
   &-header {
-    // height: 5em;
     height: rem(52);
-    border-bottom: rem(0.8) solid #ebebeb; //51.7+1 ~52
+    border-bottom: rem(0.8) solid var(--mat-sys-outline-variant);
     .mat-toolbar-single-row {
       padding: 0;
       gap: rem(8);
-      height: rem(52); //~52px
+      height: rem(52);
     }
   }
   &-body {
@@ -24,13 +23,10 @@
     &-container {
       width: 100%;
       height: 100%;
-      .navSide {
+      .navSide,
+      .settingsSide {
         width: rem(300);
       }
-    }
-    .mat-drawer:not(.mat-drawer-side) {
-      box-shadow: 0 0 0.4em rgba(0, 0, 0, 0.3);
-      border-radius: 0;
     }
   }
 }

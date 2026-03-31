@@ -1,20 +1,20 @@
 import {
+  ChangeDetectorRef,
   Component,
   computed,
+  DestroyRef,
+  effect,
   EventEmitter,
   inject,
   OnInit,
   Output,
-  effect,
-  ChangeDetectorRef,
-  OnDestroy,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
 
 import { ThemeService, AppConfigService, LanguageTranslationService, MenuConfigHelper } from '@aum/utils/services';
 import { BreadcrumbService } from '@aum/ui/navigation';
@@ -40,8 +40,9 @@ import { ToolbarContentService, ToolbarAction, ToolbarCustomTemplate } from '../
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.scss',
 })
-export class ToolbarComponent implements OnInit, OnDestroy {
+export class ToolbarComponent implements OnInit {
   @Output() sideMenuToggle = new EventEmitter();
+  @Output() settingsDrawerToggle = new EventEmitter();
   protected themeService = inject(ThemeService);
   protected breadcrumbService = inject(BreadcrumbService);
   protected appConfigService = inject(AppConfigService);
@@ -52,6 +53,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   private snackbarService = inject(SnackbarService);
   private eventBus = inject(AppEventBusService);
   private toolbarContentService = inject(ToolbarContentService);
+  private destroyRef = inject(DestroyRef);
 
   // Computed signals for reactive config
   themeIcon = computed(() => this.themeService.themeIcon());
@@ -111,13 +113,13 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   optionsMenuList: MenuItem[] = [];
   profileMenuList: MenuItem[] = [];
 
-  // Dynamic toolbar actions
-  globalActions: ToolbarAction[] = [];
-  private globalActionsSubscription?: Subscription;
+  // Dynamic toolbar actions — split into direct icons vs overflow (more_vert) menu
+  toolbarActions: ToolbarAction[] = [];
+  overflowActions: ToolbarAction[] = [];
+  overflowMenuList: MenuItem[] = [];
 
   // Custom toolbar templates
   customTemplates: ToolbarCustomTemplate[] = [];
-  private customTemplatesSubscription?: Subscription;
 
   private buildMenus(): void {
     const config = this.toolbarMenusConfig();
@@ -266,6 +268,17 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     this.profileMenuList = profileMenuItems;
+
+    this.buildOverflowMenuList();
+  }
+
+  private buildOverflowMenuList(): void {
+    this.overflowMenuList = this.overflowActions.map((action) => ({
+      label: this.languageService.instant(action.tooltip || ''),
+      value: action.id,
+      icon: action.icon,
+      showSelection: false,
+    }));
   }
 
   ngOnInit() {
@@ -298,17 +311,17 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
     });
 
-    // Subscribe to global toolbar actions
-    this.globalActionsSubscription = this.toolbarContentService
-      .getGlobalActions()
+    this.toolbarContentService.getGlobalActions()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((actions) => {
-        this.globalActions = actions;
+        this.toolbarActions = actions.filter((a) => !a.overflow);
+        this.overflowActions = actions.filter((a) => a.overflow);
+        this.buildOverflowMenuList();
         this.cdr.markForCheck();
       });
 
-    // Subscribe to custom toolbar templates
-    this.customTemplatesSubscription = this.toolbarContentService
-      .getCustomTemplates()
+    this.toolbarContentService.getCustomTemplates()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((templates) => {
         this.customTemplates = templates;
         this.cdr.markForCheck();
@@ -388,6 +401,10 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.sideMenuToggle.emit();
   }
 
+  openSettingsDrawer(): void {
+    this.settingsDrawerToggle.emit();
+  }
+
   onMenuOpening(): void {
     // Rebuild menus when the menu is opened to ensure translations are up-to-date
     // This fixes the issue where language changes don't update menu on first switch
@@ -432,8 +449,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     this.toolbarContentService.executeAction(actionId);
   }
 
-  ngOnDestroy(): void {
-    this.globalActionsSubscription?.unsubscribe();
-    this.customTemplatesSubscription?.unsubscribe();
+  onOverflowMenuSelect(item: MenuItem): void {
+    this.toolbarContentService.executeAction(item.value as string);
   }
+
 }

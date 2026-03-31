@@ -2,6 +2,8 @@
 
 Application shell template with a **persistent top toolbar** and a **hamburger-toggled overlay sidenav**.
 
+On **mobile** (< 700 px) the preferences and profile buttons are hidden from the toolbar and instead appear in the sidenav footer, matching the responsive behaviour of `AumTemplate2`.
+
 ## When to use
 
 Choose `AumTemplate` when your app needs a fixed top bar that is always visible and a side navigation that slides in over the content on demand.
