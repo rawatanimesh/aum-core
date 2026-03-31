@@ -34,6 +34,7 @@ export interface PreferencesMenuConfig {
   items?: {
     theme?: MenuItemConfig;
     language?: MenuItemConfig;
+    template?: MenuItemConfig;
   };
 }
 

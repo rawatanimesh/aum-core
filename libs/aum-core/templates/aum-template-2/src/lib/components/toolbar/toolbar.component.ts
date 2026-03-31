@@ -147,6 +147,21 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       });
     }
 
+    // Template switcher
+    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
+      const savedTemplate = localStorage.getItem('app-template') || 'template-2';
+      preferencesMenuItems.push({
+        label: this.languageService.instant('TEMPLATE'),
+        value: 'template',
+        icon: 'dashboard_customize',
+        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'template'),
+        children: [
+          { label: this.languageService.instant('TEMPLATE_1'), value: 'template-1', icon: 'view_sidebar', selected: savedTemplate === 'template-1' },
+          { label: this.languageService.instant('TEMPLATE_2'), value: 'template-2', icon: 'view_compact', selected: savedTemplate === 'template-2' },
+        ],
+      });
+    }
+
     const savedMode = localStorage.getItem('ui-scale-mode') || 'default';
     preferencesMenuItems.push({
       label: this.languageService.instant('DISPLAY'),
@@ -204,6 +219,11 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   }
 
   onMenuSelect(item: MenuItem) {
+    if (item.value === 'template-1' || item.value === 'template-2') {
+      localStorage.setItem('app-template', item.value);
+      this.setMenuSelection(this.optionsMenuList, 'template', item.value);
+      this.eventBus.emit(AppEventType.TEMPLATE_CHANGED, { template: item.value });
+    }
     if (item.value === 'compact' || item.value === 'default' || item.value === 'large') {
       this.setUiScale(item.value);
       this.setMenuSelection(this.optionsMenuList, 'mode', item.value);

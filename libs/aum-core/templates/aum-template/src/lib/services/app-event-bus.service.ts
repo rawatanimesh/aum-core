@@ -11,6 +11,7 @@ export enum AppEventType {
   THEME_CHANGED = 'THEME_CHANGED',
   UI_SCALE_CHANGED = 'UI_SCALE_CHANGED',
   LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',
+  TEMPLATE_CHANGED = 'TEMPLATE_CHANGED',
   // Add more event types as needed
 }
 

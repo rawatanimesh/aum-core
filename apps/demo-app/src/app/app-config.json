@@ -63,6 +63,10 @@
         "theme": {
           "show": true,
           "disabled": false
+        },
+        "template": {
+          "show": true,
+          "disabled": false
         }
       }
     }

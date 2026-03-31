@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { AuthGuardService } from './auth-gaurd.service';
+import { TemplateWrapperComponent } from './template-wrapper.component';
 
 export const appRoutes: Route[] = [
   {
@@ -15,8 +16,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: '',
-    loadComponent: () => import('@aum/templates/aum-template-2').then((m) => m.AumTemplate2), // Common layout
-    data: { drawerWidth: '200px' },
+    component: TemplateWrapperComponent,
     canActivate: [AuthGuardService],
     children: [
       {

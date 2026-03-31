@@ -330,6 +330,17 @@ export class MyComponent {
 }
 ```
 
+### Available Event Types
+
+| Event Type | Payload | Description |
+|---|---|---|
+| `LOGOUT` | — | Emitted when the user logs out |
+| `THEME_CHANGED` | `{ theme, previousTheme }` | Emitted when the user switches light/dark/system theme |
+| `UI_SCALE_CHANGED` | `{ scale, previousScale }` | Emitted when the user changes display density (compact/default/large) |
+| `LANGUAGE_CHANGED` | `{ language, previousLanguage }` | Emitted when the user switches the app language |
+| `TEMPLATE_CHANGED` | `{ template: 'template-1' \| 'template-2' }` | Emitted when the user switches between layout templates |
+| `CUSTOM_MENU_ACTION` | `{ menuId, actionId, data }` | Emitted when a custom toolbar menu item is selected |
+
 ## Examples from AUM Core
 
 For more examples, refer to the AUM Core implementation:
