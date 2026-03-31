@@ -65,9 +65,21 @@ interface CustomMenuActionPayload {
 enum AppEventType {
   LOGOUT = 'LOGOUT',
   CUSTOM_MENU_ACTION = 'CUSTOM_MENU_ACTION',
-  // Add more specific event types as needed
+  THEME_CHANGED = 'THEME_CHANGED',
+  UI_SCALE_CHANGED = 'UI_SCALE_CHANGED',
+  LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',
+  TEMPLATE_CHANGED = 'TEMPLATE_CHANGED',
 }
 ```
+
+| Event | Payload | Emitted when |
+|---|---|---|
+| `LOGOUT` | — | User logs out |
+| `CUSTOM_MENU_ACTION` | `{ menuId, actionId, data }` | Custom toolbar menu item is selected |
+| `THEME_CHANGED` | `{ theme, previousTheme }` | User switches light/dark/system theme |
+| `UI_SCALE_CHANGED` | `{ scale, previousScale }` | User changes display density (compact/default/large) |
+| `LANGUAGE_CHANGED` | `{ language, previousLanguage }` | User switches app language |
+| `TEMPLATE_CHANGED` | `{ template: 'template-1' \| 'template-2' }` | User switches layout template |
 
 ### ToolbarContentService Methods
 

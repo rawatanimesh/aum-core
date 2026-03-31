@@ -173,7 +173,8 @@ export const appRoutes: Route[] = [
       "disabled": false,
       "items": {
         "theme":    { "show": true,  "disabled": false },
-        "language": { "show": true,  "disabled": false }
+        "language": { "show": true,  "disabled": false },
+        "template": { "show": false, "disabled": false }
       }
     },
     "profile": {
@@ -186,11 +187,20 @@ export const appRoutes: Route[] = [
       }
     }
   },
+  "defaults": {
+    "template": "template-2",
+    "theme": "light",
+    "displayMode": "default",
+    "language": "en"
+  },
   "disableRipple": false
 }
 ```
 
-**Note:** `toolbarMenus` is only rendered by `AumTemplate` (it has a dedicated toolbar component). `AumTemplate2` does not render a toolbar — preferences/profile menus live inside its sidebar.
+**Notes:**
+- `toolbarMenus` controls the preferences and profile menus. In `AumTemplate` these appear in the top toolbar; in `AumTemplate2` they appear inside the sidebar.
+- `toolbarMenus.preferences.items.template` controls whether a **Template switcher** option appears in the preferences menu. Set `"show": true` only in apps that expose runtime template switching (e.g. the demo app). Most apps should keep this `false` and hardcode their template choice in routes.
+- `defaults` sets the initial preference values for a **fresh session** (no localStorage). Once the user changes any preference, their choice is saved to localStorage and the config default no longer applies for that preference.
 
 ---
 

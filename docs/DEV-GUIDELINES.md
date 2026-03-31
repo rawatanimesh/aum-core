@@ -314,7 +314,18 @@ Display language names in their native form, not translated:
 
 ### Centralised App Config — High Priority
 
-All app-level configuration (nav items, toolbar menus, branding, feature flags) must go through `AppConfigService` and be driven from `app-config.json`. Do not scatter configuration across components.
+All app-level configuration (nav items, toolbar menus, branding, feature flags, user preference defaults) must go through `AppConfigService` and be driven from `app-config.json`. Do not scatter configuration across components.
+
+The `defaults` block in `app-config.json` sets the initial values for user preferences on a fresh session (no saved localStorage). Once a user makes a choice it is persisted in localStorage and the config default no longer applies for that preference. This is the correct place to set per-app defaults — never hardcode them inside components.
+
+```json
+"defaults": {
+  "template": "template-2",
+  "theme": "light",
+  "displayMode": "default",
+  "language": "en"
+}
+```
 
 ### No Magic Numbers or Strings — Standard
 

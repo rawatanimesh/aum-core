@@ -98,6 +98,38 @@ export class MyComponent {
 }
 ```
 
+#### Subscription Cleanup with takeUntilDestroyed
+
+```typescript
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+export class MyComponent {
+  private eventBus = inject(AppEventBusService);
+
+  // ✅ Use takeUntilDestroyed() in the constructor — no OnDestroy needed
+  constructor() {
+    this.eventBus.on(AppEventType.THEME_CHANGED)
+      .pipe(takeUntilDestroyed())
+      .subscribe((payload) => {
+        // handle event
+      });
+  }
+}
+
+// ❌ Don't manage subscriptions manually
+export class MyComponent implements OnInit, OnDestroy {
+  private sub?: Subscription;
+
+  ngOnInit() {
+    this.sub = someObservable$.subscribe(); // ❌ boilerplate
+  }
+
+  ngOnDestroy() {
+    this.sub?.unsubscribe(); // ❌ easy to forget
+  }
+}
+```
+
 ### Component Best Practices
 
 #### Input/Output Patterns

@@ -105,6 +105,7 @@ nx lint demo-app
 
 - **AumTemplate** (`@aum/templates/aum-template`) - Toolbar-first layout with collapsible overlay sidenav
 - **AumTemplate2** (`@aum/templates/aum-template-2`) - Sidebar-first layout with persistent sidebar on desktop/tablet and responsive mobile drawer
+- **Template switching** - Apps can allow users to switch between templates at runtime via the preferences menu. Enable with `toolbarMenus.preferences.items.template.show: true` in `app-config.json`
 
 #### Feedback & Dialogs
 
@@ -119,7 +120,7 @@ nx lint demo-app
 - **LanguageTranslationService** - Multi-language support with English, Japanese, and Hindi
 - **ErrorHandlerService** - Global error handling with structured logging
 - **AuthService** - Authentication and route protection
-- **AppConfigService** - Centralized application configuration (nav items, toolbar menus, branding)
+- **AppConfigService** - Centralized application configuration (nav items, toolbar menus, branding, user preference defaults)
 - **ViewportService** - Reactive signal-based viewport detection (`mobile` | `tablet` | `desktop`)
 
 ### Usage Example
