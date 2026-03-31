@@ -7,7 +7,6 @@ import { filter, map } from 'rxjs/operators';
  */
 export enum AppEventType {
   LOGOUT = 'LOGOUT',
-  CUSTOM_MENU_ACTION = 'CUSTOM_MENU_ACTION',
   THEME_CHANGED = 'THEME_CHANGED',
   UI_SCALE_CHANGED = 'UI_SCALE_CHANGED',
   LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',
@@ -21,15 +20,6 @@ export enum AppEventType {
 export interface AppEvent<T = any> {
   type: AppEventType;
   payload?: T;
-}
-
-/**
- * Custom menu action payload interface
- */
-export interface CustomMenuActionPayload {
-  menuId: string;
-  actionId: string;
-  data?: any;
 }
 
 /**

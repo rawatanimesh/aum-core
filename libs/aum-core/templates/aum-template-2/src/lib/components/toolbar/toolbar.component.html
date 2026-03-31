@@ -28,24 +28,24 @@
       <ng-content select="[toolbar-center]"></ng-content>
     </div>
 
-    <!-- Right: global actions + preferences + profile (hidden on mobile via CSS) -->
+    <!-- Right: all controls hidden on mobile (sidebar drawer has them instead) -->
     <div class="aum-toolbar-2__right flex-row-flex-end-center gap-4">
-      @for (action of globalActions; track action.id) {
-        <aum-button
-          [type]="action.type || 'icon'"
-          [icon]="action.icon"
-          [value]="action.value || ''"
-          [tooltip]="(action.tooltip || '') | translate"
-          (clickButton)="onGlobalActionClick(action.id)"
-        ></aum-button>
-      }
-
-      @for (template of customTemplates; track template.id) {
-        <ng-container *ngTemplateOutlet="template.template"></ng-container>
-      }
-
-      <!-- Preferences + profile: hidden on mobile (drawer has them instead) -->
       <div class="aum-t2-toolbar-utility flex-row-flex-end-center gap-4">
+        <!-- Dynamic global toolbar actions -->
+        @for (action of globalActions; track action.id) {
+          <aum-button
+            [type]="action.type || 'icon'"
+            [icon]="action.icon"
+            [value]="action.value || ''"
+            [tooltip]="(action.tooltip || '') | translate"
+            (clickButton)="onGlobalActionClick(action.id)"
+          ></aum-button>
+        }
+
+        @for (template of customTemplates; track template.id) {
+          <ng-container *ngTemplateOutlet="template.template"></ng-container>
+        }
+
         @if (shouldShowPreferencesMenu()) {
           <aum-button
             [type]="'icon'"
