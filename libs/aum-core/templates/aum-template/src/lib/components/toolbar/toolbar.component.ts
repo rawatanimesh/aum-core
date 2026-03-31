@@ -154,7 +154,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     // Theme item
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'theme')) {
-      const savedTheme = localStorage.getItem('app-theme-mode') || 'light';
+      const savedTheme = localStorage.getItem('app-theme-mode') || this.appConfigService.defaults()?.theme || 'light';
       preferencesMenuItems.push({
         label: this.languageService.instant('THEME'),
         value: 'theme',
@@ -185,7 +185,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     // Template switcher
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
-      const savedTemplate = localStorage.getItem('app-template') || 'template-2';
+      const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
       preferencesMenuItems.push({
         label: this.languageService.instant('TEMPLATE'),
         value: 'template',
@@ -199,7 +199,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
     }
 
     // Display mode
-    const savedMode = localStorage.getItem('ui-scale-mode') || 'default';
+    const savedMode = localStorage.getItem('ui-scale-mode') || this.appConfigService.defaults()?.displayMode || 'default';
     preferencesMenuItems.push({
       label: this.languageService.instant('DISPLAY'),
       value: 'mode',
@@ -288,14 +288,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
         document.body.classList.add(`scale-${savedMode}`);
       }
       // Update selected state for Display options
-      this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || 'default');
+      this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || this.appConfigService.defaults()?.displayMode || 'default');
 
       const savedTheme = localStorage.getItem('app-theme-mode') as
         | 'light'
         | 'dark'
         | 'system';
       // Update selected state for Theme options
-      this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || 'light');
+      this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
     });
 
     // Subscribe to global toolbar actions

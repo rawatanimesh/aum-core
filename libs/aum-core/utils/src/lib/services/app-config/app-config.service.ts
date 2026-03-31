@@ -65,6 +65,20 @@ export interface ToolbarMenuConfig {
 }
 
 /**
+ * Default values for user preferences (used when localStorage has no saved value)
+ */
+export interface AppDefaults {
+  /** Default layout template. Defaults to 'template-2' if not set. */
+  template?: 'template-1' | 'template-2';
+  /** Default theme mode. Defaults to 'light' if not set. */
+  theme?: 'light' | 'dark' | 'system';
+  /** Default display density. Defaults to 'default' if not set. */
+  displayMode?: 'compact' | 'default' | 'large';
+  /** Default language. Defaults to 'en' if not set. */
+  language?: 'en' | 'ja' | 'hi';
+}
+
+/**
  * Application configuration interface
  */
 export interface AppConfig {
@@ -85,6 +99,8 @@ export interface AppConfig {
 
   /** Whether to disable ripple effect globally for all Material components (default: false) */
   disableRipple?: boolean;
+  /** Default values for user preferences when no saved value exists in localStorage */
+  defaults?: AppDefaults;
 }
 
 /**
@@ -133,6 +149,9 @@ export class AppConfigService {
 
   /** Computed signal for ripple disabled state */
   readonly disableRipple = computed(() => this._config().disableRipple ?? false);
+
+  /** Computed signal for default preference values */
+  readonly defaults = computed(() => this._config().defaults);
 
   /**
    * Updates the entire configuration

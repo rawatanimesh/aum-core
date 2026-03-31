@@ -136,7 +136,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     }
 
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'theme')) {
-      const savedTheme = localStorage.getItem('app-theme-mode') || 'light';
+      const savedTheme = localStorage.getItem('app-theme-mode') || this.appConfigService.defaults()?.theme || 'light';
       preferencesMenuItems.push({
         label: this.languageService.instant('THEME'),
         value: 'theme',
@@ -152,7 +152,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Template switcher
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
-      const savedTemplate = localStorage.getItem('app-template') || 'template-2';
+      const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
       preferencesMenuItems.push({
         label: this.languageService.instant('TEMPLATE'),
         value: 'template',
@@ -165,7 +165,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       });
     }
 
-    const savedMode = localStorage.getItem('ui-scale-mode') || 'default';
+    const savedMode = localStorage.getItem('ui-scale-mode') || this.appConfigService.defaults()?.displayMode || 'default';
     preferencesMenuItems.push({
       label: this.languageService.instant('DISPLAY'),
       value: 'mode',
@@ -200,10 +200,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
       const savedMode = localStorage.getItem('ui-scale-mode') as 'compact' | 'default' | 'large';
       if (savedMode) document.body.classList.add(`scale-${savedMode}`);
-      this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || 'default');
+      this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || this.appConfigService.defaults()?.displayMode || 'default');
 
       const savedTheme = localStorage.getItem('app-theme-mode') as 'light' | 'dark' | 'system';
-      this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || 'light');
+      this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
     });
 
     this.globalActionsSubscription = this.toolbarContentService

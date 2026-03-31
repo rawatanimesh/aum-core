@@ -1,12 +1,14 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { AppConfigService } from '../app-config/app-config.service';
 
 type LanguageCode = 'en' | 'ja' | 'hi';
 
 @Injectable({ providedIn: 'root' })
 export class LanguageTranslationService {
   private translateService = inject(TranslateService);
+  private appConfigService = inject(AppConfigService);
   private _currentLanguage = signal<LanguageCode>('en');
   readonly currentLanguage = this._currentLanguage.asReadonly();
   private readonly storageKey = 'app-language';
@@ -22,7 +24,7 @@ export class LanguageTranslationService {
   }
 
   getLanguage(): LanguageCode {
-    return (localStorage.getItem(this.storageKey) as LanguageCode) || 'en';
+    return (localStorage.getItem(this.storageKey) as LanguageCode) || this.appConfigService.defaults()?.language || 'en';
   }
 
   instant(key: string, params?: any): string {
