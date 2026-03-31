@@ -33,37 +33,37 @@
     }
   </nav>
 
-  <!-- Footer: global actions + preferences + profile -->
+  <!-- Footer: global actions + preferences + profile (icon + label, column-centered) -->
   <div class="aum-sidebar__footer">
     @for (action of globalActions; track action.id) {
-      <aum-button
-        [type]="'icon'"
-        [icon]="action.icon"
-        [tooltip]="(action.tooltip || '') | translate"
-        (clickButton)="onGlobalActionClick(action.id)"
-      ></aum-button>
+      <button class="aum-sidebar__item" (click)="onGlobalActionClick(action.id)">
+        <mat-icon class="aum-sidebar__icon">{{ action.icon }}</mat-icon>
+        <span class="aum-sidebar__label">{{ (action.tooltip || '') | translate }}</span>
+      </button>
     }
 
     @if (shouldShowPreferencesMenu()) {
-      <aum-button
-        [type]="'icon'"
-        [icon]="'tune'"
-        [tooltip]="'PREFERENCES' | translate"
+      <button
+        class="aum-sidebar__item"
         [matMenuTriggerFor]="optionsMenu.childMenu"
         [disabled]="isPreferencesMenuDisabled()"
-        (clickButton)="onMenuOpening()"
-      ></aum-button>
+        (click)="onMenuOpening()"
+      >
+        <mat-icon class="aum-sidebar__icon">tune</mat-icon>
+        <span class="aum-sidebar__label">{{ 'PREFERENCES' | translate }}</span>
+      </button>
     }
 
     @if (shouldShowProfileMenu()) {
-      <aum-button
-        [type]="'icon'"
-        [icon]="'account_circle'"
-        [tooltip]="'MY_ACCOUNT' | translate"
+      <button
+        class="aum-sidebar__item"
         [matMenuTriggerFor]="profileMenu.childMenu"
         [disabled]="isProfileMenuDisabled()"
-        (clickButton)="onMenuOpening()"
-      ></aum-button>
+        (click)="onMenuOpening()"
+      >
+        <mat-icon class="aum-sidebar__icon">account_circle</mat-icon>
+        <span class="aum-sidebar__label">{{ 'MY_ACCOUNT' | translate }}</span>
+      </button>
     }
   </div>
 

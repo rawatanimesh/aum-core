@@ -88,7 +88,7 @@ export class SettingsDrawerComponent implements OnInit, OnDestroy {
       preferencesMenuItems.push({
         label: this.languageService.instant('LANGUAGE'),
         value: 'language',
-        icon: 'language',
+        icon: 'translate',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'language'),
         children: [
           { label: 'English', value: 'en', selected: this.languageService.getLanguage() === 'en' },

@@ -132,7 +132,7 @@ export class ToolbarComponent implements OnInit {
       preferencesMenuItems.push({
         label: this.languageService.instant('LANGUAGE'),
         value: 'language',
-        icon: 'language',
+        icon: 'translate',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'language'),
         children: [
           {

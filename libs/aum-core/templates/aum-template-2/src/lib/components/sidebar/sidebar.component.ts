@@ -25,7 +25,6 @@ import {
   AuthService,
 } from '@aum/utils/services';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
-import { ButtonComponent } from '@aum/ui/buttons';
 import { SnackbarService } from '@aum/ui/utilities';
 import {
   AppEventBusService,
@@ -41,7 +40,6 @@ import {
     RouterModule,
     MatIconModule,
     MatMenuModule,
-    ButtonComponent,
     MenuList,
     TranslateModule,
   ],
@@ -125,7 +123,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
       preferencesMenuItems.push({
         label: this.languageService.instant('LANGUAGE'),
         value: 'language',
-        icon: 'language',
+        icon: 'translate',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'language'),
         children: [
           { label: 'English', value: 'en', selected: this.languageService.getLanguage() === 'en' },
