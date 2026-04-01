@@ -195,7 +195,7 @@ aum-core/
 
 ## 🌐 Internationalization (i18n)
 
-AUM Core includes comprehensive internationalization support with multiple languages:
+AUM Core includes comprehensive internationalization support with multiple languages.
 
 ### Supported Languages
 
@@ -203,27 +203,41 @@ AUM Core includes comprehensive internationalization support with multiple langu
 - **日本語 (ja)** - Japanese
 - **हिन्दी (hi)** - Hindi
 
+### Two-Source Architecture
+
+AUM uses a namespaced two-file approach to keep library translations separate from app translations with zero collision risk:
+
+| Source | Location | Keys |
+|---|---|---|
+| Core library | `libs/aum-core/common/src/assets/i18n/aum.{lang}.json` | Under `AUM.*` namespace |
+| App-specific | `apps/{app}/src/assets/i18n/{lang}.json` | Flat root-level keys |
+
+```typescript
+// app.config.ts — wire up the multi-loader from @aum/utils/services
+import { MultiTranslateHttpLoader } from '@aum/utils/services';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new MultiTranslateHttpLoader(http, [
+    { prefix: './assets/i18n/aum.', suffix: '.json' }, // core: AUM.* keys
+    { prefix: './assets/i18n/', suffix: '.json' },      // app: flat keys
+  ]);
+}
+```
+
 ### Usage
 
 ```typescript
-import { TranslateModule } from '@ngx-translate/core';
+// Core component keys use AUM.* namespace
+<button [tooltip]="'AUM.MENU' | translate"></button>
 
-@Component({
-  selector: 'app-example',
-  standalone: true,
-  imports: [TranslateModule],
-  template: `
-    <h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
-    <p>{{ 'WELCOME_SUBTITLE' | translate }}</p>
-  `,
-})
-export class ExampleComponent {}
+// App-level keys use flat keys
+<h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
 ```
 
 ### Language Switching
 
 ```typescript
-import { LanguageTranslationService } from '@aum/utils';
+import { LanguageTranslationService } from '@aum/utils/services';
 
 export class MyComponent {
   private languageService = inject(LanguageTranslationService);
@@ -236,10 +250,15 @@ export class MyComponent {
 
 ### Translation Files
 
-Translation files are located in `libs/aum-core/common/src/assets/i18n/`:
-- `en.json` - English translations
-- `ja.json` - Japanese translations
-- `hi.json` - Hindi translations
+**Core library** (`libs/aum-core/common/src/assets/i18n/`):
+- `aum.en.json` — English core keys (under `AUM` namespace)
+- `aum.ja.json` — Japanese core keys
+- `aum.hi.json` — Hindi core keys
+
+**App-level** (`apps/{app}/src/assets/i18n/`):
+- `en.json` — App-specific English keys
+- `ja.json` — App-specific Japanese keys
+- `hi.json` — App-specific Hindi keys
 
 ## 🛠️ Technology Stack
 

@@ -290,6 +290,38 @@ Run audits regularly. Address high and critical vulnerabilities promptly.
 - Translation keys must be `UPPER_SNAKE_CASE`
 - Never display raw translation keys to users
 
+### Two-Source Namespace Architecture — Critical
+
+AUM separates library translations from app translations using a namespaced two-file approach:
+
+- **Core keys** live in `libs/aum-core/common/src/assets/i18n/aum.{lang}.json` under the `"AUM"` namespace — used as `'AUM.KEY' | translate`
+- **App keys** live in `apps/{app}/src/assets/i18n/{lang}.json` at root level — used as `'KEY' | translate`
+
+This makes collision **structurally impossible** — a developer would have to deliberately write `"AUM": { ... }` in their app file to cause a conflict.
+
+**Rule:** If a key is used even once inside `libs/aum-core`, it belongs in `aum.{lang}.json` under `AUM.*`. All other keys belong in the app's own `{lang}.json`.
+
+```typescript
+// Core component (inside libs/aum-core)
+[tooltip]="'AUM.MENU' | translate"
+
+// App component (inside apps/ or libs/modules/)
+{{ 'DASHBOARD' | translate }}
+```
+
+Use `MultiTranslateHttpLoader` from `@aum/utils/services` to merge both sources at runtime:
+
+```typescript
+import { MultiTranslateHttpLoader } from '@aum/utils/services';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new MultiTranslateHttpLoader(http, [
+    { prefix: './assets/i18n/aum.', suffix: '.json' },
+    { prefix: './assets/i18n/', suffix: '.json' },
+  ]);
+}
+```
+
 ### Provider Order — Critical
 
 `provideHttpClient()` must appear before `TranslateModule.forRoot()` in `app.config.ts`. Reversing this order causes translations to fail silently.

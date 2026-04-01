@@ -214,7 +214,7 @@ interface ToolbarAction {
 ## Best Practices
 
 1. **Always Clean Up**: Unregister actions in `ngOnDestroy` to prevent memory leaks
-2. **Use Translation Keys**: Always use translation keys for `tooltip` and `value`
+2. **Use Translation Keys**: Always use translation keys for `tooltip` and `value`. App-level keys go in `apps/{app}/src/assets/i18n/{lang}.json` (flat, e.g. `'SAVE'`). Core library keys use the `AUM.*` namespace (e.g. `'AUM.MENU'`) and must not be redefined in app files
 3. **Unique IDs**: Use descriptive, unique IDs (e.g., `'save-user'`, not `'save'`)
 4. **Logical Ordering**: Use the `order` property to group related actions
 5. **Icon Buttons**: Prefer `type: 'icon'` for toolbar actions to save space

@@ -643,19 +643,48 @@ export const environment = {
 
 ## 🌐 Internationalization (i18n) Best Practices
 
-### Translation Key Usage
+### Translation Namespacing (Core vs App)
+
+AUM uses a two-source translation architecture to keep library keys separate from app keys:
+
+- **Core library keys** live in `libs/aum-core/common/src/assets/i18n/aum.{lang}.json` under the `"AUM"` namespace
+- **App-level keys** live in `apps/<app>/src/assets/i18n/{lang}.json` at root level
+
+This guarantees zero collision between library and app translations.
+
+```json
+// libs/aum-core/common/src/assets/i18n/aum.en.json — core keys
+{
+  "AUM": {
+    "MENU": "Menu",
+    "PREFERENCES": "Preferences",
+    "LOGOUT": "Logout"
+  }
+}
+
+// apps/my-app/src/assets/i18n/en.json — app keys
+{
+  "DASHBOARD": "Dashboard",
+  "WELCOME_MESSAGE": "Welcome"
+}
+```
+
+```html
+<!-- ✅ Core component keys use AUM.* namespace -->
+<button [tooltip]="'AUM.MENU' | translate"></button>
+
+<!-- ✅ App-level keys use flat keys -->
+<h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
+```
 
 ```typescript
-// ✅ Use translate pipe in templates
-<h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
-<button [tooltip]="'MENU' | translate"></button>
-
 // ✅ Use instant() for TypeScript code
 export class MyComponent {
   private languageService = inject(LanguageTranslationService);
 
   getTranslatedLabel(): string {
-    return this.languageService.instant('BUTTON_LABEL');
+    return this.languageService.instant('AUM.BUTTON_LABEL'); // core key
+    return this.languageService.instant('MY_LABEL');         // app key
   }
 }
 ```
@@ -759,22 +788,26 @@ onMenuSelect(item: MenuItem) {
 ### Translation File Structure
 
 ```json
-// ✅ Organize keys by feature/component
+// ✅ Core library file: aum.en.json — only 20 core keys, all under AUM namespace
 {
-  // Authentication
-  "EMAIL_ADDRESS": "Email Address",
-  "PASSWORD": "Password",
-  "LOGIN": "Login",
+  "AUM": {
+    "MENU": "Menu",
+    "PREFERENCES": "Preferences",
+    "THEME": "Theme",
+    "LANGUAGE": "Language"
+  }
+}
 
-  // Navigation
+// ✅ App file: en.json — app-specific keys at root level
+{
   "DASHBOARD": "Dashboard",
-  "SETTINGS": "Settings",
-
-  // Messages
+  "WELCOME_MESSAGE": "Welcome",
   "PROFILE_UPDATED_SUCCESSFULLY": "Profile updated successfully",
   "AN_ERROR_OCCURRED_TRY_AGAIN": "An error occurred. Please try again."
 }
 ```
+
+**Rule:** If a key is used even once inside `libs/aum-core`, it belongs in `aum.{lang}.json` under `AUM.*`. All other keys belong in the app's own `{lang}.json`.
 
 ---
 

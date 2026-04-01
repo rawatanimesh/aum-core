@@ -86,7 +86,8 @@ aum-core/
 │   │   │   ├── dialogs/
 │   │   │   └── utilities/
 │   │   ├── common/                # Shared assets (i18n, SVGs) and common components
-│   │   │   └── src/assets/i18n/   # Translation files (en.json, ja.json, hi.json)
+│   │   │   └── src/assets/i18n/   # Core translation files (aum.en.json, aum.ja.json, aum.hi.json)
+│   │   │                          # All keys namespaced under "AUM.*" — never collides with app keys
 │   │   ├── theme/                 # Theming & styling
 │   │   │   ├── src/
 │   │   │   │   ├── styles/

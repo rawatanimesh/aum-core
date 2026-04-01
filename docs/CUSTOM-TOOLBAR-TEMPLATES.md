@@ -131,7 +131,7 @@ export class App implements AfterViewInit, OnDestroy {
   <aum-button
     [type]="'icon'"
     [icon]="'more_vert'"
-    [tooltip]="'MORE_OPTIONS' | translate"
+    [tooltip]="'AUM.MORE_OPTIONS' | translate"
     [matMenuTriggerFor]="moreMenu.childMenu"
   ></aum-button>
 
@@ -178,30 +178,29 @@ Example ordering:
 
 ## Translation Keys
 
-Add all keys to every language file:
+App-level translation keys go in `apps/{app}/src/assets/i18n/{lang}.json`. Do not add them to `aum.*.json` — those are reserved for keys used inside `libs/aum-core`.
 
-**en.json:**
+`AUM.MORE_OPTIONS` already exists in the core library — reuse it. Add only app-specific keys like `HELP` and `CONTACT_US` to your app files:
+
+**apps/{app}/src/assets/i18n/en.json:**
 ```json
 {
-  "MORE_OPTIONS": "More Options",
   "HELP": "Help",
   "CONTACT_US": "Contact Us"
 }
 ```
 
-**ja.json:**
+**apps/{app}/src/assets/i18n/ja.json:**
 ```json
 {
-  "MORE_OPTIONS": "その他のオプション",
   "HELP": "ヘルプ",
   "CONTACT_US": "お問い合わせ"
 }
 ```
 
-**hi.json:**
+**apps/{app}/src/assets/i18n/hi.json:**
 ```json
 {
-  "MORE_OPTIONS": "अधिक विकल्प",
   "HELP": "मदद",
   "CONTACT_US": "हमसे संपर्क करें"
 }

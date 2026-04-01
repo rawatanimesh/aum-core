@@ -207,39 +207,75 @@ export const appRoutes: Route[] = [
 
 ## Step 7 — Internationalization (i18n)
 
-All user-facing text must use translation keys.
+All user-facing text must use translation keys. AUM uses a **two-source namespace architecture** — core library keys and app keys live in separate files and are merged at runtime with zero collision risk.
 
-**Provider order in `app.config.ts` — CRITICAL:**
+### Create app translation files
 
-```typescript
-// ALWAYS provideHttpClient() BEFORE TranslateModule.forRoot()
-// TranslateHttpLoader depends on HttpClient being available first.
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
-    provideAnimationsAsync(),
+Create one file per supported language in `apps/{app}/src/assets/i18n/`:
 
-    // 1. HttpClient first
-    provideHttpClient(withInterceptors([...])),
-
-    // 2. Translations second
-    importProvidersFrom(
-      TranslateModule.forRoot({
-        defaultLanguage: 'en',
-        loader: {
-          provide: TranslateLoader,
-          useFactory: (http: HttpClient) =>
-            new TranslateHttpLoader(http, './assets/i18n/', '.json'),
-          deps: [HttpClient],
-        },
-      })
-    ),
-  ],
-};
+```
+apps/{app}/src/assets/i18n/
+├── en.json   ← app-specific English keys
+├── ja.json   ← app-specific Japanese keys (if supporting ja)
+└── hi.json   ← app-specific Hindi keys (if supporting hi)
 ```
 
-**Shared translation files** live in `libs/aum-core/common/src/assets/i18n/` (en.json, ja.json, hi.json). App-specific keys go in `apps/{app}/src/assets/i18n/` and are merged via asset globs.
+```json
+// apps/{app}/src/assets/i18n/en.json — flat root-level keys, no AUM.* namespace
+{
+  "DASHBOARD": "Dashboard",
+  "WELCOME_MESSAGE": "Welcome to My App"
+}
+```
+
+The core library files (`aum.en.json`, `aum.ja.json`, `aum.hi.json`) are pulled in automatically via the asset glob in `project.json` — no manual copying needed.
+
+### Wire up the multi-loader
+
+```typescript
+// app.config.ts
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { MultiTranslateHttpLoader } from '@aum/utils/services';
+
+// Merges core library translations (AUM.*) with app-level translations at runtime.
+export function HttpLoaderFactory(http: HttpClient) {
+  return new MultiTranslateHttpLoader(http, [
+    { prefix: './assets/i18n/aum.', suffix: '.json' }, // core: AUM.* keys
+    { prefix: './assets/i18n/', suffix: '.json' },      // app: flat keys
+  ]);
+}
+```
+
+**Provider order — CRITICAL:** `provideHttpClient()` must appear before `TranslateModule.forRoot()`. Reversing this causes translations to fail silently.
+
+```typescript
+providers: [
+  // 1. HttpClient first
+  provideHttpClient(withInterceptors([...])),
+
+  // 2. Translations second
+  importProvidersFrom(
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    })
+  ),
+],
+```
+
+### Key ownership rule
+
+| Where the key is used | Where it lives | How to reference it |
+|---|---|---|
+| Inside `libs/aum-core` | `aum.{lang}.json` under `"AUM"` | `'AUM.MENU' \| translate` |
+| Inside `apps/` or `libs/modules/` | `apps/{app}/src/assets/i18n/{lang}.json` | `'DASHBOARD' \| translate` |
+
+Never put `AUM.*` keys in your app files or flat keys in `aum.*.json`.
 
 ---
 
@@ -300,6 +336,11 @@ Configure asset globs in `project.json`:
   "assets": [
     { "glob": "**/*", "input": "apps/{app}/public" },
     {
+      "glob": "**/*",
+      "input": "apps/{app}/src/assets",
+      "output": "assets"
+    },
+    {
       "glob": "**/*.svg",
       "input": "libs/aum-core/common/src/assets/resources/svgs",
       "output": "assets/svgs"
@@ -312,6 +353,10 @@ Configure asset globs in `project.json`:
   ]
 }
 ```
+
+The first entry copies `apps/{app}/src/assets/i18n/{lang}.json` → `assets/i18n/{lang}.json`.
+The last entry copies `aum.{lang}.json` → `assets/i18n/aum.{lang}.json`.
+Different filenames — no overwrite, no conflict.
 
 ---
 
@@ -377,17 +422,22 @@ export class AppComponent {}
 ### `app.config.ts` — loading `app-config.json`
 
 ```typescript
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { importProvidersFrom } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { APP_CONFIG } from '@aum/utils/services';
+import { APP_CONFIG, MultiTranslateHttpLoader } from '@aum/utils/services';
 import appConfigJson from './app-config.json';
 import { appRoutes } from './app.routes';
+
+// Merges core library translations (AUM.*) with app-level translations at runtime.
+export function HttpLoaderFactory(http: HttpClient) {
+  return new MultiTranslateHttpLoader(http, [
+    { prefix: './assets/i18n/aum.', suffix: '.json' },
+    { prefix: './assets/i18n/', suffix: '.json' },
+  ]);
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -395,14 +445,14 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideAnimationsAsync(),
     { provide: APP_CONFIG, useValue: appConfigJson },
+    // HttpClient MUST come before TranslateModule
     provideHttpClient(),
     importProvidersFrom(
       TranslateModule.forRoot({
         defaultLanguage: 'en',
         loader: {
           provide: TranslateLoader,
-          useFactory: (http: HttpClient) =>
-            new TranslateHttpLoader(http, './assets/i18n/', '.json'),
+          useFactory: HttpLoaderFactory,
           deps: [HttpClient],
         },
       })
@@ -452,7 +502,9 @@ export const appConfig: ApplicationConfig = {
 | `rem()` not working | 1. Add `@use 'functions' as *;` at top of SCSS file. 2. Verify `stylePreprocessorOptions.includePaths` in `project.json` |
 | UI not scaling | Replace all `px` with `rem()`. See [BEST_PRACTICES.md](../BEST_PRACTICES.md) |
 | Dark mode broken | Replace hardcoded colors with `var(--mat-sys-*)` variables |
-| i18n showing raw keys | 1. Ensure `provideHttpClient()` comes before `TranslateModule.forRoot()`. 2. Verify JSON files exist in `assets/i18n/`. 3. Check asset glob in `project.json` |
+| i18n showing raw keys | 1. Ensure `provideHttpClient()` comes before `TranslateModule.forRoot()`. 2. Verify `en.json` exists in `apps/{app}/src/assets/i18n/` and `aum.en.json` is copied from core. 3. Check both asset globs in `project.json`. 4. Confirm using `MultiTranslateHttpLoader` not `TranslateHttpLoader` |
+| Core keys (AUM.*) not translating | Ensure the `aum.` prefix glob entry is present in `project.json` assets |
+| App keys not translating | Ensure `apps/{app}/src/assets` glob entry covers the `i18n/` subfolder |
 | Mobile drawer not closing on nav | Pass `(menuItemClicked)="mobileDrawer.close()"` to the sidebar inside the `mat-sidenav` |
 
 ---
