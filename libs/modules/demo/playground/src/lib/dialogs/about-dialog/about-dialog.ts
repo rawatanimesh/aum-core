@@ -6,13 +6,13 @@ import { GenericDialogComponent } from '@aum/ui/dialogs';
 import { ButtonComponent } from '@aum/ui/buttons';
 
 @Component({
-  selector: 'demo-contact-us-dialog',
+  selector: 'demo-about-dialog',
   imports: [GenericDialogComponent, ButtonComponent, TranslateModule],
-  templateUrl: './contact-us-dialog.html',
-  styleUrl: './contact-us-dialog.scss',
+  templateUrl: './about-dialog.html',
+  styleUrl: './about-dialog.scss',
 })
-export class ContactUsDialog {
-  private readonly dialogRef = inject(MatDialogRef<ContactUsDialog>);
+export class AboutDialog {
+  private readonly dialogRef = inject(MatDialogRef<AboutDialog>);
 
   closeDialog(): void {
     this.dialogRef.close();

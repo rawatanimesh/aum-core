@@ -1,8 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ToolbarContentService } from '@aum/templates/aum-template';
-import { SnackbarService } from '@aum/ui/utilities';
-import { LanguageTranslationService } from '@aum/utils/services';
 
 /**
  * Global app initialization service
@@ -14,8 +12,6 @@ import { LanguageTranslationService } from '@aum/utils/services';
 })
 export class GlobalAppInitService {
   private toolbarContentService = inject(ToolbarContentService);
-  private snackbarService = inject(SnackbarService);
-  private languageService = inject(LanguageTranslationService);
   private dialog = inject(MatDialog);
 
   constructor() {
@@ -23,53 +19,22 @@ export class GlobalAppInitService {
   }
 
   private initializeGlobalActions(): void {
-    // Feedback — visible in main toolbar
+    // About — overflow: shown in more_vert menu on desktop, settings drawer on mobile
     this.toolbarContentService.registerGlobalAction(
-      {
-        id: 'global-feedback',
-        icon: 'feedback',
-        tooltip: 'PROVIDE_FEEDBACK',
-        type: 'icon',
-        order: 1,
-      },
-      () => this.openFeedback()
+      { id: 'about', icon: 'info', tooltip: 'ABOUT', type: 'icon', order: 10, overflow: true },
+      () => this.openAboutDialog()
     );
 
-    // Help — overflow: shown in more_vert menu on desktop, settings drawer on mobile
+    // Submit Feedback — overflow
     this.toolbarContentService.registerGlobalAction(
-      { id: 'help', icon: 'help', tooltip: 'HELP', type: 'icon', order: 10, overflow: true },
-      () => this.openHelpDialog()
-    );
-
-    // Contact Us — overflow
-    this.toolbarContentService.registerGlobalAction(
-      { id: 'contact', icon: 'email', tooltip: 'CONTACT_US', type: 'icon', order: 11, overflow: true },
-      () => this.openContactUsDialog()
+      { id: 'feedback', icon: 'feedback', tooltip: 'SUBMIT_FEEDBACK', type: 'icon', order: 11, overflow: true },
+      () => window.open('https://github.com/rawatanimesh/aum-core/issues', '_blank')
     );
   }
 
-  private openFeedback(): void {
-    this.snackbarService.info(
-      this.languageService.instant('FEEDBACK_DIALOG_OPENED'),
-      3000
-    );
-    // TODO: Implement your feedback dialog here
-  }
-
-  private async openHelpDialog(): Promise<void> {
-    const { HelpDialog } = await import('@demo/playground');
-    this.dialog.open(HelpDialog, {
-      width: '600px',
-      panelClass: 'aum-dialog-container',
-      disableClose: false,
-      autoFocus: false,
-      restoreFocus: false,
-    });
-  }
-
-  private async openContactUsDialog(): Promise<void> {
-    const { ContactUsDialog } = await import('@demo/playground');
-    this.dialog.open(ContactUsDialog, {
+  private async openAboutDialog(): Promise<void> {
+    const { AboutDialog } = await import('@demo/playground');
+    this.dialog.open(AboutDialog, {
       width: '600px',
       panelClass: 'aum-dialog-container',
       disableClose: false,
