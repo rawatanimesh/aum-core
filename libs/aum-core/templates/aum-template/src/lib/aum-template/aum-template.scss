@@ -1,6 +1,10 @@
 @use '@angular/material' as mat;
 @use 'functions' as *;
 
+.aum-template-page-body-container {
+  --mat-sidenav-container-shape: 0;
+}
+
 .aum-template-page {
   flex-direction: column;
   box-sizing: border-box;

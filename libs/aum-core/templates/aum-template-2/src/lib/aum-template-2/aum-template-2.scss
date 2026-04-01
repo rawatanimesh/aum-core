@@ -93,9 +93,10 @@ $mobile-header-height: rem(52);
     flex: 1;
     height: 100%;
 
+    --mat-sidenav-container-shape: 0;
+
     .mat-drawer:not(.mat-drawer-side) {
       box-shadow: 0 0 rem(6) var(--mat-sys-shadow);
-      border-radius: 0;
     }
   }
 
