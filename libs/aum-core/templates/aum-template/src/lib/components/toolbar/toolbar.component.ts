@@ -130,7 +130,7 @@ export class ToolbarComponent implements OnInit {
     // Language item
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'language')) {
       preferencesMenuItems.push({
-        label: this.languageService.instant('LANGUAGE'),
+        label: this.languageService.instant('AUM.LANGUAGE'),
         value: 'language',
         icon: 'translate',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'language'),
@@ -158,25 +158,25 @@ export class ToolbarComponent implements OnInit {
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'theme')) {
       const savedTheme = localStorage.getItem('app-theme-mode') || this.appConfigService.defaults()?.theme || 'light';
       preferencesMenuItems.push({
-        label: this.languageService.instant('THEME'),
+        label: this.languageService.instant('AUM.THEME'),
         value: 'theme',
         icon: 'contrast',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'theme'),
         children: [
           {
-            label: this.languageService.instant('LIGHT'),
+            label: this.languageService.instant('AUM.LIGHT'),
             value: 'light',
             icon: 'light_mode',
             selected: savedTheme === 'light',
           },
           {
-            label: this.languageService.instant('DARK'),
+            label: this.languageService.instant('AUM.DARK'),
             value: 'dark',
             icon: 'dark_mode',
             selected: savedTheme === 'dark',
           },
           {
-            label: this.languageService.instant('SYSTEM'),
+            label: this.languageService.instant('AUM.SYSTEM'),
             value: 'system',
             icon: 'computer',
             selected: savedTheme === 'system',
@@ -189,13 +189,13 @@ export class ToolbarComponent implements OnInit {
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
       const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
       preferencesMenuItems.push({
-        label: this.languageService.instant('TEMPLATE'),
+        label: this.languageService.instant('AUM.TEMPLATE'),
         value: 'template',
         icon: 'dashboard_customize',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'template'),
         children: [
-          { label: this.languageService.instant('TEMPLATE_1'), value: 'template-1', icon: 'view_sidebar', selected: savedTemplate === 'template-1' },
-          { label: this.languageService.instant('TEMPLATE_2'), value: 'template-2', icon: 'view_compact', selected: savedTemplate === 'template-2' },
+          { label: this.languageService.instant('AUM.TEMPLATE_1'), value: 'template-1', icon: 'view_sidebar', selected: savedTemplate === 'template-1' },
+          { label: this.languageService.instant('AUM.TEMPLATE_2'), value: 'template-2', icon: 'view_compact', selected: savedTemplate === 'template-2' },
         ],
       });
     }
@@ -203,25 +203,25 @@ export class ToolbarComponent implements OnInit {
     // Display mode
     const savedMode = localStorage.getItem('ui-scale-mode') || this.appConfigService.defaults()?.displayMode || 'default';
     preferencesMenuItems.push({
-      label: this.languageService.instant('DISPLAY'),
+      label: this.languageService.instant('AUM.DISPLAY'),
       value: 'mode',
       icon: 'aspect_ratio',
       disabled: MenuConfigHelper.isPreferencesMenuDisabled(config),
       children: [
         {
-          label: this.languageService.instant('COMPACT'),
+          label: this.languageService.instant('AUM.COMPACT'),
           value: 'compact',
           icon: 'density_small',
           selected: savedMode === 'compact',
         },
         {
-          label: this.languageService.instant('DEFAULT'),
+          label: this.languageService.instant('AUM.DEFAULT'),
           value: 'default',
           icon: 'density_medium',
           selected: savedMode === 'default',
         },
         {
-          label: this.languageService.instant('LARGE'),
+          label: this.languageService.instant('AUM.LARGE'),
           value: 'large',
           icon: 'density_large',
           selected: savedMode === 'large',
@@ -237,7 +237,7 @@ export class ToolbarComponent implements OnInit {
     // Profile item
     if (MenuConfigHelper.shouldShowProfileItem(config, 'profile')) {
       profileMenuItems.push({
-        label: this.languageService.instant('PROFILE'),
+        label: this.languageService.instant('AUM.PROFILE'),
         value: 'profile',
         icon: 'person',
         disabled: MenuConfigHelper.isProfileItemDisabled(config, 'profile'),
@@ -248,7 +248,7 @@ export class ToolbarComponent implements OnInit {
     // Settings item
     if (MenuConfigHelper.shouldShowProfileItem(config, 'settings')) {
       profileMenuItems.push({
-        label: this.languageService.instant('SETTINGS'),
+        label: this.languageService.instant('AUM.SETTINGS'),
         value: 'settings',
         icon: 'settings',
         disabled: MenuConfigHelper.isProfileItemDisabled(config, 'settings'),
@@ -259,7 +259,7 @@ export class ToolbarComponent implements OnInit {
     // Logout item
     if (MenuConfigHelper.shouldShowProfileItem(config, 'logout')) {
       profileMenuItems.push({
-        label: this.languageService.instant('LOGOUT'),
+        label: this.languageService.instant('AUM.LOGOUT'),
         value: 'logout',
         icon: 'logout',
         disabled: MenuConfigHelper.isProfileItemDisabled(config, 'logout'),
@@ -377,7 +377,7 @@ export class ToolbarComponent implements OnInit {
         // Use setTimeout to ensure translations are loaded
         setTimeout(() => {
           this.snackbarService.success(
-            this.languageService.instant('LANGUAGE_CHANGED_SUCCESSFULLY'),
+            this.languageService.instant('AUM.LANGUAGE_CHANGED_SUCCESSFULLY'),
             3000
           );
         }, 100);

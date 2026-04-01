@@ -12,7 +12,7 @@
       <aum-button
         [type]="'icon'"
         [icon]="'menu'"
-        [tooltip]="'MENU' | translate"
+        [tooltip]="'AUM.MENU' | translate"
         (clickButton)="toggleMenu()"
       ></aum-button>
 
@@ -59,7 +59,7 @@
             <aum-button
               [type]="'icon'"
               [icon]="'more_vert'"
-              [tooltip]="'MORE_OPTIONS' | translate"
+              [tooltip]="'AUM.MORE_OPTIONS' | translate"
               [matMenuTriggerFor]="overflowMenu.childMenu"
               (clickButton)="onMenuOpening()"
             ></aum-button>
@@ -74,7 +74,7 @@
             <aum-button
               [type]="'icon'"
               [icon]="'tune'"
-              [tooltip]="'PREFERENCES' | translate"
+              [tooltip]="'AUM.PREFERENCES' | translate"
               [matMenuTriggerFor]="optionsMenu.childMenu"
               [disabled]="isPreferencesMenuDisabled()"
               (clickButton)="onMenuOpening()"
@@ -85,7 +85,7 @@
             <aum-button
               [type]="'icon'"
               [icon]="'account_circle'"
-              [tooltip]="'MY_ACCOUNT' | translate"
+              [tooltip]="'AUM.MY_ACCOUNT' | translate"
               [matMenuTriggerFor]="profileMenu.childMenu"
               [disabled]="isProfileMenuDisabled()"
               (clickButton)="onMenuOpening()"
@@ -98,7 +98,7 @@
           class="aum-t1-settings-trigger"
           [type]="'icon'"
           [icon]="'tune'"
-          [tooltip]="'PREFERENCES' | translate"
+          [tooltip]="'AUM.PREFERENCES' | translate"
           (clickButton)="openSettingsDrawer()"
         ></aum-button>
 

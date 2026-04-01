@@ -1,0 +1,24 @@
+{
+  "AUM": {
+    "COMPACT": "कॉम्पैक्ट",
+    "DARK": "डार्क",
+    "DEFAULT": "डिफ़ॉल्ट",
+    "DISPLAY": "डिस्प्ले",
+    "LANGUAGE": "भाषा",
+    "LANGUAGE_CHANGED_SUCCESSFULLY": "भाषा सफलतापूर्वक बदल दी गई",
+    "LARGE": "बड़ा",
+    "LIGHT": "लाइट",
+    "LOGOUT": "लॉगआउट",
+    "MENU": "मेनू",
+    "MORE_OPTIONS": "अधिक विकल्प",
+    "MY_ACCOUNT": "मेरा खाता",
+    "PREFERENCES": "प्राथमिकताएं",
+    "PROFILE": "प्रोफ़ाइल",
+    "SETTINGS": "सेटिंग्स",
+    "SYSTEM": "सिस्टम",
+    "TEMPLATE": "टेम्पलेट",
+    "TEMPLATE_1": "टेम्पलेट 1",
+    "TEMPLATE_2": "टेम्पलेट 2",
+    "THEME": "थीम"
+  }
+}

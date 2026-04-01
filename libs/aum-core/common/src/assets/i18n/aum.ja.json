@@ -1,0 +1,24 @@
+{
+  "AUM": {
+    "COMPACT": "コンパクト",
+    "DARK": "ダーク",
+    "DEFAULT": "デフォルト",
+    "DISPLAY": "表示",
+    "LANGUAGE": "言語",
+    "LANGUAGE_CHANGED_SUCCESSFULLY": "言語が正常に変更されました",
+    "LARGE": "大",
+    "LIGHT": "ライト",
+    "LOGOUT": "ログアウト",
+    "MENU": "メニュー",
+    "MORE_OPTIONS": "その他のオプション",
+    "MY_ACCOUNT": "マイアカウント",
+    "PREFERENCES": "設定",
+    "PROFILE": "プロフィール",
+    "SETTINGS": "設定",
+    "SYSTEM": "システム",
+    "TEMPLATE": "テンプレート",
+    "TEMPLATE_1": "テンプレート 1",
+    "TEMPLATE_2": "テンプレート 2",
+    "THEME": "テーマ"
+  }
+}

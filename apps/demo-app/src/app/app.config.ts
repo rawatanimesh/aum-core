@@ -12,15 +12,19 @@ import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common
 import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
 import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, CspService  } from '@aum/utils/services';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MultiTranslateHttpLoader } from '@aum/utils/services';
 import { appRoutes } from './app.routes';
 import appConfiguration from './app-config.json';
 import { GlobalAppInitService } from './services/global-app-init.service';
 import { environment } from '../environments/environment';
 
-// Factory function for translation loader
+// Merges core library translations (AUM.*) with app-level translations at runtime.
+// Core keys live under the AUM namespace; app keys are at root level — no collision possible.
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new MultiTranslateHttpLoader(http, [
+    { prefix: './assets/i18n/aum.', suffix: '.json' },
+    { prefix: './assets/i18n/', suffix: '.json' },
+  ]);
 }
 
 export const appConfig: ApplicationConfig = {

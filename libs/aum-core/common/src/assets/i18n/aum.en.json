@@ -1,0 +1,24 @@
+{
+  "AUM": {
+    "COMPACT": "Compact",
+    "DARK": "Dark",
+    "DEFAULT": "Default",
+    "DISPLAY": "Display",
+    "LANGUAGE": "Language",
+    "LANGUAGE_CHANGED_SUCCESSFULLY": "Language changed successfully",
+    "LARGE": "Large",
+    "LIGHT": "Light",
+    "LOGOUT": "Logout",
+    "MENU": "Menu",
+    "MORE_OPTIONS": "More options",
+    "MY_ACCOUNT": "My Account",
+    "PREFERENCES": "Preferences",
+    "PROFILE": "Profile",
+    "SETTINGS": "Settings",
+    "SYSTEM": "System",
+    "TEMPLATE": "Template",
+    "TEMPLATE_1": "Template 1",
+    "TEMPLATE_2": "Template 2",
+    "THEME": "Theme"
+  }
+}

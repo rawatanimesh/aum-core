@@ -86,7 +86,7 @@ export class SettingsDrawerComponent implements OnInit, OnDestroy {
 
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'language')) {
       preferencesMenuItems.push({
-        label: this.languageService.instant('LANGUAGE'),
+        label: this.languageService.instant('AUM.LANGUAGE'),
         value: 'language',
         icon: 'translate',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'language'),
@@ -101,14 +101,14 @@ export class SettingsDrawerComponent implements OnInit, OnDestroy {
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'theme')) {
       const savedTheme = localStorage.getItem('app-theme-mode') || this.appConfigService.defaults()?.theme || 'light';
       preferencesMenuItems.push({
-        label: this.languageService.instant('THEME'),
+        label: this.languageService.instant('AUM.THEME'),
         value: 'theme',
         icon: 'contrast',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'theme'),
         children: [
-          { label: this.languageService.instant('LIGHT'), value: 'light', icon: 'light_mode', selected: savedTheme === 'light' },
-          { label: this.languageService.instant('DARK'), value: 'dark', icon: 'dark_mode', selected: savedTheme === 'dark' },
-          { label: this.languageService.instant('SYSTEM'), value: 'system', icon: 'computer', selected: savedTheme === 'system' },
+          { label: this.languageService.instant('AUM.LIGHT'), value: 'light', icon: 'light_mode', selected: savedTheme === 'light' },
+          { label: this.languageService.instant('AUM.DARK'), value: 'dark', icon: 'dark_mode', selected: savedTheme === 'dark' },
+          { label: this.languageService.instant('AUM.SYSTEM'), value: 'system', icon: 'computer', selected: savedTheme === 'system' },
         ],
       });
     }
@@ -116,40 +116,40 @@ export class SettingsDrawerComponent implements OnInit, OnDestroy {
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
       const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
       preferencesMenuItems.push({
-        label: this.languageService.instant('TEMPLATE'),
+        label: this.languageService.instant('AUM.TEMPLATE'),
         value: 'template',
         icon: 'dashboard_customize',
         disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'template'),
         children: [
-          { label: this.languageService.instant('TEMPLATE_1'), value: 'template-1', icon: 'view_sidebar', selected: savedTemplate === 'template-1' },
-          { label: this.languageService.instant('TEMPLATE_2'), value: 'template-2', icon: 'view_compact', selected: savedTemplate === 'template-2' },
+          { label: this.languageService.instant('AUM.TEMPLATE_1'), value: 'template-1', icon: 'view_sidebar', selected: savedTemplate === 'template-1' },
+          { label: this.languageService.instant('AUM.TEMPLATE_2'), value: 'template-2', icon: 'view_compact', selected: savedTemplate === 'template-2' },
         ],
       });
     }
 
     const savedMode = localStorage.getItem('ui-scale-mode') || this.appConfigService.defaults()?.displayMode || 'default';
     preferencesMenuItems.push({
-      label: this.languageService.instant('DISPLAY'),
+      label: this.languageService.instant('AUM.DISPLAY'),
       value: 'mode',
       icon: 'aspect_ratio',
       disabled: MenuConfigHelper.isPreferencesMenuDisabled(config),
       children: [
-        { label: this.languageService.instant('COMPACT'), value: 'compact', icon: 'density_small', selected: savedMode === 'compact' },
-        { label: this.languageService.instant('DEFAULT'), value: 'default', icon: 'density_medium', selected: savedMode === 'default' },
-        { label: this.languageService.instant('LARGE'), value: 'large', icon: 'density_large', selected: savedMode === 'large' },
+        { label: this.languageService.instant('AUM.COMPACT'), value: 'compact', icon: 'density_small', selected: savedMode === 'compact' },
+        { label: this.languageService.instant('AUM.DEFAULT'), value: 'default', icon: 'density_medium', selected: savedMode === 'default' },
+        { label: this.languageService.instant('AUM.LARGE'), value: 'large', icon: 'density_large', selected: savedMode === 'large' },
       ],
     });
     this.optionsMenuList = preferencesMenuItems;
 
     const profileMenuItems: MenuItem[] = [];
     if (MenuConfigHelper.shouldShowProfileItem(config, 'profile')) {
-      profileMenuItems.push({ label: this.languageService.instant('PROFILE'), value: 'profile', icon: 'person', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'profile'), showSelection: false });
+      profileMenuItems.push({ label: this.languageService.instant('AUM.PROFILE'), value: 'profile', icon: 'person', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'profile'), showSelection: false });
     }
     if (MenuConfigHelper.shouldShowProfileItem(config, 'settings')) {
-      profileMenuItems.push({ label: this.languageService.instant('SETTINGS'), value: 'settings', icon: 'settings', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'settings'), showSelection: false });
+      profileMenuItems.push({ label: this.languageService.instant('AUM.SETTINGS'), value: 'settings', icon: 'settings', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'settings'), showSelection: false });
     }
     if (MenuConfigHelper.shouldShowProfileItem(config, 'logout')) {
-      profileMenuItems.push({ label: this.languageService.instant('LOGOUT'), value: 'logout', icon: 'logout', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'logout'), showSelection: false });
+      profileMenuItems.push({ label: this.languageService.instant('AUM.LOGOUT'), value: 'logout', icon: 'logout', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'logout'), showSelection: false });
     }
     this.profileMenuList = profileMenuItems;
   }
@@ -198,7 +198,7 @@ export class SettingsDrawerComponent implements OnInit, OnDestroy {
         this.setMenuSelection(this.optionsMenuList, 'language', item.value);
         this.eventBus.emit(AppEventType.LANGUAGE_CHANGED, { language: item.value, previousLanguage: currentLanguage });
         setTimeout(() => {
-          this.snackbarService.success(this.languageService.instant('LANGUAGE_CHANGED_SUCCESSFULLY'), 3000);
+          this.snackbarService.success(this.languageService.instant('AUM.LANGUAGE_CHANGED_SUCCESSFULLY'), 3000);
         }, 100);
       }
     }

@@ -12,7 +12,7 @@
         class="aum-t2-hamburger"
         [type]="'icon'"
         [icon]="'menu'"
-        [tooltip]="'MENU' | translate"
+        [tooltip]="'AUM.MENU' | translate"
         (clickButton)="toggleMenu()"
       ></aum-button>
 
@@ -50,7 +50,7 @@
           <aum-button
             [type]="'icon'"
             [icon]="'tune'"
-            [tooltip]="'PREFERENCES' | translate"
+            [tooltip]="'AUM.PREFERENCES' | translate"
             [matMenuTriggerFor]="optionsMenu.childMenu"
             [disabled]="isPreferencesMenuDisabled()"
             (clickButton)="onMenuOpening()"
@@ -61,7 +61,7 @@
           <aum-button
             [type]="'icon'"
             [icon]="'account_circle'"
-            [tooltip]="'MY_ACCOUNT' | translate"
+            [tooltip]="'AUM.MY_ACCOUNT' | translate"
             [matMenuTriggerFor]="profileMenu.childMenu"
             [disabled]="isProfileMenuDisabled()"
             (clickButton)="onMenuOpening()"
