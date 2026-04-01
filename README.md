@@ -11,7 +11,7 @@ A modern Angular component library built with NX monorepo architecture, featurin
 - **[📦 Distribution](./docs/DISTRIBUTION.md)** - How to publish and consume `libs/aum-core/` via git subtree
 - **[📱 Responsive Design](./docs/RESPONSIVE-DESIGN.md)** - SCSS breakpoint mixins and ViewportService usage
 - **[🔧 Dynamic Toolbar Actions](./docs/DYNAMIC-TOOLBAR-ACTIONS.md)** - Register/unregister toolbar buttons at runtime
-- **[🎛️ Custom Toolbar Menus](./docs/CUSTOM_TOOLBAR_MENU_USAGE.md)** - Add custom dropdown menus to the toolbar
+- **[🎛️ Custom Toolbar Templates](./docs/CUSTOM-TOOLBAR-TEMPLATES.md)** - Add custom dropdown menus to the toolbar
 - **[🤝 Contributing](./CONTRIBUTING.md)** - Developer contribution guide and workflow
 - **[🚀 Getting Started](#-getting-started)** - Quick start guide and development setup
 - **[📖 Component Guide](#-component-library)** - Available components and usage examples

@@ -19,8 +19,8 @@ Reference document for scaffolding a new application inside this NX monorepo. Co
 | **App location** | `apps/{app-name}/` |
 | **Feature modules** | `libs/modules/{scope}/{feature}/` |
 | **Core libraries** | `@aum/*` (ui, theme, utils, common, templates) |
-| **Template 1** | `@aum/templates/aum-template` — toolbar-first layout |
-| **Template 2** | `@aum/templates/aum-template-2` — sidebar-first, responsive |
+| **Template 1** | `@aum/templates/aum-template` — toolbar-first layout; recommended for enterprise/scalable apps |
+| **Template 2** | `@aum/templates/aum-template-2` — sidebar-first, responsive; suited for simpler or standalone apps |
 
 ---
 
@@ -42,7 +42,8 @@ Decide on these four values before writing any code:
 ### AumTemplate (`@aum/templates/aum-template`)
 
 - **Layout:** Top toolbar always visible; sidenav slides in as an overlay when toggled.
-- **Toolbar:** Supports dynamic global actions ([DYNAMIC-TOOLBAR-ACTIONS.md](./DYNAMIC-TOOLBAR-ACTIONS.md)) and custom menu dropdowns ([CUSTOM_TOOLBAR_MENU_USAGE.md](./CUSTOM_TOOLBAR_MENU_USAGE.md)).
+- **Toolbar:** Supports dynamic global actions ([DYNAMIC-TOOLBAR-ACTIONS.md](./DYNAMIC-TOOLBAR-ACTIONS.md)) and custom toolbar templates ([CUSTOM-TOOLBAR-TEMPLATES.md](./CUSTOM-TOOLBAR-TEMPLATES.md)).
+- **Mobile:** A settings drawer slides in from the right, exposing preferences, profile, and any `overflow: true` toolbar actions.
 - **Use when:** The app primarily needs a persistent header with a hamburger-triggered nav.
 
 ```typescript
@@ -52,13 +53,13 @@ import { AumTemplate } from '@aum/templates/aum-template';
 { path: '', component: AumTemplate, children: [...] }
 ```
 
-### AumTemplate2 (`@aum/templates/aum-template-2`) — Recommended for new apps
+### AumTemplate2 (`@aum/templates/aum-template-2`)
 
 - **Layout:** Persistent sidebar on desktop/tablet; collapses to a slide-out drawer on mobile (≤700px).
 - **Mobile header:** Minimal bar with brand logo + hamburger. No separate toolbar component.
 - **Branding:** Sidebar renders `brandLogo`, `appLogo`, and `appName` from `app-config.json`.
 - **Input:** `drawerWidth` — CSS width for the mobile drawer (default `'200px'`).
-- **Use when:** The app benefits from always-visible navigation on larger screens.
+- **Use when:** The app is relatively simple or standalone and benefits from always-visible navigation on larger screens.
 
 ```typescript
 // app.routes.ts

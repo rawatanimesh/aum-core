@@ -111,7 +111,7 @@ ngAfterViewInit() {
 }
 ```
 
-See [docs/CUSTOM_TOOLBAR_MENU_USAGE.md](../../../../docs/CUSTOM_TOOLBAR_MENU_USAGE.md).
+See [docs/CUSTOM-TOOLBAR-TEMPLATES.md](../../../../docs/CUSTOM-TOOLBAR-TEMPLATES.md).
 
 ## Exports
 

@@ -7,9 +7,10 @@ The Dynamic Global Toolbar Actions feature allows pages and components to dynami
 To see this feature in action, check out the **Playground** page in the demo app:
 
 ### Global Actions (Always Visible)
-- **Help** button (icon: `help_outline`) - Available on all pages
-- **Feedback** button (icon: `feedback`) - Available on all pages
-- These are registered in [`global-app-init.service.ts`](../../../../apps/demo-app/src/app/services/global-app-init.service.ts)
+All three are registered in [`global-app-init.service.ts`](../../../../apps/demo-app/src/app/services/global-app-init.service.ts):
+- **Feedback** button (icon: `feedback`) - visible in the main toolbar
+- **Help** button (icon: `help`) - `overflow: true`, shown in the overflow menu / settings drawer
+- **Contact Us** button (icon: `email`) - `overflow: true`, shown in the overflow menu / settings drawer
 
 ### Page-Specific Actions (Only on Playground)
 - **Create** button (filled style) - Only visible when on `/playground` route
@@ -24,6 +25,7 @@ To see this feature in action, check out the **Playground** page in the demo app
 - ✅ Actions appear globally in the toolbar
 - ✅ Each action has icon, tooltip, type, and callback
 - ✅ Actions are sorted by `order` property
+- ✅ Overflow actions group into a `more_vert` menu on desktop and into the settings drawer on mobile
 - ✅ Page-specific actions can be added/removed on route changes
 - ✅ Supports i18n for tooltips and labels
 
@@ -43,187 +45,120 @@ export class MyPageComponent implements OnInit, OnDestroy {
   private toolbarContentService = inject(ToolbarContentService);
 
   ngOnInit() {
-    // Register a save action
     this.toolbarContentService.registerGlobalAction(
-      {
-        id: 'save',
-        icon: 'save',
-        tooltip: 'SAVE', // Translation key
-        type: 'icon',
-        order: 1,
-      },
+      { id: 'save', icon: 'save', tooltip: 'SAVE', type: 'icon', order: 1 },
       () => this.save()
     );
 
-    // Register a download action
     this.toolbarContentService.registerGlobalAction(
-      {
-        id: 'download',
-        icon: 'download',
-        tooltip: 'DOWNLOAD',
-        type: 'icon',
-        order: 2,
-      },
+      { id: 'download', icon: 'download', tooltip: 'DOWNLOAD', type: 'icon', order: 2 },
       () => this.download()
     );
   }
 
   ngOnDestroy() {
-    // Clean up actions when component is destroyed
     this.toolbarContentService.unregisterGlobalAction('save');
     this.toolbarContentService.unregisterGlobalAction('download');
   }
 
-  save() {
-    console.log('Save action clicked');
-    // Your save logic here
-  }
-
-  download() {
-    console.log('Download action clicked');
-    // Your download logic here
-  }
+  save() { /* your logic */ }
+  download() { /* your logic */ }
 }
 ```
 
 ### 2. Button Types
 
-The `type` property supports different Material Design button styles:
-
 ```typescript
 // Icon button (default)
-{
-  id: 'edit',
-  icon: 'edit',
-  type: 'icon',
-  tooltip: 'EDIT'
-}
+{ id: 'edit', icon: 'edit', type: 'icon', tooltip: 'EDIT' }
 
 // Filled button with text
-{
-  id: 'submit',
-  icon: 'check',
-  type: 'filled',
-  value: 'SUBMIT', // Button text
-  tooltip: 'SUBMIT_FORM'
-}
+{ id: 'submit', icon: 'check', type: 'filled', value: 'SUBMIT', tooltip: 'SUBMIT_FORM' }
 
 // Outlined button
-{
-  id: 'cancel',
-  icon: 'close',
-  type: 'outlined',
-  value: 'CANCEL',
-  tooltip: 'CANCEL_OPERATION'
-}
+{ id: 'cancel', icon: 'close', type: 'outlined', value: 'CANCEL', tooltip: 'CANCEL_OPERATION' }
 
 // Basic button
-{
-  id: 'help',
-  icon: 'help',
-  type: 'basic',
-  value: 'HELP',
-  tooltip: 'GET_HELP'
-}
+{ id: 'help', icon: 'help', type: 'basic', value: 'HELP', tooltip: 'GET_HELP' }
 ```
 
-### 3. Action Ordering
+### 3. Overflow Actions
 
-Use the `order` property to control the position of actions:
+Set `overflow: true` to move an action out of the main toolbar row. On desktop, overflow actions are grouped under a `more_vert` icon button. On mobile (`AumTemplate`), they appear as rows inside the settings drawer.
 
 ```typescript
 this.toolbarContentService.registerGlobalAction(
   {
-    id: 'first',
-    icon: 'first_page',
-    order: 1, // Appears first
+    id: 'help',
+    icon: 'help',
+    tooltip: 'HELP',
+    type: 'icon',
+    order: 10,
+    overflow: true,
   },
-  () => this.first()
-);
-
-this.toolbarContentService.registerGlobalAction(
-  {
-    id: 'second',
-    icon: 'arrow_forward',
-    order: 2, // Appears second
-  },
-  () => this.second()
+  () => this.openHelpDialog()
 );
 ```
 
-### 4. Clear All Actions
+Use `overflow: true` for secondary actions (Help, Contact Us, Feedback) that don't need constant visibility in the toolbar.
+
+### 4. Action Ordering
+
+Use the `order` property to control position. Lower numbers appear first.
 
 ```typescript
-// Remove all registered actions
+this.toolbarContentService.registerGlobalAction(
+  { id: 'primary-action', icon: 'save', order: 1 },
+  () => this.save()
+);
+
+this.toolbarContentService.registerGlobalAction(
+  { id: 'secondary-action', icon: 'refresh', order: 2 },
+  () => this.reset()
+);
+```
+
+### 5. Clear All Actions
+
+```typescript
 this.toolbarContentService.clearAllGlobalActions();
 ```
 
-### 5. Complete Example - Form Page
+### 6. Complete Example - Form Page
 
 ```typescript
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolbarContentService, AppEventBusService, AppEventType } from '@aum/templates/aum-template';
+import { ToolbarContentService } from '@aum/templates/aum-template';
 import { SnackbarService } from '@aum/ui/utilities';
 
 @Component({
   selector: 'app-user-form',
-  template: `
-    <form [formGroup]="userForm">
-      <!-- Form fields here -->
-    </form>
-  `,
+  template: `<form [formGroup]="userForm"><!-- fields --></form>`,
 })
 export class UserFormComponent implements OnInit, OnDestroy {
   private toolbarContentService = inject(ToolbarContentService);
   private snackbarService = inject(SnackbarService);
-  private eventBus = inject(AppEventBusService);
   private router = inject(Router);
 
-  userForm = new FormGroup({
-    // Form controls
-  });
+  userForm = new FormGroup({ /* controls */ });
 
   ngOnInit() {
-    // Register Save action
     this.toolbarContentService.registerGlobalAction(
-      {
-        id: 'save-user',
-        icon: 'save',
-        tooltip: 'SAVE_USER',
-        type: 'icon',
-        order: 1,
-      },
+      { id: 'save-user', icon: 'save', tooltip: 'SAVE_USER', type: 'icon', order: 1 },
       () => this.saveUser()
     );
-
-    // Register Cancel action
     this.toolbarContentService.registerGlobalAction(
-      {
-        id: 'cancel-edit',
-        icon: 'close',
-        tooltip: 'CANCEL',
-        type: 'icon',
-        order: 2,
-      },
+      { id: 'cancel-edit', icon: 'close', tooltip: 'CANCEL', type: 'icon', order: 2 },
       () => this.cancel()
     );
-
-    // Register Reset action
     this.toolbarContentService.registerGlobalAction(
-      {
-        id: 'reset-form',
-        icon: 'refresh',
-        tooltip: 'RESET_FORM',
-        type: 'icon',
-        order: 3,
-      },
+      { id: 'reset-form', icon: 'refresh', tooltip: 'RESET_FORM', type: 'icon', order: 3 },
       () => this.resetForm()
     );
   }
 
   ngOnDestroy() {
-    // Clean up all actions
     this.toolbarContentService.unregisterGlobalAction('save-user');
     this.toolbarContentService.unregisterGlobalAction('cancel-edit');
     this.toolbarContentService.unregisterGlobalAction('reset-form');
@@ -231,7 +166,6 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
   saveUser() {
     if (this.userForm.valid) {
-      // Save logic
       this.snackbarService.success('USER_SAVED_SUCCESSFULLY');
       this.router.navigate(['/users']);
     } else {
@@ -239,14 +173,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  cancel() {
-    this.router.navigate(['/users']);
-  }
-
-  resetForm() {
-    this.userForm.reset();
-    this.snackbarService.info('FORM_RESET');
-  }
+  cancel() { this.router.navigate(['/users']); }
+  resetForm() { this.userForm.reset(); this.snackbarService.info('FORM_RESET'); }
 }
 ```
 
@@ -254,31 +182,17 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
 ### ToolbarContentService
 
-#### Methods
-
 ##### `registerGlobalAction(action: ToolbarAction, callback: () => void): void`
 Register a new toolbar action.
-
-**Parameters:**
-- `action`: The action configuration
-- `callback`: Function to execute when the action is clicked
 
 ##### `unregisterGlobalAction(id: string): void`
 Remove a toolbar action by its ID.
 
-**Parameters:**
-- `id`: The unique identifier of the action to remove
-
 ##### `getGlobalActions(): Observable<ToolbarAction[]>`
-Get an observable of all registered actions (sorted by order).
-
-**Returns:** Observable that emits the current list of actions
+Get an observable of all registered actions, sorted by `order`.
 
 ##### `executeAction(id: string): void`
 Execute the callback for a specific action.
-
-**Parameters:**
-- `id`: The unique identifier of the action
 
 ##### `clearAllGlobalActions(): void`
 Remove all registered toolbar actions.
@@ -293,6 +207,7 @@ interface ToolbarAction {
   type?: 'outlined' | 'filled' | 'basic' | 'icon';  // Button type
   value?: string;            // Translation key for button text
   order?: number;            // Sort order (lower numbers appear first)
+  overflow?: boolean;        // When true, grouped into the overflow menu on desktop and shown in the settings drawer on mobile
 }
 ```
 
@@ -300,14 +215,14 @@ interface ToolbarAction {
 
 1. **Always Clean Up**: Unregister actions in `ngOnDestroy` to prevent memory leaks
 2. **Use Translation Keys**: Always use translation keys for `tooltip` and `value`
-3. **Unique IDs**: Use descriptive, unique IDs for actions (e.g., 'save-user', not 'save')
+3. **Unique IDs**: Use descriptive, unique IDs (e.g., `'save-user'`, not `'save'`)
 4. **Logical Ordering**: Use the `order` property to group related actions
 5. **Icon Buttons**: Prefer `type: 'icon'` for toolbar actions to save space
-6. **Consistent Naming**: Use consistent naming conventions across your app
+6. **Overflow for Secondary Actions**: Use `overflow: true` for Help, Feedback, Contact Us
 
 ## Event Bus Integration
 
-The toolbar also integrates with the `AppEventBusService` for application-wide events:
+The toolbar emits application-wide events via `AppEventBusService` for preference changes and logout. Listen to these anywhere in the app:
 
 ```typescript
 import { AppEventBusService, AppEventType } from '@aum/templates/aum-template';
@@ -316,16 +231,13 @@ export class MyComponent {
   private eventBus = inject(AppEventBusService);
 
   ngOnInit() {
-    // Listen to logout events
     this.eventBus.on(AppEventType.LOGOUT).subscribe(() => {
-      console.log('User logged out');
-      // Handle logout
+      // Handle logout — clear state, redirect, etc.
     });
-  }
 
-  logout() {
-    // Emit logout event
-    this.eventBus.emit(AppEventType.LOGOUT);
+    this.eventBus.on(AppEventType.THEME_CHANGED).subscribe((payload) => {
+      // payload: { theme, previousTheme }
+    });
   }
 }
 ```
@@ -339,10 +251,9 @@ export class MyComponent {
 | `UI_SCALE_CHANGED` | `{ scale, previousScale }` | Emitted when the user changes display density (compact/default/large) |
 | `LANGUAGE_CHANGED` | `{ language, previousLanguage }` | Emitted when the user switches the app language |
 | `TEMPLATE_CHANGED` | `{ template: 'template-1' \| 'template-2' }` | Emitted when the user switches between layout templates |
-| `CUSTOM_MENU_ACTION` | `{ menuId, actionId, data }` | Emitted when a custom toolbar menu item is selected |
 
 ## Examples from AUM Core
 
-For more examples, refer to the AUM Core implementation:
-- `libs/modules/demo/playground/src/lib/playground/playground.ts` - Demonstration of page-specific actions
-- `libs/aum-core/templates/aum-template/src/lib/components/toolbar/toolbar.component.ts` - Toolbar integration
+- `apps/demo-app/src/app/services/global-app-init.service.ts` — All global actions (Feedback, Help, Contact Us)
+- `libs/modules/demo/playground/src/lib/playground/playground.ts` — Page-specific actions
+- `libs/aum-core/templates/aum-template/src/lib/components/toolbar/toolbar.component.ts` — Toolbar integration
