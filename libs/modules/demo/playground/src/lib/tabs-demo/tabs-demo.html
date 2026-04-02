@@ -55,12 +55,12 @@
         <div class="controls margin-bottom-16">
           <aum-button
             [type]="'filled'"
-            [value]="'ADD_TAB'"
+            [value]="'ADD_TAB' | translate"
             (clickButton)="addTab()">
           </aum-button>
           <aum-button
             [type]="'outlined'"
-            [value]="'TOGGLE_ANIMATION'"
+            [value]="'TOGGLE_ANIMATION' | translate"
             (clickButton)="toggleAnimation()">
           </aum-button>
         </div>
@@ -76,7 +76,7 @@
                 <p>{{tab.content}}</p>
                 <aum-button
                   [type]="'basic'"
-                  [value]="'REMOVE_TAB'"
+                  [value]="'REMOVE_TAB' | translate"
                   (clickButton)="removeTab(i)">
                 </aum-button>
               </div>
@@ -109,7 +109,7 @@
         <div class="controls margin-bottom-16">
           <aum-button
             [type]="preserveScrollContent ? 'filled' : 'outlined'"
-            [value]="preserveScrollContent ? 'PRESERVE_ON' : 'PRESERVE_OFF'"
+            [value]="(preserveScrollContent ? 'PRESERVE_ON' : 'PRESERVE_OFF') | translate"
             (clickButton)="togglePreserveScrollContent()">
           </aum-button>
           <span class="fs-14 margin-left-16">

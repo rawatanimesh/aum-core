@@ -11,8 +11,6 @@ import { CommonModule } from '@angular/common';
 import { MatMenuModule, MatMenu } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslateModule } from '@ngx-translate/core';
-
 // Interface for menu item structure
 export interface MenuItem {
   label: string;
@@ -26,7 +24,7 @@ export interface MenuItem {
 
 @Component({
   selector: 'aum-menu-list',
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule, TranslateModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './menu-list.html',
   styleUrl: './menu-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

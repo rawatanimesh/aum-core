@@ -5,12 +5,12 @@
     [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
-    [matTooltip]="tooltip | translate"
+    [matTooltip]="tooltip"
     [ngClass]="sizeClass"
     [style.width]="width"
     (click)="clickButton.emit()"
   >
-    {{ value | translate }}
+    {{ value }}
   </button>
   } @case ('filled') {
   <button
@@ -18,12 +18,12 @@
     [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
-    [matTooltip]="tooltip | translate"
+    [matTooltip]="tooltip"
     [ngClass]="sizeClass"
     [style.width]="width"
     (click)="clickButton.emit()"
   >
-    {{ value | translate }}
+    {{ value }}
   </button>
   } @case ('basic') {
   <button
@@ -31,12 +31,12 @@
     [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
-    [matTooltip]="tooltip | translate"
+    [matTooltip]="tooltip"
     [ngClass]="sizeClass"
     [style.width]="width"
     (click)="clickButton.emit()"
   >
-    {{ value | translate }}
+    {{ value }}
   </button>
   } @case ('icon') {
   <button
@@ -44,7 +44,7 @@
     [type]="htmlType"
     [attr.aria-label]="value"
     [disabled]="disabled"
-    [matTooltip]="tooltip | translate"
+    [matTooltip]="tooltip"
     (click)="clickButton.emit()"
   >
     @if (icon) {

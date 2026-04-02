@@ -14,7 +14,7 @@
       [class.selected-icon]="shouldApplySelected(item)"
       >{{ item.icon }}</mat-icon
     >
-    } {{ item.label | translate }}
+    } {{ item.label }}
   </button>
   }
 
@@ -28,7 +28,7 @@
   >
     @if (item.icon) {
     <mat-icon>{{ item.icon }}</mat-icon>
-    } {{ item.label | translate }}
+    } {{ item.label }}
   </button>
 
   <!-- Recursive child menu -->
