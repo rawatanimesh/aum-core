@@ -4,14 +4,13 @@ import {
   MAT_SNACK_BAR_DATA,
   MatSnackBarRef,
 } from '@angular/material/snack-bar';
-import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 import { SnackbarType } from './snackbar.service';
 
 @Component({
   selector: 'aum-snackbar',
-  imports: [CommonModule, ButtonComponent, TranslateModule],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './snackbar.html',
   styleUrl: './snackbar.scss',
   encapsulation: ViewEncapsulation.None,
