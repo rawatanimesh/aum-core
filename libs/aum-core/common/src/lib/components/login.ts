@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { AuthService } from '@aum/utils/services';
 import { ButtonComponent } from '@aum/ui/buttons';
@@ -29,50 +30,48 @@ type LoginForm = FormGroup<{
     MatButtonModule,
     ButtonComponent,
     InputComponent,
+    TranslateModule,
   ],
   template: `
     <div class="flex-row">
       <div class="flex-column-center-center w-40 ">
         <img class="w-50" src="assets/svgs/A-logo.svg" alt="" />
         <div class="padding-top-16 padding-bottom-16 fs-18 fw-600 w-50">
-          <span class="text-left">Sign in</span>
+          <span class="text-left">{{ 'AUM.SIGN_IN' | translate }}</span>
         </div>
         <form [formGroup]="myForm" (ngSubmit)="login()" class="w-50">
           <aum-input
-            label="Email Address"
-            placeholder="Enter your email"
+            [label]="'AUM.EMAIL_ADDRESS' | translate"
+            [placeholder]="'AUM.ENTER_YOUR_EMAIL' | translate"
             type="email"
             [required]="true"
             [control]="myForm.controls.email"
             [customErrorMessages]="{
-             email: 'Invalid email format.',
-             required: 'Email is required!',
-
+             email: 'AUM.INVALID_EMAIL_FORMAT' | translate,
+             required: 'AUM.EMAIL_IS_REQUIRED' | translate
            }"
           ></aum-input>
           <aum-input
-            label="Password"
-            placeholder="Enter password"
+            [label]="'AUM.PASSWORD' | translate"
+            [placeholder]="'AUM.ENTER_PASSWORD' | translate"
             type="password"
             [required]="true"
             [control]="myForm.controls.password"
             [customErrorMessages]="{
-
-             required: 'Password is required!',
-
+             required: 'AUM.PASSWORD_IS_REQUIRED' | translate
            }"
           ></aum-input>
 
           <aum-button
             class="text-left"
             [type]="'filled'"
-            [value]="'Login'"
+            [value]="'AUM.LOGIN' | translate"
             [disabled]="myForm.invalid"
             [htmlType]="'submit'"
             [width]="'100%'"
           ></aum-button>
         </form>
-        <div class="margin-top-32 margin-bottom-16">Sign in with</div>
+        <div class="margin-top-32 margin-bottom-16">{{ 'AUM.SIGN_IN_WITH' | translate }}</div>
         <div class="flex-row-flex-start w-50">
           <aum-button
             class="text-left"

@@ -26,6 +26,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from '@aum/ui/buttons';
 import { AumErrorStateMatcher } from '../input/input';
 
@@ -75,6 +76,7 @@ export interface FileUploadConfig {
     MatIconModule,
     MatProgressBarModule,
     ButtonComponent,
+    TranslateModule,
   ],
   templateUrl: './upload-box.html',
   styleUrl: './upload-box.scss',

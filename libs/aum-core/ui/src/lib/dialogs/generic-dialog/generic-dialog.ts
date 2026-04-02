@@ -1,12 +1,13 @@
 import { Component, inject, Input, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
   selector: 'aum-generic-dialog',
-  imports: [CommonModule, MatDialogModule, ButtonComponent],
+  imports: [CommonModule, MatDialogModule, ButtonComponent, TranslateModule],
   templateUrl: './generic-dialog.html',
   styleUrl: './generic-dialog.scss',
   encapsulation: ViewEncapsulation.None,

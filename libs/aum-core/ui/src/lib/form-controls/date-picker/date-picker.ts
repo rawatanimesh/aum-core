@@ -37,6 +37,7 @@ import {
 } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -90,6 +91,7 @@ export class AumErrorStateMatcher implements ErrorStateMatcher {
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
+    TranslateModule,
   ],
   providers: [
     provideNativeDateAdapter(),

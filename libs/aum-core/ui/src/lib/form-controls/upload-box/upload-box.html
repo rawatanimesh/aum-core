@@ -42,12 +42,12 @@
       @if (variant === 'default') {
         <div class="flex-column-center-center gap-8">
           <mat-icon class="aum-upload-icon--lg">cloud_upload</mat-icon>
-          <span class="aum-upload-box-placeholder fw-600 fs-14">Drag and drop here</span>
-          <span class="fs-14">or</span>
-          <aum-button type="outlined" value="Browse File" [disabled]="disabled || readonly" (clickButton)="onBrowseClick()"></aum-button>
+          <span class="aum-upload-box-placeholder fw-600 fs-14">{{ 'AUM.DRAG_AND_DROP_HERE' | translate }}</span>
+          <span class="fs-14">{{ 'AUM.OR' | translate }}</span>
+          <aum-button type="outlined" [value]="'AUM.BROWSE_FILE' | translate" [disabled]="disabled || readonly" (clickButton)="onBrowseClick()"></aum-button>
           <p class="flex-column">
             @if (maxFileSize) {
-              <span class="fs-12">Maximum file size is {{ formatFileSize(maxFileSize) }}</span>
+              <span class="fs-12">{{ 'AUM.MAXIMUM_FILE_SIZE_IS' | translate }} {{ formatFileSize(maxFileSize) }}</span>
             }
           </p>
         </div>
@@ -58,13 +58,13 @@
         <div class="aum-upload-box-compact-layout">
           <mat-icon class="aum-upload-icon--md">cloud_upload</mat-icon>
           <div class="aum-upload-box-compact-content">
-            <span class="aum-upload-box-placeholder fw-600 fs-14">Drag and drop here</span>
+            <span class="aum-upload-box-placeholder fw-600 fs-14">{{ 'AUM.DRAG_AND_DROP_HERE' | translate }}</span>
             @if (maxFileSize) {
-              <span class="fs-12">Maximum file size is {{ formatFileSize(maxFileSize) }}</span>
+              <span class="fs-12">{{ 'AUM.MAXIMUM_FILE_SIZE_IS' | translate }} {{ formatFileSize(maxFileSize) }}</span>
             }
           </div>
-          <span class="fs-14 aum-upload-box-compact-divider">or</span>
-          <aum-button type="outlined" value="Browse File" [disabled]="disabled || readonly" (clickButton)="onBrowseClick()"></aum-button>
+          <span class="fs-14 aum-upload-box-compact-divider">{{ 'AUM.OR' | translate }}</span>
+          <aum-button type="outlined" [value]="'AUM.BROWSE_FILE' | translate" [disabled]="disabled || readonly" (clickButton)="onBrowseClick()"></aum-button>
         </div>
       }
     }
@@ -103,8 +103,8 @@
 
   @if (internalFiles.length === 0 || multiple) {
     <div class="flex-row-space-between-center padding-horizontal-8">
-      <span class="fs-12">File Type: {{ filetype }}</span>
-      <aum-button value="Download Template" type="basic" size="small"></aum-button>
+      <span class="fs-12">{{ 'AUM.FILE_TYPE' | translate }}: {{ filetype }}</span>
+      <aum-button [value]="'AUM.DOWNLOAD_TEMPLATE' | translate" type="basic" size="small"></aum-button>
     </div>
   }
 
@@ -154,7 +154,7 @@
   <!-- File Count Hint -->
   @if (!showError && internalFiles.length > 0 && maxFiles) {
     <div class="aum-upload-box-hint">
-      {{ internalFiles.length }} / {{ maxFiles }} files selected
+      {{ internalFiles.length }} / {{ maxFiles }} {{ 'AUM.FILES_SELECTED' | translate }}
     </div>
   }
 </div>

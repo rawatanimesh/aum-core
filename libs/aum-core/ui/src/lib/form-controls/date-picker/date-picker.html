@@ -19,13 +19,13 @@
       matStartDate
       formControlName="start"
       [readonly]="readonly"
-      placeholder="Start date"
+      [placeholder]="'AUM.START_DATE' | translate"
     />
     <input
       matEndDate
       formControlName="end"
       [readonly]="readonly"
-      placeholder="End date"
+      [placeholder]="'AUM.END_DATE' | translate"
     />
   </mat-date-range-input>
 
@@ -57,7 +57,7 @@
   <!-- Single Date Input: Binds to the formControlForSingleDate -->
   <input
     matInput
-    placeholder="Select date"
+    [placeholder]="'AUM.SELECT_DATE' | translate"
     [matDatepicker]="picker"
     [formControl]="formControlForSingleDate!"
     [min]="minDate"
