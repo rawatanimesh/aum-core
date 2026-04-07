@@ -179,7 +179,7 @@
   "APP_SETUP_TITLE": "Quick App Setup",
   "APP_SETUP_DESC": "Configure via app-config.json without touching code.\nSet brand logo, app name, and navigation items.\nCustomize toolbar menus and routing structure.\nZero-config setup for new applications.",
   "PERSONALIZATION_TITLE": "Extensive Personalization",
-  "PERSONALIZATION_DESC": "Multi-language support with ngx-translate (English, Japanese, Hindi).\nLight and dark theme switching with Material Design 3.\nUI scaling modes: Compact, Default, and Large.\nUser preferences persist across sessions.",
+  "PERSONALIZATION_DESC": "Multi-language support with ngx-translate (English, Japanese, Hindi).\nLight and dark theme switching with Material Design 3.\nThree color palettes: Purple, Ocean Blue, and Sea Green.\nUI scaling modes: Compact, Default, and Large.\nUser preferences persist across sessions.",
   "CSP_TITLE": "Content Security Policy",
   "CSP_DESC": "Enterprise-grade CSP configuration included.\nPrevents XSS attacks and code injection.\nSecure content delivery across all pages.\nNonce-based script and style loading.",
   "GIT_SUBTREE_TITLE": "Git Subtree Architecture",

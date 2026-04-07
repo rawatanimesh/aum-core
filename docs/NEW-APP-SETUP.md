@@ -173,8 +173,9 @@ export const appRoutes: Route[] = [
       "show": true,
       "disabled": false,
       "items": {
-        "theme":    { "show": true,  "disabled": false },
         "language": { "show": true,  "disabled": false },
+        "theme":    { "show": true,  "disabled": false },
+        "palette":  { "show": true,  "disabled": false },
         "template": { "show": false, "disabled": false }
       }
     },
@@ -191,6 +192,7 @@ export const appRoutes: Route[] = [
   "defaults": {
     "template": "template-2",
     "theme": "light",
+    "palette": "sea-green",
     "displayMode": "default",
     "language": "en"
   },
@@ -201,7 +203,8 @@ export const appRoutes: Route[] = [
 **Notes:**
 - `toolbarMenus` controls the preferences and profile menus. In `AumTemplate` these appear in the top toolbar; in `AumTemplate2` they appear inside the sidebar.
 - `toolbarMenus.preferences.items.template` controls whether a **Template switcher** option appears in the preferences menu. Set `"show": true` only in apps that expose runtime template switching (e.g. the demo app). Most apps should keep this `false` and hardcode their template choice in routes.
-- `defaults` sets the initial preference values for a **fresh session** (no localStorage). Once the user changes any preference, their choice is saved to localStorage and the config default no longer applies for that preference.
+- `toolbarMenus.preferences.items.palette` controls whether the **Color Palette** option appears. Set `"show": false` to hide it and lock the palette to the `defaults.palette` value.
+- `defaults` sets the initial preference values for a **fresh session** (no localStorage). Once the user changes any preference, their choice is saved to localStorage and the config default no longer applies for that preference. Supported palette values: `"purple"`, `"ocean-blue"`, `"sea-green"`.
 
 ---
 
@@ -422,12 +425,12 @@ export class AppComponent {}
 ### `app.config.ts` — loading `app-config.json`
 
 ```typescript
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, inject, provideAppInitializer, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { APP_CONFIG, MultiTranslateHttpLoader } from '@aum/utils/services';
+import { APP_CONFIG, MultiTranslateHttpLoader, PaletteService, ThemeService } from '@aum/utils/services';
 import appConfigJson from './app-config.json';
 import { appRoutes } from './app.routes';
 
@@ -445,6 +448,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(appRoutes),
     provideAnimationsAsync(),
     { provide: APP_CONFIG, useValue: appConfigJson },
+    // Eagerly apply saved palette and theme before any route/component renders
+    provideAppInitializer(() => {
+      inject(PaletteService);
+      inject(ThemeService);
+    }),
     // HttpClient MUST come before TranslateModule
     provideHttpClient(),
     importProvidersFrom(

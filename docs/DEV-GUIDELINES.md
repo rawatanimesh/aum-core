@@ -185,6 +185,12 @@ Components must work correctly in all three display modes (Compact / Default / L
 
 Components must work in both light and dark themes without visual breaks. All interactive states (hover, focus, disabled, selected) must use theme variables. Test by toggling theme via the preferences menu.
 
+### Color Palette Support — Critical
+
+AUM ships three color palettes: **Purple** (default), **Ocean Blue**, and **Sea Green**. Because palettes only override `--mat-sys-primary*` and related color tokens via CSS class on `<body>`, any component that correctly uses `var(--mat-sys-*)` variables will automatically support all palettes — no extra work needed.
+
+Test by switching palettes via the preferences menu and verify the component looks correct in each palette × light/dark combination.
+
 ### Responsive Design — High Priority
 
 Use the SCSS breakpoint mixins for CSS-level responsiveness and `ViewportService` for conditional rendering in TypeScript. See [RESPONSIVE-DESIGN.md](./RESPONSIVE-DESIGN.md) for the full guide.
@@ -354,6 +360,7 @@ The `defaults` block in `app-config.json` sets the initial values for user prefe
 "defaults": {
   "template": "template-2",
   "theme": "light",
+  "palette": "sea-green",
   "displayMode": "default",
   "language": "en"
 }
@@ -414,6 +421,7 @@ Before a release, verify in all target browsers:
 - [ ] Accessibility attributes added
 - [ ] All user-facing text uses translation keys
 - [ ] Tested in light and dark mode
+- [ ] Tested across all three color palettes (Purple, Ocean Blue, Sea Green)
 - [ ] Tested in Compact, Default, and Large UI scale modes
 - [ ] No `console.log` or debugging artifacts
 

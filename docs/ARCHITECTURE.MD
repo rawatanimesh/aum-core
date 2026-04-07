@@ -148,7 +148,9 @@ theme/
 │   │   │   ├── _mixins.scss     # Responsive mixins (mobile/tablet/desktop)
 │   │   │   └── functions.scss   # rem() function
 │   │   └── themes/
-│   │       └── theme-purple/
+│   │       ├── theme-purple/    # Default palette (Purple) — light + dark
+│   │       ├── theme-ocean-blue/ # Ocean Blue palette — light + dark
+│   │       └── theme-sea-green/ # Sea Green palette — light + dark
 │   └── assets/
 │       ├── icons/
 │       ├── images/
@@ -673,30 +675,42 @@ The AUM UI system supports three display modes that affect all components:
 
 ### Theme System Implementation
 
-```scss
-// Theme switching implementation
-:root {
-  // Light theme (default)
-  color-scheme: light;
-  --mat-sys-surface: #f9f9f9;
-  --mat-sys-on-surface: #1a1c1c;
-}
+The theme system combines two orthogonal dimensions: **light/dark mode** and **color palette**. Both are stored in `localStorage` and applied eagerly via `provideAppInitializer` before any route or component renders.
 
-[data-theme='dark'] {
-  // Dark theme override
-  color-scheme: dark;
-  --mat-sys-surface: #121414;
-  --mat-sys-on-surface: #e2e2e2;
-}
+#### Light/Dark Mode
 
-// Automatic theme switching based on system preference
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --mat-sys-surface: #121414;
-    --mat-sys-on-surface: #e2e2e2;
-  }
-}
+`ThemeService` manages light/dark mode by toggling `light-mode` / `dark-mode` CSS classes on `<body>`. It supports `'light'`, `'dark'`, and `'system'` (follows OS preference).
+
+```typescript
+// Eager initialization in app.config.ts
+provideAppInitializer(() => {
+  inject(PaletteService); // applies saved palette class to <body>
+  inject(ThemeService);   // applies saved theme class to <body>
+}),
 ```
+
+#### Color Palette System
+
+Three color palettes are available. Each generates a full Material Design 3 token set via `mat.theme()`:
+
+| Palette | Class on `<body>` | Primary color |
+|---|---|---|
+| Purple | _(no class — CSS fallback only)_ | `#6E57E0` |
+| Ocean Blue | `palette-ocean-blue` | `#0077b6` |
+| Sea Green (default) | `palette-sea-green` | `#1f7a8c` |
+
+The CSS cascade applies palette tokens through a layered structure:
+
+```scss
+html { ... }                          // Purple tokens (default)
+body.dark-mode { ... }                // Purple dark override
+body.palette-ocean-blue { ... }       // Ocean Blue light tokens
+body.palette-ocean-blue.dark-mode { ... } // Ocean Blue dark tokens
+body.palette-sea-green { ... }        // Sea Green light tokens
+body.palette-sea-green.dark-mode { ... }  // Sea Green dark tokens
+```
+
+`PaletteService` manages the active palette class; `ThemeService` manages the light/dark class. Both are singletons that initialize in their constructors.
 
 ### Component Scaling Requirements
 

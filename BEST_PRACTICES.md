@@ -832,6 +832,7 @@ Before submitting code, ensure:
 - [ ] **CRITICAL: Uses rem() function for ALL dimensions (no px values)**
 - [ ] **CRITICAL: Supports UI scaling (Default/Large/Compact modes)**
 - [ ] **CRITICAL: Works perfectly in both light and dark modes**
+- [ ] **CRITICAL: Works correctly across all three color palettes (Purple, Ocean Blue, Sea Green)**
 - [ ] Includes accessibility attributes
 - [ ] Has comprehensive tests
 - [ ] Follows naming conventions
@@ -847,6 +848,7 @@ Before submitting code, ensure:
 - [ ] ✅ Component scales properly in Compact mode
 - [ ] ✅ Component scales properly in Large mode
 - [ ] ✅ Theme switching works without any visual breaks
+- [ ] ✅ All three color palettes render correctly (palette-only `--mat-sys-primary*` tokens change)
 - [ ] ✅ Hover/focus/disabled states use theme variables
 
 ---
