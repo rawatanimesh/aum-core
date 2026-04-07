@@ -67,6 +67,10 @@
         "template": {
           "show": true,
           "disabled": false
+        },
+        "palette": {
+          "show": true,
+          "disabled": false
         }
       }
     }
@@ -74,8 +78,9 @@
   "disableRipple": true,
   "defaults": {
     "template": "template-1",
-    "theme": "light",
+    "theme": "dark",
     "displayMode": "default",
-    "language": "en"
+    "language": "en",
+    "palette": "sea-green"
   }
 }

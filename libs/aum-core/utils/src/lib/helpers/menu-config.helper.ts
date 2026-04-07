@@ -43,7 +43,7 @@ export class MenuConfigHelper {
    */
   static shouldShowPreferencesItem(
     toolbarConfig?: ToolbarMenuConfig,
-    item?: 'theme' | 'language' | 'template'
+    item?: 'theme' | 'language' | 'template' | 'palette'
   ): boolean {
     const prefsConfig = toolbarConfig?.preferences;
 
@@ -63,7 +63,7 @@ export class MenuConfigHelper {
    */
   static isPreferencesItemDisabled(
     toolbarConfig?: ToolbarMenuConfig,
-    item?: 'theme' | 'language' | 'template'
+    item?: 'theme' | 'language' | 'template' | 'palette'
   ): boolean {
     const prefsConfig = toolbarConfig?.preferences;
 

@@ -11,6 +11,7 @@ export enum AppEventType {
   UI_SCALE_CHANGED = 'UI_SCALE_CHANGED',
   LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',
   TEMPLATE_CHANGED = 'TEMPLATE_CHANGED',
+  PALETTE_CHANGED = 'PALETTE_CHANGED',
   // Add more event types as needed
 }
 
@@ -38,6 +39,15 @@ export interface ThemeChangedPayload {
 export interface UiScaleChangedPayload {
   scale: 'compact' | 'default' | 'large';
   previousScale?: 'compact' | 'default' | 'large';
+}
+
+/**
+ * Payload interface for palette change events
+ * Emitted when user changes the color palette
+ */
+export interface PaletteChangedPayload {
+  palette: 'purple' | 'pink';
+  previousPalette?: 'purple' | 'pink';
 }
 
 /**

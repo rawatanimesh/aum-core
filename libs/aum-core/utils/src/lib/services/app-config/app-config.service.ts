@@ -35,6 +35,7 @@ export interface PreferencesMenuConfig {
     theme?: MenuItemConfig;
     language?: MenuItemConfig;
     template?: MenuItemConfig;
+    palette?: MenuItemConfig;
   };
 }
 
@@ -76,6 +77,8 @@ export interface AppDefaults {
   displayMode?: 'compact' | 'default' | 'large';
   /** Default language. Defaults to 'en' if not set. */
   language?: 'en' | 'ja' | 'hi';
+  /** Default color palette. Defaults to 'sea-green' if not set. */
+  palette?: 'purple' | 'ocean-blue' | 'sea-green';
 }
 
 /**

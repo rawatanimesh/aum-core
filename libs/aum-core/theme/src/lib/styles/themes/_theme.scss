@@ -1,14 +1,15 @@
 @use '@angular/material' as mat;
-@use './theme-purple/theme-purple.scss' as aum-theme;
-// @use './theme-pink/theme-pink3.scss' as aum-theme;
-// @import '../themes/theme-pink.css';
+@use './theme-purple/theme-purple.scss' as purple-theme;
+@use './theme-ocean-blue/theme-ocean-blue.scss' as ocean-blue-theme;
+@use './theme-sea-green/theme-sea-green.scss' as sea-green-theme;
 
+// Default palette: purple (light)
 html {
   @include mat.theme(
     (
       color: (
-        primary: aum-theme.$primary-palette,
-        tertiary: aum-theme.$tertiary-palette,
+        primary: purple-theme.$primary-palette,
+        tertiary: purple-theme.$tertiary-palette,
       ),
       typography: 'Noto Sans',
       density: 0,
@@ -16,12 +17,63 @@ html {
   );
 }
 
+// Purple dark
 .dark-mode {
   @include mat.theme(
     (
       color: (
-        primary: aum-theme.$primary-palette,
-        tertiary: aum-theme.$tertiary-palette,
+        primary: purple-theme.$primary-palette,
+        tertiary: purple-theme.$tertiary-palette,
+        theme-type: dark,
+      ),
+    )
+  );
+}
+
+// Ocean blue light
+body.palette-ocean-blue {
+  @include mat.theme(
+    (
+      color: (
+        primary: ocean-blue-theme.$primary-palette,
+        tertiary: ocean-blue-theme.$tertiary-palette,
+      ),
+    )
+  );
+}
+
+// Ocean blue dark
+body.palette-ocean-blue.dark-mode {
+  @include mat.theme(
+    (
+      color: (
+        primary: ocean-blue-theme.$primary-palette,
+        tertiary: ocean-blue-theme.$tertiary-palette,
+        theme-type: dark,
+      ),
+    )
+  );
+}
+
+// Sea green light
+body.palette-sea-green {
+  @include mat.theme(
+    (
+      color: (
+        primary: sea-green-theme.$primary-palette,
+        tertiary: sea-green-theme.$tertiary-palette,
+      ),
+    )
+  );
+}
+
+// Sea green dark
+body.palette-sea-green.dark-mode {
+  @include mat.theme(
+    (
+      color: (
+        primary: sea-green-theme.$primary-palette,
+        tertiary: sea-green-theme.$tertiary-palette,
         theme-type: dark,
       ),
     )

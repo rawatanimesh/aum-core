@@ -1,4 +1,6 @@
 export { ThemeService } from './theme/theme.service';
+export { PaletteService } from './theme/palette.service';
+export type { ColorPalette } from './theme/palette.service';
 export { AuthService } from './auth/auth.service';
 export {
   AppConfigService,
