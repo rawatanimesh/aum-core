@@ -1,11 +1,13 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { AppConfigService } from '../app-config/app-config.service';
 
 type ThemeMode = 'light' | 'dark' | 'system';
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private _themeIcon = signal('dark_mode'); // default light theme
+  private _themeIcon = signal('dark_mode');
   readonly themeIcon = this._themeIcon.asReadonly();
   private readonly storageKey = 'app-theme-mode';
+  private readonly appConfigService = inject(AppConfigService);
 
   constructor() {
     this.loadTheme();
@@ -30,7 +32,7 @@ export class ThemeService {
    * Get the current saved mode
    */
   getTheme(): ThemeMode {
-    return (localStorage.getItem(this.storageKey) as ThemeMode) || 'light';
+    return (localStorage.getItem(this.storageKey) as ThemeMode) || this.appConfigService.defaults()?.theme || 'light';
   }
 
   /**

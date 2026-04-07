@@ -126,9 +126,6 @@ export class LoginComponent {
   });
 
   constructor() {
-    //  Clear all classes on body tag
-    document.body.className = '';
-
     //delete later
     this.myForm.patchValue({
       email: 'animesh@mail.com',

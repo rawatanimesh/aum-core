@@ -10,7 +10,7 @@ import {
 import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http';
 import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
-import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, CspService  } from '@aum/utils/services';
+import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, CspService, PaletteService, ThemeService  } from '@aum/utils/services';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from '@aum/utils/services';
 import { appRoutes } from './app.routes';
@@ -71,6 +71,11 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       // Inject the service to instantiate it and register global toolbar actions
       inject(GlobalAppInitService);
+    }),
+    // Eagerly apply palette and theme before any route/component renders
+    provideAppInitializer(() => {
+      inject(PaletteService);
+      inject(ThemeService);
     }),
     // Initialize CSP with API URL(s) from environment
     // Supports single URL or array - configure in environment.ts
