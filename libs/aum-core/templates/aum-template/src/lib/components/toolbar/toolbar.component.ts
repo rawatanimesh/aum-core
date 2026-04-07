@@ -16,7 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ThemeService, AppConfigService, LanguageTranslationService, MenuConfigHelper } from '@aum/utils/services';
+import { ThemeService, AppConfigService, LanguageTranslationService, MenuConfigHelper, PaletteService } from '@aum/utils/services';
 import { BreadcrumbService } from '@aum/ui/navigation';
 import { BreadcrumbComponent } from '@aum/ui/navigation';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
@@ -44,6 +44,7 @@ export class ToolbarComponent implements OnInit {
   @Output() sideMenuToggle = new EventEmitter();
   @Output() settingsDrawerToggle = new EventEmitter();
   protected themeService = inject(ThemeService);
+  protected paletteService = inject(PaletteService);
   protected breadcrumbService = inject(BreadcrumbService);
   protected appConfigService = inject(AppConfigService);
   protected languageService = inject(LanguageTranslationService);
@@ -185,6 +186,22 @@ export class ToolbarComponent implements OnInit {
       });
     }
 
+    // Palette item
+    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'palette')) {
+      const savedPalette = this.paletteService.getPalette();
+      preferencesMenuItems.push({
+        label: this.languageService.instant('AUM.PALETTE'),
+        value: 'palette',
+        icon: 'palette',
+        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'palette'),
+        children: [
+          { label: this.languageService.instant('AUM.PURPLE'), value: 'purple', selected: savedPalette === 'purple' },
+          { label: this.languageService.instant('AUM.OCEAN_BLUE'), value: 'ocean-blue', selected: savedPalette === 'ocean-blue' },
+          { label: this.languageService.instant('AUM.SEA_GREEN'), value: 'sea-green', selected: savedPalette === 'sea-green' },
+        ],
+      });
+    }
+
     // Template switcher
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
       const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
@@ -309,6 +326,9 @@ export class ToolbarComponent implements OnInit {
         | 'system';
       // Update selected state for Theme options
       this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
+
+      // Update selected state for Palette options
+      this.setMenuSelection(this.optionsMenuList, 'palette', this.paletteService.getPalette());
     });
 
     this.toolbarContentService.getGlobalActions()
@@ -358,6 +378,13 @@ export class ToolbarComponent implements OnInit {
         theme: item.value,
         previousTheme,
       });
+    }
+    // Palette
+    if (item.value === 'purple' || item.value === 'ocean-blue' || item.value === 'sea-green') {
+      const previousPalette = this.paletteService.getPalette();
+      this.paletteService.setPalette(item.value);
+      this.setMenuSelection(this.optionsMenuList, 'palette', item.value);
+      this.eventBus.emit(AppEventType.PALETTE_CHANGED, { palette: item.value, previousPalette });
     }
     // Language switching - must be after other actions
     if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {

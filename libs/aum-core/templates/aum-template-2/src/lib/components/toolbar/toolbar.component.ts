@@ -19,6 +19,7 @@ import { Subscription } from 'rxjs';
 import {
   AppConfigService,
   MenuConfigHelper,
+  PaletteService,
   ThemeService,
   LanguageTranslationService,
   AuthService,
@@ -51,6 +52,7 @@ export class ToolbarComponent implements OnInit, OnDestroy {
   @Output() sideMenuToggle = new EventEmitter();
 
   protected themeService = inject(ThemeService);
+  protected paletteService = inject(PaletteService);
   protected languageService = inject(LanguageTranslationService);
   private appConfigService = inject(AppConfigService);
   private cdr = inject(ChangeDetectorRef);
@@ -147,6 +149,21 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       });
     }
 
+    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'palette')) {
+      const savedPalette = this.paletteService.getPalette();
+      preferencesMenuItems.push({
+        label: this.languageService.instant('AUM.PALETTE'),
+        value: 'palette',
+        icon: 'palette',
+        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'palette'),
+        children: [
+          { label: this.languageService.instant('AUM.PURPLE'), value: 'purple', selected: savedPalette === 'purple' },
+          { label: this.languageService.instant('AUM.OCEAN_BLUE'), value: 'ocean-blue', selected: savedPalette === 'ocean-blue' },
+          { label: this.languageService.instant('AUM.SEA_GREEN'), value: 'sea-green', selected: savedPalette === 'sea-green' },
+        ],
+      });
+    }
+
     // Template switcher
     if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
       const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
@@ -201,6 +218,8 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
       const savedTheme = localStorage.getItem('app-theme-mode') as 'light' | 'dark' | 'system';
       this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
+
+      this.setMenuSelection(this.optionsMenuList, 'palette', this.paletteService.getPalette());
     });
 
     this.globalActionsSubscription = this.toolbarContentService
@@ -233,6 +252,12 @@ export class ToolbarComponent implements OnInit, OnDestroy {
       this.themeService.setTheme(item.value);
       this.setMenuSelection(this.optionsMenuList, 'theme', item.value);
       this.eventBus.emit(AppEventType.THEME_CHANGED, { theme: item.value, previousTheme });
+    }
+    if (item.value === 'purple' || item.value === 'ocean-blue' || item.value === 'sea-green') {
+      const previousPalette = this.paletteService.getPalette();
+      this.paletteService.setPalette(item.value);
+      this.setMenuSelection(this.optionsMenuList, 'palette', item.value);
+      this.eventBus.emit(AppEventType.PALETTE_CHANGED, { palette: item.value, previousPalette });
     }
     if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
       const currentLanguage = this.languageService.getLanguage();

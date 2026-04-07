@@ -5,21 +5,20 @@ import {
   EventEmitter,
   inject,
   Input,
-  OnDestroy,
-  OnInit,
   Output,
   ChangeDetectorRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
 
 import {
   AppConfigService,
   MenuConfigHelper,
+  PaletteService,
   ThemeService,
   LanguageTranslationService,
   AuthService,
@@ -46,7 +45,7 @@ import {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent {
   /** When false, hides the brand logo from the sidebar header (e.g. mobile drawer where it's already in the top bar) */
   @Input() showBrandLogo = true;
   /** When false, hides the app logo/name from the sidebar header (e.g. mobile drawer where it's already in the top bar) */
@@ -56,6 +55,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
   private appConfigService = inject(AppConfigService);
   protected themeService = inject(ThemeService);
+  protected paletteService = inject(PaletteService);
   protected languageService = inject(LanguageTranslationService);
   private cdr = inject(ChangeDetectorRef);
   private auth = inject(AuthService);
@@ -99,8 +99,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
   );
 
   private menusInitialized = false;
-  private langSubscription?: Subscription;
-  private globalActionsSubscription?: Subscription;
 
   optionsMenuList: MenuItem[] = [];
   profileMenuList: MenuItem[] = [];
@@ -113,6 +111,31 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.cdr.markForCheck();
       }
     });
+
+    this.languageService.get('LANGUAGE')
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => {
+        this.buildMenus();
+        this.menusInitialized = true;
+        this.cdr.markForCheck();
+
+        const savedMode = localStorage.getItem('ui-scale-mode') as 'compact' | 'default' | 'large';
+        if (savedMode) document.body.classList.add(`scale-${savedMode}`);
+        this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || this.appConfigService.defaults()?.displayMode || 'default');
+
+        const savedTheme = localStorage.getItem('app-theme-mode') as 'light' | 'dark' | 'system';
+        this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
+
+        this.setMenuSelection(this.optionsMenuList, 'palette', this.paletteService.getPalette());
+      });
+
+    this.toolbarContentService
+      .getGlobalActions()
+      .pipe(takeUntilDestroyed())
+      .subscribe((actions) => {
+        this.globalActions = actions;
+        this.cdr.markForCheck();
+      });
   }
 
   buildMenus(): void {
@@ -144,6 +167,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
           { label: this.languageService.instant('AUM.LIGHT'), value: 'light', icon: 'light_mode', selected: savedTheme === 'light' },
           { label: this.languageService.instant('AUM.DARK'), value: 'dark', icon: 'dark_mode', selected: savedTheme === 'dark' },
           { label: this.languageService.instant('AUM.SYSTEM'), value: 'system', icon: 'computer', selected: savedTheme === 'system' },
+        ],
+      });
+    }
+
+    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'palette')) {
+      const savedPalette = this.paletteService.getPalette();
+      preferencesMenuItems.push({
+        label: this.languageService.instant('AUM.PALETTE'),
+        value: 'palette',
+        icon: 'palette',
+        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'palette'),
+        children: [
+          { label: this.languageService.instant('AUM.PURPLE'), value: 'purple', selected: savedPalette === 'purple' },
+          { label: this.languageService.instant('AUM.OCEAN_BLUE'), value: 'ocean-blue', selected: savedPalette === 'ocean-blue' },
+          { label: this.languageService.instant('AUM.SEA_GREEN'), value: 'sea-green', selected: savedPalette === 'sea-green' },
         ],
       });
     }
@@ -190,27 +228,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.profileMenuList = profileMenuItems;
   }
 
-  ngOnInit() {
-    this.langSubscription = this.languageService.get('LANGUAGE').subscribe(() => {
-      this.buildMenus();
-      this.menusInitialized = true;
-      this.cdr.markForCheck();
-
-      const savedMode = localStorage.getItem('ui-scale-mode') as 'compact' | 'default' | 'large';
-      if (savedMode) document.body.classList.add(`scale-${savedMode}`);
-      this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || this.appConfigService.defaults()?.displayMode || 'default');
-
-      const savedTheme = localStorage.getItem('app-theme-mode') as 'light' | 'dark' | 'system';
-      this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
-    });
-
-    this.globalActionsSubscription = this.toolbarContentService
-      .getGlobalActions()
-      .subscribe((actions) => {
-        this.globalActions = actions;
-        this.cdr.markForCheck();
-      });
-  }
 
   onItemClick(value: string) {
     this.router.navigateByUrl(value).then((success) => {
@@ -233,6 +250,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.themeService.setTheme(item.value);
       this.setMenuSelection(this.optionsMenuList, 'theme', item.value);
       this.eventBus.emit(AppEventType.THEME_CHANGED, { theme: item.value, previousTheme });
+    }
+    if (item.value === 'purple' || item.value === 'ocean-blue' || item.value === 'sea-green') {
+      const previousPalette = this.paletteService.getPalette();
+      this.paletteService.setPalette(item.value);
+      this.setMenuSelection(this.optionsMenuList, 'palette', item.value);
+      this.eventBus.emit(AppEventType.PALETTE_CHANGED, { palette: item.value, previousPalette });
     }
     if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
       const currentLanguage = this.languageService.getLanguage();
@@ -280,8 +303,4 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-  ngOnDestroy(): void {
-    this.langSubscription?.unsubscribe();
-    this.globalActionsSubscription?.unsubscribe();
-  }
 }
