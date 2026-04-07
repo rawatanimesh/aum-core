@@ -38,6 +38,10 @@
     }
   }
 
+  &-feat-header {
+    color: var(--mat-sys-primary);
+  }
+
   &-subtitle {
     color: var(--mat-sys-on-surface-variant);
     margin: 0;
@@ -52,7 +56,7 @@
   }
 
   &-feature-card {
-    cursor: default;
+    cursor: pointer;
     transition: box-shadow 0.2s ease;
 
     &:hover {
@@ -70,6 +74,7 @@
       align-items: flex-start;
       gap: rem(10);
       flex-shrink: 0;
+      color: var(--mat-sys-primary);
     }
   }
 
@@ -112,7 +117,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: pre-line;
-  // Prevent overflow when header is tall — fill remaining flex space and clip
   flex: 1;
   min-height: 0;
 }

@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="margin-40 text-center">
+    <div class="aum-dashboard-feat-header margin-40 text-center">
       <span class="fw-600 fs-28">{{ 'CORE_FEATURES' | translate }}</span>
       <p class="margin-top-8 fs-18 aum-dashboard-subtitle">
         {{ 'CORE_FEATURES_SUBTITLE' | translate }}
@@ -24,8 +24,8 @@
 
     <div class="aum-dashboard-feature-list">
       @for (feature of featureList; track feature.title) {
-        <aum-card class="aum-dashboard-feature-card">
-          <div card-body class="aum-dashboard-feature-card-body" [matTooltip]="feature.description | translate">
+        <aum-card class="aum-dashboard-feature-card" (click)="openFeatureDialog(feature)">
+          <div card-body class="aum-dashboard-feature-card-body">
             <div class="aum-dashboard-feature-card-header">
               <mat-icon class="aum-dashboard-feature-icon">{{ feature.icon }}</mat-icon>
               <span class="fw-600 fs-20">{{ feature.title | translate }}</span>

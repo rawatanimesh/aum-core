@@ -2,19 +2,21 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { CardComponent, PageComponent } from '@aum/ui/layout';
+import { FeatureDetailDialog } from '../feature-detail-dialog/feature-detail-dialog';
 
 @Component({
   selector: 'demo-dashboard',
-  imports: [PageComponent, CardComponent, ButtonComponent, MatIconModule, MatTooltipModule, TranslateModule],
+  imports: [PageComponent, CardComponent, ButtonComponent, MatIconModule, TranslateModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })
 export class Dashboard {
-  private router = inject(Router);
+  private readonly router = inject(Router);
+  private readonly dialog = inject(MatDialog);
 
   pageInfo = {
     breadcrumbs: [
@@ -24,6 +26,16 @@ export class Dashboard {
 
   navigateToPlayground() {
     this.router.navigate(['/playground']);
+  }
+
+  openFeatureDialog(feature: { title: string; description: string }) {
+    this.dialog.open(FeatureDetailDialog, {
+      width: '480px',
+      data: feature,
+      panelClass: 'aum-dialog-container',
+      autoFocus: false,
+      restoreFocus: false,
+    });
   }
 
   featureList = [

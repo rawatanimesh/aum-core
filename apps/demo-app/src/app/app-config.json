@@ -9,24 +9,6 @@
       "selected": true
     },
     {
-      "label": "AGENT_DIRECTORY",
-      "value": "agent-directory",
-      "icon": "support_agent",
-      "expanded": false,
-      "children": [
-        {
-          "label": "MY_AGENTS",
-          "value": "/agent-directory/my-agents",
-          "icon": "adb"
-        },
-        {
-          "label": "AGENT_LIST",
-          "value": "/agent-directory/agent-list",
-          "icon": "smart_toy"
-        }
-      ]
-    },
-    {
       "label": "PLAYGROUND",
       "value": "/playground",
       "icon": "science",
@@ -35,22 +17,7 @@
   ],
   "toolbarMenus": {
     "profile": {
-      "show": true,
-      "disabled": false,
-      "items": {
-        "profile": {
-          "show": true,
-          "disabled": true
-        },
-        "settings": {
-          "show": true,
-          "disabled": true
-        },
-        "logout": {
-          "show": true,
-          "disabled": false
-        }
-      }
+      "show": false
     },
     "preferences": {
       "show": true,
@@ -77,7 +44,7 @@
   },
   "disableRipple": true,
   "defaults": {
-    "template": "template-1",
+    "template": "template-2",
     "theme": "dark",
     "displayMode": "default",
     "language": "en",

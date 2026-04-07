@@ -1,14 +1,7 @@
 import { Route } from '@angular/router';
-import { AuthGuardService } from './auth-gaurd.service';
 import { TemplateWrapperComponent } from './template-wrapper.component';
 
 export const appRoutes: Route[] = [
-  {
-    path: 'login',
-    loadComponent: () =>
-      import('@aum/common').then((m) => m.LoginComponent),
-  },
-
   {
     path: '',
     redirectTo: 'dashboard',
@@ -17,7 +10,6 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: TemplateWrapperComponent,
-    canActivate: [AuthGuardService],
     children: [
       {
         path: 'dashboard',
