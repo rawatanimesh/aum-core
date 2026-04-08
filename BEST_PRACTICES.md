@@ -15,6 +15,22 @@ This document outlines the best practices, coding standards, and conventions for
 
 ---
 
+## 🏆 Industry Standards & General Principles
+
+Every feature, fix, or refactor must adhere to the following principles:
+
+- **Follow established patterns** — Use Angular, Material, and NX conventions. Don't invent patterns that already have a standard solution.
+- **SOLID principles** — Single responsibility, open/closed, dependency inversion. Keep components and services focused.
+- **DRY (Don't Repeat Yourself)** — Extract shared logic into services or utilities; avoid copy-pasting code blocks.
+- **KISS (Keep It Simple)** — Solve the problem at hand with the minimum complexity required. Avoid over-engineering.
+- **Accessibility first** — All interactive elements must be keyboard-navigable and screen-reader friendly.
+- **Responsive by default** — Every UI component must work correctly on mobile (≤ 600px), tablet (601–960px), and desktop (> 960px) without horizontal overflow. Use the project's `@include mobile/tablet/desktop` mixins — never raw media queries.
+- **No magic numbers** — Use named constants or design tokens; never hardcode values without context.
+- **Fail fast, fail clearly** — Validate inputs at boundaries; surface errors with clear messages rather than silent failures.
+- **Consistent code style** — Follow the ESLint/Prettier configuration in the repo; do not disable lint rules without justification.
+
+---
+
 ## 🏗️ Project Structure
 
 ### Library Organization
@@ -251,17 +267,88 @@ export class ButtonComponent {
 
 ### Responsive Design with Scalable Units
 
-```scss
-// ✅ Mobile-first approach using rem() function
-.component {
-  padding: rem(16); // Scalable base padding
+All UI must be responsive and look polished across **mobile (≤ 600px)**, **tablet (601px–960px)**, and **desktop (> 960px)** viewports. Horizontal overflow is strictly forbidden — content must never cause the page to scroll horizontally.
 
-  @media (min-width: 768px) {
-    padding: rem(32); // Scales with user preference
+> Breakpoints are defined in `libs/aum-core/theme/src/lib/styles/abstracts/_variables.scss`:
+> - `$breakpoint-mobile: 600px`
+> - `$breakpoint-tablet: 960px`
+>
+> Responsive mixins live in `libs/aum-core/theme/src/lib/styles/abstracts/_mixins.scss`. **Always use these mixins — never write raw media queries.**
+
+```scss
+// ✅ REQUIRED: Use the project mixins for all breakpoints
+@use 'libs/aum-core/theme/src/lib/styles/abstracts/mixins' as *;
+
+.component {
+  padding: rem(16); // Base (desktop/default)
+
+  @include tablet {
+    padding: rem(12);
   }
 
-  @media (min-width: 1024px) {
-    padding: rem(48); // Maintains proportions
+  @include mobile {
+    padding: rem(8);
+  }
+}
+```
+
+#### Preventing Horizontal Overflow
+
+```scss
+// ✅ REQUIRED: Prevent horizontal overflow at layout roots
+.page-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+// ✅ Use min-width: 0 on flex/grid children to prevent overflow
+.flex-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ✅ Images and media should never overflow their container
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+```
+
+#### Responsive Layout Patterns
+
+```scss
+@use 'libs/aum-core/theme/src/lib/styles/abstracts/mixins' as *;
+
+// ✅ Use CSS Grid with auto-fit for adaptive layouts
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(rem(280), 1fr));
+  gap: rem(16);
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: rem(8);
+  }
+}
+
+// ✅ Stack on mobile, side-by-side on larger screens
+.two-column {
+  display: flex;
+  gap: rem(16);
+
+  @include tablet {
+    flex-direction: column;
+  }
+}
+
+// ✅ Hide/show elements at breakpoints
+.desktop-only {
+  @include tablet {
+    display: none;
   }
 }
 ```
@@ -833,11 +920,14 @@ Before submitting code, ensure:
 - [ ] **CRITICAL: Supports UI scaling (Default/Large/Compact modes)**
 - [ ] **CRITICAL: Works perfectly in both light and dark modes**
 - [ ] **CRITICAL: Works correctly across all three color palettes (Purple, Ocean Blue, Sea Green)**
+- [ ] **CRITICAL: Responsive across mobile (≤ 600px), tablet (601–960px), and desktop (> 960px) — use `@include mobile/tablet/desktop` mixins**
+- [ ] **CRITICAL: No horizontal overflow on any viewport size**
+- [ ] Follows industry standards and established Angular/NX patterns
+- [ ] Applies SOLID, DRY, and KISS principles
 - [ ] Includes accessibility attributes
 - [ ] Has comprehensive tests
 - [ ] Follows naming conventions
 - [ ] Is properly documented
-- [ ] Is responsive across device sizes
 
 ### UI Development Critical Checks
 
@@ -850,6 +940,10 @@ Before submitting code, ensure:
 - [ ] ✅ Theme switching works without any visual breaks
 - [ ] ✅ All three color palettes render correctly (palette-only `--mat-sys-primary*` tokens change)
 - [ ] ✅ Hover/focus/disabled states use theme variables
+- [ ] ✅ No horizontal overflow on mobile, tablet, or desktop
+- [ ] ✅ Layout looks correct and usable on all three viewport sizes
+- [ ] ✅ Flex/grid children use `min-width: 0` where needed to prevent overflow
+- [ ] ✅ Images/media constrained with `max-width: 100%`
 
 ---
 
