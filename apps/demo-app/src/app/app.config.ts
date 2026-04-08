@@ -7,7 +7,7 @@ import {
   provideAppInitializer,
   inject
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http';
 import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
 import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, CspService, PaletteService, ThemeService  } from '@aum/utils/services';
@@ -31,7 +31,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes, withComponentInputBinding()),
+    provideRouter(appRoutes, withComponentInputBinding(), withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' })),
     // Translation module (must be before HttpClient)
     importProvidersFrom(
       TranslateModule.forRoot({

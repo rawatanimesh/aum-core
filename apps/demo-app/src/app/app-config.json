@@ -9,6 +9,12 @@
       "selected": true
     },
     {
+      "label": "GETTING_STARTED",
+      "value": "/getting-started",
+      "icon": "rocket_launch",
+      "selected": false
+    },
+    {
       "label": "PLAYGROUND",
       "value": "/playground",
       "icon": "science",

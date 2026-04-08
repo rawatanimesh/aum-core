@@ -10,6 +10,11 @@
   <div dialog-footer>
     <div class="dialog-actions">
       <aum-button
+        [type]="'outlined'"
+        [value]="'GETTING_STARTED' | translate"
+        (clickButton)="goToGettingStarted()"
+      ></aum-button>
+      <aum-button
         [type]="'filled'"
         [value]="'CLOSE' | translate"
         (clickButton)="closeDialog()"

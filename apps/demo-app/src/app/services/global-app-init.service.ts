@@ -19,6 +19,12 @@ export class GlobalAppInitService {
   }
 
   private initializeGlobalActions(): void {
+    // GitHub — shown as icon directly in toolbar
+    this.toolbarContentService.registerGlobalAction(
+      { id: 'github', icon: 'code', tooltip: 'VIEW_ON_GITHUB', type: 'icon', order: 9, overflow: false },
+      () => window.open('https://github.com/rawatanimesh/aum-core', '_blank')
+    );
+
     // About — overflow: shown in more_vert menu on desktop, settings drawer on mobile
     this.toolbarContentService.registerGlobalAction(
       { id: 'about', icon: 'info', tooltip: 'ABOUT', type: 'icon', order: 10, overflow: true },

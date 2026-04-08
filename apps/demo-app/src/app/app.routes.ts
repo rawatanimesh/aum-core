@@ -13,8 +13,15 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'dashboard',
+        title: 'Aum Core',
         loadComponent: () =>
           import('@demo/dashboard').then((m) => m.Dashboard),
+      },
+      {
+        path: 'getting-started',
+        title: 'Getting Started | Aum Core',
+        loadComponent: () =>
+          import('@demo/getting-started').then((m) => m.GettingStarted),
       },
       {
         path: 'playground',

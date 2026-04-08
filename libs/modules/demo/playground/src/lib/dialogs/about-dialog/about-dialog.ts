@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialogRef } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -13,8 +14,14 @@ import { ButtonComponent } from '@aum/ui/buttons';
 })
 export class AboutDialog {
   private readonly dialogRef = inject(MatDialogRef<AboutDialog>);
+  private readonly router = inject(Router);
 
   closeDialog(): void {
     this.dialogRef.close();
+  }
+
+  goToGettingStarted(): void {
+    this.dialogRef.close();
+    this.router.navigate(['/getting-started']);
   }
 }

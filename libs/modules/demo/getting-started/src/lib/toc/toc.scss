@@ -1,0 +1,45 @@
+@use 'functions' as *;
+
+.gs-toc {
+  width: rem(200);
+  flex-shrink: 0;
+  padding: rem(16) 0;
+
+  &-title {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--mat-sys-on-surface-variant);
+    margin-bottom: rem(12);
+    padding-left: rem(12);
+  }
+
+  &-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: rem(2);
+  }
+
+  &-link {
+    display: block;
+    padding: rem(6) rem(12);
+    border-radius: rem(6);
+    color: var(--mat-sys-on-surface-variant);
+    text-decoration: none;
+    transition: color 0.15s, background-color 0.15s;
+
+    &:hover {
+      color: var(--mat-sys-on-surface);
+      background-color: var(--mat-sys-surface-container);
+    }
+
+    &.active {
+      color: var(--mat-sys-primary);
+      background-color: var(--mat-sys-primary-container);
+      font-weight: 500;
+    }
+  }
+}

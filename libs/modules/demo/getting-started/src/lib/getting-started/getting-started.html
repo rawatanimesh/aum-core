@@ -1,0 +1,289 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body class="gs-page">
+
+    <div class="gs-header">
+      <h1 class="fw-700 fs-28 gs-header-title">{{ 'GS_PAGE_TITLE' | translate }}</h1>
+      <p class="fs-16 gs-header-subtitle">{{ 'GS_PAGE_SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="gs-layout">
+      <demo-toc [sections]="sections" [activeId]="activeId()" (sectionClick)="activeId.set($event)" />
+
+      <div class="gs-content">
+
+        <!-- OVERVIEW — eager -->
+        <section id="overview" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_OVERVIEW' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('overview')" [matTooltip]="copyTooltips().get('overview')" [attr.aria-label]="copyTooltips().get('overview')">
+              <mat-icon>{{ copiedId() === 'overview' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_OVERVIEW_DESC' | translate }}</p>
+          <div class="gs-highlight-grid">
+            <div class="gs-highlight-item">
+              <mat-icon class="gs-highlight-icon">layers</mat-icon>
+              <span class="fw-500 fs-14">{{ 'GS_HL_TEMPLATES' | translate }}</span>
+            </div>
+            <div class="gs-highlight-item">
+              <mat-icon class="gs-highlight-icon">palette</mat-icon>
+              <span class="fw-500 fs-14">{{ 'GS_HL_THEMING' | translate }}</span>
+            </div>
+            <div class="gs-highlight-item">
+              <mat-icon class="gs-highlight-icon">widgets</mat-icon>
+              <span class="fw-500 fs-14">{{ 'GS_HL_COMPONENTS' | translate }}</span>
+            </div>
+            <div class="gs-highlight-item">
+              <mat-icon class="gs-highlight-icon">translate</mat-icon>
+              <span class="fw-500 fs-14">{{ 'GS_HL_I18N' | translate }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- PREREQUISITES — eager -->
+        <section id="prerequisites" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_PREREQUISITES' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('prerequisites')" [matTooltip]="copyTooltips().get('prerequisites')" [attr.aria-label]="copyTooltips().get('prerequisites')">
+              <mat-icon>{{ copiedId() === 'prerequisites' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_PREREQUISITES_DESC' | translate }}</p>
+          <ul class="gs-list fs-14">
+            <li><code class="gs-code-inline">Angular 21+</code></li>
+            <li><code class="gs-code-inline">Node.js 20+</code></li>
+            <li><code class="gs-code-inline">NX 22+</code> {{ 'GS_PREREQ_NX_NOTE' | translate }}</li>
+          </ul>
+        </section>
+
+        <!-- INSTALLATION -->
+        <section id="installation" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_INSTALLATION' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('installation')" [matTooltip]="copyTooltips().get('installation')" [attr.aria-label]="copyTooltips().get('installation')">
+              <mat-icon>{{ copiedId() === 'installation' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_INSTALLATION_DESC' | translate }}</p>
+          <pre class="gs-code">git subtree add --prefix=libs/aum-core \
+  https://github.com/your-org/aum-core.git main --squash</pre>
+          <p class="gs-section-note fs-14">{{ 'GS_INSTALLATION_NOTE' | translate }}</p>
+        </section>
+
+        <!-- THEME -->
+        <section id="theme" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_THEME' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('theme')" [matTooltip]="copyTooltips().get('theme')" [attr.aria-label]="copyTooltips().get('theme')">
+              <mat-icon>{{ copiedId() === 'theme' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_THEME_DESC' | translate }}</p>
+          <p class="gs-section-label fw-500 fs-13">styles.scss</p>
+          <pre class="gs-code">&#64;forward 'libs/aum-core/theme/src/lib/styles/core.scss';</pre>
+          <p class="gs-section-label fw-500 fs-13">project.json</p>
+          <pre class="gs-code">"stylePreprocessorOptions": &#123;
+  "includePaths": ["libs/aum-core/theme/src/lib/styles/abstracts/"]
+&#125;</pre>
+          <p class="gs-section-label fw-500 fs-13">{{ 'GS_THEME_COMPONENT_SCSS' | translate }}</p>
+          <pre class="gs-code">&#64;use 'functions' as *;
+
+.my-component &#123;
+  padding: rem(16);                        // scalable — never px
+  color: var(--mat-sys-on-surface);        // theme variable — never #hex
+&#125;</pre>
+        </section>
+
+        <!-- CONFIGURE -->
+        <section id="configure" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_CONFIGURE' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('configure')" [matTooltip]="copyTooltips().get('configure')" [attr.aria-label]="copyTooltips().get('configure')">
+              <mat-icon>{{ copiedId() === 'configure' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_CONFIGURE_DESC' | translate }}</p>
+          <p class="gs-section-label fw-500 fs-13">app-config.json</p>
+          <pre class="gs-code">&#123;
+  "brandLogo": "assets/svgs/brand-logo.svg",
+  "appName": "My App",
+  "navItems": [
+    &#123; "label": "DASHBOARD", "value": "/dashboard", "icon": "dashboard" &#125;
+  ],
+  "toolbarMenus": &#123;
+    "preferences": &#123; "show": true, "items": &#123;
+      "language": &#123; "show": true &#125;,
+      "theme":    &#123; "show": true &#125;,
+      "palette":  &#123; "show": true &#125;
+    &#125; &#125;,
+    "profile": &#123; "show": true &#125;
+  &#125;,
+  "defaults": &#123;
+    "template": "template-2",
+    "theme": "light",
+    "palette": "sea-green",
+    "displayMode": "default",
+    "language": "en"
+  &#125;
+&#125;</pre>
+          <p class="gs-section-label fw-500 fs-13">app.config.ts</p>
+          <pre class="gs-code">import &#123; APP_CONFIG, PaletteService, ThemeService &#125; from '&#64;aum/utils/services';
+import appConfigJson from './app-config.json';
+
+providers: [
+  &#123; provide: APP_CONFIG, useValue: appConfigJson &#125;,
+  provideAppInitializer(() => &#123;
+    inject(PaletteService);
+    inject(ThemeService);
+  &#125;),
+]</pre>
+        </section>
+
+        <!-- TEMPLATE -->
+        <section id="template" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_TEMPLATE' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('template')" [matTooltip]="copyTooltips().get('template')" [attr.aria-label]="copyTooltips().get('template')">
+              <mat-icon>{{ copiedId() === 'template' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_TEMPLATE_DESC' | translate }}</p>
+          <div class="gs-template-grid">
+            <div class="gs-template-card">
+              <div class="gs-template-card-header">
+                <mat-icon>view_sidebar</mat-icon>
+                <span class="fw-600 fs-15">{{ 'GS_TEMPLATE_1_TITLE' | translate }}</span>
+              </div>
+              <p class="fs-14">{{ 'GS_TEMPLATE_1_DESC' | translate }}</p>
+              <pre class="gs-code gs-code-sm">import &#123; AumTemplate &#125; from '&#64;aum/templates/aum-template';
+
+&#123; path: '', component: AumTemplate, children: [...] &#125;</pre>
+            </div>
+            <div class="gs-template-card">
+              <div class="gs-template-card-header">
+                <mat-icon>view_compact</mat-icon>
+                <span class="fw-600 fs-15">{{ 'GS_TEMPLATE_2_TITLE' | translate }}</span>
+              </div>
+              <p class="fs-14">{{ 'GS_TEMPLATE_2_DESC' | translate }}</p>
+              <pre class="gs-code gs-code-sm">import &#123; AumTemplate2 &#125; from '&#64;aum/templates/aum-template-2';
+
+&#123; path: '', component: AumTemplate2, children: [...] &#125;</pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- I18N -->
+        <section id="i18n" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_I18N' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('i18n')" [matTooltip]="copyTooltips().get('i18n')" [attr.aria-label]="copyTooltips().get('i18n')">
+              <mat-icon>{{ copiedId() === 'i18n' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_I18N_DESC' | translate }}</p>
+          <p class="gs-section-label fw-500 fs-13">app.config.ts</p>
+          <pre class="gs-code">import &#123; MultiTranslateHttpLoader &#125; from '&#64;aum/utils/services';
+
+export function HttpLoaderFactory(http: HttpClient) &#123;
+  return new MultiTranslateHttpLoader(http, [
+    &#123; prefix: './assets/i18n/aum.', suffix: '.json' &#125;, // AUM.* keys
+    &#123; prefix: './assets/i18n/', suffix: '.json' &#125;,      // app keys
+  ]);
+&#125;</pre>
+          <p class="gs-section-note fs-14">{{ 'GS_I18N_ORDER_NOTE' | translate }}</p>
+          <p class="gs-section-label fw-500 fs-13">project.json — assets</p>
+          <pre class="gs-code">&#123; "glob": "**/*.json", "input": "libs/aum-core/common/src/assets/i18n", "output": "assets/i18n" &#125;,
+&#123; "glob": "**/*.json", "input": "apps/&#123;app&#125;/src/assets/i18n",                "output": "assets/i18n" &#125;</pre>
+        </section>
+
+        <!-- CORE CONCEPTS -->
+        <section id="concepts" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_CONCEPTS' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('concepts')" [matTooltip]="copyTooltips().get('concepts')" [attr.aria-label]="copyTooltips().get('concepts')">
+              <mat-icon>{{ copiedId() === 'concepts' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_CONCEPTS_DESC' | translate }}</p>
+          <div class="gs-concept-list">
+            <div class="gs-concept-item">
+              <span class="fw-600 fs-14">&#64;aum/ui/*</span>
+              <span class="fs-14">{{ 'GS_CONCEPT_UI' | translate }}</span>
+            </div>
+            <div class="gs-concept-item">
+              <span class="fw-600 fs-14">&#64;aum/utils/services</span>
+              <span class="fs-14">{{ 'GS_CONCEPT_UTILS' | translate }}</span>
+            </div>
+            <div class="gs-concept-item">
+              <span class="fw-600 fs-14">&#64;aum/templates/*</span>
+              <span class="fs-14">{{ 'GS_CONCEPT_TEMPLATES' | translate }}</span>
+            </div>
+            <div class="gs-concept-item">
+              <span class="fw-600 fs-14">&#64;aum/common</span>
+              <span class="fs-14">{{ 'GS_CONCEPT_COMMON' | translate }}</span>
+            </div>
+            <div class="gs-concept-item">
+              <span class="fw-600 fs-14">&#64;aum/theme</span>
+              <span class="fs-14">{{ 'GS_CONCEPT_THEME' | translate }}</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- WHAT'S INCLUDED -->
+        <section id="components" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_COMPONENTS' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('components')" [matTooltip]="copyTooltips().get('components')" [attr.aria-label]="copyTooltips().get('components')">
+              <mat-icon>{{ copiedId() === 'components' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_COMPONENTS_DESC' | translate }}</p>
+          <div class="gs-comp-grid">
+            @for (comp of componentGroups; track comp.labelKey) {
+              <div class="gs-comp-item">
+                <mat-icon class="gs-comp-icon">{{ comp.icon }}</mat-icon>
+                <span class="fs-13 fw-500">{{ comp.labelKey | translate }}</span>
+              </div>
+            }
+          </div>
+        </section>
+
+        <!-- RESOURCES -->
+        <section id="resources" #section class="gs-section">
+          <div class="gs-section-header">
+            <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_RESOURCES' | translate }}</h2>
+            <button class="gs-anchor-btn" (click)="copyLink('resources')" [matTooltip]="copyTooltips().get('resources')" [attr.aria-label]="copyTooltips().get('resources')">
+              <mat-icon>{{ copiedId() === 'resources' ? 'check' : 'link' }}</mat-icon>
+            </button>
+          </div>
+          <p class="gs-section-desc fs-15">{{ 'GS_RESOURCES_DESC' | translate }}</p>
+          <div class="gs-resources-grid">
+            @for (res of resources; track res.labelKey) {
+              @if (res.external) {
+                <a class="gs-resource-card" [href]="res.href" target="_blank" rel="noopener">
+                  <mat-icon class="gs-resource-icon">{{ res.icon }}</mat-icon>
+                  <span class="fw-600 fs-15">{{ res.labelKey | translate }}</span>
+                  <span class="fs-13">{{ res.descKey | translate }}</span>
+                  <mat-icon class="gs-resource-arrow">open_in_new</mat-icon>
+                </a>
+              } @else {
+                <a class="gs-resource-card" [routerLink]="res.route">
+                  <mat-icon class="gs-resource-icon">{{ res.icon }}</mat-icon>
+                  <span class="fw-600 fs-15">{{ res.labelKey | translate }}</span>
+                  <span class="fs-13">{{ res.descKey | translate }}</span>
+                  <mat-icon class="gs-resource-arrow">arrow_forward</mat-icon>
+                </a>
+              }
+            }
+          </div>
+        </section>
+
+      </div>
+    </div>
+    @if (showBackToTop()) {
+      <button class="gs-back-to-top" (click)="scrollToTop()" [matTooltip]="'BACK_TO_TOP' | translate">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+    }
+  </div>
+</aum-page>
