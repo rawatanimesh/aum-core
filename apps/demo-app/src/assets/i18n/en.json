@@ -200,6 +200,8 @@
   "GO_TO_CHARTS_DEMO": "Go to Charts Demo",
   "UPLOAD_BOX": "Upload Box",
   "GO_TO_UPLOAD_BOX_DEMO": "Go to Upload Box Demo",
+  "BUTTON_TOGGLE": "Button Toggle",
+  "GO_TO_BUTTON_TOGGLE_DEMO": "Go to Button Toggle Demo",
   "GETTING_STARTED": "Getting Started",
   "GS_PAGE_TITLE": "Getting Started",
   "GS_PAGE_SUBTITLE": "Everything you need to set up AUM in a new Angular application.",

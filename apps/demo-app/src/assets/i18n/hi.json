@@ -201,6 +201,8 @@
   "GO_TO_CHARTS_DEMO": "चार्ट डेमो पर जाएं",
   "UPLOAD_BOX": "अपलोड बॉक्स",
   "GO_TO_UPLOAD_BOX_DEMO": "अपलोड बॉक्स डेमो पर जाएं",
+  "BUTTON_TOGGLE": "बटन टॉगल",
+  "GO_TO_BUTTON_TOGGLE_DEMO": "बटन टॉगल डेमो पर जाएं",
   "GETTING_STARTED": "शुरुआत करें",
   "GS_PAGE_TITLE": "शुरुआत करें",
   "GS_PAGE_SUBTITLE": "एक नए Angular एप्लिकेशन में AUM सेटअप करने के लिए आवश्यक सब कुछ।",

@@ -284,6 +284,18 @@
       </div>
     </section>
     <mat-divider></mat-divider>
+    <!-- Button Toggle Demo -->
+    <section>
+      <div class="example-label fs-14">{{ 'BUTTON_TOGGLE' | translate }}</div>
+      <div class="example-button-row">
+        <aum-button
+          [type]="'filled'"
+          [value]="'GO_TO_BUTTON_TOGGLE_DEMO' | translate"
+          (clickButton)="goToButtonToggleDemo()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
     <section>
       <div class="example-label fs-14">{{ 'ERROR_HANDLERS' | translate }}</div>
 

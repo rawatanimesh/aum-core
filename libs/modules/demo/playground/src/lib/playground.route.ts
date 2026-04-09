@@ -63,4 +63,11 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./upload-box-demo/upload-box-demo').then((m) => m.UploadBoxDemo),
   },
+
+  {
+    path: 'button-toggle',
+    title: 'Button Toggle | Aum Core',
+    loadComponent: () =>
+      import('./button-toggle-demo/button-toggle-demo').then((m) => m.ButtonToggleDemo),
+  },
 ];

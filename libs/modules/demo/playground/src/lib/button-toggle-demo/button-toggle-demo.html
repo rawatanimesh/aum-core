@@ -1,0 +1,124 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="button-toggle-demo-container">
+      <h1 class="page-title">Button Toggle Demo</h1>
+
+      <!-- Scenario 1: Single Selection, Labels Only -->
+      <section class="demo-section">
+        <h2 class="section-title">Single Selection — Labels Only</h2>
+        <p class="section-description">
+          Default mode. One option selected at a time. No selection indicator shown.
+        </p>
+        <div class="demo-row">
+          <aum-button-toggle
+            [options]="singleOptions"
+            ariaLabel="Time period selection"
+            (selectionChange)="singleSelection = $event; onSelectionChange('single', $event)"
+          ></aum-button-toggle>
+          <span class="selection-output">Selected: <strong>{{ singleSelection }}</strong></span>
+        </div>
+      </section>
+
+      <!-- Scenario 2: Single Selection with Icons -->
+      <section class="demo-section">
+        <h2 class="section-title">Single Selection — Icon + Label</h2>
+        <p class="section-description">
+          Each option has an icon alongside the label. Icon scales with the size modifier.
+        </p>
+        <div class="demo-row">
+          <aum-button-toggle
+            [options]="iconOptions"
+            (selectionChange)="iconSelection = $event; onSelectionChange('icon', $event)"
+          ></aum-button-toggle>
+          <span class="selection-output">Selected: <strong>{{ iconSelection }}</strong></span>
+        </div>
+      </section>
+
+      <!-- Scenario 3: Multiple Selection -->
+      <section class="demo-section">
+        <h2 class="section-title">Multiple Selection — Icon + Label</h2>
+        <p class="section-description">
+          Multiple options can be active simultaneously. Output is an array of selected values.
+        </p>
+        <div class="demo-row">
+          <aum-button-toggle
+            [options]="multipleOptions"
+            [multiple]="true"
+            (selectionChange)="multipleSelection = $event; onSelectionChange('multiple', $event)"
+          ></aum-button-toggle>
+          <span class="selection-output">Selected: <strong>{{ multipleSelection | json }}</strong></span>
+        </div>
+      </section>
+
+      <!-- Scenario 4: Sizes -->
+      <section class="demo-section">
+        <h2 class="section-title">Size Variants</h2>
+        <p class="section-description">
+          <code>size="small"</code> (h=28px) and <code>size="large"</code> (h=36px, default).
+          Both adapt via <code>rem()</code> so they scale with Compact / Default / Large modes.
+        </p>
+        <div class="demo-column">
+          <div class="demo-row">
+            <span class="size-label">Small</span>
+            <aum-button-toggle
+              [options]="sizeSmallOptions"
+              size="small"
+            ></aum-button-toggle>
+          </div>
+          <div class="demo-row">
+            <span class="size-label">Large (default)</span>
+            <aum-button-toggle
+              [options]="sizeLargeOptions"
+              size="large"
+            ></aum-button-toggle>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scenario 5: Icons Only (no label text) -->
+      <section class="demo-section">
+        <h2 class="section-title">Icons Only</h2>
+        <p class="section-description">
+          Label is empty — icon-only toggles for compact controls like alignment pickers.
+        </p>
+        <div class="demo-row">
+          <aum-button-toggle
+            [options]="iconOnlyOptions"
+            (selectionChange)="alignSelection = $event; onSelectionChange('align', $event)"
+          ></aum-button-toggle>
+          <span class="selection-output">Selected: <strong>{{ alignSelection }}</strong></span>
+        </div>
+      </section>
+
+      <!-- Scenario 6: Disabled -->
+      <section class="demo-section">
+        <h2 class="section-title">Disabled State</h2>
+        <p class="section-description">
+          The entire group is disabled. The checked state is still visible but interaction is blocked.
+        </p>
+        <div class="demo-row">
+          <aum-button-toggle
+            [options]="disabledOptions"
+            [disabled]="true"
+          ></aum-button-toggle>
+        </div>
+      </section>
+
+      <!-- Scenario 7: Multiple + Small -->
+      <section class="demo-section">
+        <h2 class="section-title">Multiple Selection — Small Size</h2>
+        <p class="section-description">
+          Combining <code>multiple</code> and <code>size="small"</code>.
+        </p>
+        <div class="demo-row">
+          <aum-button-toggle
+            [options]="multipleOptions"
+            [multiple]="true"
+            size="small"
+            (selectionChange)="onSelectionChange('multi-small', $event)"
+          ></aum-button-toggle>
+        </div>
+      </section>
+    </div>
+  </div>
+</aum-page>

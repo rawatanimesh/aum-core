@@ -1,0 +1,155 @@
+@use 'functions' as *;
+
+.aum-button-toggle {
+  display: inline-flex;
+
+  // ─── Group container ──────────────────────────────────────────────────────
+  // rem(100) pill border matches Material 3 button shape-full.
+  // No overflow:hidden — corners are handled per-toggle below so the selected
+  // background on first/last options actually shows its rounded shape.
+  // Primary border only when enabled — mirrors .mat-mdc-outlined-button:not(:disabled).
+  .mat-button-toggle-group {
+    border-radius: rem(100);
+  }
+
+  &:not(.aum-button-toggle--disabled) .mat-button-toggle-group {
+    border-color: var(--mat-sys-primary);
+  }
+
+  // Internal dividers between adjacent toggles
+  .mat-button-toggle + .mat-button-toggle {
+    border-left-color: var(--mat-sys-outline-variant);
+  }
+
+  // ─── Individual toggle — unselected = outlined button ─────────────────────
+  .mat-button-toggle {
+    background-color: var(--mat-sys-surface);
+    color: var(--mat-sys-primary);
+    border-radius: 0;
+  }
+
+  // Pill corners on the outer edges only — mirrors the group's border-radius.
+  // This is what makes selected backgrounds on the first/last button look
+  // properly rounded instead of square inside the curved group border.
+  .mat-button-toggle:first-child {
+    border-radius: rem(100) 0 0 rem(100);
+  }
+
+  .mat-button-toggle:last-child {
+    border-radius: 0 rem(100) rem(100) 0;
+  }
+
+  // Edge case: single-option group is fully pill-shaped
+  .mat-button-toggle:only-child {
+    border-radius: rem(100);
+  }
+
+  // ─── Inner <button> element ───────────────────────────────────────────────
+  // Material does NOT add flex here by default → content sits at the bottom.
+  // Adding flex + align-items:center vertically centers the label content.
+  // padding:0 here; horizontal spacing is owned by label-content below.
+  .mat-button-toggle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: rem(36);
+    padding: 0;
+    color: inherit;
+    background: transparent;
+    box-sizing: border-box;
+  }
+
+  // ─── Label content: font, spacing, icon alignment ─────────────────────────
+  // Overrides Material's default padding (0 16px) and sets font to match
+  // the outlined button (font-weight:600, font-size:rem(14)).
+  .mat-button-toggle-label-content {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 rem(16);
+    gap: rem(4);
+    font-weight: 600;
+    font-size: rem(14);
+    line-height: 1;
+    letter-spacing: normal;
+
+    mat-icon {
+      font-size: rem(16);
+      width: rem(16);
+      height: rem(16);
+      line-height: rem(16);
+    }
+  }
+
+  // ─── Selected state = filled/Save button ──────────────────────────────────
+  // Primary background + on-primary text, matching the filled button.
+  .mat-button-toggle-checked {
+    background-color: var(--mat-sys-primary);
+    color: var(--mat-sys-on-primary);
+  }
+
+  // ─── Hover state (unselected only) ────────────────────────────────────────
+  .mat-button-toggle:not(.mat-button-toggle-checked):not(.mat-button-toggle-disabled):hover {
+    background-color: var(--mat-sys-primary-container);
+    color: var(--mat-sys-on-primary-container);
+  }
+
+  // ─── Disabled state ───────────────────────────────────────────────────────
+  // The group border sits on .mat-button-toggle-group, so we can only reach it
+  // via the wrapper class. border-color switches to on-surface (greyed out, same
+  // as Material's disabled outlined button). opacity fades text + bg together.
+  &--disabled {
+    .mat-button-toggle-group {
+      border-color: var(--mat-sys-on-surface);
+      opacity: 0.38;
+    }
+  }
+
+  .mat-button-toggle-disabled .mat-button-toggle-button {
+    cursor: not-allowed;
+  }
+
+  // ─── Remove ripple ────────────────────────────────────────────────────────
+  .mat-button-toggle-button .mat-ripple {
+    display: none;
+  }
+
+  // ─── Focus-visible state (keyboard navigation) ────────────────────────────
+  .mat-button-toggle-button:focus-visible {
+    outline: rem(2) solid var(--mat-sys-primary);
+    outline-offset: rem(-2);
+    border-radius: inherit;
+  }
+
+  // ─── Size: small — mirrors .aum-button-small (h=28, padding=4 12) ─────────
+  &-small {
+    .mat-button-toggle-button {
+      height: rem(28);
+    }
+
+    .mat-button-toggle-label-content {
+      padding: 0 rem(12);
+      font-size: rem(14); // keep same font-size, only height/padding shrink
+
+      mat-icon {
+        font-size: rem(14);
+        width: rem(14);
+        height: rem(14);
+        line-height: rem(14);
+      }
+    }
+  }
+
+  // ─── Size: large — mirrors .aum-button-large (h=36, padding=8 16) ─────────
+  // h=36 and padding=rem(16) are already the defaults above; this block is
+  // explicit so intent is clear if defaults ever change.
+  &-large {
+    .mat-button-toggle-button {
+      height: rem(36);
+    }
+
+    .mat-button-toggle-label-content {
+      padding: 0 rem(16);
+    }
+  }
+}

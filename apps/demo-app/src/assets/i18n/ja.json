@@ -201,6 +201,8 @@
   "GO_TO_CHARTS_DEMO": "チャートデモへ移動",
   "UPLOAD_BOX": "アップロードボックス",
   "GO_TO_UPLOAD_BOX_DEMO": "アップロードボックスデモへ移動",
+  "BUTTON_TOGGLE": "ボタントグル",
+  "GO_TO_BUTTON_TOGGLE_DEMO": "ボタントグルデモへ移動",
   "GETTING_STARTED": "はじめに",
   "GS_PAGE_TITLE": "はじめに",
   "GS_PAGE_SUBTITLE": "新しいAngularアプリにAUMをセットアップするために必要なすべて。",
