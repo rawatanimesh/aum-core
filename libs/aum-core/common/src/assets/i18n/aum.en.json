@@ -58,6 +58,13 @@
     "VALIDATION_FAILED": "Validation failed. Please check your input.",
     "SERVER_ERROR": "Server error. Please try again later.",
     "SERVICE_UNAVAILABLE": "Service temporarily unavailable. Please try again later.",
-    "REQUEST_TIMEOUT": "Request timeout. Please try again."
+    "REQUEST_TIMEOUT": "Request timeout. Please try again.",
+    "APPEARANCE": "Appearance",
+    "LOCALIZATION": "Localization",
+    "LAYOUT": "Layout",
+    "SAVE": "Save",
+    "CANCEL": "Cancel",
+    "RESET_TO_DEFAULT": "Reset to Default",
+    "PREFERENCES_SAVED": "Preferences saved successfully"
   }
 }

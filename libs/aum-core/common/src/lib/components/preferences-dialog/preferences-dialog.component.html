@@ -1,0 +1,159 @@
+<aum-generic-dialog [showCloseButton]="true" [noPadding]="true" bodyHeight="calc(420 / 16 * 1rem * var(--ui-scale))">
+
+  <!-- Header -->
+  <span dialog-header>{{ 'AUM.PREFERENCES' | translate }}</span>
+
+  <!-- Body: tabs -->
+  <div dialog-body>
+    <aum-tab-group
+      [(selectedIndex)]="activeTabIndex"
+      animationDuration="0ms"
+    >
+
+      <!-- Appearance Tab -->
+      @if (showAppearanceTab()) {
+        <aum-tab [label]="'AUM.APPEARANCE' | translate">
+          <div class="aum-prefs-dialog__tab-content">
+
+            <!-- Theme -->
+            @if (showTheme()) {
+              <div class="aum-prefs-dialog__section">
+                <span class="aum-prefs-dialog__section-label">{{ 'AUM.THEME' | translate }}</span>
+                <aum-button-toggle
+                  #themeToggle
+                  [options]="themeOptions"
+                  [disabled]="isThemeDisabled()"
+                  (selectionChange)="onThemeChange($any($event))"
+                ></aum-button-toggle>
+              </div>
+            }
+
+            <!-- Color Palette -->
+            @if (showPalette()) {
+              <div class="aum-prefs-dialog__section">
+                <span class="aum-prefs-dialog__section-label">{{ 'AUM.PALETTE' | translate }}</span>
+                <div class="aum-prefs-dialog__palette-options">
+                  @for (palette of palettes; track palette) {
+                    <button
+                      class="aum-prefs-dialog__palette-swatch"
+                      [class.aum-prefs-dialog__palette-swatch--selected]="draft.palette === palette"
+                      [disabled]="isPaletteDisabled()"
+                      (click)="onPaletteChange(palette)"
+                      type="button"
+                    >
+                      <span class="aum-prefs-dialog__palette-dot aum-prefs-dialog__palette-dot--{{ palette }}">
+                        @if (draft.palette === palette) {
+                          <mat-icon>check</mat-icon>
+                        }
+                      </span>
+                      <span class="aum-prefs-dialog__palette-name">{{ getPaletteLabel(palette) | translate }}</span>
+                    </button>
+                  }
+                </div>
+              </div>
+            }
+
+            <!-- Display Scale -->
+            @if (showDisplay()) {
+              <div class="aum-prefs-dialog__section">
+                <span class="aum-prefs-dialog__section-label">{{ 'AUM.DISPLAY' | translate }}</span>
+                <aum-button-toggle
+                  #displayToggle
+                  [options]="displayOptions"
+                  [disabled]="isDisplayDisabled()"
+                  (selectionChange)="onDisplayModeChange($any($event))"
+                ></aum-button-toggle>
+              </div>
+            }
+
+          </div>
+        </aum-tab>
+      }
+
+      <!-- Localization Tab -->
+      @if (showLocalizationTab()) {
+        <aum-tab [label]="'AUM.LOCALIZATION' | translate">
+          <div class="aum-prefs-dialog__tab-content">
+
+            @if (showLanguage()) {
+              <div class="aum-prefs-dialog__section">
+                <span class="aum-prefs-dialog__section-label">{{ 'AUM.LANGUAGE' | translate }}</span>
+                <mat-radio-group
+                  class="aum-prefs-dialog__radio-group"
+                  [value]="draft.language"
+                  [disabled]="isLanguageDisabled()"
+                  (change)="onLanguageChange($event.value)"
+                >
+                  <mat-radio-button value="en">English</mat-radio-button>
+                  <mat-radio-button value="ja">日本語</mat-radio-button>
+                  <mat-radio-button value="hi">हिन्दी</mat-radio-button>
+                </mat-radio-group>
+              </div>
+            }
+
+          </div>
+        </aum-tab>
+      }
+
+      <!-- Layout Tab -->
+      @if (showLayoutTab()) {
+        <aum-tab [label]="'AUM.LAYOUT' | translate">
+          <div class="aum-prefs-dialog__tab-content">
+
+            @if (showTemplate()) {
+              <div class="aum-prefs-dialog__section">
+                <span class="aum-prefs-dialog__section-label">{{ 'AUM.TEMPLATE' | translate }}</span>
+                <div class="aum-prefs-dialog__template-options">
+                  <button
+                    class="aum-prefs-dialog__template-card"
+                    [class.aum-prefs-dialog__template-card--selected]="draft.template === 'template-1'"
+                    [disabled]="isTemplateDisabled()"
+                    (click)="onTemplateChange('template-1')"
+                    type="button"
+                  >
+                    <mat-icon>view_sidebar</mat-icon>
+                    <span>{{ 'AUM.TEMPLATE_1' | translate }}</span>
+                  </button>
+                  <button
+                    class="aum-prefs-dialog__template-card"
+                    [class.aum-prefs-dialog__template-card--selected]="draft.template === 'template-2'"
+                    [disabled]="isTemplateDisabled()"
+                    (click)="onTemplateChange('template-2')"
+                    type="button"
+                  >
+                    <mat-icon>view_compact</mat-icon>
+                    <span>{{ 'AUM.TEMPLATE_2' | translate }}</span>
+                  </button>
+                </div>
+              </div>
+            }
+
+          </div>
+        </aum-tab>
+      }
+
+    </aum-tab-group>
+  </div>
+
+  <!-- Footer -->
+  <div dialog-footer class="aum-prefs-dialog__footer-content">
+    <aum-button
+      [type]="'basic'"
+      [value]="'AUM.RESET_TO_DEFAULT' | translate"
+      (clickButton)="onReset()"
+    ></aum-button>
+    <div class="flex-row-flex-end-center gap-8">
+      <aum-button
+        [type]="'outlined'"
+        [value]="'AUM.CANCEL' | translate"
+        (clickButton)="onCancel()"
+      ></aum-button>
+      <aum-button
+        [type]="'filled'"
+        [value]="'AUM.SAVE' | translate"
+        (clickButton)="onSave()"
+      ></aum-button>
+    </div>
+  </div>
+
+</aum-generic-dialog>

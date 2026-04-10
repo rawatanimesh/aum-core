@@ -58,6 +58,13 @@
     "VALIDATION_FAILED": "検証に失敗しました。入力を確認してください。",
     "SERVER_ERROR": "サーバーエラー。後でもう一度お試しください。",
     "SERVICE_UNAVAILABLE": "サービスが一時的に利用できません。後でもう一度お試しください。",
-    "REQUEST_TIMEOUT": "リクエストがタイムアウトしました。もう一度お試しください。"
+    "REQUEST_TIMEOUT": "リクエストがタイムアウトしました。もう一度お試しください。",
+    "APPEARANCE": "外観",
+    "LOCALIZATION": "ローカライズ",
+    "LAYOUT": "レイアウト",
+    "SAVE": "保存",
+    "CANCEL": "キャンセル",
+    "RESET_TO_DEFAULT": "デフォルトにリセット",
+    "PREFERENCES_SAVED": "設定が保存されました"
   }
 }
