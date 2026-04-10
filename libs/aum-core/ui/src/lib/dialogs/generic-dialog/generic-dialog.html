@@ -17,7 +17,9 @@
   </div>
 
   <!-- BODY -->
-  <div class="aum-generic-dialog-body">
+  <div class="aum-generic-dialog-body"
+       [class.aum-generic-dialog-body--no-padding]="noPadding"
+       [style.height]="bodyHeight">
     <ng-content select="[dialog-body]" />
   </div>
 

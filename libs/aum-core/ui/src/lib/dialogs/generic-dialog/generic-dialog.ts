@@ -15,6 +15,8 @@ import { ButtonComponent } from '../../buttons/button/button.component';
 })
 export class GenericDialogComponent {
   @Input() showCloseButton = true;
+  @Input() noPadding = false;
+  @Input() bodyHeight?: string;
 
   readonly dialogRef = inject(MatDialogRef<GenericDialogComponent>, {
     optional: true,

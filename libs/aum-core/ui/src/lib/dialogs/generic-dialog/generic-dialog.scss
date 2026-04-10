@@ -5,7 +5,7 @@
   &-header {
     padding: rem(14) rem(16);
     height: rem(30);
-    border-bottom: rem(1) solid #ebebeb;
+    border-bottom: rem(1) solid var(--mat-sys-outline-variant);
     &-title {
       font-size: rem(18);
     }
@@ -14,13 +14,16 @@
     padding: rem(16);
     overflow: auto;
     max-height: 70vh;
+    &--no-padding {
+      padding: 0;
+    }
     &:empty {
       display: none;
     }
   }
   &-footer {
     padding: rem(14) rem(16);
-    border-top: rem(1) solid #ebebeb;
+    border-top: rem(1) solid var(--mat-sys-outline-variant);
     &:empty {
       display: none;
     }
