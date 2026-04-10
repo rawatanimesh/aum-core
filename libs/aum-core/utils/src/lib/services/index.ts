@@ -9,12 +9,24 @@ export {
 } from './app-config/app-config.service';
 export type {
   AppConfig,
+  AppDefaults,
   SideNavItem,
   MenuItemConfig,
   PreferencesMenuConfig,
   ProfileMenuConfig,
   ToolbarMenuConfig,
 } from './app-config/app-config.service';
+export {
+  AppEventBusService,
+  AppEventType,
+} from './app-event-bus/app-event-bus.service';
+export type {
+  AppEvent,
+  ThemeChangedPayload,
+  UiScaleChangedPayload,
+  PaletteChangedPayload,
+  LanguageChangedPayload,
+} from './app-event-bus/app-event-bus.service';
 export { MenuConfigHelper } from '../helpers/menu-config.helper';
 export { MultiTranslateHttpLoader } from '../helpers/multi-translate-loader';
 export { RippleConfigService } from './ripple-config/ripple-config.service';

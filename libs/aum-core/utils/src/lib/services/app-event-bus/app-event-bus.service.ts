@@ -12,7 +12,6 @@ export enum AppEventType {
   LANGUAGE_CHANGED = 'LANGUAGE_CHANGED',
   TEMPLATE_CHANGED = 'TEMPLATE_CHANGED',
   PALETTE_CHANGED = 'PALETTE_CHANGED',
-  // Add more event types as needed
 }
 
 /**
@@ -25,7 +24,6 @@ export interface AppEvent<T = any> {
 
 /**
  * Payload interface for theme change events
- * Emitted when user changes the application theme
  */
 export interface ThemeChangedPayload {
   theme: 'light' | 'dark' | 'system';
@@ -34,7 +32,6 @@ export interface ThemeChangedPayload {
 
 /**
  * Payload interface for UI scale change events
- * Emitted when user changes the display scale/size
  */
 export interface UiScaleChangedPayload {
   scale: 'compact' | 'default' | 'large';
@@ -43,16 +40,14 @@ export interface UiScaleChangedPayload {
 
 /**
  * Payload interface for palette change events
- * Emitted when user changes the color palette
  */
 export interface PaletteChangedPayload {
-  palette: 'purple' | 'pink';
-  previousPalette?: 'purple' | 'pink';
+  palette: 'purple' | 'ocean-blue' | 'sea-green';
+  previousPalette?: 'purple' | 'ocean-blue' | 'sea-green';
 }
 
 /**
  * Payload interface for language change events
- * Emitted when user changes the application language
  */
 export interface LanguageChangedPayload {
   language: string;
@@ -60,8 +55,8 @@ export interface LanguageChangedPayload {
 }
 
 /**
- * Event Bus Service for application-wide events
- * Provides a decoupled way for components to communicate across the application
+ * Event Bus Service for application-wide events.
+ * Provides a decoupled way for components to communicate across the application.
  */
 @Injectable({
   providedIn: 'root',
