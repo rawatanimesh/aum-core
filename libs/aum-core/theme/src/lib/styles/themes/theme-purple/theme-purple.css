@@ -1,4 +1,4 @@
-/* Note: Color palettes are generated from primary: #6E57E0, secondary: #ffffff, tertiary: #ffffff, neutral: #ffffff, neutral variant: #ffffff, error: #DF0101 */
+/* Note: Color palettes are generated from primary: #6E57E0, secondary: #625B71, tertiary: #ffffff, neutral: #ffffff, neutral variant: #ffffff, error: #DF0101 */
 html {
   /* COLOR SYSTEM VARIABLES */
   color-scheme: light;
@@ -15,14 +15,14 @@ html {
   --mat-sys-on-primary-fixed-variant: light-dark(#4628b7, #4628b7);
 
   /* Secondary palette variables */
-  --mat-sys-secondary: light-dark(#5d5f5f, #c6c6c7);
-  --mat-sys-on-secondary: light-dark(#ffffff, #2f3131);
-  --mat-sys-secondary-container: light-dark(#e2e2e2, #454747);
-  --mat-sys-on-secondary-container: light-dark(#1a1c1c, #e2e2e2);
-  --mat-sys-secondary-fixed: light-dark(#e2e2e2, #e2e2e2);
-  --mat-sys-secondary-fixed-dim: light-dark(#c6c6c7, #c6c6c7);
-  --mat-sys-on-secondary-fixed: light-dark(#1a1c1c, #1a1c1c);
-  --mat-sys-on-secondary-fixed-variant: light-dark(#454747, #454747);
+  --mat-sys-secondary: light-dark(#625b71, #ccc2dc);
+  --mat-sys-on-secondary: light-dark(#ffffff, #332d41);
+  --mat-sys-secondary-container: light-dark(#e8def9, #4a4358);
+  --mat-sys-on-secondary-container: light-dark(#1e192b, #e8def9);
+  --mat-sys-secondary-fixed: light-dark(#e8def9, #e8def9);
+  --mat-sys-secondary-fixed-dim: light-dark(#ccc2dc, #ccc2dc);
+  --mat-sys-on-secondary-fixed: light-dark(#1e192b, #1e192b);
+  --mat-sys-on-secondary-fixed-variant: light-dark(#4a4358, #4a4358);
 
   /* Tertiary palette variables */
   --mat-sys-tertiary: light-dark(#5d5f5f, #c6c6c7);

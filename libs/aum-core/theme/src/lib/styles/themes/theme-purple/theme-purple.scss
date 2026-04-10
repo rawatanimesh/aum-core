@@ -4,7 +4,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 
-// Note: Color palettes are generated from primary: #6E57E0, secondary: #ffffff, tertiary: #ffffff, neutral: #ffffff, neutral variant: #ffffff, error: #DF0101
+// Note: Color palettes are generated from primary: #6E57E0, secondary: #625B71, tertiary: #ffffff, neutral: #ffffff, neutral variant: #ffffff, error: #DF0101
 $_palettes: (
   primary: (
     0: #000000,
@@ -26,21 +26,20 @@ $_palettes: (
   ),
   secondary: (
     0: #000000,
-    10: #1a1c1c,
-    20: #2f3131,
-    25: #3a3c3c,
-    30: #454747,
-    35: #515353,
-    40: #ffffff,
-    //5d5f5f
-    50: #767777,
-    60: #909191,
-    70: #aaabab,
-    80: #c6c6c7,
-    90: #e2e2e2,
-    95: #f0f1f1,
-    98: #f9f9f9,
-    99: #fcfcfc,
+    10: #1e192b,
+    20: #332d41,
+    25: #3e384d,
+    30: #4a4358,
+    35: #564f65,
+    40: #625b71,
+    50: #7b738a,
+    60: #958da5,
+    70: #b0a7c0,
+    80: #ccc2dc,
+    90: #e8def9,
+    95: #f6edff,
+    98: #fef7ff,
+    99: #fffbff,
     100: #ffffff,
   ),
   tertiary: (
@@ -50,8 +49,7 @@ $_palettes: (
     25: #3a3c3c,
     30: #454747,
     35: #515353,
-    40: #ffffff,
-    //5d5f5f
+    40: #5d5f5f,
     50: #767777,
     60: #909191,
     70: #aaabab,
@@ -69,8 +67,7 @@ $_palettes: (
     25: #3a3c3c,
     30: #454747,
     35: #515353,
-    40: #ffffff,
-    //5d5f5f
+    40: #5d5f5f,
     50: #767777,
     60: #909191,
     70: #aaabab,
@@ -105,8 +102,7 @@ $_palettes: (
     80: #c6c6c7,
     90: #e2e2e2,
     95: #f0f1f1,
-    98: #ffffff,
-    //f9f9f9
+    98: #f9f9f9,
     99: #fcfcfc,
     100: #ffffff,
   ),
@@ -117,8 +113,7 @@ $_palettes: (
     25: #7e0000,
     30: #930000,
     35: #aa0000,
-    40: #df0101,
-    //c00000
+    40: #c00000,
     50: #ec150c,
     60: #ff5541,
     70: #ff8a78,
@@ -134,7 +129,7 @@ $_palettes: (
 $_rest: (
   secondary: map.get($_palettes, secondary),
   neutral: map.get($_palettes, neutral),
-  neutral-variant: map.get($_palettes, neutral-variant),
+  neutral-variant: map.get($_palettes,  neutral-variant),
   error: map.get($_palettes, error),
 );
 
