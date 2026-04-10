@@ -2,8 +2,7 @@ import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/cor
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AumTemplate } from '@aum/templates/aum-template';
 import { AumTemplate2 } from '@aum/templates/aum-template-2';
-import { AppEventBusService, AppEventType } from '@aum/templates/aum-template';
-import { AppConfigService } from '@aum/utils/services';
+import { AppConfigService, AppEventBusService, AppEventType } from '@aum/utils/services';
 
 @Component({
   selector: 'app-template-wrapper',

@@ -1,4 +1,5 @@
-import { Component, model, inject, OnInit, OnDestroy } from '@angular/core';
+import { Component, model, inject, OnInit, OnDestroy, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -8,8 +9,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { PageComponent } from '@aum/ui/layout';
@@ -17,8 +16,8 @@ import { ConfirmationDialogService } from '@aum/ui/dialogs';
 import { CheckboxComponent, RadioButton } from '@aum/ui/form-controls';
 import { SnackbarService, Spinner } from '@aum/ui/utilities';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
-import { LanguageTranslationService } from '@aum/utils/services';
-import { ToolbarContentService, AppEventBusService, AppEventType, ThemeChangedPayload, UiScaleChangedPayload, LanguageChangedPayload } from '@aum/templates/aum-template';
+import { LanguageTranslationService, AppEventBusService, AppEventType, ThemeChangedPayload, UiScaleChangedPayload, LanguageChangedPayload } from '@aum/utils/services';
+import { ToolbarContentService } from '@aum/templates/aum-template';
 
 import { GenericDialogDemo } from '../generic-dialog-demo/generic-dialog-demo';
 
@@ -49,16 +48,13 @@ export class Playground implements OnInit, OnDestroy {
   readonly languageService = inject(LanguageTranslationService);
   private toolbarContentService = inject(ToolbarContentService);
   private eventBus = inject(AppEventBusService);
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
   route = inject(Router);
   pageInfo = {
     breadcrumbs: [
       { title: 'PLAYGROUND', route: '/playground' },
       { title: 'CHILD_A', route: '/dashboard' },
       { title: 'CHILD_A2', route: '/dashboard' },
-      // { title: 'Child A3', route: '/dashboard' },
-      // { title: 'Child A4', route: '/A/childA4' },
-      // { title: 'Child A5', route: '/dashboard' },
     ],
   };
   readonly checked = model(false);
@@ -73,10 +69,7 @@ export class Playground implements OnInit, OnDestroy {
       value: 'language',
       icon: 'language',
       children: [
-        {
-          label: 'English',
-          value: 'en',
-        },
+        { label: 'English', value: 'en' },
         { label: '日本語', value: 'ja' },
       ],
     },
@@ -84,7 +77,6 @@ export class Playground implements OnInit, OnDestroy {
       label: 'Mode',
       value: 'mode',
       icon: 'aspect_ratio',
-
       children: [
         { label: 'Compact', value: 'compact' },
         { label: 'Default', value: 'default' },
@@ -95,19 +87,9 @@ export class Playground implements OnInit, OnDestroy {
       label: 'Level 1',
       value: 'about',
       icon: 'info',
-
       children: [
-        {
-          label: 'Level 2',
-          value: 'about',
-          icon: 'info',
-        },
-        {
-          label: 'Dont show selection',
-          value: 'about',
-          icon: 'info',
-          showSelection: false,
-        },
+        { label: 'Level 2', value: 'about', icon: 'info' },
+        { label: 'Dont show selection', value: 'about', icon: 'info', showSelection: false },
       ],
     },
   ];
@@ -117,18 +99,14 @@ export class Playground implements OnInit, OnDestroy {
     { label: 'Maybe', value: 'maybe' },
   ];
 
-  // For Spinner demo
   showPageSpinner = false;
-
-  // For Drawer demo
   isDrawerOpen = false;
-
-  // For Browser Navigation Protection demo
   enableBrowserNavigationProtection = false;
 
   openMenu() {
     console.log('clicked');
   }
+
   openConfirmationDialog() {
     this.dialog
       .open({
@@ -141,10 +119,8 @@ export class Playground implements OnInit, OnDestroy {
       .afterClosed()
       .subscribe((result) => {
         if (result) {
-          // User clicked confirm
           console.log('User confirmed the action');
         } else {
-          // User clicked cancel
           console.log('User canceled the action');
         }
       });
@@ -155,7 +131,7 @@ export class Playground implements OnInit, OnDestroy {
       width: '800px',
       data: { name: 'Animesh' },
       panelClass: 'aum-dialog-container',
-      disableClose: false, // Optional: allow clicking outside to close
+      disableClose: false,
       autoFocus: false,
       restoreFocus: false,
     });
@@ -168,13 +144,12 @@ export class Playground implements OnInit, OnDestroy {
         console.log('User canceled the action');
         this.snackbar.error(this.languageService.instant('FAILED_TO_SAVE_CHANGES'), 5000, {
           label: this.languageService.instant('RETRY'),
-          callback: () => {
-            console.log('snackbar open error');
-          },
+          callback: () => { console.log('snackbar open error'); },
         });
       }
     });
   }
+
   openSnackbar(state: string) {
     switch (state) {
       case 'success':
@@ -183,9 +158,7 @@ export class Playground implements OnInit, OnDestroy {
       case 'error':
         this.snackbar.error(this.languageService.instant('PROFILE_NOT_UPDATED'), 5000, {
           label: this.languageService.instant('RETRY'),
-          callback: () => {
-            console.log('Snackbar retry method');
-          },
+          callback: () => { console.log('Snackbar retry method'); },
         });
         break;
       case 'warning':
@@ -197,39 +170,18 @@ export class Playground implements OnInit, OnDestroy {
     }
   }
 
-  checkboxState(event: any, state: any) {
-    console.log(event, state);
-  }
-  radioChange(event: any) {
-    console.log(event);
-  }
-  goToInputsDemo() {
-    this.route.navigate(['/playground/inputs']);
-  }
-  goToExpansionPanelsDemo() {
-    this.route.navigate(['/playground/expansion-panels']);
-  }
-  goToSlideToggleDemo() {
-    this.route.navigate(['/playground/slide-toggle']);
-  }
-  goToErrorTest() {
-    this.route.navigate(['/playground/error-test']);
-  }
-  goToChartsDemo() {
-    this.route.navigate(['/playground/charts']);
-  }
-  goToTabsDemo() {
-    this.route.navigate(['/playground/tabs']);
-  }
-  goToCarouselsDemo() {
-    this.route.navigate(['/playground/carousels']);
-  }
-  goToUploadBoxDemo() {
-    this.route.navigate(['/playground/upload-box']);
-  }
-  goToButtonToggleDemo() {
-    this.route.navigate(['/playground/button-toggle']);
-  }
+  checkboxState(event: any, state: any) { console.log(event, state); }
+  radioChange(event: any) { console.log(event); }
+  goToInputsDemo() { this.route.navigate(['/playground/inputs']); }
+  goToExpansionPanelsDemo() { this.route.navigate(['/playground/expansion-panels']); }
+  goToSlideToggleDemo() { this.route.navigate(['/playground/slide-toggle']); }
+  goToErrorTest() { this.route.navigate(['/playground/error-test']); }
+  goToChartsDemo() { this.route.navigate(['/playground/charts']); }
+  goToTabsDemo() { this.route.navigate(['/playground/tabs']); }
+  goToCarouselsDemo() { this.route.navigate(['/playground/carousels']); }
+  goToUploadBoxDemo() { this.route.navigate(['/playground/upload-box']); }
+  goToButtonToggleDemo() { this.route.navigate(['/playground/button-toggle']); }
+
   onMenuSelect(item: MenuItem) {
     console.log('selected', item);
     console.log('updated menu list', this.choiceMenuItems);
@@ -237,18 +189,13 @@ export class Playground implements OnInit, OnDestroy {
 
   showPageModeSpinner() {
     this.showPageSpinner = true;
-    setTimeout(() => {
-      this.showPageSpinner = false;
-    }, 3000);
+    setTimeout(() => { this.showPageSpinner = false; }, 3000);
   }
 
-  toggleDrawer() {
-    this.isDrawerOpen = !this.isDrawerOpen;
-  }
+  toggleDrawer() { this.isDrawerOpen = !this.isDrawerOpen; }
 
   toggleBrowserNavigationProtection() {
-    this.enableBrowserNavigationProtection =
-      !this.enableBrowserNavigationProtection;
+    this.enableBrowserNavigationProtection = !this.enableBrowserNavigationProtection;
     const status = this.enableBrowserNavigationProtection ? 'enabled' : 'disabled';
     this.snackbar.info(
       this.languageService.instant(`BROWSER_NAVIGATION_PROTECTION_${status.toUpperCase()}`),
@@ -256,54 +203,34 @@ export class Playground implements OnInit, OnDestroy {
     );
   }
 
-  handleBrowserNavigation(event: {
-    event: BeforeUnloadEvent | PopStateEvent;
-    type: 'refresh' | 'back' | 'forward';
-  }) {
-    // Event handler for browser navigation
-    // The page component handles showing the confirmation dialog automatically
-    // This handler can be used for custom logic if needed
+  handleBrowserNavigation(event: { event: BeforeUnloadEvent | PopStateEvent; type: 'refresh' | 'back' | 'forward' }) {
     console.log('Browser navigation detected:', event.type);
   }
 
   ngOnInit(): void {
-    // Listen for theme change events
+    // Event bus listeners use takeUntilDestroyed(destroyRef) since we're in ngOnInit,
+    // not the constructor (takeUntilDestroyed() without args requires injection context).
     this.eventBus.on<ThemeChangedPayload>(AppEventType.THEME_CHANGED)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(payload => {
         if (!payload) return;
-        console.log('🎨 Playground detected theme change:', {
-          from: payload.previousTheme,
-          to: payload.theme
-        });
+        console.log('🎨 Playground detected theme change:', { from: payload.previousTheme, to: payload.theme });
       });
 
-    // Listen for UI scale change events
     this.eventBus.on<UiScaleChangedPayload>(AppEventType.UI_SCALE_CHANGED)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(payload => {
         if (!payload) return;
-        console.log('📏 Playground detected UI scale change:', {
-          from: payload.previousScale,
-          to: payload.scale
-        });
+        console.log('📏 Playground detected UI scale change:', { from: payload.previousScale, to: payload.scale });
       });
 
-    // Listen for language change events
     this.eventBus.on<LanguageChangedPayload>(AppEventType.LANGUAGE_CHANGED)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(payload => {
         if (!payload) return;
-        console.log('🌐 Playground detected language change:', {
-          from: payload.previousLanguage,
-          to: payload.language
-        });
+        console.log('🌐 Playground detected language change:', { from: payload.previousLanguage, to: payload.language });
       });
 
-    console.log('🎮 Playground: Registering page-specific toolbar actions');
-
-    // Register page-specific Create action (only visible on playground page)
-    // Pass translation keys, not translated strings - the toolbar component will handle translation
     this.toolbarContentService.registerGlobalAction(
       {
         id: 'playground-create',
@@ -311,29 +238,19 @@ export class Playground implements OnInit, OnDestroy {
         value: 'CREATE',
         tooltip: 'CREATE_NEW_ITEM',
         type: 'filled',
-        order: 0,  // Higher order to appear after global actions
+        order: 0,
       },
       () => this.handleCreate()
     );
-
-    console.log('✅ Playground: Page-specific actions registered');
   }
 
   handleCreate(): void {
     console.log('Create button clicked from playground');
-    this.snackbar.success(
-      this.languageService.instant('CREATE_BUTTON_CLICKED'),
-      3000
-    );
+    this.snackbar.success(this.languageService.instant('CREATE_BUTTON_CLICKED'), 3000);
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-    console.log('🎮 Playground: Cleaning up page-specific toolbar actions');
-    // Unregister toolbar actions when leaving the page
     this.toolbarContentService.unregisterGlobalAction('playground-create');
     this.toolbarContentService.unregisterGlobalAction('playground-export');
-    console.log('✅ Playground: Page-specific actions removed');
   }
 }
