@@ -5,6 +5,7 @@ This document outlines the best practices, coding standards, and conventions for
 ## 📋 Table of Contents
 
 - [🏗️ Project Structure](#️-project-structure)
+- [📦 AUM Component & Service Catalog](#-aum-component--service-catalog)
 - [🧩 Component Development](#-component-development)
 - [🎨 Styling Guidelines](#-styling-guidelines)
 - [📝 TypeScript Standards](#-typescript-standards)
@@ -60,6 +61,60 @@ libs/
 - Don't put business logic directly in apps folder
 - Don't mix app-specific code with reusable UI components
 - Don't create deep nested folder structures
+
+---
+
+## 📦 AUM Component & Service Catalog
+
+### ⚠️ CRITICAL: Check AUM wrappers before using Material directly
+
+`aum-core` ships wrapper components and services for the most common Material building blocks. **Always use the `aum-*` version first.** Only fall back to a raw `mat-*` component if no wrapper exists.
+
+> **Why:** AUM wrappers apply project-wide theming, scaling (`rem()`), accessibility defaults, and consistent API conventions. Using raw Material components bypasses all of that and creates drift.
+
+#### UI Components — `libs/aum-core/ui/src/lib/`
+
+| Use case | AUM component | Import from |
+|---|---|---|
+| Buttons (filled, outlined, basic, icon) | `<aum-button>` | `@aum/ui/buttons` |
+| Toggle button group | `<aum-button-toggle>` | `@aum/ui/buttons` |
+| Tab group + individual tab | `<aum-tab-group>`, `<aum-tab>` | `@aum/ui/layout` |
+| Page layout wrapper | `<aum-page>` | `@aum/ui/layout` |
+| Generic dialog shell | `<aum-generic-dialog>` | `@aum/ui/dialogs` |
+| Confirmation dialog | `ConfirmationDialogService` | `@aum/ui/dialogs` |
+| Navigation menu list | `<aum-menu-list>` | `@aum/ui/navigation` |
+| Breadcrumb | `<aum-breadcrumb>` | `@aum/ui/navigation` |
+| Snackbar (success/error/warning/info) | `SnackbarService` | `@aum/ui/utilities` |
+| Loading spinner | `<aum-spinner>` | `@aum/ui/utilities` |
+
+#### Services — `libs/aum-core/utils/src/lib/services/`
+
+| Use case | Service | Import from |
+|---|---|---|
+| Theme (light/dark/system) | `ThemeService` | `@aum/utils/services` |
+| Color palette | `PaletteService` | `@aum/utils/services` |
+| Translations | `LanguageTranslationService` | `@aum/utils/services` |
+| App config / toolbar menus | `AppConfigService` | `@aum/utils/services` |
+| Cross-component events | `AppEventBusService` | `@aum/utils/services` |
+| Auth | `AuthService` | `@aum/utils/services` |
+| Preferences dialog | `PreferencesDialogService` | `@aum/common` |
+
+#### Decision rule
+
+```
+Need a UI element?
+  → Search libs/aum-core/ui/src/lib/ for an aum-* wrapper
+  → If found: use it
+  → If not found: use the mat-* component and consider adding a wrapper
+```
+
+```typescript
+// ✅ Correct — use the AUM wrapper
+import { TabGroupComponent, TabComponent } from '@aum/ui/layout';
+
+// ❌ Wrong — bypasses AUM theming and scaling
+import { MatTabsModule } from '@angular/material/tabs';
+```
 
 ---
 
@@ -912,6 +967,7 @@ onMenuSelect(item: MenuItem) {
 
 Before submitting code, ensure:
 
+- [ ] **CRITICAL: Checked AUM component catalog before using any `mat-*` component directly**
 - [ ] Component follows standalone pattern
 - [ ] Uses signals and inject() where appropriate
 - [ ] Implements proper TypeScript typing
@@ -931,6 +987,7 @@ Before submitting code, ensure:
 
 ### UI Development Critical Checks
 
+- [ ] ✅ No raw `mat-*` components used where an `aum-*` wrapper exists (check catalog)
 - [ ] ✅ No hardcoded color values (#hex, rgb, rgba)
 - [ ] ✅ All colors use var(--mat-sys-\*) variables
 - [ ] ✅ No pixel (px) values for dimensions
