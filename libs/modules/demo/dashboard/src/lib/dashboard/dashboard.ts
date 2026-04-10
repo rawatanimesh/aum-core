@@ -28,6 +28,10 @@ export class Dashboard {
     this.router.navigate(['/playground']);
   }
 
+  navigateToGettingStarted() {
+    this.router.navigate(['/getting-started']);
+  }
+
   openFeatureDialog(feature: { title: string; description: string }) {
     this.dialog.open(FeatureDetailDialog, {
       width: '480px',
@@ -37,6 +41,23 @@ export class Dashboard {
       restoreFocus: false,
     });
   }
+
+  statsList = [
+    { value: 'STAT_COMPONENTS', icon: 'widgets' },
+    { value: 'STAT_TEMPLATES', icon: 'dashboard_customize' },
+    { value: 'STAT_LANGUAGES', icon: 'translate' },
+    { value: 'STAT_PALETTES', icon: 'palette' },
+    { value: 'STAT_ACCESSIBILITY', icon: 'accessibility_new' },
+  ];
+
+  benefitsList = [
+    { title: 'BENEFIT_MODERN_TITLE', description: 'BENEFIT_MODERN_DESC', icon: 'auto_awesome' },
+    { title: 'BENEFIT_VELOCITY_TITLE', description: 'BENEFIT_VELOCITY_DESC', icon: 'bolt' },
+    { title: 'BENEFIT_ENTERPRISE_TITLE', description: 'BENEFIT_ENTERPRISE_DESC', icon: 'domain' },
+    { title: 'BENEFIT_BRAND_TITLE', description: 'BENEFIT_BRAND_DESC', icon: 'palette' },
+    { title: 'BENEFIT_AI_TITLE', description: 'BENEFIT_AI_DESC', icon: 'smart_toy' },
+    { title: 'BENEFIT_SLOP_TITLE', description: 'BENEFIT_SLOP_DESC', icon: 'rule' },
+  ];
 
   featureList = [
     {

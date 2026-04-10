@@ -11,8 +11,40 @@
             [icon]="'play_arrow'"
             (clickButton)="navigateToPlayground()"
           />
+          <aum-button
+            [type]="'outlined'"
+            [value]="'GET_STARTED' | translate"
+            [icon]="'rocket_launch'"
+            (clickButton)="navigateToGettingStarted()"
+          />
         </div>
       </div>
+    </div>
+
+    <div class="aum-dashboard-stats">
+      @for (stat of statsList; track stat.value) {
+        <div class="aum-dashboard-stat-item">
+          <mat-icon class="aum-dashboard-stat-icon">{{ stat.icon }}</mat-icon>
+          <span class="fw-600 fs-14">{{ stat.value | translate }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="aum-dashboard-why-header margin-40 text-center">
+      <span class="fw-600 fs-28">{{ 'WHY_AUM' | translate }}</span>
+      <p class="margin-top-8 fs-18 aum-dashboard-subtitle">{{ 'WHY_AUM_SUBTITLE' | translate }}</p>
+    </div>
+
+    <div class="aum-dashboard-benefits-list">
+      @for (benefit of benefitsList; track benefit.title) {
+        <div class="aum-dashboard-benefit-item">
+          <mat-icon class="aum-dashboard-benefit-icon">{{ benefit.icon }}</mat-icon>
+          <div>
+            <div class="fw-600 fs-16">{{ benefit.title | translate }}</div>
+            <div class="fw-400 fs-14 aum-dashboard-benefit-desc">{{ benefit.description | translate }}</div>
+          </div>
+        </div>
+      }
     </div>
 
     <div class="aum-dashboard-feat-header margin-40 text-center">

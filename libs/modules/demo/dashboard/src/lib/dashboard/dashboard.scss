@@ -31,11 +31,77 @@
 
     &-actions {
       margin-top: rem(24);
+      display: flex;
+      gap: rem(12);
+      justify-content: center;
+      flex-wrap: wrap;
 
       // Make the outlined button visible on the primary-colored banner background
       --mdc-outlined-button-label-text-color: var(--mat-sys-on-primary);
       --mdc-outlined-button-outline-color: var(--mat-sys-on-primary);
     }
+  }
+
+  &-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: rem(8) rem(28);
+    padding: rem(18) rem(32);
+    background: var(--mat-sys-surface-container-low);
+    border-radius: rem(12);
+    margin-top: rem(16);
+  }
+
+  &-stat-item {
+    display: flex;
+    align-items: center;
+    gap: rem(6);
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  &-stat-icon {
+    color: var(--mat-sys-primary);
+    font-size: rem(18);
+    width: rem(18);
+    height: rem(18);
+  }
+
+  &-why-header {
+    color: var(--mat-sys-primary);
+  }
+
+  &-benefits-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(rem(340), 1fr));
+    gap: rem(16);
+    padding: rem(0) rem(40) rem(16);
+  }
+
+  &-benefit-item {
+    display: flex;
+    align-items: flex-start;
+    gap: rem(16);
+    padding: rem(20);
+    background: var(--mat-sys-surface-container-low);
+    border-radius: rem(12);
+    border-left: rem(3) solid var(--mat-sys-primary);
+  }
+
+  &-benefit-icon {
+    color: var(--mat-sys-primary);
+    font-size: rem(28);
+    width: rem(28);
+    height: rem(28);
+    flex-shrink: 0;
+    margin-top: rem(2);
+  }
+
+  &-benefit-desc {
+    color: var(--mat-sys-on-surface-variant);
+    margin-top: rem(4);
+    line-height: 1.5;
   }
 
   &-feat-header {
@@ -89,6 +155,16 @@
       justify-content: unset;
       padding: rem(0) rem(16) rem(32);
     }
+
+    &-benefits-list {
+      grid-template-columns: 1fr;
+      padding: rem(0) rem(16) rem(16);
+    }
+
+    &-stats {
+      gap: rem(8) rem(16);
+      padding: rem(16);
+    }
   }
 
   @include mobile {
@@ -105,6 +181,16 @@
     &-feature-list {
       padding: 0 0 rem(24);
       gap: rem(16);
+    }
+
+    &-benefits-list {
+      padding: 0 0 rem(16);
+      gap: rem(12);
+    }
+
+    &-stats {
+      padding: rem(12) rem(8);
+      gap: rem(8) rem(12);
     }
   }
 }
