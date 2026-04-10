@@ -51,9 +51,8 @@
             [type]="'icon'"
             [icon]="'tune'"
             [tooltip]="'AUM.PREFERENCES' | translate"
-            [matMenuTriggerFor]="optionsMenu.childMenu"
             [disabled]="isPreferencesMenuDisabled()"
-            (clickButton)="onMenuOpening()"
+            (clickButton)="openPreferences()"
           ></aum-button>
         }
 
@@ -70,12 +69,6 @@
       </div>
     </div>
   </div>
-
-  <aum-menu-list
-    #optionsMenu="aumMenu"
-    [list]="optionsMenuList"
-    (itemSelected)="onMenuSelect($event)"
-  ></aum-menu-list>
 
   <aum-menu-list
     #profileMenu="aumMenu"

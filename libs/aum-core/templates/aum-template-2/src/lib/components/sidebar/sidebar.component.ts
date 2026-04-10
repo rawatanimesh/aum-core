@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   computed,
   effect,
@@ -6,31 +7,26 @@ import {
   inject,
   Input,
   Output,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
   AppConfigService,
-  MenuConfigHelper,
-  PaletteService,
-  ThemeService,
-  LanguageTranslationService,
-  AuthService,
-} from '@aum/utils/services';
-import { MenuList, MenuItem } from '@aum/ui/navigation';
-import { SnackbarService } from '@aum/ui/utilities';
-import {
   AppEventBusService,
   AppEventType,
-  ToolbarContentService,
-  ToolbarAction,
-} from '@aum/templates/aum-template';
+  AuthService,
+  LanguageTranslationService,
+  MenuConfigHelper,
+} from '@aum/utils/services';
+import { MenuList, MenuItem } from '@aum/ui/navigation';
+import { PreferencesDialogService } from '@aum/common';
+import { ToolbarAction, ToolbarContentService } from '@aum/templates/aum-template';
 
 @Component({
   selector: 'aum-sidebar-2',
@@ -46,23 +42,18 @@ import {
   styleUrl: './sidebar.component.scss',
 })
 export class SidebarComponent {
-  /** When false, hides the brand logo from the sidebar header (e.g. mobile drawer where it's already in the top bar) */
   @Input() showBrandLogo = true;
-  /** When false, hides the app logo/name from the sidebar header (e.g. mobile drawer where it's already in the top bar) */
   @Input() showAppIdentity = true;
-
   @Output() menuItemClicked = new EventEmitter();
 
   private appConfigService = inject(AppConfigService);
-  protected themeService = inject(ThemeService);
-  protected paletteService = inject(PaletteService);
-  protected languageService = inject(LanguageTranslationService);
+  private languageService = inject(LanguageTranslationService);
   private cdr = inject(ChangeDetectorRef);
   private auth = inject(AuthService);
   private router = inject(Router);
-  private snackbarService = inject(SnackbarService);
   private eventBus = inject(AppEventBusService);
   private toolbarContentService = inject(ToolbarContentService);
+  private preferencesDialogService = inject(PreferencesDialogService);
 
   navItems = this.appConfigService.navItems;
   brandLogo = this.appConfigService.brandLogo;
@@ -74,12 +65,10 @@ export class SidebarComponent {
     const logo = this.brandLogo();
     return !!logo && logo.trim().length > 0;
   });
-
   shouldShowAppLogo = computed(() => {
     const logo = this.appLogo();
     return !!logo && logo.trim() !== '';
   });
-
   shouldShowAppName = computed(() => {
     const name = this.appName();
     return !this.shouldShowAppLogo() && !!name && name.trim() !== '';
@@ -98,16 +87,16 @@ export class SidebarComponent {
     MenuConfigHelper.isProfileMenuDisabled(this.toolbarMenusConfig())
   );
 
-  private menusInitialized = false;
-
-  optionsMenuList: MenuItem[] = [];
   profileMenuList: MenuItem[] = [];
   globalActions: ToolbarAction[] = [];
+
+  private menusInitialized = false;
 
   constructor() {
     effect(() => {
       this.languageService.currentLanguage();
       if (this.menusInitialized) {
+        this.buildProfileMenu();
         this.cdr.markForCheck();
       }
     });
@@ -115,18 +104,9 @@ export class SidebarComponent {
     this.languageService.get('LANGUAGE')
       .pipe(takeUntilDestroyed())
       .subscribe(() => {
-        this.buildMenus();
+        this.buildProfileMenu();
         this.menusInitialized = true;
         this.cdr.markForCheck();
-
-        const savedMode = localStorage.getItem('ui-scale-mode') as 'compact' | 'default' | 'large';
-        if (savedMode) document.body.classList.add(`scale-${savedMode}`);
-        this.setMenuSelection(this.optionsMenuList, 'mode', savedMode || this.appConfigService.defaults()?.displayMode || 'default');
-
-        const savedTheme = localStorage.getItem('app-theme-mode') as 'light' | 'dark' | 'system';
-        this.setMenuSelection(this.optionsMenuList, 'theme', savedTheme || this.appConfigService.defaults()?.theme || 'light');
-
-        this.setMenuSelection(this.optionsMenuList, 'palette', this.paletteService.getPalette());
       });
 
     this.toolbarContentService
@@ -138,169 +118,70 @@ export class SidebarComponent {
       });
   }
 
-  buildMenus(): void {
+  private buildProfileMenu(): void {
     const config = this.toolbarMenusConfig();
-    const preferencesMenuItems: MenuItem[] = [];
+    const items: MenuItem[] = [];
 
-    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'language')) {
-      preferencesMenuItems.push({
-        label: this.languageService.instant('AUM.LANGUAGE'),
-        value: 'language',
-        icon: 'translate',
-        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'language'),
-        children: [
-          { label: 'English', value: 'en', selected: this.languageService.getLanguage() === 'en' },
-          { label: '日本語 (Japanese)', value: 'ja', selected: this.languageService.getLanguage() === 'ja' },
-          { label: 'हिन्दी (Hindi)', value: 'hi', selected: this.languageService.getLanguage() === 'hi' },
-        ],
-      });
-    }
-
-    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'theme')) {
-      const savedTheme = localStorage.getItem('app-theme-mode') || this.appConfigService.defaults()?.theme || 'light';
-      preferencesMenuItems.push({
-        label: this.languageService.instant('AUM.THEME'),
-        value: 'theme',
-        icon: 'contrast',
-        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'theme'),
-        children: [
-          { label: this.languageService.instant('AUM.LIGHT'), value: 'light', icon: 'light_mode', selected: savedTheme === 'light' },
-          { label: this.languageService.instant('AUM.DARK'), value: 'dark', icon: 'dark_mode', selected: savedTheme === 'dark' },
-          { label: this.languageService.instant('AUM.SYSTEM'), value: 'system', icon: 'computer', selected: savedTheme === 'system' },
-        ],
-      });
-    }
-
-    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'palette')) {
-      const savedPalette = this.paletteService.getPalette();
-      preferencesMenuItems.push({
-        label: this.languageService.instant('AUM.PALETTE'),
-        value: 'palette',
-        icon: 'palette',
-        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'palette'),
-        children: [
-          { label: this.languageService.instant('AUM.PURPLE'), value: 'purple', selected: savedPalette === 'purple' },
-          { label: this.languageService.instant('AUM.OCEAN_BLUE'), value: 'ocean-blue', selected: savedPalette === 'ocean-blue' },
-          { label: this.languageService.instant('AUM.SEA_GREEN'), value: 'sea-green', selected: savedPalette === 'sea-green' },
-        ],
-      });
-    }
-
-    // Template switcher
-    if (MenuConfigHelper.shouldShowPreferencesItem(config, 'template')) {
-      const savedTemplate = localStorage.getItem('app-template') || this.appConfigService.defaults()?.template || 'template-2';
-      preferencesMenuItems.push({
-        label: this.languageService.instant('AUM.TEMPLATE'),
-        value: 'template',
-        icon: 'dashboard_customize',
-        disabled: MenuConfigHelper.isPreferencesItemDisabled(config, 'template'),
-        children: [
-          { label: this.languageService.instant('AUM.TEMPLATE_1'), value: 'template-1', icon: 'view_sidebar', selected: savedTemplate === 'template-1' },
-          { label: this.languageService.instant('AUM.TEMPLATE_2'), value: 'template-2', icon: 'view_compact', selected: savedTemplate === 'template-2' },
-        ],
-      });
-    }
-
-    const savedMode = localStorage.getItem('ui-scale-mode') || this.appConfigService.defaults()?.displayMode || 'default';
-    preferencesMenuItems.push({
-      label: this.languageService.instant('AUM.DISPLAY'),
-      value: 'mode',
-      icon: 'aspect_ratio',
-      disabled: MenuConfigHelper.isPreferencesMenuDisabled(config),
-      children: [
-        { label: this.languageService.instant('AUM.COMPACT'), value: 'compact', icon: 'density_small', selected: savedMode === 'compact' },
-        { label: this.languageService.instant('AUM.DEFAULT'), value: 'default', icon: 'density_medium', selected: savedMode === 'default' },
-        { label: this.languageService.instant('AUM.LARGE'), value: 'large', icon: 'density_large', selected: savedMode === 'large' },
-      ],
-    });
-    this.optionsMenuList = preferencesMenuItems;
-
-    const profileMenuItems: MenuItem[] = [];
     if (MenuConfigHelper.shouldShowProfileItem(config, 'profile')) {
-      profileMenuItems.push({ label: this.languageService.instant('AUM.PROFILE'), value: 'profile', icon: 'person', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'profile'), showSelection: false });
+      items.push({
+        label: this.languageService.instant('AUM.PROFILE'),
+        value: 'profile',
+        icon: 'person',
+        disabled: MenuConfigHelper.isProfileItemDisabled(config, 'profile'),
+        showSelection: false,
+      });
     }
     if (MenuConfigHelper.shouldShowProfileItem(config, 'settings')) {
-      profileMenuItems.push({ label: this.languageService.instant('AUM.SETTINGS'), value: 'settings', icon: 'settings', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'settings'), showSelection: false });
+      items.push({
+        label: this.languageService.instant('AUM.SETTINGS'),
+        value: 'settings',
+        icon: 'settings',
+        disabled: MenuConfigHelper.isProfileItemDisabled(config, 'settings'),
+        showSelection: false,
+      });
     }
     if (MenuConfigHelper.shouldShowProfileItem(config, 'logout')) {
-      profileMenuItems.push({ label: this.languageService.instant('AUM.LOGOUT'), value: 'logout', icon: 'logout', disabled: MenuConfigHelper.isProfileItemDisabled(config, 'logout'), showSelection: false });
+      items.push({
+        label: this.languageService.instant('AUM.LOGOUT'),
+        value: 'logout',
+        icon: 'logout',
+        disabled: MenuConfigHelper.isProfileItemDisabled(config, 'logout'),
+        showSelection: false,
+      });
     }
-    this.profileMenuList = profileMenuItems;
+
+    this.profileMenuList = items;
   }
 
-
-  onItemClick(value: string) {
+  onItemClick(value: string): void {
     this.router.navigateByUrl(value).then((success) => {
       if (success) this.menuItemClicked.emit();
     });
   }
 
-  onMenuSelect(item: MenuItem) {
-    if (item.value === 'template-1' || item.value === 'template-2') {
-      localStorage.setItem('app-template', item.value);
-      this.setMenuSelection(this.optionsMenuList, 'template', item.value);
-      this.eventBus.emit(AppEventType.TEMPLATE_CHANGED, { template: item.value });
-    }
-    if (item.value === 'compact' || item.value === 'default' || item.value === 'large') {
-      this.setUiScale(item.value);
-      this.setMenuSelection(this.optionsMenuList, 'mode', item.value);
-    }
-    if (item.value === 'light' || item.value === 'dark' || item.value === 'system') {
-      const previousTheme = this.themeService.getTheme();
-      this.themeService.setTheme(item.value);
-      this.setMenuSelection(this.optionsMenuList, 'theme', item.value);
-      this.eventBus.emit(AppEventType.THEME_CHANGED, { theme: item.value, previousTheme });
-    }
-    if (item.value === 'purple' || item.value === 'ocean-blue' || item.value === 'sea-green') {
-      const previousPalette = this.paletteService.getPalette();
-      this.paletteService.setPalette(item.value);
-      this.setMenuSelection(this.optionsMenuList, 'palette', item.value);
-      this.eventBus.emit(AppEventType.PALETTE_CHANGED, { palette: item.value, previousPalette });
-    }
-    if (item.value === 'en' || item.value === 'ja' || item.value === 'hi') {
-      const currentLanguage = this.languageService.getLanguage();
-      if (currentLanguage !== item.value) {
-        this.languageService.setLanguage(item.value);
-        this.setMenuSelection(this.optionsMenuList, 'language', item.value);
-        this.eventBus.emit(AppEventType.LANGUAGE_CHANGED, { language: item.value, previousLanguage: currentLanguage });
-        setTimeout(() => {
-          this.snackbarService.success(this.languageService.instant('AUM.LANGUAGE_CHANGED_SUCCESSFULLY'), 3000);
-        }, 100);
-      }
-    }
+  onMenuSelect(item: MenuItem): void {
     if (item.value === 'logout') {
       this.logout();
     }
   }
 
-  setMenuSelection(menuList: MenuItem[], parent: string, value: string) {
-    const parentMenu = menuList.find((m) => m.value === parent);
-    if (parentMenu?.children) {
-      parentMenu.children.forEach((child) => { child.selected = child.value === value; });
+  onMenuOpening(): void {
+    if (this.menusInitialized) {
+      this.buildProfileMenu();
     }
   }
 
-  onMenuOpening(): void {
-    if (this.menusInitialized) this.buildMenus();
+  openPreferences(): void {
+    this.preferencesDialogService.open();
   }
 
   onGlobalActionClick(actionId: string): void {
     this.toolbarContentService.executeAction(actionId);
   }
 
-  setUiScale(mode: 'compact' | 'default' | 'large') {
-    const previousScale = (localStorage.getItem('ui-scale-mode') || 'default') as 'compact' | 'default' | 'large';
-    const body = document.body;
-    body.classList.remove('scale-compact', 'scale-large', 'scale-default');
-    body.classList.add(`scale-${mode}`);
-    localStorage.setItem('ui-scale-mode', mode);
-    this.eventBus.emit(AppEventType.UI_SCALE_CHANGED, { scale: mode, previousScale });
-  }
-
-  logout() {
+  logout(): void {
     this.eventBus.emit(AppEventType.LOGOUT);
     this.auth.logout();
     this.router.navigate(['/login']);
   }
-
 }

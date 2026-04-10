@@ -45,9 +45,8 @@
     @if (shouldShowPreferencesMenu()) {
       <button
         class="aum-sidebar__item"
-        [matMenuTriggerFor]="optionsMenu.childMenu"
         [disabled]="isPreferencesMenuDisabled()"
-        (click)="onMenuOpening()"
+        (click)="openPreferences()"
       >
         <mat-icon class="aum-sidebar__icon">tune</mat-icon>
         <span class="aum-sidebar__label">{{ 'AUM.PREFERENCES' | translate }}</span>
@@ -68,12 +67,6 @@
   </div>
 
 </div>
-
-<aum-menu-list
-  #optionsMenu="aumMenu"
-  [list]="optionsMenuList"
-  (itemSelected)="onMenuSelect($event)"
-></aum-menu-list>
 
 <aum-menu-list
   #profileMenu="aumMenu"

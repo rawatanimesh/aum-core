@@ -16,13 +16,11 @@
   @if (shouldShowPreferencesMenu()) {
     <button
       class="aum-settings-drawer__item"
-      [matMenuTriggerFor]="optionsMenu.childMenu"
       [disabled]="isPreferencesMenuDisabled()"
-      (click)="onMenuOpening()"
+      (click)="openPreferences()"
     >
       <mat-icon class="aum-settings-drawer__icon">tune</mat-icon>
       <span class="aum-settings-drawer__label">{{ 'AUM.PREFERENCES' | translate }}</span>
-      <mat-icon class="aum-settings-drawer__chevron">chevron_right</mat-icon>
     </button>
   }
 
@@ -41,12 +39,6 @@
   }
 
 </div>
-
-<aum-menu-list
-  #optionsMenu="aumMenu"
-  [list]="optionsMenuList"
-  (itemSelected)="onMenuSelect($event)"
-></aum-menu-list>
 
 <aum-menu-list
   #profileMenu="aumMenu"
