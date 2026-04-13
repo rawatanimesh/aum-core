@@ -1,4 +1,4 @@
-import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -8,10 +8,11 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 
+import { ConfirmationImageComponent, ConfirmationImageType } from '@aum/common';
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 export interface ConfirmationDialogData {
-  confirmationImage?: string;
+  confirmationImage?: ConfirmationImageType;
   title?: string;
   message?: string;
   confirmText?: string;
@@ -20,12 +21,14 @@ export interface ConfirmationDialogData {
 
 @Component({
   selector: 'aum-confirmation-dialog',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     CommonModule,
     MatDialogContent,
     MatDialogActions,
     MatButtonModule,
     ButtonComponent,
+    ConfirmationImageComponent,
   ],
   templateUrl: './confirmation-dialog.html',
   styleUrl: './confirmation-dialog.scss',

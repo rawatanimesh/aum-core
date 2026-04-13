@@ -1,19 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from '@aum/ui/buttons';
+import { ConfirmationImageComponent } from './confirmation-image/confirmation-image.component';
 
 @Component({
   selector: 'aum-page-not-found',
   standalone: true,
-  imports: [ButtonComponent, TranslateModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ButtonComponent, TranslateModule, ConfirmationImageComponent],
   template: `
     <div class="page-not-found-container">
-      <img
-        src="assets/svgs/confirmation/page-not-found.svg"
-        [attr.alt]="'AUM.PAGE_NOT_FOUND' | translate"
-        class="not-found-image"
-      />
+      <aum-confirmation-image type="page-not-found" class="not-found-image"></aum-confirmation-image>
       <h1 class="not-found-text">{{ 'AUM.PAGE_NOT_FOUND' | translate }}</h1>
       <aum-button
         [type]="'filled'"

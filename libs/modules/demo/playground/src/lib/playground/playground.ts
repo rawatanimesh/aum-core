@@ -110,7 +110,7 @@ export class Playground implements OnInit, OnDestroy {
   openConfirmationDialog() {
     this.dialog
       .open({
-        confirmationImage: 'assets/svgs/confirmation/info.svg',
+        confirmationImage: 'info',
         title: this.languageService.instant('NOTE'),
         message: this.languageService.instant('AUTHORIZATION_MESSAGE'),
         confirmText: this.languageService.instant('YES'),
