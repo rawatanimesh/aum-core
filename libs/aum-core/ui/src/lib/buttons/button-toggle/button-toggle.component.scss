@@ -73,12 +73,6 @@
     line-height: 1;
     letter-spacing: normal;
 
-    mat-icon {
-      font-size: rem(16);
-      width: rem(16);
-      height: rem(16);
-      line-height: rem(16);
-    }
   }
 
   // ─── Selected state = filled/Save button ──────────────────────────────────
@@ -131,12 +125,6 @@
       padding: 0 rem(12);
       font-size: rem(14); // keep same font-size, only height/padding shrink
 
-      mat-icon {
-        font-size: rem(14);
-        width: rem(14);
-        height: rem(14);
-        line-height: rem(14);
-      }
     }
   }
 

@@ -80,28 +80,6 @@
     }
   }
 
-  // Material icon size helpers
-  .aum-upload-icon--md {
-    font-size: rem(24);
-    width: rem(24);
-    height: rem(24);
-    color: var(--mat-sys-outline);
-  }
-
-  .aum-upload-icon--lg {
-    font-size: rem(36);
-    width: rem(36);
-    height: rem(36);
-    color: var(--mat-sys-outline);
-  }
-
-  .aum-upload-icon--xl {
-    font-size: rem(48);
-    width: rem(48);
-    height: rem(48);
-    color: var(--mat-sys-outline);
-  }
-
   // Single file layouts
   .aum-upload-box-single-file {
     width: 100%;
@@ -145,11 +123,6 @@
     align-items: center;
     gap: rem(16);
     width: 100%;
-
-    mat-icon {
-      flex-shrink: 0;
-      color: var(--mat-sys-outline);
-    }
 
     .aum-upload-box-compact-content {
       flex: 1;

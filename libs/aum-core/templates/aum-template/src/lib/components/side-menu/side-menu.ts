@@ -8,7 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
+import { Icon } from '@aum/ui/utilities';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -23,7 +23,7 @@ export interface SideMenuItem {
 
 @Component({
   selector: 'aum-side-menu',
-  imports: [CommonModule, MatIconModule, RouterModule, TranslateModule],
+  imports: [CommonModule, Icon, RouterModule, TranslateModule],
   templateUrl: './side-menu.html',
   styleUrl: './side-menu.scss',
   encapsulation: ViewEncapsulation.None,

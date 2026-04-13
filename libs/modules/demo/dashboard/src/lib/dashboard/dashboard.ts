@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
+import { Icon } from '@aum/ui/utilities';
 
 import { ButtonComponent } from '@aum/ui/buttons';
 import { CardComponent, PageComponent } from '@aum/ui/layout';
@@ -10,7 +10,7 @@ import { FeatureDetailDialog } from '../feature-detail-dialog/feature-detail-dia
 
 @Component({
   selector: 'demo-dashboard',
-  imports: [PageComponent, CardComponent, ButtonComponent, MatIconModule, TranslateModule],
+  imports: [PageComponent, CardComponent, ButtonComponent, Icon, TranslateModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
 })

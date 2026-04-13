@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatIconModule } from '@angular/material/icon';
+import { Icon } from '@aum/ui/utilities';
 
 export interface ButtonToggleOption {
   label: string;
@@ -20,7 +20,7 @@ export interface ButtonToggleOption {
 @Component({
   selector: 'aum-button-toggle',
   standalone: true,
-  imports: [CommonModule, MatButtonToggleModule, MatIconModule],
+  imports: [CommonModule, MatButtonToggleModule, Icon],
   templateUrl: './button-toggle.component.html',
   styleUrl: './button-toggle.component.scss',
   encapsulation: ViewEncapsulation.None,

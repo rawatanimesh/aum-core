@@ -10,7 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatMenuModule, MatMenu } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { Icon } from '@aum/ui/utilities';
 // Interface for menu item structure
 export interface MenuItem {
   label: string;
@@ -24,7 +24,7 @@ export interface MenuItem {
 
 @Component({
   selector: 'aum-menu-list',
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatMenuModule],
+  imports: [CommonModule, MatButtonModule, Icon, MatMenuModule],
   templateUrl: './menu-list.html',
   styleUrl: './menu-list.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

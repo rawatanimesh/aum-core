@@ -95,18 +95,7 @@
       background-color: var(--mat-sys-primary-container);
       color: var(--mat-sys-primary);
       font-weight: 600;
-
-      .aum-sidebar__icon {
-        color: var(--mat-sys-primary);
-      }
     }
-  }
-
-  &__icon {
-    font-size: rem(22);
-    width: rem(22);
-    height: rem(22);
-    line-height: rem(22);
   }
 
   &__label {

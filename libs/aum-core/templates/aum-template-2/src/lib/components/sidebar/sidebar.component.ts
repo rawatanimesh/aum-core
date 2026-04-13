@@ -12,7 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
+import { Icon } from '@aum/ui/utilities';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -33,7 +33,7 @@ import { ToolbarAction, ToolbarContentService } from '@aum/templates/aum-templat
   imports: [
     CommonModule,
     RouterModule,
-    MatIconModule,
+    Icon,
     MatMenuModule,
     MenuList,
     TranslateModule,

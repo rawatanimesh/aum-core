@@ -7,8 +7,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
+import { Icon } from '@aum/ui/utilities';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
@@ -54,8 +54,8 @@ export interface PreferencesDialogData {
   standalone: true,
   imports: [
     CommonModule,
-    MatIconModule,
     MatRadioModule,
+    Icon,
     ButtonComponent,
     ButtonToggleComponent,
     TabGroupComponent,

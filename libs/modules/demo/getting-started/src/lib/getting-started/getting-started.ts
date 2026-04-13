@@ -14,8 +14,8 @@ import {
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { map, merge, startWith, take } from 'rxjs';
-import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Icon } from '@aum/ui/utilities';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 import { PageComponent } from '@aum/ui/layout';
@@ -24,7 +24,7 @@ import { TocComponent, TocSection } from '../toc/toc';
 @Component({
   selector: 'demo-getting-started',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [PageComponent, RouterModule, MatIconModule, MatTooltipModule, TranslateModule, TocComponent],
+  imports: [PageComponent, RouterModule, Icon, MatTooltipModule, TranslateModule, TocComponent],
   templateUrl: './getting-started.html',
   styleUrl: './getting-started.scss',
 })
@@ -89,8 +89,12 @@ export class GettingStarted implements AfterViewInit {
     { icon: 'account_tree',  labelKey: 'GS_COMP_BREADCRUMB' },
     { icon: 'check_circle',  labelKey: 'GS_COMP_DIALOG_CONFIRM' },
     { icon: 'open_in_new',   labelKey: 'GS_COMP_DIALOG_GENERIC' },
-    { icon: 'notifications', labelKey: 'GS_COMP_SNACKBAR' },
-    { icon: 'upload',        labelKey: 'GS_COMP_UPLOAD' },
+    { icon: 'notifications',   labelKey: 'GS_COMP_SNACKBAR' },
+    { icon: 'upload',          labelKey: 'GS_COMP_UPLOAD' },
+    { icon: 'interests',       labelKey: 'GS_COMP_ICON' },
+    { icon: 'toggle_on',       labelKey: 'GS_COMP_BUTTON_TOGGLE' },
+    { icon: 'tab',             labelKey: 'GS_COMP_TABS' },
+    { icon: 'progress_activity', labelKey: 'GS_COMP_SPINNER' },
   ];
 
   readonly resources = [

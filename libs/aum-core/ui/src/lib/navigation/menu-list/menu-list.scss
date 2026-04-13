@@ -10,11 +10,6 @@
       color: var(--mat-sys-primary) !important;
     }
   }
-  &-icon {
-    font-size: rem(20); //size of icon
-    height: rem(20) !important; // height and width of icon containter
-    width: rem(20) !important;
-  }
   // remove top and bottom padding of mat menu content
   .mat-mdc-menu-content {
     padding: 0 !important;

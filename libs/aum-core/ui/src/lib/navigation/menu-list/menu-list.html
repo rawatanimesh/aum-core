@@ -9,11 +9,12 @@
     [class.selected]="shouldApplySelected(item)"
   >
     @if (item.icon) {
-    <mat-icon
+    <aum-icon
       class="aum-menu-list-icon"
       [class.selected-icon]="shouldApplySelected(item)"
-      >{{ item.icon }}</mat-icon
-    >
+      [name]="item.icon"
+      [width]="20"
+    ></aum-icon>
     } {{ item.label }}
   </button>
   }
@@ -27,7 +28,7 @@
     [disabled]="item.disabled"
   >
     @if (item.icon) {
-    <mat-icon>{{ item.icon }}</mat-icon>
+    <aum-icon [name]="item.icon" [width]="20"></aum-icon>
     } {{ item.label }}
   </button>
 

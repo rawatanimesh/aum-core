@@ -12,16 +12,12 @@
         class="aum-side-nav-item-link flex-row w-100"
       >
         <div class="flex-row-flex-start-center">
-          <mat-icon class="aum-side-nav-item-link-icon"
-            >{{ item.icon || 'radio_button_unchecked' }}</mat-icon
-          >
+          <aum-icon class="aum-side-nav-item-link-icon" [name]="item.icon || 'radio_button_unchecked'"></aum-icon>
           <span class="aum-side-nav-item-link-label">{{ item.label | translate }}</span>
         </div>
 
         @if (item.children?.length) {
-        <mat-icon class="aum-side-nav-item-link-expand-icon">
-          {{ item.expanded ? 'expand_less' : 'expand_more' }}
-        </mat-icon>
+          <aum-icon class="aum-side-nav-item-link-expand-icon" [name]="item.expanded ? 'expand_less' : 'expand_more'"></aum-icon>
         }
       </a>
     </li>
@@ -38,9 +34,7 @@
           (click)="onItemClick(child, $event)"
           class="aum-side-nav-item-link flex-row-flex-start-center w-100"
         >
-          <mat-icon class="aum-side-nav-item-link-icon"
-            >{{ child.icon || 'circle' }}</mat-icon
-          >
+          <aum-icon class="aum-side-nav-item-link-icon" [name]="child.icon || 'circle'"></aum-icon>
           <span class="aum-side-nav-item-link-label">{{ child.label | translate }}</span>
         </a>
       </li>

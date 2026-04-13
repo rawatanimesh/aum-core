@@ -24,7 +24,7 @@
     <div class="aum-dashboard-stats">
       @for (stat of statsList; track stat.value) {
         <div class="aum-dashboard-stat-item">
-          <mat-icon class="aum-dashboard-stat-icon">{{ stat.icon }}</mat-icon>
+          <aum-icon class="aum-dashboard-stat-icon" [name]="stat.icon" [width]="18" color="primary"></aum-icon>
           <span class="fw-600 fs-14">{{ stat.value | translate }}</span>
         </div>
       }
@@ -38,7 +38,7 @@
     <div class="aum-dashboard-benefits-list">
       @for (benefit of benefitsList; track benefit.title) {
         <div class="aum-dashboard-benefit-item">
-          <mat-icon class="aum-dashboard-benefit-icon">{{ benefit.icon }}</mat-icon>
+          <aum-icon class="aum-dashboard-benefit-icon" [name]="benefit.icon" [width]="28" color="primary"></aum-icon>
           <div>
             <div class="fw-600 fs-16">{{ benefit.title | translate }}</div>
             <div class="fw-400 fs-14 aum-dashboard-benefit-desc">{{ benefit.description | translate }}</div>
@@ -59,7 +59,7 @@
         <aum-card class="aum-dashboard-feature-card" (click)="openFeatureDialog(feature)">
           <div card-body class="aum-dashboard-feature-card-body">
             <div class="aum-dashboard-feature-card-header">
-              <mat-icon class="aum-dashboard-feature-icon">{{ feature.icon }}</mat-icon>
+              <aum-icon class="aum-dashboard-feature-icon" [name]="feature.icon" color="primary"></aum-icon>
               <span class="fw-600 fs-20">{{ feature.title | translate }}</span>
             </div>
             <div class="truncate-multiline">

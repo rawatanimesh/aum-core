@@ -26,7 +26,7 @@
         (click)="menuItemClicked.emit()"
       >
         @if (item.icon) {
-          <mat-icon class="aum-sidebar__icon">{{ item.icon }}</mat-icon>
+          <aum-icon [name]="item.icon" [width]="22"></aum-icon>
         }
         <span class="aum-sidebar__label">{{ item.label | translate }}</span>
       </a>
@@ -37,7 +37,7 @@
   <div class="aum-sidebar__footer">
     @for (action of globalActions; track action.id) {
       <button class="aum-sidebar__item" (click)="onGlobalActionClick(action.id)">
-        <mat-icon class="aum-sidebar__icon">{{ action.icon }}</mat-icon>
+        <aum-icon [name]="action.icon" [width]="22"></aum-icon>
         <span class="aum-sidebar__label">{{ (action.tooltip || '') | translate }}</span>
       </button>
     }
@@ -48,7 +48,7 @@
         [disabled]="isPreferencesMenuDisabled()"
         (click)="openPreferences()"
       >
-        <mat-icon class="aum-sidebar__icon">tune</mat-icon>
+        <aum-icon name="tune" [width]="22"></aum-icon>
         <span class="aum-sidebar__label">{{ 'AUM.PREFERENCES' | translate }}</span>
       </button>
     }
@@ -60,7 +60,7 @@
         [disabled]="isProfileMenuDisabled()"
         (click)="onMenuOpening()"
       >
-        <mat-icon class="aum-sidebar__icon">account_circle</mat-icon>
+        <aum-icon name="account_circle" [width]="22"></aum-icon>
         <span class="aum-sidebar__label">{{ 'AUM.MY_ACCOUNT' | translate }}</span>
       </button>
     }

@@ -61,13 +61,6 @@
     color: var(--mat-sys-on-surface-variant);
   }
 
-  &-stat-icon {
-    color: var(--mat-sys-primary);
-    font-size: rem(18);
-    width: rem(18);
-    height: rem(18);
-  }
-
   &-why-header {
     color: var(--mat-sys-primary);
   }
@@ -87,15 +80,6 @@
     background: var(--mat-sys-surface-container-low);
     border-radius: rem(12);
     border-left: rem(3) solid var(--mat-sys-primary);
-  }
-
-  &-benefit-icon {
-    color: var(--mat-sys-primary);
-    font-size: rem(28);
-    width: rem(28);
-    height: rem(28);
-    flex-shrink: 0;
-    margin-top: rem(2);
   }
 
   &-benefit-desc {
@@ -142,11 +126,6 @@
       flex-shrink: 0;
       color: var(--mat-sys-primary);
     }
-  }
-
-  &-feature-icon {
-    color: var(--mat-sys-primary);
-    margin-top: rem(2);
   }
 
   @include tablet {

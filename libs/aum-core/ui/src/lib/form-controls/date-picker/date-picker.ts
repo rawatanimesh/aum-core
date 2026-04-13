@@ -35,8 +35,8 @@ import {
   Validators,
   UntypedFormControl,
 } from '@angular/forms';
-import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Icon } from '@aum/ui/utilities';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -86,11 +86,10 @@ export class AumErrorStateMatcher implements ErrorStateMatcher {
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
     MatButtonModule,
+    Icon,
     TranslateModule,
   ],
   providers: [

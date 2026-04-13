@@ -8,8 +8,8 @@ import {
 } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Icon } from '@aum/ui/utilities';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 import { AppConfigService } from '@aum/utils/services';
@@ -20,7 +20,7 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
   imports: [
     RouterModule,
     MatSidenavModule,
-    MatIconModule,
+    Icon,
     SidebarComponent,
   ],
   templateUrl: './aum-template-2.html',

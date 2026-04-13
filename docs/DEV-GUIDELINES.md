@@ -118,6 +118,7 @@ All UI must use components from `libs/aum-core/ui/`. Do not rebuild components t
 - Navigation (menus, breadcrumbs, side menu)
 - Loading indicators, spinners
 - Date pickers, autocomplete, form controls
+- **Icons — always use `<aum-icon>` from `@aum/ui/utilities`; never use `<mat-icon>` directly**
 
 **Exception process:** If the library lacks required functionality, contribute a new component to `libs/aum-core/ui/` rather than building a one-off custom component in a feature module.
 

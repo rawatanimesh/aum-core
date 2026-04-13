@@ -99,12 +99,6 @@ demo-toc {
   transition: opacity 0.15s, color 0.15s;
   flex-shrink: 0;
 
-  mat-icon {
-    font-size: rem(18);
-    width: rem(18);
-    height: rem(18);
-  }
-
   &:hover {
     color: var(--mat-sys-primary);
   }
@@ -165,12 +159,6 @@ demo-toc {
   border-radius: rem(20);
   background: var(--mat-sys-primary-container);
   color: var(--mat-sys-on-primary-container);
-}
-
-.gs-highlight-icon {
-  font-size: rem(18);
-  width: rem(18);
-  height: rem(18);
 }
 
 // Prerequisites list
@@ -264,10 +252,6 @@ demo-toc {
 }
 
 .gs-comp-icon {
-  color: var(--mat-sys-primary);
-  font-size: rem(18);
-  width: rem(18);
-  height: rem(18);
   flex-shrink: 0;
 }
 
@@ -304,16 +288,11 @@ demo-toc {
 }
 
 .gs-resource-icon {
-  color: var(--mat-sys-primary);
   margin-bottom: rem(4);
 }
 
 .gs-resource-arrow {
   margin-top: rem(8);
-  color: var(--mat-sys-on-surface-variant);
-  font-size: rem(16);
-  width: rem(16);
-  height: rem(16);
 }
 
 // Back to top

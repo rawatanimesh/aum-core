@@ -7,20 +7,20 @@
   <a [routerLink]="item.route" class="aum-breadcrumb-clickable">
     {{ item.title | translate }}
   </a>
-  <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="chevron_right"></mat-icon>
+  <aum-icon name="chevron_right" [width]="20"></aum-icon>
   } } } @else {
   <!-- First breadcrumb -->
   <a [routerLink]="breadcrumbs![0].route" class="aum-breadcrumb-clickable">
     {{ breadcrumbs![0].title | translate }}
   </a>
-  <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="chevron_right"></mat-icon>
+  <aum-icon name="chevron_right" [width]="20"></aum-icon>
 
   <!-- Truncated middle breadcrumb menu -->
   <a
     [matMenuTriggerFor]="breadcrumbMenu"
     class="aum-breadcrumb-clickable flex-row-center-center"
   >
-    <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="more_horiz"></mat-icon>
+    <aum-icon name="more_horiz" [width]="20"></aum-icon>
   </a>
   <!-- adding aum-menu-list class from menu-list component -->
   <mat-menu #breadcrumbMenu="matMenu" class="aum-menu-list">
@@ -30,7 +30,7 @@
     </button>
     }
   </mat-menu>
-  <mat-icon class="aum-breadcrumb-nestIcon" fontIcon="chevron_right"></mat-icon>
+  <aum-icon name="chevron_right" [width]="20"></aum-icon>
 
   <!-- Last breadcrumb -->
   <span>{{ breadcrumbs![breadcrumbs!.length - 1].title | translate }}</span>

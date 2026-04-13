@@ -1,8 +1,8 @@
 import { Component, Input, ViewEncapsulation, TemplateRef, ContentChild, AfterContentInit } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { Icon } from '@aum/ui/utilities';
 import { ExpansionPanelContentDirective } from './expansion-panel-content.directive';
 
 export interface ExpansionPanelItem {
@@ -16,7 +16,7 @@ export interface ExpansionPanelItem {
 @Component({
   selector: 'aum-expansion-panel',
   standalone: true,
-  imports: [MatExpansionModule, CommonModule, MatIconModule, TranslateModule],
+  imports: [MatExpansionModule, CommonModule, Icon, TranslateModule],
   templateUrl: './expansion-panel.component.html',
   styleUrl: './expansion-panel.component.scss',
   encapsulation: ViewEncapsulation.None,

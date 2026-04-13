@@ -43,7 +43,7 @@
                     >
                       <span class="aum-prefs-dialog__palette-dot aum-prefs-dialog__palette-dot--{{ palette }}">
                         @if (draft.palette === palette) {
-                          <mat-icon>check</mat-icon>
+                          <aum-icon name="check" [width]="18"></aum-icon>
                         }
                       </span>
                       <span class="aum-prefs-dialog__palette-name">{{ getPaletteLabel(palette) | translate }}</span>
@@ -111,7 +111,7 @@
                     (click)="onTemplateChange('template-1')"
                     type="button"
                   >
-                    <mat-icon>view_sidebar</mat-icon>
+                    <aum-icon name="view_sidebar" [width]="32"></aum-icon>
                     <span>{{ 'AUM.TEMPLATE_1' | translate }}</span>
                   </button>
                   <button
@@ -121,7 +121,7 @@
                     (click)="onTemplateChange('template-2')"
                     type="button"
                   >
-                    <mat-icon>view_compact</mat-icon>
+                    <aum-icon name="view_compact" [width]="32"></aum-icon>
                     <span>{{ 'AUM.TEMPLATE_2' | translate }}</span>
                   </button>
                 </div>

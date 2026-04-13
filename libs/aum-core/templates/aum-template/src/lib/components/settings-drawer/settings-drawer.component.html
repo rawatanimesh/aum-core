@@ -3,7 +3,7 @@
   <!-- Global actions -->
   @for (action of globalActions; track action.id) {
     <button class="aum-settings-drawer__item" (click)="onGlobalActionClick(action.id)">
-      <mat-icon class="aum-settings-drawer__icon">{{ action.icon }}</mat-icon>
+      <aum-icon class="aum-settings-drawer__icon" [name]="action.icon" [width]="24" color="on-surface-variant"></aum-icon>
       <span class="aum-settings-drawer__label">{{ (action.tooltip || '') | translate }}</span>
     </button>
   }
@@ -19,7 +19,7 @@
       [disabled]="isPreferencesMenuDisabled()"
       (click)="openPreferences()"
     >
-      <mat-icon class="aum-settings-drawer__icon">tune</mat-icon>
+      <aum-icon class="aum-settings-drawer__icon" name="tune" [width]="24" color="on-surface-variant"></aum-icon>
       <span class="aum-settings-drawer__label">{{ 'AUM.PREFERENCES' | translate }}</span>
     </button>
   }
@@ -32,9 +32,9 @@
       [disabled]="isProfileMenuDisabled()"
       (click)="onMenuOpening()"
     >
-      <mat-icon class="aum-settings-drawer__icon">account_circle</mat-icon>
+      <aum-icon class="aum-settings-drawer__icon" name="account_circle" [width]="24" color="on-surface-variant"></aum-icon>
       <span class="aum-settings-drawer__label">{{ 'AUM.MY_ACCOUNT' | translate }}</span>
-      <mat-icon class="aum-settings-drawer__chevron">chevron_right</mat-icon>
+      <aum-icon class="aum-settings-drawer__chevron" name="chevron_right" [width]="20" color="on-surface-variant"></aum-icon>
     </button>
   }
 

@@ -10,8 +10,8 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
+import { Icon } from '@aum/ui/utilities';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
@@ -28,7 +28,7 @@ import { ToolbarAction, ToolbarContentService } from '../../services/toolbar-con
 
 @Component({
   selector: 'aum-settings-drawer',
-  imports: [CommonModule, MatIconModule, MatMenuModule, TranslateModule, MenuList],
+  imports: [CommonModule, MatMenuModule, TranslateModule, MenuList, Icon],
   templateUrl: './settings-drawer.component.html',
   styleUrl: './settings-drawer.component.scss',
 })

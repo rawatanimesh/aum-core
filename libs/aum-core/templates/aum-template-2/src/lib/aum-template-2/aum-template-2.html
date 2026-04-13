@@ -6,7 +6,7 @@
       <img [src]="brandLogo()" class="aum-t2__mobile-brand-logo" alt="brand-logo" />
     }
     <button class="aum-t2__hamburger" (click)="mobileDrawer.toggle()" aria-label="Open navigation">
-      <mat-icon>menu</mat-icon>
+      <aum-icon name="menu"></aum-icon>
     </button>
     @if (shouldShowAppLogo()) {
       <img [src]="appLogo()" class="aum-t2__mobile-logo" alt="app-logo" />

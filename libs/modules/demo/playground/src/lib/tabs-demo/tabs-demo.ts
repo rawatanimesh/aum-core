@@ -3,7 +3,7 @@ import { TabGroupComponent, TabComponent, TabLabelDirective } from '@aum/ui/layo
 import { PageComponent } from '@aum/ui/layout';
 import { ButtonComponent } from '@aum/ui/buttons';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatIconModule } from '@angular/material/icon';
+import { Icon } from '@aum/ui/utilities';
 
 interface DynamicTab {
   label: string;
@@ -20,7 +20,7 @@ interface DynamicTab {
     TabLabelDirective,
     PageComponent,
     ButtonComponent,
-    MatIconModule,
+    Icon,
     TranslateModule,
   ],
   templateUrl: './tabs-demo.html',

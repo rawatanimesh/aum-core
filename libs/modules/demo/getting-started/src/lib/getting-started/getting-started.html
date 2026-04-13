@@ -16,25 +16,25 @@
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_OVERVIEW' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('overview')" [matTooltip]="copyTooltips().get('overview')" [attr.aria-label]="copyTooltips().get('overview')">
-              <mat-icon>{{ copiedId() === 'overview' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'overview' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_OVERVIEW_DESC' | translate }}</p>
           <div class="gs-highlight-grid">
             <div class="gs-highlight-item">
-              <mat-icon class="gs-highlight-icon">layers</mat-icon>
+              <aum-icon class="gs-highlight-icon" name="layers" [width]="18"></aum-icon>
               <span class="fw-500 fs-14">{{ 'GS_HL_TEMPLATES' | translate }}</span>
             </div>
             <div class="gs-highlight-item">
-              <mat-icon class="gs-highlight-icon">palette</mat-icon>
+              <aum-icon class="gs-highlight-icon" name="palette" [width]="18"></aum-icon>
               <span class="fw-500 fs-14">{{ 'GS_HL_THEMING' | translate }}</span>
             </div>
             <div class="gs-highlight-item">
-              <mat-icon class="gs-highlight-icon">widgets</mat-icon>
+              <aum-icon class="gs-highlight-icon" name="widgets" [width]="18"></aum-icon>
               <span class="fw-500 fs-14">{{ 'GS_HL_COMPONENTS' | translate }}</span>
             </div>
             <div class="gs-highlight-item">
-              <mat-icon class="gs-highlight-icon">translate</mat-icon>
+              <aum-icon class="gs-highlight-icon" name="translate" [width]="18"></aum-icon>
               <span class="fw-500 fs-14">{{ 'GS_HL_I18N' | translate }}</span>
             </div>
           </div>
@@ -45,7 +45,7 @@
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_PREREQUISITES' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('prerequisites')" [matTooltip]="copyTooltips().get('prerequisites')" [attr.aria-label]="copyTooltips().get('prerequisites')">
-              <mat-icon>{{ copiedId() === 'prerequisites' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'prerequisites' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_PREREQUISITES_DESC' | translate }}</p>
@@ -61,7 +61,7 @@
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_INSTALLATION' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('installation')" [matTooltip]="copyTooltips().get('installation')" [attr.aria-label]="copyTooltips().get('installation')">
-              <mat-icon>{{ copiedId() === 'installation' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'installation' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_INSTALLATION_DESC' | translate }}</p>
@@ -75,7 +75,7 @@
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_THEME' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('theme')" [matTooltip]="copyTooltips().get('theme')" [attr.aria-label]="copyTooltips().get('theme')">
-              <mat-icon>{{ copiedId() === 'theme' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'theme' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_THEME_DESC' | translate }}</p>
@@ -99,7 +99,7 @@
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_CONFIGURE' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('configure')" [matTooltip]="copyTooltips().get('configure')" [attr.aria-label]="copyTooltips().get('configure')">
-              <mat-icon>{{ copiedId() === 'configure' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'configure' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_CONFIGURE_DESC' | translate }}</p>
@@ -144,14 +144,14 @@ providers: [
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_TEMPLATE' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('template')" [matTooltip]="copyTooltips().get('template')" [attr.aria-label]="copyTooltips().get('template')">
-              <mat-icon>{{ copiedId() === 'template' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'template' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_TEMPLATE_DESC' | translate }}</p>
           <div class="gs-template-grid">
             <div class="gs-template-card">
               <div class="gs-template-card-header">
-                <mat-icon>view_sidebar</mat-icon>
+                <aum-icon name="view_sidebar"></aum-icon>
                 <span class="fw-600 fs-15">{{ 'GS_TEMPLATE_1_TITLE' | translate }}</span>
               </div>
               <p class="fs-14">{{ 'GS_TEMPLATE_1_DESC' | translate }}</p>
@@ -161,7 +161,7 @@ providers: [
             </div>
             <div class="gs-template-card">
               <div class="gs-template-card-header">
-                <mat-icon>view_compact</mat-icon>
+                <aum-icon name="view_compact"></aum-icon>
                 <span class="fw-600 fs-15">{{ 'GS_TEMPLATE_2_TITLE' | translate }}</span>
               </div>
               <p class="fs-14">{{ 'GS_TEMPLATE_2_DESC' | translate }}</p>
@@ -177,7 +177,7 @@ providers: [
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_I18N' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('i18n')" [matTooltip]="copyTooltips().get('i18n')" [attr.aria-label]="copyTooltips().get('i18n')">
-              <mat-icon>{{ copiedId() === 'i18n' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'i18n' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_I18N_DESC' | translate }}</p>
@@ -201,7 +201,7 @@ export function HttpLoaderFactory(http: HttpClient) &#123;
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_CONCEPTS' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('concepts')" [matTooltip]="copyTooltips().get('concepts')" [attr.aria-label]="copyTooltips().get('concepts')">
-              <mat-icon>{{ copiedId() === 'concepts' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'concepts' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_CONCEPTS_DESC' | translate }}</p>
@@ -234,14 +234,14 @@ export function HttpLoaderFactory(http: HttpClient) &#123;
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_COMPONENTS' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('components')" [matTooltip]="copyTooltips().get('components')" [attr.aria-label]="copyTooltips().get('components')">
-              <mat-icon>{{ copiedId() === 'components' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'components' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_COMPONENTS_DESC' | translate }}</p>
           <div class="gs-comp-grid">
             @for (comp of componentGroups; track comp.labelKey) {
               <div class="gs-comp-item">
-                <mat-icon class="gs-comp-icon">{{ comp.icon }}</mat-icon>
+                <aum-icon class="gs-comp-icon" [name]="comp.icon" [width]="18" color="primary"></aum-icon>
                 <span class="fs-13 fw-500">{{ comp.labelKey | translate }}</span>
               </div>
             }
@@ -253,7 +253,7 @@ export function HttpLoaderFactory(http: HttpClient) &#123;
           <div class="gs-section-header">
             <h2 class="gs-section-title fw-600 fs-22">{{ 'GS_RESOURCES' | translate }}</h2>
             <button class="gs-anchor-btn" (click)="copyLink('resources')" [matTooltip]="copyTooltips().get('resources')" [attr.aria-label]="copyTooltips().get('resources')">
-              <mat-icon>{{ copiedId() === 'resources' ? 'check' : 'link' }}</mat-icon>
+              <aum-icon [width]="18" [name]="copiedId() === 'resources' ? 'check' : 'link'"></aum-icon>
             </button>
           </div>
           <p class="gs-section-desc fs-15">{{ 'GS_RESOURCES_DESC' | translate }}</p>
@@ -261,17 +261,17 @@ export function HttpLoaderFactory(http: HttpClient) &#123;
             @for (res of resources; track res.labelKey) {
               @if (res.external) {
                 <a class="gs-resource-card" [href]="res.href" target="_blank" rel="noopener">
-                  <mat-icon class="gs-resource-icon">{{ res.icon }}</mat-icon>
+                  <aum-icon class="gs-resource-icon" [name]="res.icon" color="primary"></aum-icon>
                   <span class="fw-600 fs-15">{{ res.labelKey | translate }}</span>
                   <span class="fs-13">{{ res.descKey | translate }}</span>
-                  <mat-icon class="gs-resource-arrow">open_in_new</mat-icon>
+                  <aum-icon class="gs-resource-arrow" name="open_in_new" [width]="16" color="on-surface-variant"></aum-icon>
                 </a>
               } @else {
                 <a class="gs-resource-card" [routerLink]="res.route">
-                  <mat-icon class="gs-resource-icon">{{ res.icon }}</mat-icon>
+                  <aum-icon class="gs-resource-icon" [name]="res.icon" color="primary"></aum-icon>
                   <span class="fw-600 fs-15">{{ res.labelKey | translate }}</span>
                   <span class="fs-13">{{ res.descKey | translate }}</span>
-                  <mat-icon class="gs-resource-arrow">arrow_forward</mat-icon>
+                  <aum-icon class="gs-resource-arrow" name="arrow_forward" [width]="16" color="on-surface-variant"></aum-icon>
                 </a>
               }
             }
@@ -282,7 +282,7 @@ export function HttpLoaderFactory(http: HttpClient) &#123;
     </div>
     @if (showBackToTop()) {
       <button class="gs-back-to-top" (click)="scrollToTop()" [matTooltip]="'BACK_TO_TOP' | translate">
-        <mat-icon>arrow_upward</mat-icon>
+        <aum-icon name="arrow_upward"></aum-icon>
       </button>
     }
   </div>

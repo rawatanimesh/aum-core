@@ -11,7 +11,7 @@
     @for (option of options; track option.value) {
       <mat-button-toggle [value]="option.value">
         @if (option.icon) {
-          <mat-icon>{{ option.icon }}</mat-icon>
+          <aum-icon [name]="option.icon" [width]="size === 'small' ? 14 : 16"></aum-icon>
         }
         {{ option.label }}
       </mat-button-toggle>

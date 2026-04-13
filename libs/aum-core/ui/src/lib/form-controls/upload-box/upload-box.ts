@@ -22,8 +22,8 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
-import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Icon } from '@aum/ui/utilities';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateModule } from '@ngx-translate/core';
@@ -73,8 +73,8 @@ export interface FileUploadConfig {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatIconModule,
     MatProgressBarModule,
+    Icon,
     ButtonComponent,
     TranslateModule,
   ],

@@ -86,6 +86,7 @@ libs/
 | Breadcrumb | `<aum-breadcrumb>` | `@aum/ui/navigation` |
 | Snackbar (success/error/warning/info) | `SnackbarService` | `@aum/ui/utilities` |
 | Loading spinner | `<aum-spinner>` | `@aum/ui/utilities` |
+| Icon | `<aum-icon>` | `@aum/ui/utilities` |
 
 #### Services — `libs/aum-core/utils/src/lib/services/`
 
@@ -114,6 +115,41 @@ import { TabGroupComponent, TabComponent } from '@aum/ui/layout';
 
 // ❌ Wrong — bypasses AUM theming and scaling
 import { MatTabsModule } from '@angular/material/tabs';
+```
+
+#### Icons — Always use `<aum-icon>`
+
+**Never use `<mat-icon>` directly.** Always use `<aum-icon>` from `@aum/ui/utilities`.
+
+```typescript
+// ✅ Correct
+import { Icon } from '@aum/ui/utilities';
+
+// ❌ Wrong — font-size/width CSS overrides won't work through ViewEncapsulation
+import { MatIconModule } from '@angular/material/icon';
+```
+
+```html
+<!-- ✅ Correct — size via [width]/[height] inputs, color via [color] input or CSS currentColor -->
+<aum-icon name="check" [width]="18"></aum-icon>
+<aum-icon name="star" color="primary"></aum-icon>
+<aum-icon [name]="item.icon" [width]="20" color="on-surface-variant"></aum-icon>
+
+<!-- ❌ Wrong — bypasses AUM wrapper; mat-icon CSS overrides break with ViewEncapsulation -->
+<mat-icon>check</mat-icon>
+<mat-icon style="font-size: 18px">star</mat-icon>
+```
+
+**`[color]` presets:** `'primary' | 'secondary' | 'tertiary' | 'error' | 'on-surface' | 'on-surface-variant'`
+— or any raw CSS string (e.g. `color="var(--mat-sys-outline)"`).
+
+**State-driven color via CSS:** set `color` on the `<aum-icon>` host — it propagates inward via `currentColor`:
+
+```scss
+// ✅ Host color propagates to inner icon via currentColor
+.my-selected-item {
+  aum-icon { color: var(--mat-sys-primary); }
+}
 ```
 
 ---
@@ -988,6 +1024,7 @@ Before submitting code, ensure:
 ### UI Development Critical Checks
 
 - [ ] ✅ No raw `mat-*` components used where an `aum-*` wrapper exists (check catalog)
+- [ ] ✅ No raw `<mat-icon>` elements — always use `<aum-icon>` with `[width]`/`[color]` inputs
 - [ ] ✅ No hardcoded color values (#hex, rgb, rgba)
 - [ ] ✅ All colors use var(--mat-sys-\*) variables
 - [ ] ✅ No pixel (px) values for dimensions

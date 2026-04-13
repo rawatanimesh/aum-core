@@ -39,7 +39,7 @@
   @if (formGroupForDateRange && (formGroupForDateRange.controls['start'].value
   || formGroupForDateRange.controls['end'].value)) {
   <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
-    <mat-icon>close</mat-icon>
+    <aum-icon name="close"></aum-icon>
   </button>
   } @if (showError) {
   <mat-error>{{ getErrorMessage() }}</mat-error>
@@ -74,7 +74,7 @@
   <!-- Clear Button: Appears if a single date is selected -->
   @if (formControlForSingleDate && formControlForSingleDate.value) {
   <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
-    <mat-icon>close</mat-icon>
+    <aum-icon name="close"></aum-icon>
   </button>
   } @if (showError) {
   <mat-error>{{ getErrorMessage() }}</mat-error>
