@@ -1,0 +1,19 @@
+@use 'functions' as *;
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.aum-icon {
+  // Default 24×24 (matches Angular Material default), scales with --ui-scale via rem()
+  font-size: rem(24);
+  width: rem(24);
+  height: rem(24);
+  line-height: 1;
+  // Inherit color from parent so icons respond to theme and active/selected states
+  color: currentColor;
+}

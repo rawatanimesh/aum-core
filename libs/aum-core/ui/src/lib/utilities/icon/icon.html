@@ -1,0 +1,8 @@
+@if (library === 'material') {
+  <mat-icon
+    class="aum-icon"
+    [ngStyle]="iconStyles"
+    [attr.aria-label]="ariaLabel ?? null"
+    [attr.aria-hidden]="ariaLabel ? null : 'true'"
+  >{{ name }}</mat-icon>
+}
