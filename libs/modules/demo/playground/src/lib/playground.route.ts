@@ -70,4 +70,11 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./button-toggle-demo/button-toggle-demo').then((m) => m.ButtonToggleDemo),
   },
+
+  {
+    path: 'icons',
+    title: 'Icons | Aum Core',
+    loadComponent: () =>
+      import('./icon-demo/icon-demo').then((m) => m.IconDemo),
+  },
 ];

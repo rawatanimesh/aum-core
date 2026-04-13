@@ -1,0 +1,139 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.demo-section {
+  padding: rem(24) 0;
+  border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.section-title {
+  font-size: rem(16);
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+  margin-bottom: rem(4);
+
+  code {
+    font-size: rem(14);
+    background-color: var(--mat-sys-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
+    padding: rem(2) rem(6);
+    border-radius: rem(4);
+  }
+}
+
+.section-description {
+  font-size: rem(13);
+  color: var(--mat-sys-on-surface-variant);
+  margin-bottom: rem(16);
+
+  code {
+    font-size: rem(12);
+    background-color: var(--mat-sys-surface-variant);
+    color: var(--mat-sys-on-surface-variant);
+    padding: rem(2) rem(6);
+    border-radius: rem(4);
+  }
+}
+
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(16);
+  align-items: center;
+
+  &--aligned {
+    align-items: flex-end;
+  }
+}
+
+.demo-column {
+  display: flex;
+  flex-direction: column;
+  gap: rem(12);
+}
+
+.demo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: rem(6);
+}
+
+.demo-label {
+  font-size: rem(11);
+  color: var(--mat-sys-on-surface-variant);
+  text-align: center;
+}
+
+// Scenario 4: dynamic icon cycle button
+.demo-cycle-btn {
+  padding: rem(6) rem(12);
+  font-size: rem(13);
+  border: rem(1) solid var(--mat-sys-outline);
+  border-radius: rem(6);
+  background: transparent;
+  color: var(--mat-sys-on-surface);
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--mat-sys-surface-variant);
+  }
+}
+
+// Scenario 5: color swatches
+.demo-color-swatch {
+  display: flex;
+  align-items: center;
+  gap: rem(6);
+  padding: rem(8) rem(12);
+  border-radius: rem(8);
+  font-size: rem(12);
+
+  &--primary {
+    color: var(--mat-sys-primary);
+  }
+
+  &--secondary {
+    color: var(--mat-sys-secondary);
+  }
+
+  &--error {
+    color: var(--mat-sys-error);
+  }
+
+  &--tertiary {
+    color: var(--mat-sys-tertiary);
+  }
+
+  &--muted {
+    color: var(--mat-sys-on-surface-variant);
+  }
+}
+
+// Scenario 6: inline text
+.demo-inline-text {
+  display: flex;
+  align-items: center;
+  gap: rem(6);
+  font-size: rem(14);
+  color: var(--mat-sys-on-surface);
+  margin: 0;
+
+  &--warning {
+    color: var(--mat-sys-tertiary);
+  }
+
+  &--error {
+    color: var(--mat-sys-error);
+  }
+}
+
+@include mobile {
+  .demo-row {
+    gap: rem(8);
+  }
+}

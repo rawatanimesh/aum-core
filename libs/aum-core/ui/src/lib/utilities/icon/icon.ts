@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 export type IconLibrary = 'material'; // extend later: | 'icomoon'
@@ -24,9 +24,9 @@ const COLOR_MAP: Record<IconColor, string> = {
 @Component({
   selector: 'aum-icon',
   templateUrl: './icon.html',
-  styleUrls: ['./icon.scss'],
+  styleUrl: './icon.scss',
   standalone: true,
-  imports: [CommonModule, MatIconModule],
+  imports: [NgStyle, MatIconModule],
 })
 export class Icon {
   @Input({ required: true }) name!: string;

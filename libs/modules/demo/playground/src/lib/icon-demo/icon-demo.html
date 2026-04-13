@@ -1,0 +1,213 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+
+    <!-- Scenario 1: Default size (24×24) -->
+    <section class="demo-section">
+      <h2 class="section-title">Default Size (24×24)</h2>
+      <p class="section-description">
+        No inputs needed. Default is <code>24×24</code> matching Angular Material — scales automatically with the global UI scale setting via <code>rem()</code>.
+      </p>
+      <div class="demo-row">
+        <aum-icon name="home"></aum-icon>
+        <aum-icon name="settings"></aum-icon>
+        <aum-icon name="notifications"></aum-icon>
+        <aum-icon name="favorite"></aum-icon>
+        <aum-icon name="star"></aum-icon>
+        <aum-icon name="search"></aum-icon>
+        <aum-icon name="person"></aum-icon>
+        <aum-icon name="edit"></aum-icon>
+        <aum-icon name="delete"></aum-icon>
+        <aum-icon name="add"></aum-icon>
+        <aum-icon name="close"></aum-icon>
+        <aum-icon name="check"></aum-icon>
+      </div>
+    </section>
+
+    <!-- Scenario 2: Custom sizes via width input -->
+    <section class="demo-section">
+      <h2 class="section-title">Custom Size via <code>[width]</code></h2>
+      <p class="section-description">
+        <code>[width]</code> overrides both width and height (square icon). Value is in px and is converted to <code>rem</code> with <code>--ui-scale</code> applied, so it still scales.
+      </p>
+      <div class="demo-row demo-row--aligned">
+        <div class="demo-item">
+          <aum-icon name="star" [width]="16"></aum-icon>
+          <span class="demo-label">16px</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="star" [width]="20"></aum-icon>
+          <span class="demo-label">20px</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="star" [width]="24"></aum-icon>
+          <span class="demo-label">24px (default)</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="star" [width]="32"></aum-icon>
+          <span class="demo-label">32px</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="star" [width]="40"></aum-icon>
+          <span class="demo-label">40px</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="star" [width]="48"></aum-icon>
+          <span class="demo-label">48px</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scenario 3: width + height independently -->
+    <section class="demo-section">
+      <h2 class="section-title">Independent <code>[width]</code> and <code>[height]</code></h2>
+      <p class="section-description">
+        Provide both to set non-square dimensions. If only one is given, the other matches it.
+      </p>
+      <div class="demo-row demo-row--aligned">
+        <div class="demo-item">
+          <aum-icon name="more_horiz" [width]="32" [height]="16"></aum-icon>
+          <span class="demo-label">32×16</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="more_vert" [width]="16" [height]="32"></aum-icon>
+          <span class="demo-label">16×32</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="home" [height]="36"></aum-icon>
+          <span class="demo-label">height only → 36×36</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scenario 4: Dynamic icon binding -->
+    <section class="demo-section">
+      <h2 class="section-title">Dynamic Icon Name Binding</h2>
+      <p class="section-description">
+        <code>[name]</code> accepts any expression. Click to cycle through icon names.
+      </p>
+      <div class="demo-row demo-row--aligned">
+        <div class="demo-item">
+          <aum-icon [name]="dynamicIcon" [width]="32"></aum-icon>
+          <span class="demo-label">{{ dynamicIcon }}</span>
+        </div>
+        <button class="demo-cycle-btn" (click)="cycleDynamicIcon()">Next icon</button>
+      </div>
+    </section>
+
+    <!-- Scenario 5: Color inheritance -->
+    <section class="demo-section">
+      <h2 class="section-title">Color Inheritance (<code>currentColor</code>)</h2>
+      <p class="section-description">
+        Default behavior — icons inherit the text color of their parent. No <code>[color]</code> input needed.
+        Use this for nav items, buttons, and any context where the parent already sets the right color.
+      </p>
+      <div class="demo-row">
+        <div class="demo-color-swatch demo-color-swatch--primary">
+          <aum-icon name="palette"></aum-icon>
+          <span>parent sets primary</span>
+        </div>
+        <div class="demo-color-swatch demo-color-swatch--secondary">
+          <aum-icon name="palette"></aum-icon>
+          <span>parent sets secondary</span>
+        </div>
+        <div class="demo-color-swatch demo-color-swatch--error">
+          <aum-icon name="palette"></aum-icon>
+          <span>parent sets error</span>
+        </div>
+        <div class="demo-color-swatch demo-color-swatch--tertiary">
+          <aum-icon name="palette"></aum-icon>
+          <span>parent sets tertiary</span>
+        </div>
+        <div class="demo-color-swatch demo-color-swatch--muted">
+          <aum-icon name="palette"></aum-icon>
+          <span>parent sets on-surface-variant</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scenario 5b: Explicit color input -->
+    <section class="demo-section">
+      <h2 class="section-title">Explicit <code>[color]</code> Input</h2>
+      <p class="section-description">
+        Use <code>[color]</code> when the icon must always render in a specific theme token
+        regardless of the parent's text color — e.g. a permanent error indicator or a branded accent.
+        Maps directly to <code>--mat-sys-*</code> tokens.
+      </p>
+      <div class="demo-row demo-row--aligned">
+        <div class="demo-item">
+          <aum-icon name="check_circle" color="primary"></aum-icon>
+          <span class="demo-label">primary</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="bookmark" color="secondary"></aum-icon>
+          <span class="demo-label">secondary</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="auto_awesome" color="tertiary"></aum-icon>
+          <span class="demo-label">tertiary</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="error" color="error"></aum-icon>
+          <span class="demo-label">error</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="info" color="on-surface"></aum-icon>
+          <span class="demo-label">on-surface</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="help_outline" color="on-surface-variant"></aum-icon>
+          <span class="demo-label">on-surface-variant</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="palette" color="#e91e63"></aum-icon>
+          <span class="demo-label">#e91e63 (raw CSS)</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="bolt" color="orange"></aum-icon>
+          <span class="demo-label">orange (raw CSS)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scenario 6: Inline with text -->
+    <section class="demo-section">
+      <h2 class="section-title">Inline with Text</h2>
+      <p class="section-description">
+        The <code>:host</code> is <code>inline-flex</code>, so icons sit naturally alongside text. The icon color matches the surrounding text.
+      </p>
+      <div class="demo-column">
+        <p class="demo-inline-text">
+          <aum-icon name="info" [width]="18"></aum-icon>
+          This is an informational message with an inline icon.
+        </p>
+        <p class="demo-inline-text demo-inline-text--warning">
+          <aum-icon name="warning" [width]="18"></aum-icon>
+          Warning: this action cannot be undone.
+        </p>
+        <p class="demo-inline-text demo-inline-text--error">
+          <aum-icon name="error" [width]="18"></aum-icon>
+          Error: something went wrong.
+        </p>
+      </div>
+    </section>
+
+    <!-- Scenario 7: ariaLabel for accessibility -->
+    <section class="demo-section">
+      <h2 class="section-title">Accessibility — <code>ariaLabel</code></h2>
+      <p class="section-description">
+        By default icons are <code>aria-hidden="true"</code> (decorative). Pass <code>[ariaLabel]</code> when the icon carries meaning standalone — it gets <code>role="img"</code> behavior.
+      </p>
+      <div class="demo-row">
+        <div class="demo-item">
+          <aum-icon name="home"></aum-icon>
+          <span class="demo-label">decorative (aria-hidden)</span>
+        </div>
+        <div class="demo-item">
+          <aum-icon name="home" ariaLabel="Go to home page"></aum-icon>
+          <span class="demo-label">aria-label="Go to home page"</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</aum-page>
