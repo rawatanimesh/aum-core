@@ -1,7 +1,6 @@
 import {
   Component,
   computed,
-  Input,
   ViewChild,
   ViewEncapsulation,
   inject,
@@ -28,9 +27,6 @@ import { SidebarComponent } from '../components/sidebar/sidebar.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class AumTemplate2 {
-  /** Width of the mobile slide-out drawer. Accepts any valid CSS width value (e.g. '240px', '80vw'). Defaults to '200px'. */
-  @Input() drawerWidth = '200px';
-
   @ViewChild('mobileDrawer') mobileDrawer!: MatSidenav;
 
   private breakpointObserver = inject(BreakpointObserver);
