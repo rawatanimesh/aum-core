@@ -76,7 +76,7 @@ libs/
 
 | Use case | AUM component | Import from |
 |---|---|---|
-| Buttons (filled, outlined, basic, icon) | `<aum-button>` | `@aum/ui/buttons` |
+| Buttons (filled, outlined, basic, icon, icon+text) | `<aum-button>` | `@aum/ui/buttons` |
 | Toggle button group | `<aum-button-toggle>` | `@aum/ui/buttons` |
 | Tab group + individual tab | `<aum-tab-group>`, `<aum-tab>` | `@aum/ui/layout` |
 | Page layout wrapper | `<aum-page>` | `@aum/ui/layout` |
@@ -150,6 +150,24 @@ import { MatIconModule } from '@angular/material/icon';
 .my-selected-item {
   aum-icon { color: var(--mat-sys-primary); }
 }
+```
+
+**Font requirement — every app's `index.html` must include:**
+
+```html
+<link
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  rel="stylesheet"
+/>
+```
+
+> `core.scss` already aliases `.material-icons` → `Material Symbols Outlined` so `mat-icon` renders correctly. The font link is the only app-level requirement. Without it, all icons render as blank boxes.
+
+**Icon + text buttons:** pass both `[icon]` and `[value]` to `<aum-button>` for a leading icon alongside a label — works on `filled`, `outlined`, and `basic` types:
+
+```html
+<aum-button type="filled" icon="add" value="Add Item"></aum-button>
+<aum-button type="outlined" icon="download" value="Export"></aum-button>
 ```
 
 ---

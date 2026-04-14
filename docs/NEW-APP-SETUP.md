@@ -284,6 +284,21 @@ Never put `AUM.*` keys in your app files or flat keys in `aum.*.json`.
 
 ## Step 8 — Theming & Styling
 
+### `index.html` — required font link
+
+Add the **Material Symbols Outlined** font link inside `<head>`. Without it all `<aum-icon>` instances render as blank boxes.
+
+```html
+<link
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+  rel="stylesheet"
+/>
+```
+
+> `core.scss` already aliases `.material-icons` → `Material Symbols Outlined`, so no additional CSS is needed. The font link is the only per-app requirement.
+
+If your CSP is strict, ensure `fonts.googleapis.com` is in `style-src` and `fonts.gstatic.com` is in `font-src`.
+
 ### `styles.scss`
 
 ```scss
@@ -477,7 +492,7 @@ export const appConfig: ApplicationConfig = {
 
 - [ ] `project.json` — NX build/serve targets, asset globs, SCSS include paths
 - [ ] `src/main.ts` — bootstrap entry
-- [ ] `src/index.html` — HTML shell
+- [ ] `src/index.html` — HTML shell with Material Symbols Outlined font link (required for `<aum-icon>`)
 - [ ] `src/app/app.component.ts/html/scss` — root component
 - [ ] `src/app/app.config.ts` — providers (correct HttpClient → TranslateModule order)
 - [ ] `src/app/app.routes.ts` — route definitions with chosen template
@@ -507,6 +522,7 @@ export const appConfig: ApplicationConfig = {
 | Module not found `@scope/...` | Add path alias to `tsconfig.base.json` |
 | Assets not loading | Check asset globs in `project.json` |
 | Content not showing in `PageComponent` | Add `aum-page-body` attribute: `<div aum-page-body>...</div>` |
+| Icons render as blank boxes | Add the Material Symbols Outlined font link to `index.html` — see Step 8. `core.scss` handles the CSS alias; the font link is the only per-app requirement |
 | `rem()` not working | 1. Add `@use 'functions' as *;` at top of SCSS file. 2. Verify `stylePreprocessorOptions.includePaths` in `project.json` |
 | UI not scaling | Replace all `px` with `rem()`. See [BEST_PRACTICES.md](../BEST_PRACTICES.md) |
 | Dark mode broken | Replace hardcoded colors with `var(--mat-sys-*)` variables |
