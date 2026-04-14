@@ -51,3 +51,10 @@ ul {
   all: unset; // removes default button styles
   cursor: pointer;
 }
+
+// mat-icon always renders with class .material-icons — alias it to Material Symbols Outlined
+// so aum-icon works correctly across all apps that consume this library
+.material-icons {
+  font-family: 'Material Symbols Outlined';
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
