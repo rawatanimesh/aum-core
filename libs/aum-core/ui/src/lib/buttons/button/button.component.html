@@ -10,6 +10,7 @@
     [style.width]="width"
     (click)="clickButton.emit()"
   >
+    @if (icon) { <aum-icon [name]="icon" [width]="18"></aum-icon> }
     {{ value }}
   </button>
   } @case ('filled') {
@@ -23,6 +24,7 @@
     [style.width]="width"
     (click)="clickButton.emit()"
   >
+    @if (icon) { <aum-icon [name]="icon" [width]="18"></aum-icon> }
     {{ value }}
   </button>
   } @case ('basic') {
@@ -36,6 +38,7 @@
     [style.width]="width"
     (click)="clickButton.emit()"
   >
+    @if (icon) { <aum-icon [name]="icon" [width]="18"></aum-icon> }
     {{ value }}
   </button>
   } @case ('icon') {

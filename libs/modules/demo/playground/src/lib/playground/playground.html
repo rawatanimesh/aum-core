@@ -19,84 +19,11 @@
     }
     <section>
       <div class="example-label fs-14">{{ 'BUTTONS' | translate }}</div>
-      <div class="example-button-row flex-row-space-between-center gap-4">
-        <aum-button
-          [type]="'outlined'"
-          [value]="'OUTLINED' | translate"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'outlined'"
-          [size]="'small'"
-          [value]="'OUTLINED' | translate"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'outlined'"
-          [size]="'large'"
-          [value]="'DISABLED' | translate"
-          [disabled]="true"
-          [tooltip]="'DISABLED_BUTTON' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'basic'"
-          [value]="'BASIC' | translate"
-          [disabled]="false"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'basic'"
-          [value]="'DISABLED' | translate"
-          [disabled]="true"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
+      <div class="example-button-row">
         <aum-button
           [type]="'filled'"
-          [value]="'FILLED' | translate"
-          [disabled]="false"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'filled'"
-          [value]="'FILLED' | translate"
-          [size]="'small'"
-          [disabled]="false"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'filled'"
-          [value]="'DISABLED' | translate"
-          [disabled]="true"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'icon'"
-          [icon]="'more_vert'"
-          [tooltip]="'AUM.MORE_OPTIONS' | translate"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'icon'"
-          [icon]="'open_in_new'"
-          [tooltip]="'AUM.MORE_OPTIONS' | translate"
-          [disabled]="true"
-          (clickButton)="openMenu()"
-        ></aum-button>
-        <aum-button
-          [type]="'filled'"
-          [value]="'FILLED' | translate"
-          [disabled]="false"
-          [tooltip]="'DUMMY_TOOLTIP' | translate"
-          [width]="'20rem'"
-          (clickButton)="openMenu()"
+          [value]="'GO_TO_BUTTONS_DEMO' | translate"
+          (clickButton)="goToButtonsDemo()"
         ></aum-button>
       </div>
     </section>

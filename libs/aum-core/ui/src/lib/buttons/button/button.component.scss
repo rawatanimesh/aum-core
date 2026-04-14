@@ -16,6 +16,12 @@
   .mat-mdc-outlined-button {
     font-weight: 600;
     font-size: rem(14);
+
+    .mdc-button__label {
+      display: inline-flex;
+      align-items: center;
+      gap: rem(4);
+    }
   }
 
   .mat-mdc-outlined-button:not(:disabled) {

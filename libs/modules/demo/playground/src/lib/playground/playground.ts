@@ -182,6 +182,7 @@ export class Playground implements OnInit, OnDestroy {
   goToUploadBoxDemo() { this.route.navigate(['/playground/upload-box']); }
   goToButtonToggleDemo() { this.route.navigate(['/playground/button-toggle']); }
   goToIconsDemo() { this.route.navigate(['/playground/icons']); }
+  goToButtonsDemo() { this.route.navigate(['/playground/buttons']); }
 
   onMenuSelect(item: MenuItem) {
     console.log('selected', item);

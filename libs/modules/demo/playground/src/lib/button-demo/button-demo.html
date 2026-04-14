@@ -1,0 +1,158 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="button-demo-container">
+      <h1 class="page-title">Button Demo</h1>
+
+      <!-- Scenario 1: Button Types -->
+      <section class="demo-section">
+        <h2 class="section-title">Button Types</h2>
+        <p class="section-description">
+          Four core variants: <code>filled</code> for primary actions, <code>outlined</code> for secondary actions,
+          <code>basic</code> for low-emphasis actions, and <code>icon</code> for compact icon-only controls.
+        </p>
+        <div class="demo-row">
+          <div class="demo-item">
+            <span class="item-label">Filled</span>
+            <aum-button
+              [type]="'filled'"
+              [value]="'Button'"
+              (clickButton)="onButtonClick('filled')"
+            ></aum-button>
+          </div>
+          <div class="demo-item">
+            <span class="item-label">Outlined</span>
+            <aum-button
+              [type]="'outlined'"
+              [value]="'Button'"
+              (clickButton)="onButtonClick('outlined')"
+            ></aum-button>
+          </div>
+          <div class="demo-item">
+            <span class="item-label">Basic</span>
+            <aum-button
+              [type]="'basic'"
+              [value]="'Button'"
+              (clickButton)="onButtonClick('basic')"
+            ></aum-button>
+          </div>
+          <div class="demo-item">
+            <span class="item-label">Icon</span>
+            <aum-button
+              [type]="'icon'"
+              [icon]="'more_vert'"
+              [tooltip]="'More options'"
+              (clickButton)="onButtonClick('icon')"
+            ></aum-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scenario 2: Size Variants -->
+      <section class="demo-section">
+        <h2 class="section-title">Size Variants</h2>
+        <p class="section-description">
+          <code>size="large"</code> (default, 36px height) and <code>size="small"</code> (28px height).
+          Both use <code>rem()</code> so they scale correctly with Compact / Default / Large density modes.
+        </p>
+        <div class="demo-column">
+          <div class="demo-row">
+            <span class="size-label">Large (default)</span>
+            <aum-button [type]="'filled'" [size]="'large'" [value]="'Filled'"></aum-button>
+            <aum-button [type]="'outlined'" [size]="'large'" [value]="'Outlined'"></aum-button>
+            <aum-button [type]="'basic'" [size]="'large'" [value]="'Basic'"></aum-button>
+          </div>
+          <div class="demo-row">
+            <span class="size-label">Small</span>
+            <aum-button [type]="'filled'" [size]="'small'" [value]="'Filled'"></aum-button>
+            <aum-button [type]="'outlined'" [size]="'small'" [value]="'Outlined'"></aum-button>
+            <aum-button [type]="'basic'" [size]="'small'" [value]="'Basic'"></aum-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scenario 3: Icon + Text -->
+      <section class="demo-section">
+        <h2 class="section-title">Icon + Text</h2>
+        <p class="section-description">
+          Pass both <code>[icon]</code> and <code>[value]</code> to render a leading icon alongside the label.
+          Works on all text button types in both sizes.
+        </p>
+        <div class="demo-column">
+          <div class="demo-row">
+            <span class="size-label">Large (default)</span>
+            <aum-button [type]="'filled'" [icon]="'add'" [value]="'Add Item'" (clickButton)="onButtonClick('filled-icon-large')"></aum-button>
+            <aum-button [type]="'outlined'" [icon]="'add'" [value]="'Add Item'" (clickButton)="onButtonClick('outlined-icon-large')"></aum-button>
+            <aum-button [type]="'basic'" [icon]="'add'" [value]="'Add Item'" (clickButton)="onButtonClick('basic-icon-large')"></aum-button>
+          </div>
+          <div class="demo-row">
+            <span class="size-label">Small</span>
+            <aum-button [type]="'filled'" [size]="'small'" [icon]="'add'" [value]="'Add Item'" (clickButton)="onButtonClick('filled-icon-small')"></aum-button>
+            <aum-button [type]="'outlined'" [size]="'small'" [icon]="'add'" [value]="'Add Item'" (clickButton)="onButtonClick('outlined-icon-small')"></aum-button>
+            <aum-button [type]="'basic'" [size]="'small'" [icon]="'add'" [value]="'Add Item'" (clickButton)="onButtonClick('basic-icon-small')"></aum-button>
+          </div>
+          <div class="demo-row">
+            <span class="size-label">Other icons</span>
+            <aum-button [type]="'filled'" [icon]="'download'" [value]="'Export'"></aum-button>
+            <aum-button [type]="'outlined'" [icon]="'upload'" [value]="'Import'"></aum-button>
+            <aum-button [type]="'basic'" [icon]="'delete'" [value]="'Delete'"></aum-button>
+            <aum-button [type]="'outlined'" [icon]="'edit'" [value]="'Edit'"></aum-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scenario 4: Disabled States -->
+      <section class="demo-section">
+        <h2 class="section-title">Disabled States</h2>
+        <p class="section-description">
+          All button types and configurations support the <code>[disabled]="true"</code> state.
+          The visual treatment and pointer events are suppressed consistently across variants.
+        </p>
+        <div class="demo-column">
+          <div class="demo-row">
+            <span class="size-label">Text only</span>
+            <aum-button [type]="'filled'" [value]="'Filled'" [disabled]="true"></aum-button>
+            <aum-button [type]="'outlined'" [value]="'Outlined'" [disabled]="true"></aum-button>
+            <aum-button [type]="'basic'" [value]="'Basic'" [disabled]="true"></aum-button>
+            <aum-button [type]="'icon'" [icon]="'more_vert'" [disabled]="true" [tooltip]="'Disabled'"></aum-button>
+          </div>
+          <div class="demo-row">
+            <span class="size-label">Icon + text</span>
+            <aum-button [type]="'filled'" [icon]="'add'" [value]="'Add Item'" [disabled]="true"></aum-button>
+            <aum-button [type]="'outlined'" [icon]="'add'" [value]="'Add Item'" [disabled]="true"></aum-button>
+            <aum-button [type]="'basic'" [icon]="'add'" [value]="'Add Item'" [disabled]="true"></aum-button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scenario 5: Tooltip -->
+      <section class="demo-section">
+        <h2 class="section-title">Tooltip</h2>
+        <p class="section-description">
+          Pass <code>[tooltip]</code> to show a Material tooltip on hover. Commonly used on icon-only buttons
+          to expose the action label, but available on all types.
+        </p>
+        <div class="demo-row">
+          <aum-button [type]="'icon'" [icon]="'settings'" [tooltip]="'Settings'"></aum-button>
+          <aum-button [type]="'icon'" [icon]="'notifications'" [tooltip]="'Notifications'"></aum-button>
+          <aum-button [type]="'icon'" [icon]="'help_outline'" [tooltip]="'Help & documentation'"></aum-button>
+          <aum-button [type]="'outlined'" [value]="'Hover me'" [tooltip]="'Tooltip on a text button too'"></aum-button>
+        </div>
+      </section>
+
+      <!-- Scenario 6: Custom Width -->
+      <section class="demo-section">
+        <h2 class="section-title">Custom Width</h2>
+        <p class="section-description">
+          Set <code>[width]</code> to any valid CSS length to stretch the button — useful for form submit buttons
+          or full-width CTAs in constrained containers.
+        </p>
+        <div class="demo-column">
+          <aum-button [type]="'filled'" [value]="'Full-width (100%)'" [width]="'100%'"></aum-button>
+          <aum-button [type]="'outlined'" [value]="'Fixed 20rem'" [width]="'20rem'"></aum-button>
+          <aum-button [type]="'filled'" [icon]="'save'" [value]="'Save Changes'" [width]="'16rem'"></aum-button>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</aum-page>
