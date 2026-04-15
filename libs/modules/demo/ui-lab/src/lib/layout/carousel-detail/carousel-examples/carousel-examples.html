@@ -1,0 +1,61 @@
+<div class="layout-examples">
+
+  <!-- Scenario 1: Basic Carousel -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CAR_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CAR_BASIC_DESC' | translate"
+  >
+    <aum-carousel [carouselItems]="basicItems"></aum-carousel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Custom Card Size -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CAR_SIZE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CAR_SIZE_DESC' | translate"
+  >
+    <aum-carousel [carouselItems]="wideItems" itemWidth="320px" itemHeight="200px"></aum-carousel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Scroll Modes -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CAR_SCROLL_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CAR_SCROLL_DESC' | translate"
+  >
+    <aum-carousel [carouselItems]="wideItems" scrollMode="viewport" itemWidth="280px" itemHeight="180px"></aum-carousel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: No Arrows -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CAR_NO_ARROWS_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CAR_NO_ARROWS_DESC' | translate"
+  >
+    <aum-carousel [carouselItems]="basicItems" [showArrows]="false" itemWidth="280px" itemHeight="180px"></aum-carousel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Infinite Scroll -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CAR_INFINITE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CAR_INFINITE_DESC' | translate"
+  >
+    <aum-carousel [carouselItems]="basicItems" [infiniteScroll]="true" itemWidth="280px" itemHeight="180px"></aum-carousel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 6: Click Handler -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CAR_CLICK_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CAR_CLICK_DESC' | translate"
+  >
+    <div class="layout-demo-carousel-wrap">
+      <aum-carousel
+        [carouselItems]="basicItems"
+        itemWidth="280px"
+        itemHeight="180px"
+        (cardClick)="onCardClick($event)"
+      ></aum-carousel>
+      <p class="layout-demo-output">
+        Last clicked: <strong>{{ lastClicked() }}</strong>
+      </p>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

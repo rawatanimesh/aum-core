@@ -1,0 +1,55 @@
+<div class="layout-examples">
+
+  <!-- Scenario 1: Basic Card -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CARD_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CARD_BASIC_DESC' | translate"
+  >
+    <aum-card>
+      <p class="layout-demo-text">Card with default padding and shadow. Content goes here.</p>
+    </aum-card>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: No Padding -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CARD_NO_PADDING_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CARD_NO_PADDING_DESC' | translate"
+  >
+    <aum-card [padding]="false" width="320px">
+      <div class="layout-demo-placeholder">
+        Flush content — no padding
+      </div>
+    </aum-card>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: No Shadow (flat) -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CARD_NO_SHADOW_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CARD_NO_SHADOW_DESC' | translate"
+  >
+    <div class="layout-demo-row">
+      <aum-card [boxShadow]="true" width="220px">
+        <p class="layout-demo-text">With shadow (default)</p>
+      </aum-card>
+      <aum-card [boxShadow]="false" width="220px">
+        <p class="layout-demo-text">Flat — no shadow</p>
+      </aum-card>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Custom Dimensions -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CARD_DIMENSIONS_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CARD_DIMENSIONS_DESC' | translate"
+  >
+    <div class="layout-demo-row">
+      <aum-card width="200px" height="100px">
+        <p class="layout-demo-text">200px × 100px</p>
+      </aum-card>
+      <aum-card width="300px" height="120px">
+        <p class="layout-demo-text">300px × 120px</p>
+      </aum-card>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

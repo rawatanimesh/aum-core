@@ -1,0 +1,70 @@
+<div class="layout-examples">
+
+  <!-- Scenario 1: Basic Accordion -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_EP_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_EP_BASIC_DESC' | translate"
+  >
+    <aum-expansion-panel [items]="basicItems"></aum-expansion-panel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Multi Mode with Expand/Collapse All -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_EP_MULTI_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_EP_MULTI_DESC' | translate"
+  >
+    <div class="layout-demo-ep-controls">
+      <div class="layout-demo-btn-row">
+        <aum-button type="filled" [value]="'UI_LAB_EXPAND_ALL' | translate" size="small" (clickButton)="expandAll()"></aum-button>
+        <aum-button type="outlined" [value]="'UI_LAB_COLLAPSE_ALL' | translate" size="small" (clickButton)="collapseAll()"></aum-button>
+      </div>
+      <aum-expansion-panel #multiPanel [items]="multiItems" [multi]="true"></aum-expansion-panel>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Content Projection -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_EP_PROJECTION_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_EP_PROJECTION_DESC' | translate"
+  >
+    <aum-expansion-panel [items]="projectionItems">
+      <ng-template aumExpansionPanelContent let-index="index">
+        @if (index === 0) {
+          <div class="layout-demo-btn-row">
+            <aum-button type="filled" value="Primary" size="small"></aum-button>
+            <aum-button type="outlined" value="Secondary" size="small"></aum-button>
+            <aum-button type="basic" value="Tertiary" size="small"></aum-button>
+          </div>
+        } @else if (index === 1) {
+          <div class="layout-demo-ep-checkboxes">
+            <aum-checkbox label="Option A" [checked]="true"></aum-checkbox>
+            <aum-checkbox label="Option B" [checked]="false"></aum-checkbox>
+            <aum-checkbox label="Option C (disabled)" [checked]="false" [disabled]="true"></aum-checkbox>
+          </div>
+        } @else {
+          <div class="layout-demo-ep-form">
+            <aum-input label="Username" placeholder="Enter username"></aum-input>
+            <aum-input label="Email" type="email" placeholder="user@example.com"></aum-input>
+          </div>
+        }
+      </ng-template>
+    </aum-expansion-panel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Default Expanded -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_EP_EXPANDED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_EP_EXPANDED_DESC' | translate"
+  >
+    <aum-expansion-panel [items]="defaultExpandedItems"></aum-expansion-panel>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Disabled Item -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_EP_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_EP_DISABLED_DESC' | translate"
+  >
+    <aum-expansion-panel [items]="disabledItems"></aum-expansion-panel>
+  </ui-lab-scenario-card>
+
+</div>

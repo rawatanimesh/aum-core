@@ -35,6 +35,45 @@ export const uiLabRoutes: Routes = [
     ],
   },
   {
+    path: 'layout',
+    children: [
+      {
+        path: '',
+        title: 'Layout | UI Lab',
+        loadComponent: () =>
+          import('./layout/layout-category').then((m) => m.LayoutCategory),
+      },
+      {
+        path: 'card',
+        title: 'Card | UI Lab',
+        loadComponent: () =>
+          import('./layout/card-detail/card-detail').then((m) => m.CardDetail),
+      },
+      {
+        path: 'tabs',
+        title: 'Tabs | UI Lab',
+        loadComponent: () =>
+          import('./layout/tabs-detail/tabs-detail').then((m) => m.TabsDetail),
+      },
+      {
+        path: 'expansion-panel',
+        title: 'Expansion Panel | UI Lab',
+        loadComponent: () =>
+          import('./layout/expansion-panel-detail/expansion-panel-detail').then(
+            (m) => m.ExpansionPanelDetail
+          ),
+      },
+      {
+        path: 'carousel',
+        title: 'Carousel | UI Lab',
+        loadComponent: () =>
+          import('./layout/carousel-detail/carousel-detail').then(
+            (m) => m.CarouselDetail
+          ),
+      },
+    ],
+  },
+  {
     path: 'form-controls',
     children: [
       {

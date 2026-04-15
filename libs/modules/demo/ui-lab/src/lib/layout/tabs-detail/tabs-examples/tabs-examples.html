@@ -1,0 +1,122 @@
+<div class="layout-examples">
+
+  <!-- Scenario 1: Basic Tabs -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_TABS_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_TABS_BASIC_DESC' | translate"
+  >
+    <aum-tab-group>
+      <aum-tab label="Overview">
+        <p class="layout-demo-tab-content">Overview tab content. Describe the component at a high level here.</p>
+      </aum-tab>
+      <aum-tab label="Details">
+        <p class="layout-demo-tab-content">Details tab content. List all properties and behaviors here.</p>
+      </aum-tab>
+      <aum-tab label="Settings">
+        <p class="layout-demo-tab-content">Settings tab content. Configuration options go here.</p>
+      </aum-tab>
+    </aum-tab-group>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Programmatic Selection -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_TABS_SELECTED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_TABS_SELECTED_DESC' | translate"
+  >
+    <div class="layout-demo-controls">
+      <div class="layout-demo-btn-row">
+        <aum-button type="outlined" value="Tab 1" size="small" (clickButton)="activeTab.set(0)"></aum-button>
+        <aum-button type="outlined" value="Tab 2" size="small" (clickButton)="activeTab.set(1)"></aum-button>
+        <aum-button type="outlined" value="Tab 3" size="small" (clickButton)="activeTab.set(2)"></aum-button>
+      </div>
+      <aum-tab-group [selectedIndex]="activeTab()" (selectedIndexChange)="activeTab.set($event)">
+        <aum-tab label="Tab 1"><p class="layout-demo-tab-content">First tab panel.</p></aum-tab>
+        <aum-tab label="Tab 2"><p class="layout-demo-tab-content">Second tab panel.</p></aum-tab>
+        <aum-tab label="Tab 3"><p class="layout-demo-tab-content">Third tab panel.</p></aum-tab>
+      </aum-tab-group>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Disabled Tab -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_TABS_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_TABS_DISABLED_DESC' | translate"
+  >
+    <aum-tab-group>
+      <aum-tab label="Active"><p class="layout-demo-tab-content">This tab is selectable.</p></aum-tab>
+      <aum-tab label="Disabled" [disabled]="true"><p class="layout-demo-tab-content">Never rendered.</p></aum-tab>
+      <aum-tab label="Also Active"><p class="layout-demo-tab-content">This tab is also selectable.</p></aum-tab>
+    </aum-tab-group>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Header Below -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_TABS_HEADER_BELOW_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_TABS_HEADER_BELOW_DESC' | translate"
+  >
+    <aum-tab-group headerPosition="below">
+      <aum-tab label="Step 1"><p class="layout-demo-tab-content">Content is above the tab strip.</p></aum-tab>
+      <aum-tab label="Step 2"><p class="layout-demo-tab-content">Useful for wizard-style flows.</p></aum-tab>
+    </aum-tab-group>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Custom Label Template -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_TABS_CUSTOM_LABEL_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_TABS_CUSTOM_LABEL_DESC' | translate"
+  >
+    <aum-tab-group>
+      <aum-tab>
+        <ng-template aum-tab-label>
+          <aum-icon name="mail" [width]="16"></aum-icon>
+          <span class="layout-demo-label-text">{{ 'UI_LAB_TAB_INBOX' | translate }}</span>
+        </ng-template>
+        <p class="layout-demo-tab-content">Inbox messages and notifications.</p>
+      </aum-tab>
+      <aum-tab>
+        <ng-template aum-tab-label>
+          <aum-icon name="person" [width]="16"></aum-icon>
+          <span class="layout-demo-label-text">{{ 'UI_LAB_TAB_PROFILE' | translate }}</span>
+        </ng-template>
+        <p class="layout-demo-tab-content">User profile settings and preferences.</p>
+      </aum-tab>
+      <aum-tab>
+        <ng-template aum-tab-label>
+          <aum-icon name="settings" [width]="16"></aum-icon>
+          <span class="layout-demo-label-text">{{ 'UI_LAB_TAB_SETTINGS_LABEL' | translate }}</span>
+        </ng-template>
+        <p class="layout-demo-tab-content">App configuration options.</p>
+      </aum-tab>
+    </aum-tab-group>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 6: Preserve Content -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_TABS_PRESERVE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_TABS_PRESERVE_DESC' | translate"
+  >
+    <div class="layout-demo-controls">
+      <div class="layout-demo-btn-row">
+        <aum-button
+          [type]="preserveContent() ? 'filled' : 'outlined'"
+          size="small"
+          [value]="preserveContent() ? ('UI_LAB_PRESERVE_ON' | translate) : ('UI_LAB_PRESERVE_OFF' | translate)"
+          (clickButton)="preserveContent.set(!preserveContent())"
+        ></aum-button>
+      </div>
+      <aum-tab-group [preserveContent]="preserveContent()">
+        <aum-tab label="Short">
+          <p class="layout-demo-tab-content">Minimal content — nothing to scroll.</p>
+        </aum-tab>
+        <aum-tab label="Long (scroll me)">
+          <div class="layout-demo-scrollable">
+            @for (i of longList; track i) {
+              <p class="layout-demo-tab-content">Paragraph {{ i }}: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            }
+          </div>
+        </aum-tab>
+      </aum-tab-group>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>
