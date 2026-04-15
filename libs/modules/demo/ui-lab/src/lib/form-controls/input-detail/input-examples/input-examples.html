@@ -1,0 +1,71 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Text Input -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_TEXT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_TEXT_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-input
+        label="Full Name"
+        placeholder="Enter your name"
+        [data]="name()"
+        (dataChange)="name.set($event)"
+      ></aum-input>
+      <p class="fc-output">Value: <strong>{{ name() || '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Input Types -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_TYPES_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_TYPES_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-input label="Email" type="email" placeholder="user@example.com" [data]="email()" (dataChange)="email.set($event)"></aum-input>
+      <aum-input label="Password" type="password" placeholder="Enter password" [data]="password()" (dataChange)="password.set($event)"></aum-input>
+      <aum-input label="Age" type="number" placeholder="25" [data]="age()" (dataChange)="age.set($event)"></aum-input>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Textarea -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_TEXTAREA_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_TEXTAREA_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-input
+        label="Message"
+        placeholder="Enter your message here..."
+        [textarea]="true"
+        [rows]="4"
+        [maxlength]="300"
+        [data]="message()"
+        (dataChange)="message.set($event)"
+      ></aum-input>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Validation -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_VALIDATION_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_VALIDATION_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-input label="Name" placeholder="Min 3 characters" [required]="true" [control]="nameControl"></aum-input>
+      <aum-input label="Email" type="email" placeholder="user@example.com" [required]="true" [control]="emailControl"></aum-input>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Disabled & Readonly -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_STATES_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_STATES_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-input label="Disabled" [disabled]="true" data="Cannot edit this"></aum-input>
+      <aum-input label="Readonly" [readonly]="true" data="View only value"></aum-input>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

@@ -67,9 +67,10 @@ export const BUTTON_TOGGLE_INTERFACES = [
 ];
 
 export const BUTTON_TOGGLE_EXAMPLES = {
-  basicUsage: `import { ButtonToggleComponent, ButtonToggleOption } from '@aum/ui/buttons';
+  importPath: `import { ButtonToggleComponent } from '@aum/ui/buttons';
+import type { ButtonToggleOption } from '@aum/ui/buttons';`,
 
-@Component({
+  basicUsage: `@Component({
   imports: [ButtonToggleComponent],
   template: \`
     <aum-button-toggle

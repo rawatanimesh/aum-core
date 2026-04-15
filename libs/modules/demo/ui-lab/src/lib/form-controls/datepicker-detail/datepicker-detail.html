@@ -1,0 +1,57 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="detail-page">
+
+      <ui-lab-component-header
+        [name]="meta.name"
+        [selector]="meta.selector"
+        [importFrom]="meta.importFrom"
+        [description]="meta.description"
+        [status]="meta.status"
+      ></ui-lab-component-header>
+
+      <aum-tab-group>
+
+        <aum-tab [label]="'UI_LAB_TAB_EXAMPLES' | translate">
+          <ui-lab-datepicker-examples></ui-lab-datepicker-examples>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
+          <div class="detail-page__code-section">
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_IMPORT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.importPath" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_BASIC_USAGE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.basicUsage" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_DATE_RANGE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.dateRange" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_MONTH_YEAR' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.monthYear" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_DISABLED_READONLY' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.states" language="html"></ui-lab-code-block>
+          </div>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_API' | translate">
+          <ui-lab-api-table [inputs]="inputs" [outputs]="outputs"></ui-lab-api-table>
+        </aum-tab>
+
+      </aum-tab-group>
+
+      <div class="detail-page__nav">
+        <a class="detail-page__nav-prev" [routerLink]="'/ui-lab/form-controls/select'">
+          <aum-icon name="arrow_back" color="primary" [width]="18"></aum-icon>
+          <span>{{ 'UI_LAB_SELECT' | translate }}</span>
+        </a>
+        <a class="detail-page__nav-next" [routerLink]="'/ui-lab/form-controls/autocomplete'">
+          <span>{{ 'UI_LAB_AUTOCOMPLETE' | translate }}</span>
+          <aum-icon name="arrow_forward" color="primary" [width]="18"></aum-icon>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</aum-page>

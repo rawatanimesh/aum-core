@@ -34,4 +34,65 @@ export const uiLabRoutes: Routes = [
       },
     ],
   },
+  {
+    path: 'form-controls',
+    children: [
+      {
+        path: '',
+        title: 'Form Controls | UI Lab',
+        loadComponent: () =>
+          import('./form-controls/form-controls-category').then(
+            (m) => m.FormControlsCategory
+          ),
+      },
+      {
+        path: 'input',
+        title: 'Input | UI Lab',
+        loadComponent: () =>
+          import('./form-controls/input-detail/input-detail').then(
+            (m) => m.InputDetail
+          ),
+      },
+      {
+        path: 'checkbox',
+        title: 'Checkbox | UI Lab',
+        loadComponent: () =>
+          import('./form-controls/checkbox-detail/checkbox-detail').then(
+            (m) => m.CheckboxDetail
+          ),
+      },
+      {
+        path: 'radio',
+        title: 'Radio | UI Lab',
+        loadComponent: () =>
+          import('./form-controls/radio-detail/radio-detail').then(
+            (m) => m.RadioDetail
+          ),
+      },
+      {
+        path: 'select',
+        title: 'Select | UI Lab',
+        loadComponent: () =>
+          import('./form-controls/select-detail/select-detail').then(
+            (m) => m.SelectDetail
+          ),
+      },
+      {
+        path: 'datepicker',
+        title: 'Date Picker | UI Lab',
+        loadComponent: () =>
+          import('./form-controls/datepicker-detail/datepicker-detail').then(
+            (m) => m.DatepickerDetail
+          ),
+      },
+      {
+        path: 'autocomplete',
+        title: 'Autocomplete | UI Lab',
+        loadComponent: () =>
+          import(
+            './form-controls/autocomplete-detail/autocomplete-detail'
+          ).then((m) => m.AutocompleteDetail),
+      },
+    ],
+  },
 ];

@@ -1,0 +1,58 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Single Select -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SELECT_SINGLE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SELECT_SINGLE_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-select-box
+        label="Country"
+        placeholder="Select a country"
+        [optionList]="countryOptions"
+        [data]="country()"
+        (dataChange)="country.set($event)"
+      ></aum-select-box>
+      <p class="fc-output">Selected: <strong>{{ country() || '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Multiple Select -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SELECT_MULTI_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SELECT_MULTI_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-select-box
+        label="Tags"
+        placeholder="Select tags"
+        [optionList]="tagOptions"
+        [multiple]="true"
+        [data]="selectedTags()"
+        (dataChange)="selectedTags.set($event)"
+      ></aum-select-box>
+      <p class="fc-output">Selected: <strong>{{ selectedTags().length ? selectedTags().join(', ') : '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Disabled Options & Field -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SELECT_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SELECT_DISABLED_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-select-box
+        label="Status (with disabled options)"
+        [optionList]="statusOptions"
+        [data]="status()"
+        (dataChange)="status.set($event)"
+      ></aum-select-box>
+      <aum-select-box
+        label="Fully disabled field"
+        [optionList]="countryOptions"
+        [disabled]="true"
+      ></aum-select-box>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

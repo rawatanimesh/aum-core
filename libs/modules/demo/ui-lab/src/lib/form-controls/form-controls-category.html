@@ -1,0 +1,34 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="fc-category">
+
+      <div class="fc-category__header">
+        <div class="fc-category__header-icon">
+          <aum-icon name="edit_note" color="primary" [width]="32"></aum-icon>
+        </div>
+        <div>
+          <h1 class="fc-category__title">{{ 'UI_LAB_FORM_CONTROLS' | translate }}</h1>
+          <p class="fc-category__subtitle">{{ 'UI_LAB_FORM_CONTROLS_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="fc-category__grid">
+        @for (comp of components; track comp.route) {
+          <a class="fc-category__card" [routerLink]="comp.route">
+            <div class="fc-category__card-top">
+              <aum-icon [name]="comp.icon" color="primary" [width]="24"></aum-icon>
+              <h2 class="fc-category__card-name">{{ comp.nameKey | translate }}</h2>
+            </div>
+            <code class="fc-category__card-selector">{{ comp.selector }}</code>
+            <p class="fc-category__card-desc">{{ comp.descKey | translate }}</p>
+            <div class="fc-category__card-cta">
+              <span>{{ 'UI_LAB_VIEW_DOCS' | translate }}</span>
+              <aum-icon name="arrow_forward" color="primary" [width]="16"></aum-icon>
+            </div>
+          </a>
+        }
+      </div>
+
+    </div>
+  </div>
+</aum-page>

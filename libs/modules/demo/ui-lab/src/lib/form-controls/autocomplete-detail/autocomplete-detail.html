@@ -13,7 +13,7 @@
       <aum-tab-group>
 
         <aum-tab [label]="'UI_LAB_TAB_EXAMPLES' | translate">
-          <ui-lab-button-toggle-examples></ui-lab-button-toggle-examples>
+          <ui-lab-autocomplete-examples></ui-lab-autocomplete-examples>
         </aum-tab>
 
         <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
@@ -24,31 +24,24 @@
             <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_BASIC_USAGE' | translate }}</h3>
             <ui-lab-code-block [code]="examples.basicUsage" language="typescript"></ui-lab-code-block>
 
-            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_WITH_ICONS' | translate }}</h3>
-            <ui-lab-code-block [code]="examples.withIcons" language="typescript"></ui-lab-code-block>
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_SEARCH_FILTER' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.searchFilter" language="html"></ui-lab-code-block>
 
-            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_MULTIPLE_SELECTION' | translate }}</h3>
-            <ui-lab-code-block [code]="examples.multipleSelection" language="html"></ui-lab-code-block>
-
-            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_ICON_ONLY' | translate }}</h3>
-            <ui-lab-code-block [code]="examples.iconOnly" language="typescript"></ui-lab-code-block>
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_DISABLED_READONLY' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.states" language="html"></ui-lab-code-block>
           </div>
         </aum-tab>
 
         <aum-tab [label]="'UI_LAB_TAB_API' | translate">
-          <ui-lab-api-table
-            [inputs]="inputs"
-            [outputs]="outputs"
-            [interfaces]="interfaces"
-          ></ui-lab-api-table>
+          <ui-lab-api-table [inputs]="inputs" [outputs]="outputs"></ui-lab-api-table>
         </aum-tab>
 
       </aum-tab-group>
 
       <div class="detail-page__nav">
-        <a class="detail-page__nav-prev" [routerLink]="'/ui-lab/buttons/button'">
+        <a class="detail-page__nav-prev" [routerLink]="'/ui-lab/form-controls/datepicker'">
           <aum-icon name="arrow_back" color="primary" [width]="18"></aum-icon>
-          <span>{{ 'UI_LAB_BUTTON' | translate }}</span>
+          <span>{{ 'UI_LAB_DATEPICKER' | translate }}</span>
         </a>
         <div></div>
       </div>

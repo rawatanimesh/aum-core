@@ -74,9 +74,9 @@ export const BUTTON_OUTPUTS: ApiRow[] = [
 ];
 
 export const BUTTON_EXAMPLES = {
-  basicUsage: `import { ButtonComponent } from '@aum/ui/buttons';
+  importPath: `import { ButtonComponent } from '@aum/ui/buttons';`,
 
-@Component({
+  basicUsage: `@Component({
   imports: [ButtonComponent],
   template: \`
     <aum-button type="filled" value="Save"></aum-button>

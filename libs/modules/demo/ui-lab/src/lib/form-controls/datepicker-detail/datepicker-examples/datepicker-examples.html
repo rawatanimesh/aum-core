@@ -1,0 +1,55 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Date Picker -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_DATE_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_DATE_BASIC_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-date-picker
+        label="Select a date"
+        [data]="selectedDate()"
+        (dateSelected)="selectedDate.set($event)"
+      ></aum-date-picker>
+      <p class="fc-output">Selected: <strong>{{ selectedDate() ? (selectedDate() | date: 'mediumDate') : '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Date Range -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_DATE_RANGE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_DATE_RANGE_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-date-picker
+        label="Select a date range"
+        mode="daterange"
+        [data]="dateRange()"
+        (dataChange)="dateRange.set($event)"
+      ></aum-date-picker>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Month & Year Pickers -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_DATE_MONTH_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_DATE_MONTH_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-date-picker label="Billing Month" mode="month" [data]="selectedMonth()" (dataChange)="selectedMonth.set($event)"></aum-date-picker>
+      <aum-date-picker label="Fiscal Year" mode="year" [data]="selectedYear()" (dataChange)="selectedYear.set($event)"></aum-date-picker>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Disabled State -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_DATE_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_DATE_DISABLED_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-date-picker label="Disabled" [disabled]="true"></aum-date-picker>
+      <aum-date-picker label="With date constraints" [minDate]="today" [maxDate]="maxDate"></aum-date-picker>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

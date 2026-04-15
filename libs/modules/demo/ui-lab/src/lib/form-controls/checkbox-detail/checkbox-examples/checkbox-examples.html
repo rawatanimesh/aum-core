@@ -1,0 +1,55 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Basic Checkbox -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CB_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CB_BASIC_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-checkbox
+        label="I agree to the terms and conditions"
+        [checked]="agreed()"
+        (checkedChange)="agreed.set($event)"
+      ></aum-checkbox>
+      <p class="fc-output">Agreed: <strong>{{ agreed() }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Label Positions -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CB_LABEL_POS_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CB_LABEL_POS_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-checkbox label="Label after (default)" labelPosition="after" [checked]="notifyAfter()" (checkedChange)="notifyAfter.set($event)"></aum-checkbox>
+      <aum-checkbox label="Label before" labelPosition="before" [checked]="notifyBefore()" (checkedChange)="notifyBefore.set($event)"></aum-checkbox>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Indeterminate -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CB_INDETERMINATE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CB_INDETERMINATE_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-checkbox
+        label="Select all (indeterminate)"
+        [checked]="parentChecked()"
+        [indeterminate]="indeterminate()"
+        (checkedChange)="parentChecked.set($event); indeterminate.set(false)"
+      ></aum-checkbox>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Disabled -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CB_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CB_DISABLED_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-checkbox label="Disabled unchecked" [disabled]="true"></aum-checkbox>
+      <aum-checkbox label="Disabled checked" [checked]="true" [disabled]="true"></aum-checkbox>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

@@ -18,6 +18,9 @@
 
         <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
           <div class="detail-page__code-section">
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_IMPORT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.importPath" language="typescript"></ui-lab-code-block>
+
             <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_BASIC_USAGE' | translate }}</h3>
             <ui-lab-code-block [code]="examples.basicUsage" language="typescript"></ui-lab-code-block>
 

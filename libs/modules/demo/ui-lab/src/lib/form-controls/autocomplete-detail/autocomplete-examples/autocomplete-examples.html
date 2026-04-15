@@ -1,0 +1,48 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Autocomplete -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_AUTO_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_AUTO_BASIC_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-autocomplete
+        label="Framework"
+        placeholder="Type to search..."
+        [optionList]="frameworkOptions"
+        [data]="selectedFramework()"
+        (dataChange)="selectedFramework.set($event)"
+      ></aum-autocomplete>
+      <p class="fc-output">Selected: <strong>{{ selectedFramework() || '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Search & Filter -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_AUTO_SEARCH_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_AUTO_SEARCH_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-autocomplete
+        label="City"
+        placeholder="Type to search cities..."
+        [optionList]="cityOptions"
+        [data]="selectedCity()"
+        (dataChange)="selectedCity.set($event)"
+      ></aum-autocomplete>
+      <p class="fc-output">Selected: <strong>{{ selectedCity() || '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Disabled & Readonly -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_AUTO_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_AUTO_DISABLED_DESC' | translate"
+  >
+    <div class="fc-demo-column">
+      <aum-autocomplete label="Disabled" [disabled]="true" [optionList]="frameworkOptions"></aum-autocomplete>
+      <aum-autocomplete label="Readonly" [readonly]="true" data="Angular" [optionList]="frameworkOptions"></aum-autocomplete>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

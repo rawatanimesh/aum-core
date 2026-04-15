@@ -1,0 +1,45 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Basic Radio Group -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_RADIO_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_RADIO_BASIC_DESC' | translate"
+  >
+    <div class="fc-demo-row">
+      <aum-radio-button
+        [options]="basicOptions"
+        (selectionChange)="basicSelected.set($event.value)"
+      ></aum-radio-button>
+      <p class="fc-output">Selected: <strong>{{ basicSelected() }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Label Positions -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_RADIO_LABEL_POS_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_RADIO_LABEL_POS_DESC' | translate"
+  >
+    <div class="fc-demo-row">
+      <aum-radio-button
+        [options]="labelBeforeOptions"
+        labelPosition="before"
+        (selectionChange)="labelPosSelected.set($event.value)"
+      ></aum-radio-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Disabled Options -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_RADIO_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_RADIO_DISABLED_DESC' | translate"
+  >
+    <div class="fc-demo-row">
+      <aum-radio-button
+        [options]="disabledOptions"
+        (selectionChange)="disabledSelected.set($event.value)"
+      ></aum-radio-button>
+      <p class="fc-output">Selected: <strong>{{ disabledSelected() }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>
