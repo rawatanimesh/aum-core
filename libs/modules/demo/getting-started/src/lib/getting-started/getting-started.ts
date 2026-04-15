@@ -100,7 +100,7 @@ export class GettingStarted implements AfterViewInit {
   readonly resources = [
     { icon: 'code',       labelKey: 'GS_RES_GITHUB',     descKey: 'GS_RES_GITHUB_DESC',     external: true,  href: 'https://github.com/rawatanimesh/aum-core' },
     { icon: 'menu_book',  labelKey: 'GS_RES_DOCS',       descKey: 'GS_RES_DOCS_DESC',       external: true,  href: 'https://github.com/rawatanimesh/aum-core/tree/main/docs' },
-    { icon: 'science',    labelKey: 'GS_RES_PLAYGROUND', descKey: 'GS_RES_PLAYGROUND_DESC', external: false, route: '/playground' },
+    { icon: 'widgets',    labelKey: 'GS_RES_UI_LAB',     descKey: 'GS_RES_UI_LAB_DESC',     external: false, route: '/ui-lab' },
     { icon: 'bug_report', labelKey: 'GS_RES_ISSUES',     descKey: 'GS_RES_ISSUES_DESC',     external: true,  href: 'https://github.com/rawatanimesh/aum-core/issues' },
   ];
 

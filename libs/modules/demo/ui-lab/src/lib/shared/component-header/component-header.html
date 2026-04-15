@@ -1,0 +1,21 @@
+<div class="comp-header">
+  <div class="comp-header__top">
+    <h1 class="comp-header__name">{{ name }}</h1>
+    <span class="comp-header__badge comp-header__badge--{{ status }}">{{ 'UI_LAB_STATUS_' + status.toUpperCase() | translate }}</span>
+  </div>
+  <p class="comp-header__description">{{ description }}</p>
+  <div class="comp-header__meta">
+    @if (selector) {
+      <div class="comp-header__chip">
+        <span class="comp-header__chip-label">{{ 'UI_LAB_SELECTOR' | translate }}</span>
+        <code class="comp-header__chip-value">{{ selector }}</code>
+      </div>
+    }
+    @if (importFrom) {
+      <div class="comp-header__chip">
+        <span class="comp-header__chip-label">{{ 'UI_LAB_IMPORT_FROM' | translate }}</span>
+        <code class="comp-header__chip-value">{{ importFrom }}</code>
+      </div>
+    }
+  </div>
+</div>

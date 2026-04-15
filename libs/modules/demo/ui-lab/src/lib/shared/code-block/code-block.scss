@@ -1,0 +1,41 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.code-block {
+  border-radius: rem(8);
+  border: rem(1) solid var(--mat-sys-outline-variant);
+  overflow: hidden;
+  background-color: var(--mat-sys-surface-container);
+
+  &__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: rem(6) rem(12);
+    background-color: var(--mat-sys-surface-container-high);
+    border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+  }
+
+  &__lang {
+    font-size: rem(12);
+    font-family: monospace;
+    color: var(--mat-sys-on-surface-variant);
+    text-transform: lowercase;
+    letter-spacing: rem(0.5);
+  }
+
+  &__pre {
+    margin: 0;
+    padding: rem(16) rem(20);
+    overflow-x: auto;
+    background-color: var(--mat-sys-surface-container);
+  }
+
+  &__code {
+    font-size: rem(13);
+    line-height: 1.6;
+    font-family: 'Roboto Mono', 'Courier New', monospace;
+    color: var(--mat-sys-on-surface);
+    white-space: pre;
+  }
+}

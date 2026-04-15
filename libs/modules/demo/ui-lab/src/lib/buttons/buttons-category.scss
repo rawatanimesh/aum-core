@@ -1,0 +1,121 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.btn-category {
+  padding: rem(32);
+  width: 100%;
+  box-sizing: border-box;
+
+  @include tablet { padding: rem(24); }
+  @include mobile { padding: rem(16); }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: rem(16);
+    padding: rem(32) 0 rem(32);
+    border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+    margin-bottom: rem(32);
+
+    @include mobile {
+      padding: rem(20) 0 rem(20);
+    }
+
+    &-icon {
+      width: rem(56);
+      height: rem(56);
+      border-radius: rem(12);
+      background-color: var(--mat-sys-primary-container);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+  }
+
+  &__title {
+    margin: 0 0 rem(6);
+    font-size: rem(26);
+    font-weight: 700;
+    color: var(--mat-sys-on-surface);
+
+    @include mobile { font-size: rem(20); }
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: rem(14);
+    color: var(--mat-sys-on-surface-variant);
+    line-height: 1.5;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: rem(16);
+
+    @include mobile {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: rem(10);
+    padding: rem(20);
+    border-radius: rem(12);
+    border: rem(1) solid var(--mat-sys-outline-variant);
+    background-color: var(--mat-sys-surface-container-lowest);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s, background-color 0.15s, transform 0.15s;
+
+    &:hover {
+      border-color: var(--mat-sys-primary);
+      background-color: var(--mat-sys-surface-container);
+      transform: translateY(rem(-2));
+    }
+
+    &-top {
+      display: flex;
+      align-items: center;
+      gap: rem(10);
+    }
+
+    &-name {
+      margin: 0;
+      font-size: rem(17);
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+    }
+
+    &-selector {
+      font-family: 'Roboto Mono', 'Courier New', monospace;
+      font-size: rem(12);
+      color: var(--mat-sys-primary);
+      background-color: var(--mat-sys-primary-container);
+      padding: rem(2) rem(8);
+      border-radius: rem(4);
+      align-self: flex-start;
+    }
+
+    &-desc {
+      margin: 0;
+      font-size: rem(13);
+      color: var(--mat-sys-on-surface-variant);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    &-cta {
+      display: flex;
+      align-items: center;
+      gap: rem(4);
+      font-size: rem(13);
+      font-weight: 600;
+      color: var(--mat-sys-primary);
+      margin-top: rem(4);
+    }
+  }
+}

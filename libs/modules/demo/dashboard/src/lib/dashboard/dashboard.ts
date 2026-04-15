@@ -24,8 +24,8 @@ export class Dashboard {
     ],
   };
 
-  navigateToPlayground() {
-    this.router.navigate(['/playground']);
+  navigateToUiLab() {
+    this.router.navigate(['/ui-lab']);
   }
 
   navigateToGettingStarted() {
@@ -101,9 +101,9 @@ export class Dashboard {
       icon: 'account_tree',
     },
     {
-      title: 'PLAYGROUND_TITLE',
-      description: 'PLAYGROUND_DESC',
-      icon: 'play_arrow',
+      title: 'UI_LAB_TITLE',
+      description: 'UI_LAB_SUBTITLE',
+      icon: 'widgets',
     },
   ];
 }

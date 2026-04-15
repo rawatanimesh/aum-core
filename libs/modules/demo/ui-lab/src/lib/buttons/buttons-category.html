@@ -1,0 +1,34 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="btn-category">
+
+      <div class="btn-category__header">
+        <div class="btn-category__header-icon">
+          <aum-icon name="smart_button" color="primary" [width]="32"></aum-icon>
+        </div>
+        <div>
+          <h1 class="btn-category__title">{{ 'UI_LAB_BUTTONS' | translate }}</h1>
+          <p class="btn-category__subtitle">{{ 'UI_LAB_BUTTONS_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="btn-category__grid">
+        @for (comp of components; track comp.route) {
+          <a class="btn-category__card" [routerLink]="comp.route">
+            <div class="btn-category__card-top">
+              <aum-icon [name]="comp.icon" color="primary" [width]="24"></aum-icon>
+              <h2 class="btn-category__card-name">{{ comp.nameKey | translate }}</h2>
+            </div>
+            <code class="btn-category__card-selector">{{ comp.selector }}</code>
+            <p class="btn-category__card-desc">{{ comp.descKey | translate }}</p>
+            <div class="btn-category__card-cta">
+              <span>{{ 'UI_LAB_VIEW_DOCS' | translate }}</span>
+              <aum-icon name="arrow_forward" color="primary" [width]="16"></aum-icon>
+            </div>
+          </a>
+        }
+      </div>
+
+    </div>
+  </div>
+</aum-page>

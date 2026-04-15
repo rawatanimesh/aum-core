@@ -1,0 +1,105 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.api-table {
+  display: flex;
+  flex-direction: column;
+  gap: rem(32);
+
+  &__section-title {
+    margin: 0 0 rem(12);
+    font-size: rem(14);
+    font-weight: 600;
+    color: var(--mat-sys-on-surface);
+    text-transform: uppercase;
+    letter-spacing: rem(0.8);
+  }
+
+  &__scroll {
+    overflow-x: auto;
+    border-radius: rem(8);
+    border: rem(1) solid var(--mat-sys-outline-variant);
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: rem(13);
+
+    th {
+      padding: rem(10) rem(16);
+      text-align: left;
+      font-weight: 600;
+      font-size: rem(12);
+      color: var(--mat-sys-on-surface-variant);
+      background-color: var(--mat-sys-surface-container-lowest);
+      border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: rem(10) rem(16);
+      border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+      vertical-align: top;
+      color: var(--mat-sys-on-surface);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background-color: var(--mat-sys-surface-container-lowest);
+    }
+  }
+
+  &__code {
+    font-family: 'Roboto Mono', 'Courier New', monospace;
+    font-size: rem(12);
+    background-color: var(--mat-sys-surface-container);
+    border-radius: rem(4);
+    padding: rem(2) rem(6);
+    color: var(--mat-sys-on-surface);
+
+    &--type {
+      color: var(--mat-sys-primary);
+    }
+  }
+
+  &__required {
+    color: var(--mat-sys-error);
+    margin-left: rem(2);
+    font-weight: 700;
+  }
+
+  &__empty {
+    color: var(--mat-sys-on-surface-variant);
+    opacity: 0.5;
+  }
+
+  &__desc {
+    color: var(--mat-sys-on-surface-variant);
+    line-height: 1.5;
+  }
+
+  &__iface {
+    margin-bottom: rem(16);
+
+    &-name {
+      margin: 0 0 rem(8);
+    }
+
+    &-def {
+      margin: 0;
+      padding: rem(16);
+      border-radius: rem(8);
+      border: rem(1) solid var(--mat-sys-outline-variant);
+      background-color: var(--mat-sys-surface-container);
+      font-size: rem(13);
+      font-family: 'Roboto Mono', 'Courier New', monospace;
+      overflow-x: auto;
+      color: var(--mat-sys-on-surface);
+      line-height: 1.6;
+    }
+  }
+}

@@ -1,0 +1,98 @@
+<div class="button-toggle-examples">
+
+  <!-- Scenario 1: Single Selection, Labels Only -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_SINGLE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_SINGLE_DESC' | translate"
+  >
+    <div class="demo-row">
+      <aum-button-toggle
+        [options]="singleOptions"
+        ariaLabel="Time period selection"
+        (selectionChange)="singleSelection.set($event)"
+      ></aum-button-toggle>
+      <span class="selection-output">Selected: <strong>{{ singleSelection() }}</strong></span>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Icon + Label -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_ICON_LABEL_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_ICON_LABEL_DESC' | translate"
+  >
+    <div class="demo-row">
+      <aum-button-toggle
+        [options]="iconOptions"
+        (selectionChange)="iconSelection.set($event)"
+      ></aum-button-toggle>
+      <span class="selection-output">Selected: <strong>{{ iconSelection() }}</strong></span>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Multiple Selection -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_MULTI_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_MULTI_DESC' | translate"
+  >
+    <div class="demo-row">
+      <aum-button-toggle
+        [options]="multipleOptions"
+        [multiple]="true"
+        (selectionChange)="multipleSelection.set($event)"
+      ></aum-button-toggle>
+      <span class="selection-output">Selected: <strong>{{ multipleSelection() | json }}</strong></span>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Size Variants -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_SIZE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_SIZE_DESC' | translate"
+  >
+    <div class="demo-column">
+      <div class="demo-row">
+        <span class="size-label">Small</span>
+        <aum-button-toggle [options]="sizeOptions" size="small"></aum-button-toggle>
+      </div>
+      <div class="demo-row">
+        <span class="size-label">Large (default)</span>
+        <aum-button-toggle [options]="sizeOptions" size="large"></aum-button-toggle>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Icons Only -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_ICONS_ONLY_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_ICONS_ONLY_DESC' | translate"
+  >
+    <div class="demo-row">
+      <aum-button-toggle
+        [options]="iconOnlyOptions"
+        (selectionChange)="alignSelection.set($event)"
+      ></aum-button-toggle>
+      <span class="selection-output">Selected: <strong>{{ alignSelection() }}</strong></span>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 6: Disabled -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_DISABLED_DESC' | translate"
+  >
+    <div class="demo-row">
+      <aum-button-toggle [options]="disabledOptions" [disabled]="true"></aum-button-toggle>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 7: Multiple + Small -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BT_MULTI_SMALL_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BT_MULTI_SMALL_DESC' | translate"
+  >
+    <div class="demo-row">
+      <aum-button-toggle [options]="multipleOptions" [multiple]="true" size="small"></aum-button-toggle>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

@@ -1,0 +1,32 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="catalog">
+
+      <div class="catalog__hero">
+        <h1 class="catalog__title">{{ 'UI_LAB_TITLE' | translate }}</h1>
+        <p class="catalog__subtitle">{{ 'UI_LAB_SUBTITLE' | translate }}</p>
+
+      </div>
+
+      <div class="catalog__grid">
+        @for (category of categories; track category.route) {
+          <a class="catalog__card" [routerLink]="category.route">
+            <div class="catalog__card-icon">
+              <aum-icon [name]="category.icon" color="primary" [width]="28"></aum-icon>
+            </div>
+            <div class="catalog__card-body">
+              <h2 class="catalog__card-title">{{ category.titleKey | translate }}</h2>
+              <p class="catalog__card-description">{{ category.descKey | translate }}</p>
+            </div>
+            <div class="catalog__card-footer">
+              <span class="catalog__card-count">{{ category.count }} {{ 'UI_LAB_COMPONENTS' | translate }}</span>
+              <aum-icon name="arrow_forward" color="on-surface-variant" [width]="18"></aum-icon>
+            </div>
+          </a>
+        }
+
+      </div>
+
+    </div>
+  </div>
+</aum-page>

@@ -1,0 +1,11 @@
+<div class="scenario-card">
+  <div class="scenario-card__header">
+    <h3 class="scenario-card__title">{{ title }}</h3>
+    @if (description) {
+      <p class="scenario-card__description">{{ description }}</p>
+    }
+  </div>
+  <div class="scenario-card__body">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.catalog {
+  padding: 0 rem(32);
+  width: 100%;
+  box-sizing: border-box;
+
+  @include tablet { padding: 0 rem(24); }
+  @include mobile { padding: 0 rem(16); }
+
+  &__hero {
+    text-align: center;
+    padding: rem(48) rem(24) rem(40);
+
+    @include tablet {
+      padding: rem(32) rem(16) rem(28);
+    }
+
+    @include mobile {
+      padding: rem(24) rem(12) rem(20);
+    }
+  }
+
+  &__title {
+    margin: 0 0 rem(12);
+    font-size: rem(36);
+    font-weight: 800;
+    color: var(--mat-sys-on-surface);
+    line-height: 1.2;
+
+    @include tablet { font-size: rem(28); }
+    @include mobile { font-size: rem(24); }
+  }
+
+  &__subtitle {
+    margin: 0;
+    font-size: rem(16);
+    color: var(--mat-sys-on-surface-variant);
+    line-height: 1.6;
+    max-width: rem(560);
+    margin-inline: auto;
+
+    @include mobile { font-size: rem(14); }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(16);
+    padding: 0 rem(8) rem(48);
+
+    @include tablet {
+      grid-template-columns: repeat(2, 1fr);
+      padding: 0 rem(4) rem(32);
+    }
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      padding: 0 0 rem(24);
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12);
+    padding: rem(20);
+    border-radius: rem(12);
+    border: rem(1) solid var(--mat-sys-outline-variant);
+    background-color: var(--mat-sys-surface-container-lowest);
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--mat-sys-primary);
+      background-color: var(--mat-sys-surface-container);
+      transform: translateY(rem(-2));
+    }
+
+    &-icon {
+      width: rem(48);
+      height: rem(48);
+      border-radius: rem(10);
+      background-color: var(--mat-sys-primary-container);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-body {
+      flex: 1;
+    }
+
+    &-title {
+      margin: 0 0 rem(6);
+      font-size: rem(16);
+      font-weight: 600;
+      color: var(--mat-sys-on-surface);
+    }
+
+    &-description {
+      margin: 0;
+      font-size: rem(13);
+      color: var(--mat-sys-on-surface-variant);
+      line-height: 1.5;
+    }
+
+    &-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: rem(8);
+      border-top: rem(1) solid var(--mat-sys-outline-variant);
+    }
+
+    &-count {
+      font-size: rem(12);
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+
+}

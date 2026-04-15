@@ -28,6 +28,11 @@ export const appRoutes: Route[] = [
         loadChildren: () =>
           import('@demo/playground').then((m) => m.playgroundRoutes),
       },
+      {
+        path: 'ui-lab',
+        loadChildren: () =>
+          import('@demo/ui-lab').then((m) => m.uiLabRoutes),
+      },
       // // Launch agent from dashboard (shortcut route)
       // {
       //   path: 'email-agent',

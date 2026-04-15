@@ -1,0 +1,80 @@
+<div class="api-table">
+
+  @if (inputs.length) {
+    <section class="api-table__section">
+      <h3 class="api-table__section-title">{{ 'UI_LAB_API_INPUTS' | translate }}</h3>
+      <div class="api-table__scroll">
+        <table class="api-table__table">
+          <thead>
+            <tr>
+              <th>{{ 'UI_LAB_API_PROPERTY' | translate }}</th>
+              <th>{{ 'UI_LAB_API_TYPE' | translate }}</th>
+              <th>{{ 'UI_LAB_API_DEFAULT' | translate }}</th>
+              <th>{{ 'UI_LAB_API_DESCRIPTION' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of inputs; track row.name) {
+              <tr>
+                <td>
+                  <code class="api-table__code">{{ row.name }}</code>
+                  @if (row.required) {
+                    <span class="api-table__required" [title]="'UI_LAB_API_REQUIRED' | translate">*</span>
+                  }
+                </td>
+                <td><code class="api-table__code api-table__code--type">{{ row.type }}</code></td>
+                <td>
+                  @if (row.default) {
+                    <code class="api-table__code">{{ row.default }}</code>
+                  } @else {
+                    <span class="api-table__empty">—</span>
+                  }
+                </td>
+                <td class="api-table__desc">{{ row.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+
+  @if (outputs.length) {
+    <section class="api-table__section">
+      <h3 class="api-table__section-title">{{ 'UI_LAB_API_OUTPUTS' | translate }}</h3>
+      <div class="api-table__scroll">
+        <table class="api-table__table">
+          <thead>
+            <tr>
+              <th>{{ 'UI_LAB_API_EVENT' | translate }}</th>
+              <th>{{ 'UI_LAB_API_TYPE' | translate }}</th>
+              <th>{{ 'UI_LAB_API_DESCRIPTION' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of outputs; track row.name) {
+              <tr>
+                <td><code class="api-table__code">{{ row.name }}</code></td>
+                <td><code class="api-table__code api-table__code--type">{{ row.type }}</code></td>
+                <td class="api-table__desc">{{ row.description }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+
+  @if (interfaces.length) {
+    <section class="api-table__section">
+      <h3 class="api-table__section-title">{{ 'UI_LAB_API_INTERFACES' | translate }}</h3>
+      @for (iface of interfaces; track iface.name) {
+        <div class="api-table__iface">
+          <p class="api-table__iface-name"><code class="api-table__code">{{ iface.name }}</code></p>
+          <pre class="api-table__iface-def"><code>{{ iface.definition }}</code></pre>
+        </div>
+      }
+    </section>
+  }
+
+</div>

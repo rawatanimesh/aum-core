@@ -19,6 +19,21 @@
       "value": "/playground",
       "icon": "science",
       "selected": false
+    },
+    {
+      "label": "UI_LAB",
+      "value": "/ui-lab",
+      "icon": "widgets",
+      "selected": false,
+      "children": [
+        { "label": "UI_LAB_BUTTONS", "value": "/ui-lab/buttons", "icon": "smart_button" },
+        { "label": "UI_LAB_FORM_CONTROLS", "value": "/ui-lab/form-controls", "icon": "edit_note" },
+        { "label": "UI_LAB_LAYOUT", "value": "/ui-lab/layout", "icon": "dashboard" },
+        { "label": "UI_LAB_NAVIGATION", "value": "/ui-lab/navigation", "icon": "menu" },
+        { "label": "UI_LAB_FEEDBACK", "value": "/ui-lab/feedback", "icon": "notifications" },
+        { "label": "UI_LAB_UTILITIES", "value": "/ui-lab/utilities", "icon": "construction" },
+        { "label": "UI_LAB_DATA_DISPLAY", "value": "/ui-lab/data-display", "icon": "bar_chart" }
+      ]
     }
   ],
   "toolbarMenus": {
