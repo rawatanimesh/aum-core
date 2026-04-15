@@ -168,7 +168,7 @@ Two ready-to-use application shell templates are available. Choose one per app.
 
 **AumTemplate** — classic toolbar + collapsible overlay sidenav. The toolbar is always visible; the sidenav slides in over the content. On mobile, a settings drawer (`SettingsDrawerComponent`) slides in from the right and exposes preferences, profile, and overflow toolbar actions. Configured entirely through `AppConfigService`/`app-config.json`.
 
-**AumTemplate2** — persistent sidebar on tablet/desktop, auto-hides to a mobile drawer on narrow screens. No dedicated top toolbar; identity (logo, app name) lives in the sidebar. Accepts a `drawerWidth` input. Best suited for simpler or standalone apps that don't require heavy scalability.
+**AumTemplate2** — persistent sidebar on tablet/desktop, auto-hides to a mobile drawer on narrow screens. No dedicated top toolbar; identity (logo, app name) lives in the sidebar. Supports two-level navigation: `navItems` with `children` show a secondary L2 panel beside the sidebar on desktop/tablet, and expand the drawer on mobile. Best suited for simpler or standalone apps that don't require heavy scalability.
 
 See [DYNAMIC-TOOLBAR-ACTIONS.md](./DYNAMIC-TOOLBAR-ACTIONS.md) and [CUSTOM-TOOLBAR-TEMPLATES.md](./CUSTOM-TOOLBAR-TEMPLATES.md) for toolbar customisation patterns (applies to `AumTemplate`).
 

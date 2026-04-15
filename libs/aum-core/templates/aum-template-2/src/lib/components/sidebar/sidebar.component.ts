@@ -6,12 +6,14 @@ import {
   EventEmitter,
   inject,
   Input,
+  OnInit,
   Output,
+  signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { Icon } from '@aum/ui/utilities';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
@@ -23,6 +25,7 @@ import {
   AuthService,
   LanguageTranslationService,
   MenuConfigHelper,
+  SideNavItem,
 } from '@aum/utils/services';
 import { MenuList, MenuItem } from '@aum/ui/navigation';
 import { PreferencesDialogService } from '@aum/common';
@@ -41,10 +44,18 @@ import { ToolbarAction, ToolbarContentService } from '@aum/templates/aum-templat
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   @Input() showBrandLogo = true;
   @Input() showAppIdentity = true;
-  @Output() menuItemClicked = new EventEmitter();
+
+  @Output() menuItemClicked = new EventEmitter<void>();
+  /** Emits the active L1 parent item (with children) so the template can show the L2 panel. Emits null when deselected. */
+  @Output() activeItemChange = new EventEmitter<SideNavItem | null>();
+
+  /** Which parent's L2 panel is currently open — set by user click and route sync */
+  openParent = signal<SideNavItem | null>(null);
+  /** Which parent has an active child route — router-driven only, drives the active highlight */
+  routeActiveParent = signal<SideNavItem | null>(null);
 
   private appConfigService = inject(AppConfigService);
   private languageService = inject(LanguageTranslationService);
@@ -116,6 +127,27 @@ export class SidebarComponent {
         this.globalActions = actions;
         this.cdr.markForCheck();
       });
+
+    // Re-sync active parent on every navigation (back/forward, programmatic)
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd), takeUntilDestroyed())
+      .subscribe(() => this.syncActiveParent());
+  }
+
+  ngOnInit(): void {
+    this.syncActiveParent();
+  }
+
+  private syncActiveParent(): void {
+    const url = this.router.url;
+    const parent = this.navItems().find(item =>
+      item.children?.length &&
+      item.children.some(c => url === c.value || url.startsWith(c.value + '/'))
+    ) ?? null;
+
+    this.routeActiveParent.set(parent);
+    this.openParent.set(parent);       // also open the L2 panel for the matched route
+    this.activeItemChange.emit(parent);
   }
 
   private buildProfileMenu(): void {
@@ -153,10 +185,18 @@ export class SidebarComponent {
     this.profileMenuList = items;
   }
 
-  onItemClick(value: string): void {
-    this.router.navigateByUrl(value).then((success) => {
-      if (success) this.menuItemClicked.emit();
-    });
+  onItemClick(item: SideNavItem): void {
+    if (!item.children?.length) {
+      this.router.navigateByUrl(item.value).then(success => {
+        if (success) this.menuItemClicked.emit();
+      });
+      return;
+    }
+
+    const isSame = this.openParent()?.value === item.value;
+    this.openParent.set(isSame ? null : item);
+    this.activeItemChange.emit(isSame ? null : item);
+    // routeActiveParent is NOT touched here — only the router drives it
   }
 
   onMenuSelect(item: MenuItem): void {

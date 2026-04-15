@@ -20,14 +20,54 @@
 
     <!-- Persistent sidebar: visible on tablet + desktop -->
     <aside class="aum-t2__sidebar">
-      <aum-sidebar-2></aum-sidebar-2>
+      <aum-sidebar-2 (activeItemChange)="onActiveItemChange($event)"></aum-sidebar-2>
     </aside>
+
+    <!-- L2 panel: shown when an L1 parent item is active (desktop/tablet only) -->
+    @if (activeL1Item()?.children?.length) {
+      <nav class="aum-t2__l2-panel" [attr.aria-label]="activeL1Item()!.label | translate">
+        <p class="aum-t2__l2-header">{{ activeL1Item()!.label | translate }}</p>
+        @for (child of activeL1Item()!.children!; track child.value) {
+          <a class="aum-t2__l2-item" [routerLink]="child.value" routerLinkActive="active">
+            @if (child.icon) {
+              <aum-icon [name]="child.icon" [width]="18"></aum-icon>
+            }
+            <span>{{ child.label | translate }}</span>
+          </a>
+        }
+      </nav>
+    }
 
     <!-- Content area + mobile drawer -->
     <mat-sidenav-container class="aum-t2__content" [hasBackdrop]="true">
-      <mat-sidenav #mobileDrawer mode="over" class="aum-t2__drawer">
-        <!-- Brand logo is in the mobile header, so hide it inside the drawer -->
-        <aum-sidebar-2 [showBrandLogo]="false" [showAppIdentity]="false" (menuItemClicked)="mobileDrawer.close()"></aum-sidebar-2>
+      <mat-sidenav
+        #mobileDrawer
+        mode="over"
+        class="aum-t2__drawer"
+        [class.aum-t2__drawer--l2-open]="mobileActiveL1Item()?.children?.length"
+      >
+        <div class="aum-t2__drawer-inner">
+          <aum-sidebar-2
+            [showBrandLogo]="false"
+            [showAppIdentity]="false"
+            (menuItemClicked)="mobileDrawer.close()"
+            (activeItemChange)="onMobileActiveItemChange($event)"
+          ></aum-sidebar-2>
+
+          @if (mobileActiveL1Item()?.children?.length) {
+            <nav class="aum-t2__l2-panel" [attr.aria-label]="mobileActiveL1Item()!.label | translate">
+              <p class="aum-t2__l2-header">{{ mobileActiveL1Item()!.label | translate }}</p>
+              @for (child of mobileActiveL1Item()!.children!; track child.value) {
+                <a class="aum-t2__l2-item" [routerLink]="child.value" routerLinkActive="active" (click)="mobileDrawer.close()">
+                  @if (child.icon) {
+                    <aum-icon [name]="child.icon" [width]="18"></aum-icon>
+                  }
+                  <span>{{ child.label | translate }}</span>
+                </a>
+              }
+            </nav>
+          }
+        </div>
       </mat-sidenav>
 
       <mat-sidenav-content>

@@ -19,17 +19,37 @@
   <!-- Nav: icon on top, label below -->
   <nav class="aum-sidebar__nav">
     @for (item of navItems(); track item.value) {
-      <a
-        class="aum-sidebar__item"
-        [routerLink]="item.value"
-        routerLinkActive="active"
-        (click)="menuItemClicked.emit()"
-      >
-        @if (item.icon) {
-          <aum-icon [name]="item.icon" [width]="22"></aum-icon>
-        }
-        <span class="aum-sidebar__label">{{ item.label | translate }}</span>
-      </a>
+
+      @if (item.children?.length) {
+        <!-- Parent item: navigates to first child, shows L2 panel -->
+        <button
+          class="aum-sidebar__item"
+          [class.open]="openParent()?.value === item.value"
+          [class.active]="routeActiveParent()?.value === item.value"
+          [attr.aria-expanded]="openParent()?.value === item.value"
+          (click)="onItemClick(item)"
+        >
+          @if (item.icon) {
+            <aum-icon [name]="item.icon" [width]="22"></aum-icon>
+          }
+          <span class="aum-sidebar__label">{{ item.label | translate }}</span>
+        </button>
+
+      } @else {
+        <!-- Leaf item: navigates directly -->
+        <a
+          class="aum-sidebar__item"
+          [routerLink]="item.value"
+          routerLinkActive="active"
+          (click)="menuItemClicked.emit()"
+        >
+          @if (item.icon) {
+            <aum-icon [name]="item.icon" [width]="22"></aum-icon>
+          }
+          <span class="aum-sidebar__label">{{ item.label | translate }}</span>
+        </a>
+      }
+
     }
   </nav>
 

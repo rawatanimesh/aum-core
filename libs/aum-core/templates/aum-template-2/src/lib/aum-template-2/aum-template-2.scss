@@ -1,8 +1,9 @@
 @use '@angular/material' as mat;
 @use 'functions' as *;
+@use 'mixins' as *;
 
-$bp-tablet:            700px;
 $sidebar-width:        rem(120);
+$l2-panel-width:       rem(200);
 $mobile-header-height: rem(52);
 
 .aum-t2 {
@@ -24,8 +25,8 @@ $mobile-header-height: rem(52);
     color: var(--mat-sys-on-surface);
     border-bottom: rem(1) solid var(--mat-sys-outline-variant);
 
-    // Hidden on tablet + desktop (sidebar is always present)
-    @media (min-width: $bp-tablet) {
+    // Hidden on desktop (sidebar is always present)
+    @include desktop {
       display: none;
     }
   }
@@ -69,16 +70,66 @@ $mobile-header-height: rem(52);
     overflow: hidden;
   }
 
-  // ── Persistent sidebar: tablet + desktop ─────────────────
+  // ── Persistent sidebar: desktop only ─────────────────────
   &__sidebar {
     display: none;
     flex-shrink: 0;
 
-    @media (min-width: $bp-tablet) {
+    @include desktop {
       display: flex;
       flex-direction: column;
       width: $sidebar-width;
       border-inline-end: rem(1) solid var(--mat-sys-outline-variant);
+    }
+  }
+
+  // ── L2 secondary panel: desktop only ─────────────────────
+  &__l2-panel {
+    display: none;
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      width: $l2-panel-width;
+      border-inline-end: rem(1) solid var(--mat-sys-outline-variant);
+      background-color: var(--mat-sys-surface);
+      overflow-y: auto;
+    }
+  }
+
+  &__l2-header {
+    font-size: rem(11);
+    font-weight: 600;
+    // text-transform: uppercase;
+    // letter-spacing: 0.06em;
+    padding: rem(16);
+    color: var(--mat-sys-on-surface-variant);
+    // border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+    flex-shrink: 0;
+  }
+
+  &__l2-item {
+    display: flex;
+    align-items: center;
+    gap: rem(10);
+    padding: rem(9) rem(14);
+    margin: rem(2) rem(8);
+    border-radius: rem(6);
+    color: var(--mat-sys-on-surface-variant);
+    font-size: rem(13);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: var(--mat-sys-primary-container);
+      color: var(--mat-sys-on-primary-container);
+    }
+
+    &.active {
+      background-color: var(--mat-sys-primary-container);
+      color: var(--mat-sys-primary);
+      font-weight: 600;
     }
   }
 
@@ -97,10 +148,37 @@ $mobile-header-height: rem(52);
   // ── Mobile drawer ────────────────────────────────────────
   &__drawer {
     width: $sidebar-width !important;
+    transition: width 0.2s ease !important;
 
     .mat-drawer-inner-container {
-      width: $sidebar-width;
+      width: 100%;
       overflow: hidden;
+    }
+
+    &--l2-open {
+      width: calc(#{$sidebar-width} + #{$l2-panel-width}) !important;
+    }
+
+    // L2 panel inside the drawer — display:none is desktop-gated, override it here
+    .aum-t2__l2-panel {
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      width: $l2-panel-width;
+      background-color: var(--mat-sys-surface);
+      border-inline-end: none;
+      border-inline-start: rem(1) solid var(--mat-sys-outline-variant);
+      overflow-y: auto;
+    }
+  }
+
+  &__drawer-inner {
+    display: flex;
+    height: 100%;
+
+    aum-sidebar-2 {
+      width: $sidebar-width;
+      flex-shrink: 0;
     }
   }
 }
@@ -109,7 +187,7 @@ $mobile-header-height: rem(52);
 .dark-mode {
   .aum-t2__hamburger {
     &:hover {
-      background-color: color-mix(in srgb, var(--mat-sys-primary-container) 30%, black);
+      background-color: color-mix(in srgb, var(--mat-sys-primary-container) 30%, var(--mat-sys-surface));
     }
   }
 }

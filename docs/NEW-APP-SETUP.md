@@ -55,17 +55,17 @@ import { AumTemplate } from '@aum/templates/aum-template';
 
 ### AumTemplate2 (`@aum/templates/aum-template-2`)
 
-- **Layout:** Persistent sidebar on desktop/tablet; collapses to a slide-out drawer on mobile (≤700px).
+- **Layout:** Persistent sidebar on desktop (> 960px); collapses to a slide-out drawer on tablet and mobile (≤ 960px).
 - **Mobile header:** Minimal bar with brand logo + hamburger. No separate toolbar component.
 - **Branding:** Sidebar renders `brandLogo`, `appLogo`, and `appName` from `app-config.json`.
-- **Input:** `drawerWidth` — CSS width for the mobile drawer (default `'200px'`).
+- **Navigation:** Supports two levels. L1 items with `children` open a secondary panel beside the sidebar on desktop/tablet; on mobile the drawer expands to show the same L2 panel inline.
 - **Use when:** The app is relatively simple or standalone and benefits from always-visible navigation on larger screens.
 
 ```typescript
 // app.routes.ts
 import { AumTemplate2 } from '@aum/templates/aum-template-2';
 
-{ path: '', component: AumTemplate2, data: { drawerWidth: '240px' }, children: [...] }
+{ path: '', component: AumTemplate2, children: [...] }
 ```
 
 ---

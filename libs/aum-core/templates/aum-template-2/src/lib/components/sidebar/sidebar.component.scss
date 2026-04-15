@@ -22,9 +22,9 @@
     align-items: center;
     justify-content: center;
     gap: rem(4);
-    padding: rem(16) rem(8) rem(12);
+    padding: rem(16) rem(4);
     flex-shrink: 0;
-    border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+    // border-bottom: rem(1) solid var(--mat-sys-outline-variant);
   }
 
   &__brand-logo {
@@ -91,6 +91,11 @@
       outline-offset: rem(2);
     }
 
+    &.open {
+      background-color: var(--mat-sys-surface-container-high);
+      color: var(--mat-sys-on-surface);
+    }
+
     &.active {
       background-color: var(--mat-sys-primary-container);
       color: var(--mat-sys-primary);
@@ -120,12 +125,12 @@
   }
 }
 
-// Dark mode: tone down active/hover fill to avoid over-saturation
+// Dark mode: tone down fills to avoid over-saturation
 .dark-mode {
   .aum-sidebar__item {
     &:hover,
     &.active {
-      background-color: color-mix(in srgb, var(--mat-sys-primary-container) 30%, black);
+      background-color: color-mix(in srgb, var(--mat-sys-primary-container) 30%, var(--mat-sys-surface));
     }
   }
 }

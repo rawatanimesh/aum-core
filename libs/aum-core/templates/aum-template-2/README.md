@@ -22,7 +22,6 @@ export const appRoutes: Route[] = [
   {
     path: '',
     component: AumTemplate2,
-    data: { drawerWidth: '240px' },   // optional — default is '200px'
     canActivate: [AuthGuardService],
     children: [
       {
@@ -70,20 +69,43 @@ providers: [
 
 **Note:** `toolbarMenus` (preferences/profile) is not rendered by `AumTemplate2`. Those menus live inside the sidebar.
 
-## Inputs
+## L2 Navigation
 
-| Input | Type | Default | Description |
-|-------|------|---------|-------------|
-| `drawerWidth` | `string` | `'200px'` | CSS width of the mobile slide-out drawer |
+`navItems` entries with a `children` array enable two-level navigation:
+
+- **Desktop/tablet:** Clicking an L1 parent item opens a secondary panel beside the sidebar showing its children. The L1 icon is highlighted with an `open` state (neutral background) while the panel is visible, and an `active` state (primary colour) when a child route is matched.
+- **Mobile:** Clicking an L1 parent expands the drawer horizontally to show the L2 panel inline. The user must explicitly tap an L2 item to navigate — no auto-navigation occurs. Tapping an L2 item changes the route and closes the drawer.
+
+```json
+"navItems": [
+  { "label": "DASHBOARD", "value": "/dashboard", "icon": "dashboard" },
+  {
+    "label": "REPORTS",
+    "value": "reports",
+    "icon": "assessment",
+    "children": [
+      { "label": "SALES",    "value": "/reports/sales",    "icon": "trending_up" },
+      { "label": "OVERVIEW", "value": "/reports/overview", "icon": "bar_chart"   }
+    ]
+  }
+]
+```
+
+**Visual states for parent items:**
+
+| CSS class | When applied | Appearance |
+|---|---|---|
+| `open` | L2 panel is visible (user clicked, no child route active yet) | Neutral highlight |
+| `active` | A child route is currently matched by the router | Primary colour highlight |
 
 ## Layout behaviour
 
 | Screen width | Layout |
 |---|---|
-| > 700px (tablet/desktop) | Sidebar visible, no mobile header, no drawer |
-| ≤ 700px (mobile) | Sidebar hidden, mobile header shown (brand logo + hamburger), drawer opens on tap |
+| > 960px (desktop) | Sidebar visible + optional L2 panel beside it when an L1 parent is selected; no mobile header, no drawer |
+| ≤ 960px (tablet/mobile) | Sidebar hidden, mobile header shown (brand logo + hamburger); drawer opens on tap and expands to show L2 panel inline when an L1 parent is tapped |
 
-The breakpoint is controlled via Angular CDK `BreakpointObserver` at `(min-width: 700px)`. The drawer closes automatically when the screen widens past this breakpoint.
+The breakpoint is controlled via Angular CDK `BreakpointObserver` at `(min-width: 961px)`, matching the standard `$breakpoint-tablet` (960px). The drawer closes automatically when the screen widens past this breakpoint.
 
 ## Exports
 
