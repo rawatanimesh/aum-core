@@ -1,0 +1,34 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="data-display-category">
+
+      <div class="data-display-category__header">
+        <div class="data-display-category__header-icon">
+          <aum-icon name="bar_chart" color="primary" [width]="32"></aum-icon>
+        </div>
+        <div>
+          <h1 class="data-display-category__title">{{ 'UI_LAB_DATA_DISPLAY' | translate }}</h1>
+          <p class="data-display-category__subtitle">{{ 'UI_LAB_DATA_DISPLAY_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="data-display-category__grid">
+        @for (comp of components; track comp.route) {
+          <a class="data-display-category__card" [routerLink]="comp.route">
+            <div class="data-display-category__card-top">
+              <aum-icon [name]="comp.icon" color="primary" [width]="24"></aum-icon>
+              <h2 class="data-display-category__card-name">{{ comp.nameKey | translate }}</h2>
+            </div>
+            <code class="data-display-category__card-selector">{{ comp.selector }}</code>
+            <p class="data-display-category__card-desc">{{ comp.descKey | translate }}</p>
+            <div class="data-display-category__card-cta">
+              <span>{{ 'UI_LAB_VIEW_DOCS' | translate }}</span>
+              <aum-icon name="arrow_forward" color="primary" [width]="16"></aum-icon>
+            </div>
+          </a>
+        }
+      </div>
+
+    </div>
+  </div>
+</aum-page>

@@ -1,0 +1,43 @@
+<div class="data-examples">
+
+  <!-- Scenario 1: Bar Chart -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CH_BAR_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CH_BAR_DESC' | translate"
+  >
+    <div class="data-demo-chart-wrap">
+      <aum-chart [config]="barChart"></aum-chart>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Line Chart (multi-dataset) -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CH_LINE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CH_LINE_DESC' | translate"
+  >
+    <div class="data-demo-chart-wrap">
+      <aum-chart [config]="lineChart"></aum-chart>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Doughnut Chart -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CH_DOUGHNUT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CH_DOUGHNUT_DESC' | translate"
+  >
+    <div class="data-demo-chart-wrap">
+      <aum-chart [config]="doughnutChart"></aum-chart>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Custom Size -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CH_SIZE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CH_SIZE_DESC' | translate"
+  >
+    <div class="data-demo-chart-wrap">
+      <aum-chart [config]="customSizeChart"></aum-chart>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

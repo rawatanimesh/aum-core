@@ -1,0 +1,40 @@
+<div class="feedback-examples">
+
+  <!-- Scenario 1: All Types -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SB_TYPES_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SB_TYPES_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="filled" [value]="'UI_LAB_SHOW_SUCCESS' | translate" (clickButton)="showSuccess()"></aum-button>
+      <aum-button type="outlined" [value]="'UI_LAB_SHOW_ERROR' | translate" (clickButton)="showError()"></aum-button>
+      <aum-button type="outlined" [value]="'UI_LAB_SHOW_WARNING' | translate" (clickButton)="showWarning()"></aum-button>
+      <aum-button type="basic" [value]="'UI_LAB_SHOW_INFO' | translate" (clickButton)="showInfo()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: With Action Button -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SB_ACTION_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SB_ACTION_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="filled" [value]="'UI_LAB_SHOW_WITH_ACTION' | translate" (clickButton)="showWithAction()"></aum-button>
+    </div>
+    @if (actionClicked()) {
+      <p class="feedback-demo-output">{{ 'UI_LAB_ACTION_CLICKED' | translate }}</p>
+    }
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Custom Duration -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SB_DURATION_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SB_DURATION_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_SHOW_SHORT' | translate" (clickButton)="showShort()"></aum-button>
+      <aum-button type="outlined" [value]="'UI_LAB_SHOW_LONG' | translate" (clickButton)="showLong()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

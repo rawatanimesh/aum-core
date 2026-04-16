@@ -1,0 +1,34 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="utilities-category">
+
+      <div class="utilities-category__header">
+        <div class="utilities-category__header-icon">
+          <aum-icon name="construction" color="primary" [width]="32"></aum-icon>
+        </div>
+        <div>
+          <h1 class="utilities-category__title">{{ 'UI_LAB_UTILITIES' | translate }}</h1>
+          <p class="utilities-category__subtitle">{{ 'UI_LAB_UTILITIES_DESC' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="utilities-category__grid">
+        @for (comp of components; track comp.route) {
+          <a class="utilities-category__card" [routerLink]="comp.route">
+            <div class="utilities-category__card-top">
+              <aum-icon [name]="comp.icon" color="primary" [width]="24"></aum-icon>
+              <h2 class="utilities-category__card-name">{{ comp.nameKey | translate }}</h2>
+            </div>
+            <code class="utilities-category__card-selector">{{ comp.selector }}</code>
+            <p class="utilities-category__card-desc">{{ comp.descKey | translate }}</p>
+            <div class="utilities-category__card-cta">
+              <span>{{ 'UI_LAB_VIEW_DOCS' | translate }}</span>
+              <aum-icon name="arrow_forward" color="primary" [width]="16"></aum-icon>
+            </div>
+          </a>
+        }
+      </div>
+
+    </div>
+  </div>
+</aum-page>

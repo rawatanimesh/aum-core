@@ -1,0 +1,57 @@
+<div class="util-examples">
+
+  <!-- Scenario 1: Basic Indeterminate -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SP_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SP_BASIC_DESC' | translate"
+  >
+    <div class="util-demo-spinner-row">
+      <aum-spinner></aum-spinner>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Determinate -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SP_DETERMINATE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SP_DETERMINATE_DESC' | translate"
+  >
+    <div class="util-demo-progress-controls">
+      <div class="util-demo-spinner-row">
+        <aum-spinner type="determinate" [progress]="progress()"></aum-spinner>
+        <span class="util-demo-progress-value">{{ progress() }}%</span>
+      </div>
+      <div class="util-demo-btn-row">
+        <aum-button type="filled" value="+10%" size="small" (clickButton)="increaseProgress()"></aum-button>
+        <aum-button type="outlined" value="Reset" size="small" (clickButton)="resetProgress()"></aum-button>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: With Text at Different Positions -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SP_TEXT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SP_TEXT_DESC' | translate"
+  >
+    <div class="util-demo-spinner-row">
+      <aum-spinner text="Top" textPosition="top" [diameter]="40"></aum-spinner>
+      <aum-spinner text="Bottom" textPosition="bottom" [diameter]="40"></aum-spinner>
+      <aum-spinner text="Left" textPosition="left" [diameter]="40"></aum-spinner>
+      <aum-spinner text="Right" textPosition="right" [diameter]="40"></aum-spinner>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Multiple Sizes -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SP_SIZES_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SP_SIZES_DESC' | translate"
+  >
+    <div class="util-demo-spinner-row">
+      <aum-spinner [diameter]="24"></aum-spinner>
+      <aum-spinner [diameter]="36"></aum-spinner>
+      <aum-spinner [diameter]="50"></aum-spinner>
+      <aum-spinner [diameter]="64"></aum-spinner>
+      <aum-spinner [diameter]="80"></aum-spinner>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

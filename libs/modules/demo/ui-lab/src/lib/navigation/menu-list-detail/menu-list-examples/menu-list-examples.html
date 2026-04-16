@@ -1,0 +1,96 @@
+<div class="nav-examples">
+
+  <!-- Scenario 1: Basic List -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_ML_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_ML_BASIC_DESC' | translate"
+  >
+    <aum-button
+      type="outlined"
+      [value]="'UI_LAB_OPEN_MENU' | translate"
+      [matMenuTriggerFor]="basicMenu.childMenu"
+    ></aum-button>
+    <aum-menu-list
+      #basicMenu="aumMenu"
+      [list]="basicItems"
+      (itemSelected)="onItemSelected($event)"
+    ></aum-menu-list>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: With Icons -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_ML_ICONS_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_ML_ICONS_DESC' | translate"
+  >
+    <aum-button
+      type="outlined"
+      icon="menu"
+      [value]="'UI_LAB_OPEN_MENU' | translate"
+      [matMenuTriggerFor]="iconMenu.childMenu"
+    ></aum-button>
+    <aum-menu-list
+      #iconMenu="aumMenu"
+      [list]="iconItems"
+      (itemSelected)="onItemSelected($event)"
+    ></aum-menu-list>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Nested Menu -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_ML_NESTED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_ML_NESTED_DESC' | translate"
+  >
+    <aum-button
+      type="outlined"
+      icon="account_tree"
+      [value]="'UI_LAB_OPEN_MENU' | translate"
+      [matMenuTriggerFor]="nestedMenu.childMenu"
+    ></aum-button>
+    <aum-menu-list
+      #nestedMenu="aumMenu"
+      [list]="nestedItems"
+      (itemSelected)="onItemSelected($event)"
+    ></aum-menu-list>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Disabled Items -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_ML_DISABLED_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_ML_DISABLED_DESC' | translate"
+  >
+    <aum-button
+      type="outlined"
+      [value]="'UI_LAB_OPEN_MENU' | translate"
+      [matMenuTriggerFor]="disabledMenu.childMenu"
+    ></aum-button>
+    <aum-menu-list
+      #disabledMenu="aumMenu"
+      [list]="disabledItems"
+      (itemSelected)="onItemSelected($event)"
+    ></aum-menu-list>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Selection Result -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_ML_RESULT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_ML_RESULT_DESC' | translate"
+  >
+    <div class="nav-examples__trigger-row">
+      <aum-button
+        type="filled"
+        icon="touch_app"
+        [value]="'UI_LAB_OPEN_MENU' | translate"
+        [matMenuTriggerFor]="resultMenu.childMenu"
+      ></aum-button>
+      <span class="nav-examples__result">
+        {{ 'UI_LAB_LAST_SELECTED' | translate }}: <strong>{{ lastSelected() }}</strong>
+      </span>
+    </div>
+    <aum-menu-list
+      #resultMenu="aumMenu"
+      [list]="iconItems"
+      (itemSelected)="onItemSelected($event)"
+    ></aum-menu-list>
+  </ui-lab-scenario-card>
+
+</div>

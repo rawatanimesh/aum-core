@@ -1,0 +1,51 @@
+<div class="nav-examples">
+
+  <!-- Scenario 1: Basic Breadcrumb -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BC_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BC_BASIC_DESC' | translate"
+  >
+    <aum-breadcrumb></aum-breadcrumb>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Dynamic Update -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BC_DYNAMIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BC_DYNAMIC_DESC' | translate"
+  >
+    <div class="nav-demo-row">
+      <aum-button
+        type="outlined"
+        [value]="'UI_LAB_BC_PRESET_1' | translate"
+        (clickButton)="loadPreset(preset1)"
+      ></aum-button>
+      <aum-button
+        type="outlined"
+        [value]="'UI_LAB_BC_PRESET_2' | translate"
+        (clickButton)="loadPreset(preset2)"
+      ></aum-button>
+    </div>
+    <aum-breadcrumb></aum-breadcrumb>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Clear Breadcrumbs -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_BC_CLEAR_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_BC_CLEAR_DESC' | translate"
+  >
+    <div class="nav-demo-row">
+      <aum-button
+        type="filled"
+        [value]="'UI_LAB_SET_TRAIL' | translate"
+        (clickButton)="loadPreset(preset1)"
+      ></aum-button>
+      <aum-button
+        type="outlined"
+        [value]="'UI_LAB_CLEAR_TRAIL' | translate"
+        (clickButton)="clear()"
+      ></aum-button>
+    </div>
+    <aum-breadcrumb></aum-breadcrumb>
+  </ui-lab-scenario-card>
+
+</div>

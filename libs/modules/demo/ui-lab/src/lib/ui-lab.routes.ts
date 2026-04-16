@@ -74,6 +74,98 @@ export const uiLabRoutes: Routes = [
     ],
   },
   {
+    path: 'navigation',
+    children: [
+      {
+        path: '',
+        title: 'Navigation | UI Lab',
+        loadComponent: () =>
+          import('./navigation/navigation-category').then((m) => m.NavigationCategory),
+      },
+      {
+        path: 'breadcrumb',
+        title: 'Breadcrumb | UI Lab',
+        loadComponent: () =>
+          import('./navigation/breadcrumb-detail/breadcrumb-detail').then((m) => m.BreadcrumbDetail),
+      },
+      {
+        path: 'menu-list',
+        title: 'Menu List | UI Lab',
+        loadComponent: () =>
+          import('./navigation/menu-list-detail/menu-list-detail').then((m) => m.MenuListDetail),
+      },
+    ],
+  },
+  {
+    path: 'feedback',
+    children: [
+      {
+        path: '',
+        title: 'Feedback | UI Lab',
+        loadComponent: () =>
+          import('./feedback/feedback-category').then((m) => m.FeedbackCategory),
+      },
+      {
+        path: 'snackbar',
+        title: 'Snackbar | UI Lab',
+        loadComponent: () =>
+          import('./feedback/snackbar-detail/snackbar-detail').then((m) => m.SnackbarDetail),
+      },
+      {
+        path: 'generic-dialog',
+        title: 'Generic Dialog | UI Lab',
+        loadComponent: () =>
+          import('./feedback/generic-dialog-detail/generic-dialog-detail').then((m) => m.GenericDialogDetail),
+      },
+      {
+        path: 'confirmation-dialog',
+        title: 'Confirmation Dialog | UI Lab',
+        loadComponent: () =>
+          import('./feedback/confirmation-dialog-detail/confirmation-dialog-detail').then((m) => m.ConfirmationDialogDetail),
+      },
+    ],
+  },
+  {
+    path: 'utilities',
+    children: [
+      {
+        path: '',
+        title: 'Utilities | UI Lab',
+        loadComponent: () =>
+          import('./utilities/utilities-category').then((m) => m.UtilitiesCategory),
+      },
+      {
+        path: 'icon',
+        title: 'Icon | UI Lab',
+        loadComponent: () =>
+          import('./utilities/icon-detail/icon-detail').then((m) => m.IconDetail),
+      },
+      {
+        path: 'spinner',
+        title: 'Spinner | UI Lab',
+        loadComponent: () =>
+          import('./utilities/spinner-detail/spinner-detail').then((m) => m.SpinnerDetail),
+      },
+    ],
+  },
+  {
+    path: 'data-display',
+    children: [
+      {
+        path: '',
+        title: 'Data Display | UI Lab',
+        loadComponent: () =>
+          import('./data-display/data-display-category').then((m) => m.DataDisplayCategory),
+      },
+      {
+        path: 'chart',
+        title: 'Chart | UI Lab',
+        loadComponent: () =>
+          import('./data-display/chart-detail/chart-detail').then((m) => m.ChartDetail),
+      },
+    ],
+  },
+  {
     path: 'form-controls',
     children: [
       {

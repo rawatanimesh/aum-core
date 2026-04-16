@@ -1,0 +1,115 @@
+<div class="util-examples">
+
+  <!-- Scenario 1: Default Size -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_IC_DEFAULT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_IC_DEFAULT_DESC' | translate"
+  >
+    <div class="util-demo-icon-row">
+      <aum-icon name="home"></aum-icon>
+      <aum-icon name="settings"></aum-icon>
+      <aum-icon name="notifications"></aum-icon>
+      <aum-icon name="favorite"></aum-icon>
+      <aum-icon name="star"></aum-icon>
+      <aum-icon name="search"></aum-icon>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Custom Sizes -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_IC_SIZE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_IC_SIZE_DESC' | translate"
+  >
+    <div class="util-demo-icon-row">
+      <div class="util-demo-icon-item">
+        <aum-icon name="star" color="primary" [width]="16"></aum-icon>
+        <span class="util-demo-icon-label">16px</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="star" color="primary" [width]="20"></aum-icon>
+        <span class="util-demo-icon-label">20px</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="star" color="primary" [width]="24"></aum-icon>
+        <span class="util-demo-icon-label">24px</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="star" color="primary" [width]="32"></aum-icon>
+        <span class="util-demo-icon-label">32px</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="star" color="primary" [width]="48"></aum-icon>
+        <span class="util-demo-icon-label">48px</span>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Color Presets -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_IC_COLOR_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_IC_COLOR_DESC' | translate"
+  >
+    <div class="util-demo-icon-row">
+      <div class="util-demo-icon-item">
+        <aum-icon name="circle" color="primary" [width]="28"></aum-icon>
+        <span class="util-demo-icon-label">primary</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="circle" color="secondary" [width]="28"></aum-icon>
+        <span class="util-demo-icon-label">secondary</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="circle" color="tertiary" [width]="28"></aum-icon>
+        <span class="util-demo-icon-label">tertiary</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="circle" color="error" [width]="28"></aum-icon>
+        <span class="util-demo-icon-label">error</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="circle" color="on-surface" [width]="28"></aum-icon>
+        <span class="util-demo-icon-label">on-surface</span>
+      </div>
+      <div class="util-demo-icon-item">
+        <aum-icon name="circle" color="on-surface-variant" [width]="28"></aum-icon>
+        <span class="util-demo-icon-label">on-surface-variant</span>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Inline With Text -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_IC_INLINE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_IC_INLINE_DESC' | translate"
+  >
+    <div class="util-demo-icon-row">
+      <div class="util-demo-inline-text">
+        <aum-icon name="check_circle" color="primary" [width]="20"></aum-icon>
+        <span>{{ 'UI_LAB_SCENE_IC_INLINE_TITLE' | translate }}</span>
+      </div>
+      <div class="util-demo-inline-text">
+        <aum-icon name="warning" color="error" [width]="20"></aum-icon>
+        <span>{{ 'UI_LAB_SCENE_IC_COLOR_TITLE' | translate }}</span>
+      </div>
+      <div class="util-demo-inline-text">
+        <aum-icon name="info" color="secondary" [width]="20"></aum-icon>
+        <span>{{ 'UI_LAB_SCENE_IC_DEFAULT_TITLE' | translate }}</span>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 5: Dynamic Icon Name -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_IC_DYNAMIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_IC_DYNAMIC_DESC' | translate"
+  >
+    <div class="util-demo-icon-row">
+      <div class="util-demo-icon-item">
+        <aum-icon [name]="dynamicIcon" color="primary" [width]="48"></aum-icon>
+        <span class="util-demo-icon-label">{{ dynamicIcon }}</span>
+      </div>
+      <aum-button type="outlined" icon="refresh" value="Cycle Icon" (clickButton)="cycleDynamic()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

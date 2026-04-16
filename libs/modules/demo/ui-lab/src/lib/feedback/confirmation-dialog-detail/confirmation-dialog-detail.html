@@ -1,0 +1,53 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="detail-page">
+
+      <ui-lab-component-header
+        [name]="meta.name"
+        [selector]="meta.selector"
+        [importFrom]="meta.importFrom"
+        [description]="meta.description"
+        [status]="meta.status"
+      ></ui-lab-component-header>
+
+      <aum-tab-group>
+
+        <aum-tab [label]="'UI_LAB_TAB_EXAMPLES' | translate">
+          <demo-confirmation-dialog-examples></demo-confirmation-dialog-examples>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
+          <div class="detail-page__code-section">
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_IMPORT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.importPath" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_CONFIRMATION_BASIC' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.basicUsage" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_WITH_IMAGE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.withImage" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_HANDLE_RESULT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.handleResult" language="typescript"></ui-lab-code-block>
+          </div>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_API' | translate">
+          <ui-lab-api-table
+            [interfaces]="interfaces"
+          ></ui-lab-api-table>
+        </aum-tab>
+
+      </aum-tab-group>
+
+      <div class="detail-page__nav">
+        <a class="detail-page__nav-prev" [routerLink]="'/ui-lab/feedback/generic-dialog'">
+          <aum-icon name="arrow_back" color="primary" [width]="18"></aum-icon>
+          <span>{{ 'UI_LAB_GENERIC_DIALOG' | translate }}</span>
+        </a>
+        <div></div>
+      </div>
+
+    </div>
+  </div>
+</aum-page>

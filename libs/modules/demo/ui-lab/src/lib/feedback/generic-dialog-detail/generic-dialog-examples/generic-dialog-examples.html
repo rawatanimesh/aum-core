@@ -1,0 +1,43 @@
+<div class="feedback-examples">
+
+  <!-- Scenario 1: Basic Dialog -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_GD_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_GD_BASIC_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="filled" [value]="'UI_LAB_OPEN_DIALOG' | translate" (clickButton)="openBasic()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: No Close Button -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_GD_NO_CLOSE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_GD_NO_CLOSE_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_OPEN_NO_CLOSE' | translate" (clickButton)="openNoClose()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: No Padding -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_GD_NO_PADDING_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_GD_NO_PADDING_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_OPEN_NO_PADDING' | translate" (clickButton)="openNoPadding()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Fixed Body Height -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_GD_BODY_HEIGHT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_GD_BODY_HEIGHT_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_OPEN_BODY_HEIGHT' | translate" (clickButton)="openBodyHeight()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

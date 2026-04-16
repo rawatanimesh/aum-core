@@ -1,0 +1,46 @@
+<div class="feedback-examples">
+
+  <!-- Scenario 1: Basic Confirmation -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CD_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CD_BASIC_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="filled" [value]="'UI_LAB_OPEN_BASIC' | translate" (clickButton)="openBasic()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: With Illustration Image -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CD_IMAGE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CD_IMAGE_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_OPEN_WITH_IMAGE' | translate" (clickButton)="openWithImage()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Custom Button Text -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CD_CUSTOM_TEXT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CD_CUSTOM_TEXT_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_OPEN_CUSTOM_TEXT' | translate" (clickButton)="openCustomText()"></aum-button>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Track Result -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_CD_RESULT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_CD_RESULT_DESC' | translate"
+  >
+    <div class="feedback-demo-row">
+      <aum-button type="outlined" [value]="'UI_LAB_OPEN_TRACK_RESULT' | translate" (clickButton)="openAndTrackResult()"></aum-button>
+    </div>
+    <p class="feedback-demo-output">
+      {{ 'UI_LAB_LAST_RESULT' | translate }} <strong>{{ lastResult() }}</strong>
+    </p>
+  </ui-lab-scenario-card>
+
+</div>

@@ -14,6 +14,7 @@ interface CatalogCategory {
 
 @Component({
   selector: 'demo-ui-lab-catalog',
+  standalone: true,
   imports: [RouterModule, PageComponent, Icon, TranslateModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './ui-lab-catalog.html',
@@ -51,7 +52,7 @@ export class UiLabCatalog {
       descKey: 'UI_LAB_CAT_NAVIGATION_DESC',
       icon: 'menu',
       route: '/ui-lab/navigation',
-      count: 3,
+      count: 2,
     },
     {
       titleKey: 'UI_LAB_FEEDBACK',
@@ -65,14 +66,14 @@ export class UiLabCatalog {
       descKey: 'UI_LAB_CAT_UTILITIES_DESC',
       icon: 'construction',
       route: '/ui-lab/utilities',
-      count: 4,
+      count: 2,
     },
     {
       titleKey: 'UI_LAB_DATA_DISPLAY',
       descKey: 'UI_LAB_CAT_DATA_DISPLAY_DESC',
       icon: 'bar_chart',
       route: '/ui-lab/data-display',
-      count: 2,
+      count: 1,
     },
   ];
 

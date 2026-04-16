@@ -1,0 +1,61 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="detail-page">
+
+      <ui-lab-component-header
+        [name]="meta.name"
+        [selector]="meta.selector"
+        [importFrom]="meta.importFrom"
+        [description]="meta.description"
+        [status]="meta.status"
+      ></ui-lab-component-header>
+
+      <aum-tab-group>
+
+        <aum-tab [label]="'UI_LAB_TAB_EXAMPLES' | translate">
+          <demo-icon-examples></demo-icon-examples>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
+          <div class="detail-page__code-section">
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_IMPORT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.importPath" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_BASIC_USAGE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.basicUsage" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_COLOR_PRESETS' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.withColor" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_INLINE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.inlineWithText" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_DYNAMIC_ICON' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.dynamic" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_ARIA' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.withSize" language="html"></ui-lab-code-block>
+          </div>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_API' | translate">
+          <ui-lab-api-table
+            [inputs]="inputs"
+            [outputs]="[]"
+            [interfaces]="interfaces"
+          ></ui-lab-api-table>
+        </aum-tab>
+
+      </aum-tab-group>
+
+      <div class="detail-page__nav">
+        <div></div>
+        <a class="detail-page__nav-next" [routerLink]="'/ui-lab/utilities/spinner'">
+          <span>{{ 'UI_LAB_SPINNER' | translate }}</span>
+          <aum-icon name="arrow_forward" color="primary" [width]="18"></aum-icon>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</aum-page>
