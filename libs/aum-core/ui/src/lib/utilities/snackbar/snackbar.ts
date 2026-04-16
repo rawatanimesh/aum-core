@@ -6,7 +6,12 @@ import {
 } from '@angular/material/snack-bar';
 import { ButtonComponent } from '../../buttons/button/button.component';
 
-import { SnackbarType } from './snackbar.service';
+export type SnackbarType = 'success' | 'warning' | 'info' | 'error';
+
+export interface SnackbarAction {
+  label: string;
+  callback: () => void;
+}
 
 @Component({
   selector: 'aum-snackbar',

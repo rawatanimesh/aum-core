@@ -2,7 +2,7 @@ import { Component, Input, ViewEncapsulation, TemplateRef, ContentChild, AfterCo
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { Icon } from '@aum/ui/utilities';
+import { Icon } from '../../utilities/icon/icon';
 import { ExpansionPanelContentDirective } from './expansion-panel-content.directive';
 
 export interface ExpansionPanelItem {

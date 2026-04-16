@@ -10,7 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { MatMenuModule, MatMenu } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { Icon } from '@aum/ui/utilities';
+import { Icon } from '../../utilities/icon/icon';
 // Interface for menu item structure
 export interface MenuItem {
   label: string;

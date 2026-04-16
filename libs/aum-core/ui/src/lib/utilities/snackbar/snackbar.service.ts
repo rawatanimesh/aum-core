@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Snackbar } from './snackbar';
+import { Snackbar, SnackbarType, SnackbarAction } from './snackbar';
 
 @Injectable({ providedIn: 'root' })
 export class SnackbarService {
@@ -36,11 +36,4 @@ export class SnackbarService {
   error(message: string, duration?: number, action?: SnackbarAction) {
     this.show(message, 'error', duration, action);
   }
-}
-
-export type SnackbarType = 'success' | 'warning' | 'info' | 'error';
-
-export interface SnackbarAction {
-  label: string;
-  callback: () => void;
 }

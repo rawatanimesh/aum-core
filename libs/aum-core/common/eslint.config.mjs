@@ -8,6 +8,19 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
+      // Prevent self-barrel imports within this lib — use relative paths instead.
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@aum/common',
+              message:
+                'Inside libs/aum-core/common, import siblings via relative paths — not the @aum/common alias. Self-barrel imports cause circular dependencies.',
+            },
+          ],
+        },
+      ],
       '@angular-eslint/directive-selector': [
         'error',
         {

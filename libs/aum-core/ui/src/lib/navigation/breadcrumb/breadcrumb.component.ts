@@ -3,7 +3,7 @@ import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslateModule } from '@ngx-translate/core';
-import { Icon } from '@aum/ui/utilities';
+import { Icon } from '../../utilities/icon/icon';
 
 import { BreadcrumbService } from './breadcrumb.service';
 import { BreadcrumbItem } from './breadcrumb';

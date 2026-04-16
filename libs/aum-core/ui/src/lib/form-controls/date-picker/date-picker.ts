@@ -36,7 +36,7 @@ import {
   UntypedFormControl,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { Icon } from '@aum/ui/utilities';
+import { Icon } from '../../utilities/icon/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

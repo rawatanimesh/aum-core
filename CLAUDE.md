@@ -134,6 +134,22 @@ constructor() {
 <h1>{{ 'WELCOME_MESSAGE' | translate }}</h1>
 ```
 
+### NX Internal Imports (MANDATORY)
+
+`@aum/ui/*`, `@aum/utils/*`, and similar aliases are **for external consumers only**. Inside a library, always import siblings via relative paths — never via the library's own alias. Using the alias internally creates circular dependencies that cause `NG0919` runtime crashes in lazy-loaded routes.
+
+```typescript
+// ✅ CORRECT — relative path inside libs/aum-core/ui
+import { Icon } from '../../utilities/icon/icon';
+import { ButtonComponent } from '../../buttons/button/button.component';
+
+// ❌ FORBIDDEN — self-barrel import inside the same NX lib
+import { Icon } from '@aum/ui/utilities';          // circular risk
+import { ButtonComponent } from '@aum/ui/buttons'; // circular risk
+```
+
+This rule applies inside `libs/aum-core/ui`, `libs/aum-core/utils`, `libs/aum-core/common`, and `libs/aum-core/theme`. App code and other libraries **should** use the `@aum/*` aliases as normal.
+
 ### Language Switching Order (CRITICAL)
 ```typescript
 // ✅ Language switching must be LAST in event handlers
@@ -174,6 +190,7 @@ onMenuSelect(item: MenuItem) {
 
 Before committing code, verify:
 - [ ] **Checked AUM catalog** — no raw `mat-*` where `aum-*` exists; never `<mat-icon>`
+- [ ] **NX internal imports** — if code lives inside a `libs/aum-core/*` library, all same-library imports use relative paths (not `@aum/*` aliases)
 - [ ] **No hardcoded colors** - only var(--mat-sys-*)
 - [ ] **No pixel values** - only rem() function
 - [ ] **No inline styles**

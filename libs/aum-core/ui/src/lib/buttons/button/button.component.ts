@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { Icon } from '@aum/ui/utilities';
+import { Icon } from '../../utilities/icon/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'aum-button',

@@ -23,11 +23,11 @@ import {
 } from '@angular/forms';
 import { HttpClient, HttpEvent, HttpEventType } from '@angular/common/http';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { Icon } from '@aum/ui/utilities';
+import { Icon } from '../../utilities/icon/icon';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { TranslateModule } from '@ngx-translate/core';
-import { ButtonComponent } from '@aum/ui/buttons';
+import { ButtonComponent } from '../../buttons/button/button.component';
 import { AumErrorStateMatcher } from '../input/input';
 
 /**

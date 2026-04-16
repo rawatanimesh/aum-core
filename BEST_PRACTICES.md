@@ -62,6 +62,33 @@ libs/
 - Don't mix app-specific code with reusable UI components
 - Don't create deep nested folder structures
 
+### NX Internal Imports — Relative Paths Within the Same Library
+
+> **Why this matters:** `@aum/ui/*`, `@aum/utils/*`, and similar aliases are **public APIs for external consumers**. Inside the library that owns those aliases, importing via the barrel re-enters the same module graph — creating circular dependencies that surface as runtime `NG0919` errors in lazy-loaded routes (class appears `undefined` at runtime even though the build succeeds).
+
+**Rule: files inside a NX library must import siblings via relative paths — never via the library's own public alias.**
+
+```typescript
+// ✅ Correct — relative import within libs/aum-core/ui
+import { Icon } from '../../utilities/icon/icon';
+import { ButtonComponent } from '../../buttons/button/button.component';
+
+// ❌ Wrong — self-barrel import within the same NX lib
+import { Icon } from '@aum/ui/utilities';         // barrel is for external consumers
+import { ButtonComponent } from '@aum/ui/buttons'; // same lib → use relative path
+```
+
+The public barrel (`index.ts` → alias) is the **exit point** of the library. It is correct to use it from application code or from a different NX library. It is incorrect to use it from within the same library.
+
+This applies to all libraries in the monorepo:
+
+| Library | Internal source root | Public alias(es) |
+|---|---|---|
+| `aum-core/ui` | `libs/aum-core/ui/src/lib/` | `@aum/ui/*` |
+| `aum-core/utils` | `libs/aum-core/utils/src/lib/` | `@aum/utils/*` |
+| `aum-core/common` | `libs/aum-core/common/src/lib/` | `@aum/common` |
+| `aum-core/theme` | `libs/aum-core/theme/src/lib/` | `@aum/theme` |
+
 ---
 
 ## 📦 AUM Component & Service Catalog
@@ -1043,6 +1070,7 @@ Before submitting code, ensure:
 
 - [ ] ✅ No raw `mat-*` components used where an `aum-*` wrapper exists (check catalog)
 - [ ] ✅ No raw `<mat-icon>` elements — always use `<aum-icon>` with `[width]`/`[color]` inputs
+- [ ] ✅ If adding code **inside** a NX library (`libs/aum-core/ui`, `libs/aum-core/utils`, etc.) — imports from the same library use relative paths, not the library's own `@aum/*` alias
 - [ ] ✅ No hardcoded color values (#hex, rgb, rgba)
 - [ ] ✅ All colors use var(--mat-sys-\*) variables
 - [ ] ✅ No pixel (px) values for dimensions
