@@ -3,7 +3,13 @@
   <!-- Mobile-only minimal header (brand logo + hamburger + app identity) -->
   <header class="aum-t2__mobile-header">
     @if (hasBrandLogo()) {
-      <img [src]="brandLogo()" class="aum-t2__mobile-brand-logo" alt="brand-logo" />
+      @if (logoHomeRoute()) {
+        <a class="aum-t2__mobile-brand-logo-link" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
+          <img [src]="brandLogo()" class="aum-t2__mobile-brand-logo" alt="brand-logo" />
+        </a>
+      } @else {
+        <img [src]="brandLogo()" class="aum-t2__mobile-brand-logo" alt="brand-logo" />
+      }
     }
     <button class="aum-t2__hamburger" (click)="mobileDrawer.toggle()" aria-label="Open navigation">
       <aum-icon name="menu"></aum-icon>

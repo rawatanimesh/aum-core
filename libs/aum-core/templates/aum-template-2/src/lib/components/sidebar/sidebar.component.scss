@@ -27,6 +27,17 @@
     // border-bottom: rem(1) solid var(--mat-sys-outline-variant);
   }
 
+  &__brand-logo-link {
+    display: flex;
+    cursor: pointer;
+    border-radius: rem(4);
+
+    &:focus-visible {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(2);
+    }
+  }
+
   &__brand-logo {
     height: rem(32);
     max-width: 100%;

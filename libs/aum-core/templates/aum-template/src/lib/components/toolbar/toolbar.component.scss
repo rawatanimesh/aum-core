@@ -6,6 +6,17 @@
   width: 100%;
   &-left {
     width: 30%;
+    &-brandLogo-link {
+      display: flex;
+      cursor: pointer;
+      border-radius: rem(4);
+
+      &:focus-visible {
+        outline: rem(2) solid var(--mat-sys-primary);
+        outline-offset: rem(2);
+      }
+    }
+
     &-brandLogo {
       height: rem(45);
     }

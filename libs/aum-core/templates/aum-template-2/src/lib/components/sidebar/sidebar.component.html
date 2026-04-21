@@ -4,7 +4,13 @@
   @if ((showBrandLogo && hasBrandLogo()) || showAppIdentity) {
     <div class="aum-sidebar__header">
       @if (showBrandLogo && hasBrandLogo()) {
-        <img [src]="brandLogo()" class="aum-sidebar__brand-logo" alt="brand-logo" />
+        @if (logoHomeRoute()) {
+          <a class="aum-sidebar__brand-logo-link" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
+            <img [src]="brandLogo()" class="aum-sidebar__brand-logo" alt="brand-logo" />
+          </a>
+        } @else {
+          <img [src]="brandLogo()" class="aum-sidebar__brand-logo" alt="brand-logo" />
+        }
       }
       @if (showAppIdentity) {
         @if (shouldShowAppLogo()) {

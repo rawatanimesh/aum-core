@@ -5,6 +5,17 @@
 .aum-toolbar-2 {
   width: 100%;
 
+  &__brand-logo-link {
+    display: flex;
+    cursor: pointer;
+    border-radius: rem(4);
+
+    &:focus-visible {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(2);
+    }
+  }
+
   &__brand-logo { height: rem(45); }
   &__app-icon   { height: rem(22); }
   &__app-name   { color: var(--mat-sys-on-surface); }

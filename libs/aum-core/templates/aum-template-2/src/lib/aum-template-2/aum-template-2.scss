@@ -55,6 +55,17 @@ $mobile-header-height: rem(52);
 
   }
 
+  &__mobile-brand-logo-link {
+    display: flex;
+    cursor: pointer;
+    border-radius: rem(4);
+
+    &:focus-visible {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(2);
+    }
+  }
+
   &__mobile-brand-logo { height: rem(36); }
   &__mobile-logo { height: rem(22); }
   &__mobile-name {

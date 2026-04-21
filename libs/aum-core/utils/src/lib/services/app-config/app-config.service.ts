@@ -104,6 +104,11 @@ export interface AppConfig {
   disableRipple?: boolean;
   /** Default values for user preferences when no saved value exists in localStorage */
   defaults?: AppDefaults;
+  /**
+   * Route to navigate to when the brand logo is clicked.
+   * When set, the logo becomes a clickable link. When omitted or null, the logo is static.
+   */
+  logoHomeRoute?: string | null;
 }
 
 /**
@@ -155,6 +160,9 @@ export class AppConfigService {
 
   /** Computed signal for default preference values */
   readonly defaults = computed(() => this._config().defaults);
+
+  /** Computed signal for logo home route — null/undefined means logo is not clickable */
+  readonly logoHomeRoute = computed(() => this._config().logoHomeRoute ?? null);
 
   /**
    * Updates the entire configuration

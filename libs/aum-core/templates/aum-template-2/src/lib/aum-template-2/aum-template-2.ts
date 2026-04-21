@@ -6,7 +6,7 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Icon } from '@aum/ui/utilities';
@@ -34,15 +34,24 @@ export class AumTemplate2 {
 
   private breakpointObserver = inject(BreakpointObserver);
   private appConfigService = inject(AppConfigService);
+  private router = inject(Router);
 
   brandLogo = this.appConfigService.brandLogo;
   appLogo = this.appConfigService.appLogo;
   appName = this.appConfigService.appName;
+  logoHomeRoute = this.appConfigService.logoHomeRoute;
 
   /** Active L1 parent for the desktop/tablet persistent sidebar L2 panel */
   activeL1Item = signal<SideNavItem | null>(null);
   /** Active L1 parent for the mobile drawer L2 panel */
   mobileActiveL1Item = signal<SideNavItem | null>(null);
+
+  navigateHome(): void {
+    const route = this.logoHomeRoute();
+    if (route) {
+      this.router.navigateByUrl(route);
+    }
+  }
 
   onActiveItemChange(item: SideNavItem | null): void {
     this.activeL1Item.set(item);
