@@ -1,5 +1,5 @@
 {
-  "brandLogo": "assets/svgs/A-logo.svg",
+  "brandLogo": "assets/svgs/brand-logo.svg",
   "logoHomeRoute": "/dashboard",
   "appName": "Angular UI Mods",
   "navItems": [

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200"><metadata><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/"><rdf:Description><dc:creator>RealFaviconGenerator</dc:creator><dc:source>https://realfavicongenerator.net</dc:source></rdf:Description></rdf:RDF></metadata><defs>
+    <linearGradient id="grad-c-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0F1A"></stop>
+      <stop offset="100%" stop-color="#1A0A2E"></stop>
+    </linearGradient>
+    <linearGradient id="grad-c-mark" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E40035"></stop>
+      <stop offset="35%" stop-color="#DC087D"></stop>
+      <stop offset="75%" stop-color="#9717E7"></stop>
+      <stop offset="100%" stop-color="#6C00F5"></stop>
+    </linearGradient>
+    <linearGradient id="grad-c-shine" x1="0%" y1="0%" x2="60%" y2="80%">
+      <stop offset="0%" stop-color="#FF31D9" stop-opacity="0.6"></stop>
+      <stop offset="100%" stop-color="#FF5BE1" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs><circle cx="100" cy="100" r="92" fill="url(#grad-c-bg)"></circle><circle cx="100" cy="100" r="92" fill="none" stroke="url(#grad-c-mark)" stroke-width="3"></circle><path d="M52 148 L100 44 L148 148" stroke="url(#grad-c-mark)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"></path><line x1="72" y1="110" x2="128" y2="110" stroke="url(#grad-c-mark)" stroke-width="12" stroke-linecap="round"></line><path d="M52 148 L100 44 L148 148" stroke="url(#grad-c-shine)" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
