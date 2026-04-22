@@ -297,7 +297,7 @@ Add the **Material Symbols Outlined** font link inside `<head>`. Without it all 
 
 > `core.scss` already aliases `.material-icons` → `Material Symbols Outlined`, so no additional CSS is needed. The font link is the only per-app requirement.
 
-If your CSP is strict, ensure `fonts.googleapis.com` is in `style-src` and `fonts.gstatic.com` is in `font-src`.
+The `index.html` already includes the correct `style-src` and `font-src` directives for Google Fonts — no changes needed.
 
 ### `styles.scss`
 

@@ -91,9 +91,9 @@ export class Dashboard {
       icon: 'devices',
     },
     {
-      title: 'CSP_TITLE',
-      description: 'CSP_DESC',
-      icon: 'security',
+      title: 'PWA_TITLE',
+      description: 'PWA_DESC',
+      icon: 'install_mobile',
     },
     {
       title: 'GIT_SUBTREE_TITLE',
