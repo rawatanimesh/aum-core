@@ -60,6 +60,10 @@
             {
               "replace": "apps/demo-app/src/environments/environment.ts",
               "with": "apps/demo-app/src/environments/environment.prod.ts"
+            },
+            {
+              "replace": "apps/demo-app/src/app/app-config.json",
+              "with": "apps/demo-app/src/app/app-config.prod.json"
             }
           ]
         },
