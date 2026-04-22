@@ -22,7 +22,7 @@
     align-items: center;
     justify-content: center;
     gap: rem(4);
-    padding: rem(16) rem(4);
+    padding: rem(10) rem(4);
     flex-shrink: 0;
     // border-bottom: rem(1) solid var(--mat-sys-outline-variant);
   }
@@ -39,7 +39,7 @@
   }
 
   &__brand-logo {
-    height: rem(32);
+    height: rem(40);
     max-width: 100%;
     object-fit: contain;
   }
