@@ -4,7 +4,7 @@
   <header class="aum-t2__mobile-header">
     @if (hasBrandLogo()) {
       @if (logoHomeRoute()) {
-        <a class="aum-t2__mobile-brand-logo-link" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
+        <a class="aum-t2__mobile-brand-logo-link" [routerLink]="logoHomeRoute()" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
           <img [src]="brandLogo()" class="aum-t2__mobile-brand-logo" alt="brand-logo" />
         </a>
       } @else {

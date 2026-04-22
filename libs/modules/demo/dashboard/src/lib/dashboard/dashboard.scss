@@ -80,6 +80,13 @@
     background: var(--mat-sys-surface-container-low);
     border-radius: rem(12);
     border-left: rem(3) solid var(--mat-sys-primary);
+    min-height: rem(80);
+  }
+
+  &-benefit-icon {
+    flex-shrink: 0;
+    width: rem(28);
+    height: rem(28);
   }
 
   &-benefit-desc {

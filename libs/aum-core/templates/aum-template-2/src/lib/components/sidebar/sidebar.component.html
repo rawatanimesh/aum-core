@@ -5,7 +5,7 @@
     <div class="aum-sidebar__header">
       @if (showBrandLogo && hasBrandLogo()) {
         @if (logoHomeRoute()) {
-          <a class="aum-sidebar__brand-logo-link" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
+          <a class="aum-sidebar__brand-logo-link" [routerLink]="logoHomeRoute()" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
             <img [src]="brandLogo()" class="aum-sidebar__brand-logo" alt="brand-logo" />
           </a>
         } @else {
