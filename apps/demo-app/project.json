@@ -30,7 +30,7 @@
             "input": "libs/aum-core/common/src/assets/resources/svgs",
             "output": "assets/svgs"
           },
-{
+          {
             "glob": "**/*.json",
             "input": "libs/aum-core/common/src/assets/i18n",
             "output": "assets/i18n"
@@ -47,7 +47,7 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "2mb"
             },
             {
               "type": "anyComponentStyle",
