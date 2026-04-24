@@ -70,6 +70,7 @@ export class SidebarComponent implements OnInit {
   brandLogo = this.appConfigService.brandLogo;
   appLogo = this.appConfigService.appLogo;
   appName = this.appConfigService.appName;
+  logoHomeRoute = this.appConfigService.logoHomeRoute;
   toolbarMenusConfig = this.appConfigService.toolbarMenus;
 
   hasBrandLogo = computed(() => {
@@ -183,6 +184,13 @@ export class SidebarComponent implements OnInit {
     }
 
     this.profileMenuList = items;
+  }
+
+  navigateHome(): void {
+    const route = this.logoHomeRoute();
+    if (route) {
+      this.router.navigateByUrl(route);
+    }
   }
 
   onItemClick(item: SideNavItem): void {

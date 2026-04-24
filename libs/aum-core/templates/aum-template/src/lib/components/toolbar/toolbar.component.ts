@@ -61,6 +61,7 @@ export class ToolbarComponent implements OnInit {
   brandLogo = this.appConfigService.brandLogo;
   appLogo = this.appConfigService.appLogo;
   appName = this.appConfigService.appName;
+  logoHomeRoute = this.appConfigService.logoHomeRoute;
   toolbarMenusConfig = this.appConfigService.toolbarMenus;
 
   protected hasBrandLogo = computed(() => {
@@ -193,6 +194,13 @@ export class ToolbarComponent implements OnInit {
 
   openPreferences(): void {
     this.preferencesDialogService.open();
+  }
+
+  navigateHome(): void {
+    const route = this.logoHomeRoute();
+    if (route) {
+      this.router.navigate([route]);
+    }
   }
 
   toggleMenu(): void {

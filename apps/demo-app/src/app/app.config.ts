@@ -10,13 +10,12 @@ import {
 import { provideRouter, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
 import { provideHttpClient, withInterceptors, HttpClient } from '@angular/common/http';
 import { MAT_RIPPLE_GLOBAL_OPTIONS, RippleGlobalOptions } from '@angular/material/core';
-import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, CspService, PaletteService, ThemeService  } from '@aum/utils/services';
+import { APP_CONFIG, GlobalErrorHandler, httpErrorInterceptor, RippleConfigService, PaletteService, ThemeService } from '@aum/utils/services';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from '@aum/utils/services';
 import { appRoutes } from './app.routes';
 import appConfiguration from './app-config.json';
 import { GlobalAppInitService } from './services/global-app-init.service';
-import { environment } from '../environments/environment';
 
 // Merges core library translations (AUM.*) with app-level translations at runtime.
 // Core keys live under the AUM namespace; app keys are at root level — no collision possible.
@@ -76,14 +75,6 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       inject(PaletteService);
       inject(ThemeService);
-    }),
-    // Initialize CSP with API URL(s) from environment
-    // Supports single URL or array - configure in environment.ts
-    provideAppInitializer(() => {
-      const cspService = inject(CspService);
-      cspService.initializeCsp(environment.apiUrl, {
-        enableViolationLogging: !environment.production,
-      });
     }),
   ],
 };

@@ -4,7 +4,13 @@
     <!-- Left: brand logo + hamburger (mobile only) + app identity -->
     <div class="aum-toolbar-2__left flex-row-flex-start-center gap-4 h-100">
       @if (hasBrandLogo()) {
-        <img class="margin-left-4 aum-toolbar-2__brand-logo" [src]="brandLogo()" alt="brand-logo" />
+        @if (logoHomeRoute()) {
+          <a class="margin-left-4 aum-toolbar-2__brand-logo-link" (click)="navigateHome()" (keydown.enter)="navigateHome()" tabindex="0" [attr.aria-label]="'AUM.GO_TO_HOME' | translate">
+            <img class="aum-toolbar-2__brand-logo" [src]="brandLogo()" alt="brand-logo" />
+          </a>
+        } @else {
+          <img class="margin-left-4 aum-toolbar-2__brand-logo" [src]="brandLogo()" alt="brand-logo" />
+        }
       }
 
       <!-- Hamburger: hidden on tablet + desktop via CSS -->

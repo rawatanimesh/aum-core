@@ -16,12 +16,6 @@
       "selected": false
     },
     {
-      "label": "PLAYGROUND",
-      "value": "/playground",
-      "icon": "science",
-      "selected": false
-    },
-    {
       "label": "UI_LAB",
       "value": "/ui-lab",
       "icon": "widgets",
