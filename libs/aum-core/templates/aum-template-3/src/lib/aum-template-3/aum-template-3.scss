@@ -1,0 +1,86 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+$header-height:       rem(52);
+$sidebar-collapsed:   rem(88);
+$sidebar-expanded:    rem(280);
+$settings-drawer-w:   rem(300);
+$transition-dur:      0.25s;
+$transition-ease:     cubic-bezier(0.4, 0, 0.2, 1);
+
+.aum-t3 {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+
+  // ── Header ────────────────────────────────────────────────
+  &__header {
+    height: $header-height;
+    flex-shrink: 0;
+    border-bottom: rem(0.8) solid var(--mat-sys-outline-variant);
+    background-color: var(--mat-sys-surface);
+
+    .mat-toolbar-single-row {
+      padding: 0;
+      gap: rem(8);
+      height: $header-height;
+    }
+  }
+
+  // ── Body ──────────────────────────────────────────────────
+  &__body {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+
+  // ── Persistent sidebar: desktop only, push layout ─────────
+  &__sidebar {
+    display: none;
+    flex-shrink: 0;
+    width: $sidebar-collapsed;
+    min-width: $sidebar-collapsed;
+    transition: width $transition-dur $transition-ease,
+                min-width $transition-dur $transition-ease;
+    border-inline-end: rem(1) solid var(--mat-sys-outline-variant);
+    overflow: hidden;
+    background-color: var(--mat-sys-surface);
+
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &--expanded {
+      width: $sidebar-expanded;
+      min-width: $sidebar-expanded;
+    }
+  }
+
+  // ── Content area (flex:1, fills remaining space) ──────────
+  &__content {
+    flex: 1;
+    height: 100%;
+    overflow: hidden;
+    --mat-sidenav-container-shape: 0;
+
+    .mat-drawer:not(.mat-drawer-side) {
+      box-shadow: 0 0 rem(8) var(--mat-sys-shadow);
+    }
+  }
+
+  // ── Mobile/tablet overlay drawer ─────────────────────────
+  &__mobile-drawer {
+    width: $sidebar-expanded !important;
+    background-color: var(--mat-sys-surface) !important;
+  }
+
+  // ── Settings drawer (right side, mobile only) ─────────────
+  &__settings-drawer {
+    width: $settings-drawer-w !important;
+  }
+}

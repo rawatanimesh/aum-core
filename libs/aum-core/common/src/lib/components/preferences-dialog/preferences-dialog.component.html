@@ -124,6 +124,16 @@
                     <aum-icon name="view_compact" [width]="32"></aum-icon>
                     <span>{{ 'AUM.TEMPLATE_2' | translate }}</span>
                   </button>
+                  <button
+                    class="aum-prefs-dialog__template-card"
+                    [class.aum-prefs-dialog__template-card--selected]="draft.template === 'template-3'"
+                    [disabled]="isTemplateDisabled()"
+                    (click)="onTemplateChange('template-3')"
+                    type="button"
+                  >
+                    <aum-icon name="dock_to_right" [width]="32"></aum-icon>
+                    <span>{{ 'AUM.TEMPLATE_3' | translate }}</span>
+                  </button>
                 </div>
               </div>
             }

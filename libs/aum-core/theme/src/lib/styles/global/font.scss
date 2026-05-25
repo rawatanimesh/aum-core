@@ -1,6 +1,15 @@
 // _fonts.scss
 
 $noto-sans-font-path: '../../../assets/resources/fonts/Noto_Sans' !default;
+$material-symbols-font-path: '../../../assets/resources/fonts/MaterialSymbols' !default;
+
+@font-face {
+  font-family: 'Material Symbols Outlined';
+  src: url('#{$material-symbols-font-path}/material-symbols-outlined.woff2') format('woff2');
+  font-weight: 100 700;
+  font-style: normal;
+  font-display: block;
+}
 
 // Regular
 @font-face {

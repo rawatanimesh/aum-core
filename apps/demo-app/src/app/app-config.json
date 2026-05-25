@@ -66,7 +66,7 @@
   },
   "disableRipple": true,
   "defaults": {
-    "template": "template-2",
+    "template": "template-3",
     "theme": "dark",
     "displayMode": "default",
     "language": "en",

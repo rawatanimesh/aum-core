@@ -1,0 +1,120 @@
+<mat-toolbar>
+  <div class="aum-t3-toolbar flex-row-space-between-center h-100">
+
+    <!-- Left side -->
+    <div class="aum-t3-toolbar__left flex-row-flex-start-center gap-4 h-100">
+      @if (hasBrandLogo()) {
+        @if (logoHomeRoute()) {
+          <a
+            class="margin-left-4 aum-t3-toolbar__brand-logo-link"
+            (click)="navigateHome()"
+            (keydown.enter)="navigateHome()"
+            tabindex="0"
+            [attr.aria-label]="'AUM.GO_TO_HOME' | translate"
+          >
+            <img class="aum-t3-toolbar__brand-logo" [src]="brandLogo()" alt="brand-logo" />
+          </a>
+        } @else {
+          <img class="margin-left-4 aum-t3-toolbar__brand-logo" [src]="brandLogo()" alt="brand-logo" />
+        }
+      }
+
+      <!-- Hamburger: expands/collapses desktop sidebar on desktop; opens drawer on mobile/tablet -->
+      <aum-button
+        [type]="'icon'"
+        [icon]="isDesktop() && sidebarExpanded() ? 'menu_open' : 'menu'"
+        [tooltip]="'AUM.MENU' | translate"
+        class="aum-t3-hamburger"
+        (clickButton)="toggleMenu()"
+      ></aum-button>
+
+      <div class="flex-column-center-flex-start gap-4">
+        @if (shouldShowAppLogo()) {
+          <img [src]="appLogo()" class="aum-t3-toolbar__app-icon" alt="app-logo" />
+        } @else if (shouldShowAppName()) {
+          <span class="aum-t3-toolbar__app-name fw-600 fs-18">{{ appName() }}</span>
+        }
+        <aum-breadcrumb></aum-breadcrumb>
+      </div>
+    </div>
+
+    <!-- Center space -->
+    <div class="aum-t3-toolbar__center"></div>
+
+    <!-- Right side -->
+    <div class="aum-t3-toolbar__right">
+      <div class="flex-row-flex-end-center gap-4">
+
+        <!-- Desktop/tablet: direct actions, custom templates, preferences, profile -->
+        <div class="aum-t3-desktop-actions flex-row-flex-end-center gap-4">
+          @for (action of toolbarActions; track action.id) {
+            <aum-button
+              [type]="action.type || 'icon'"
+              [icon]="action.icon"
+              [value]="(action.value || '') | translate"
+              [tooltip]="(action.tooltip || '') | translate"
+              (clickButton)="onGlobalActionClick(action.id)"
+            ></aum-button>
+          }
+
+          @for (template of customTemplates; track template.id) {
+            <ng-container *ngTemplateOutlet="template.template"></ng-container>
+          }
+
+          @if (overflowActions.length) {
+            <aum-button
+              [type]="'icon'"
+              [icon]="'more_vert'"
+              [tooltip]="'AUM.MORE_OPTIONS' | translate"
+              [matMenuTriggerFor]="overflowMenu.childMenu"
+              (clickButton)="onMenuOpening()"
+            ></aum-button>
+            <aum-menu-list
+              #overflowMenu="aumMenu"
+              [list]="overflowMenuList"
+              (itemSelected)="onOverflowMenuSelect($event)"
+            ></aum-menu-list>
+          }
+
+          @if (shouldShowPreferencesMenu()) {
+            <aum-button
+              [type]="'icon'"
+              [icon]="'tune'"
+              [tooltip]="'AUM.PREFERENCES' | translate"
+              [disabled]="isPreferencesMenuDisabled()"
+              (clickButton)="openPreferences()"
+            ></aum-button>
+          }
+
+          @if (shouldShowProfileMenu()) {
+            <aum-button
+              [type]="'icon'"
+              [icon]="'account_circle'"
+              [tooltip]="'AUM.MY_ACCOUNT' | translate"
+              [matMenuTriggerFor]="profileMenu.childMenu"
+              [disabled]="isProfileMenuDisabled()"
+              (clickButton)="onMenuOpening()"
+            ></aum-button>
+          }
+        </div>
+
+        <!-- Mobile only: tune icon opens the right settings drawer -->
+        <aum-button
+          class="aum-t3-settings-trigger"
+          [type]="'icon'"
+          [icon]="'tune'"
+          [tooltip]="'AUM.PREFERENCES' | translate"
+          (clickButton)="openSettingsDrawer()"
+        ></aum-button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <aum-menu-list
+    #profileMenu="aumMenu"
+    [list]="profileMenuList"
+    (itemSelected)="onMenuSelect($event)"
+  ></aum-menu-list>
+</mat-toolbar>

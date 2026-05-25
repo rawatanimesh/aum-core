@@ -1,0 +1,52 @@
+<div class="aum-t3">
+
+  <!-- Top header: always visible on all breakpoints -->
+  <div class="aum-t3__header">
+    <aum-t3-toolbar
+      [sidebarExpanded]="sidebarExpanded()"
+      [isDesktop]="isDesktop()"
+      (sideMenuToggle)="onSideMenuToggle()"
+      (settingsDrawerToggle)="toggleSettingsDrawer()"
+    ></aum-t3-toolbar>
+  </div>
+
+  <!-- Body: persistent desktop sidebar (push) + content area -->
+  <div class="aum-t3__body">
+
+    <!-- Persistent sidebar: desktop only, push layout -->
+    <aside
+      class="aum-t3__sidebar"
+      [class.aum-t3__sidebar--expanded]="sidebarExpanded()"
+    >
+      <aum-sidebar-3 [expanded]="sidebarExpanded()" (expandRequested)="sidebarExpanded.set(true)"></aum-sidebar-3>
+    </aside>
+
+    <!-- Content area + mobile/tablet overlay drawers -->
+    <mat-sidenav-container class="aum-t3__content" [hasBackdrop]="true">
+
+      <!-- Left overlay: mobile/tablet nav drawer (full-width tree style) -->
+      <mat-sidenav #mobileDrawer mode="over" class="aum-t3__mobile-drawer">
+        <aum-sidebar-3
+          [mobileMode]="true"
+          (menuItemClicked)="mobileDrawer.close()"
+        ></aum-sidebar-3>
+      </mat-sidenav>
+
+      <!-- Right overlay: settings drawer (mobile only) -->
+      <mat-sidenav
+        #settingsDrawer
+        mode="over"
+        position="end"
+        class="aum-t3__settings-drawer"
+      >
+        <aum-settings-drawer></aum-settings-drawer>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+  </div>
+</div>

@@ -21,6 +21,7 @@
       "@demo/ui-lab": ["libs/modules/demo/ui-lab/src/index.ts"],
       "@aum/templates/aum-template": ["libs/aum-core/templates/aum-template/src/index.ts"],
       "@aum/templates/aum-template-2": ["libs/aum-core/templates/aum-template-2/src/index.ts"],
+      "@aum/templates/aum-template-3": ["libs/aum-core/templates/aum-template-3/src/index.ts"],
       "@aum/common": ["libs/aum-core/common/src/index.ts"],
       "@aum/theme": ["libs/aum-core/theme/src/index.ts"],
       "@aum/ui/buttons": ["libs/aum-core/ui/src/lib/buttons/index.ts"],
