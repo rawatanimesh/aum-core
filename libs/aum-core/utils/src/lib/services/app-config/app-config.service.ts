@@ -69,8 +69,8 @@ export interface ToolbarMenuConfig {
  * Default values for user preferences (used when localStorage has no saved value)
  */
 export interface AppDefaults {
-  /** Default layout template. Defaults to 'template-2' if not set. */
-  template?: 'template-1' | 'template-2';
+  /** Default layout template. Defaults to 'template-3' if not set. */
+  template?: 'template-1' | 'template-2' | 'template-3';
   /** Default theme mode. Defaults to 'light' if not set. */
   theme?: 'light' | 'dark' | 'system';
   /** Default display density. Defaults to 'default' if not set. */

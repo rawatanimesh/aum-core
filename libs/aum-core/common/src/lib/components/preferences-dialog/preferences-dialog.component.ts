@@ -35,7 +35,7 @@ import { SnackbarService } from '@aum/ui/utilities';
 export type ThemeMode = 'light' | 'dark' | 'system';
 export type DisplayMode = 'compact' | 'default' | 'large';
 export type Language = 'en' | 'ja' | 'hi';
-export type Template = 'template-1' | 'template-2';
+export type Template = 'template-1' | 'template-2' | 'template-3';
 
 interface PreferencesDraft {
   theme: ThemeMode;
@@ -207,7 +207,7 @@ export class PreferencesDialogComponent implements OnInit {
       palette:     defaults?.palette     ?? 'sea-green',
       displayMode: defaults?.displayMode ?? 'default',
       language:    defaults?.language    ?? 'en',
-      template:    defaults?.template    ?? 'template-2',
+      template:    defaults?.template    ?? 'template-3',
     };
 
     if (reset.theme !== this.draft.theme) {
@@ -246,7 +246,7 @@ export class PreferencesDialogComponent implements OnInit {
       language:    this.languageService.getLanguage() as Language,
       template:    (localStorage.getItem('app-template') as Template)
                     ?? this.appConfigService.defaults()?.template
-                    ?? 'template-2',
+                    ?? 'template-3',
     };
   }
 

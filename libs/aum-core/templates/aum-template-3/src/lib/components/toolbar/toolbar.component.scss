@@ -1,0 +1,46 @@
+@use 'functions' as *;
+@use 'mixins.scss' as *;
+@use 'variables.scss' as *;
+
+.aum-t3-toolbar {
+  width: 100%;
+
+  &__brand-logo-link {
+    display: flex;
+    cursor: pointer;
+    border-radius: rem(4);
+
+    &:focus-visible {
+      outline: rem(2) solid var(--mat-sys-primary);
+      outline-offset: rem(2);
+    }
+  }
+
+  &__brand-logo { height: rem(45); }
+  &__app-icon   { height: rem(22); }
+
+  &__app-name {
+    color: var(--mat-toolbar-container-text-color);
+  }
+
+  &__left  { width: 30%; }
+  &__center { width: 40%; }
+  &__right  { width: 30%; }
+}
+
+// Desktop/tablet: all individual action icons visible
+// Mobile: hidden — right settings drawer shows them instead
+.aum-t3-desktop-actions {
+  @include mobile {
+    display: none !important;
+  }
+}
+
+// Mobile only: hamburger is always visible; tune icon only on mobile
+.aum-t3-settings-trigger {
+  @media (min-width: ($breakpoint-mobile + 1px)) {
+    display: none !important;
+  }
+}
+
+

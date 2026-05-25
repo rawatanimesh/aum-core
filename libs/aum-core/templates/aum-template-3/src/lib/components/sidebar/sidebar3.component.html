@@ -1,0 +1,90 @@
+<nav
+  class="aum-sb3"
+  [class.aum-sb3--expanded]="isExpanded()"
+  aria-label="left navigation"
+>
+  <ul class="aum-sb3__nav">
+    @for (item of navItems(); track item.value) {
+
+      @if (item.children?.length) {
+        <li
+          class="aum-sb3__row"
+          [class.aum-sb3__row--active]="isParentActive(item)"
+        >
+          <button
+            class="aum-sb3__item"
+            [class.aum-sb3__item--active]="isParentActive(item)"
+            [attr.aria-expanded]="openParent()?.value === item.value"
+            (click)="onItemClick(item)"
+          >
+            <span class="aum-sb3__item-icon-wrap">
+              @if (item.icon) {
+                <aum-icon [name]="item.icon" [width]="22"></aum-icon>
+              }
+              @if (!isExpanded()) {
+                <aum-icon
+                  class="aum-sb3__chevron-badge"
+                  name="expand_more"
+                  [width]="18"
+                ></aum-icon>
+              }
+            </span>
+            <span class="aum-sb3__label">{{ item.label | translate }}</span>
+            @if (isExpanded()) {
+              <aum-icon
+                class="aum-sb3__chevron-end"
+                [name]="openParent()?.value === item.value ? 'expand_less' : 'expand_more'"
+                [width]="18"
+              ></aum-icon>
+            }
+          </button>
+
+          @if (isExpanded() && openParent()?.value === item.value) {
+            <ul class="aum-sb3__children">
+              @for (child of item.children!; track child.value) {
+                <li
+                  class="aum-sb3__row"
+                  [class.aum-sb3__row--active]="isItemActive(child)"
+                >
+                  <a
+                    href="javascript:void(0)"
+                    class="aum-sb3__item aum-sb3__item--child"
+                    [class.aum-sb3__item--active]="isItemActive(child)"
+                    (click)="onItemClick(child)"
+                  >
+                    <aum-icon
+                      [name]="child.icon || 'circle'"
+                      [width]="22"
+                    ></aum-icon>
+                    <span>{{ child.label | translate }}</span>
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        </li>
+
+      } @else {
+        <li
+          class="aum-sb3__row"
+          [class.aum-sb3__row--active]="isItemActive(item)"
+        >
+          <a
+            class="aum-sb3__item"
+            [class.aum-sb3__item--active]="isItemActive(item)"
+            href="javascript:void(0)"
+            (click)="onItemClick(item)"
+          >
+            <span class="aum-sb3__item-icon-wrap">
+              @if (item.icon) {
+                <aum-icon [name]="item.icon" [width]="22"></aum-icon>
+              }
+            </span>
+            <span class="aum-sb3__label">{{ item.label | translate }}</span>
+          </a>
+        </li>
+      }
+
+    }
+  </ul>
+</nav>
