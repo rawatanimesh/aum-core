@@ -105,6 +105,7 @@ nx lint demo-app
 
 - **AumTemplate** (`@aum/templates/aum-template`) - Toolbar-first layout with collapsible overlay sidenav
 - **AumTemplate2** (`@aum/templates/aum-template-2`) - Sidebar-first layout with persistent sidebar on desktop/tablet and responsive mobile drawer
+- **AumTemplate3** (`@aum/templates/aum-template-3`) - Hybrid layout combining a persistent global toolbar (Template 1) with a collapsible persistent sidebar (Template 2). Sidebar collapses to icon-only on desktop and opens as an overlay on mobile. Best when you need both a persistent header and always-visible navigation.
 - **Template switching** - Apps can allow users to switch between templates at runtime via the preferences menu. Enable with `toolbarMenus.preferences.items.template.show: true` in `app-config.json`
 
 #### Feedback & Dialogs

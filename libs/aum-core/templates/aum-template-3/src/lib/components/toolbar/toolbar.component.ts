@@ -58,6 +58,7 @@ export class ToolbarComponent implements OnInit {
 
   @Output() sideMenuToggle = new EventEmitter();
   @Output() settingsDrawerToggle = new EventEmitter();
+  @Output() homeNavigate = new EventEmitter<void>();
 
   private appConfigService = inject(AppConfigService);
   private languageService = inject(LanguageTranslationService);
@@ -213,6 +214,7 @@ export class ToolbarComponent implements OnInit {
   navigateHome(): void {
     const route = this.logoHomeRoute();
     if (route) {
+      this.homeNavigate.emit();
       this.router.navigate([route]);
     }
   }

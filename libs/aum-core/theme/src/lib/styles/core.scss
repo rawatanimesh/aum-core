@@ -22,6 +22,12 @@ body.scale-large {
 }
 
 /* Reset browser default body margin */
+/* overflow: hidden prevents iOS Safari from scrolling <body> when page content is short */
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   margin: 0;
   font-family: 'Noto Sans', sans-serif;

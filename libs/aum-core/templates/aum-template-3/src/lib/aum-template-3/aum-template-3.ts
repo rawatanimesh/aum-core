@@ -70,4 +70,9 @@ export class AumTemplate3 {
     this.mobileDrawer?.close();
     this.settingsDrawer?.toggle();
   }
+
+  closeSideNavs(): void {
+    this.mobileDrawer?.close();
+    this.settingsDrawer?.close();
+  }
 }
