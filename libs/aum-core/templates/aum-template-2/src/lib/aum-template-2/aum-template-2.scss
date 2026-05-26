@@ -9,7 +9,8 @@ $mobile-header-height: rem(52);
 .aum-t2 {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100vh;    // fallback for browsers without dvh support
+  height: 100dvh;   // dynamic viewport height: tracks iOS browser chrome show/hide
   overflow: hidden;
   box-sizing: border-box;
 
