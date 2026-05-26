@@ -21,6 +21,7 @@ Reference document for scaffolding a new application inside this NX monorepo. Co
 | **Core libraries** | `@aum/*` (ui, theme, utils, common, templates) |
 | **Template 1** | `@aum/templates/aum-template` — toolbar-first layout; recommended for enterprise/scalable apps |
 | **Template 2** | `@aum/templates/aum-template-2` — sidebar-first, responsive; suited for simpler or standalone apps |
+| **Template 3** | `@aum/templates/aum-template-3` — hybrid layout with global toolbar + collapsible persistent sidebar; best when you need both |
 
 ---
 
@@ -66,6 +67,22 @@ import { AumTemplate } from '@aum/templates/aum-template';
 import { AumTemplate2 } from '@aum/templates/aum-template-2';
 
 { path: '', component: AumTemplate2, children: [...] }
+```
+
+### AumTemplate3 (`@aum/templates/aum-template-3`)
+
+- **Layout:** Hybrid — global toolbar (always visible, same as Template 1) combined with a persistent collapsible sidebar (inspired by Template 2).
+- **Desktop sidebar:** Expands to show icon + label; collapses to icon-only strip. Toggle with the toolbar hamburger button.
+- **Mobile:** Sidebar hides completely; a full-screen overlay drawer opens on hamburger tap. Active submenu opens automatically when the drawer opens.
+- **Toolbar:** Full Template 1 toolbar — branding, dynamic global actions, overflow menu, preferences and profile menus.
+- **Navigation:** Two-level support. Clicking a parent in collapsed state auto-expands the sidebar and opens the submenu. On desktop, the hamburger icon toggles between `menu` and `menu_open`.
+- **Use when:** You need both a persistent global header (for toolbar actions, branding, user menu) and a persistent, collapsible side navigation. This is the richest layout — best for feature-heavy enterprise apps.
+
+```typescript
+// app.routes.ts
+import { AumTemplate3 } from '@aum/templates/aum-template-3';
+
+{ path: '', component: AumTemplate3, children: [...] }
 ```
 
 ---
