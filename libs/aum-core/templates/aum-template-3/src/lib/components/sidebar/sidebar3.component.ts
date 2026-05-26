@@ -10,6 +10,7 @@ import {
   OnInit,
   Output,
   signal,
+  untracked,
   ViewEncapsulation,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -77,6 +78,17 @@ export class Sidebar3Component implements OnInit {
     effect(() => {
       if (!this.isExpanded()) {
         this.openParent.set(null);
+      } else {
+        const active = untracked(() => this.activeItemValue());
+        if (!active) return;
+        const parent = this.navItems().find(
+          (item) =>
+            item.children?.length &&
+            item.children.some(
+              (c) => active === c.value || active.startsWith(c.value + '/')
+            )
+        ) ?? null;
+        if (parent) this.openParent.set(parent);
       }
     });
   }
@@ -89,7 +101,7 @@ export class Sidebar3Component implements OnInit {
     const url = this.router.url;
     this.activeItemValue.set(url);
 
-    if (this.mobileMode()) {
+    if (this.isExpanded()) {
       const parent =
         this.navItems().find(
           (item) =>
@@ -98,7 +110,7 @@ export class Sidebar3Component implements OnInit {
               (c) => url === c.value || url.startsWith(c.value + '/')
             )
         ) ?? null;
-      if (parent) this.openParent.set(parent);
+      this.openParent.set(parent);
     }
   }
 
