@@ -35,6 +35,11 @@ export class AumTemplate {
     this.settingsDrawer.toggle();
   }
 
+  closeSideNavs(): void {
+    this.sidenav?.close();
+    this.settingsDrawer?.close();
+  }
+
   updateBreadCrumbs(event: any) {
     console.log('Breadcrumbs updated with event:', event);
   }

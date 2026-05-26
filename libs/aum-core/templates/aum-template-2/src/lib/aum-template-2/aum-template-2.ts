@@ -49,6 +49,7 @@ export class AumTemplate2 {
   navigateHome(): void {
     const route = this.logoHomeRoute();
     if (route) {
+      this.mobileDrawer?.close();
       this.router.navigateByUrl(route);
     }
   }
