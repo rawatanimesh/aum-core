@@ -405,9 +405,17 @@ export class ButtonComponent {
 
 All UI must be responsive and look polished across **mobile (≤ 600px)**, **tablet (601px–960px)**, and **desktop (> 960px)** viewports. Horizontal overflow is strictly forbidden — content must never cause the page to scroll horizontally.
 
-> Breakpoints are defined in `libs/aum-core/theme/src/lib/styles/abstracts/_variables.scss`:
-> - `$breakpoint-mobile: 600px`
-> - `$breakpoint-tablet: 960px`
+> `libs/aum-core/theme/src/lib/styles/abstracts/_variables.scss` is the **single source of truth** for all global SCSS tokens. Update values here only — they propagate everywhere automatically:
+>
+> | Variable | Value | Purpose |
+> |---|---|---|
+> | `$breakpoint-mobile` | `600px` | Breakpoint for `@include mobile` mixin |
+> | `$breakpoint-tablet` | `960px` | Breakpoint for `@include tablet` mixin |
+> | `$scale-compact` | `0.85` | Compact display mode ratio |
+> | `$scale-default` | `1` | Default display mode ratio |
+> | `$scale-large` | `1.15` | Large display mode ratio |
+>
+> The scale ratios drive both `--ui-scale` (CSS custom property in `core.scss`, used by `rem()`) and any px-only third-party token overrides (e.g. AG Grid). Any SCSS file needing these values must `@use 'variables' as *` — never hardcode `0.85`, `1`, or `1.15`.
 >
 > Responsive mixins live in `libs/aum-core/theme/src/lib/styles/abstracts/_mixins.scss`. **Always use these mixins — never write raw media queries.**
 
@@ -1075,6 +1083,7 @@ Before submitting code, ensure:
 - [ ] ✅ All colors use var(--mat-sys-\*) variables
 - [ ] ✅ No pixel (px) values for dimensions
 - [ ] ✅ All dimensions use rem() function
+- [ ] ✅ If overriding px-only tokens for a third-party lib (e.g. AG Grid), use `@use 'variables' as *` and reference `$scale-compact` / `$scale-large` — never hardcode `0.85` or `1.15`
 - [ ] ✅ Component scales properly in Compact mode
 - [ ] ✅ Component scales properly in Large mode
 - [ ] ✅ Theme switching works without any visual breaks

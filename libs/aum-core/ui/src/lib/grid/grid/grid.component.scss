@@ -2,10 +2,7 @@
 // AG Grid renders DOM outside Angular's component tree so encapsulated styles don't reach it.
 @use 'sass:math';
 @use 'functions' as *;
-
-// AG Grid px tokens cannot use rem() — keep as plain numbers for math.round()
-$scale-compact: 0.85;
-$scale-large:   1.15;
+@use 'variables' as *;
 
 // Base AG Grid sizing tokens (default / scale-1.0)
 $ag-font-size:        13;

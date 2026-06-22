@@ -1,24 +1,25 @@
+@use 'variables' as *;
 @use 'functions' as *;
 @import './themes/theme';
 @import './global/font.scss';
 @import './global/scroll.scss';
 @import './abstracts/utilities.scss';
 
-/* Global scale variables */
+/* Global scale variables — ratios defined once in _variables.scss */
 :root {
-  --ui-scale: 1; // Default scale
+  --ui-scale: #{$scale-default};
 }
 
 body.scale-compact {
-  --ui-scale: 0.85;
+  --ui-scale: #{$scale-compact};
 }
 
 body.scale-default {
-  --ui-scale: 1;
+  --ui-scale: #{$scale-default};
 }
 
 body.scale-large {
-  --ui-scale: 1.15;
+  --ui-scale: #{$scale-large};
 }
 
 /* Reset browser default body margin */
