@@ -98,7 +98,7 @@
           <div class="aum-filter-toggle-wrap" [class.filters-active]="hasChips()">
             <aum-button
               type="icon"
-              [icon]="filterPanelOpen() ? 'filter_list_off' : 'filter_list'"
+              [icon]="filterPanelOpen() ? 'filter_alt_off' : 'filter_alt'"
               [tooltip]="'AUM.GRID_TOGGLE_FILTERS' | translate"
               [class.active]="filterPanelOpen()"
               (clickButton)="toggleFilters()"
@@ -150,7 +150,7 @@
     <!-- Empty state -->
     @if (showEmpty()) {
       <div class="aum-grid-overlay aum-grid-overlay--empty">
-        <img src="assets/svgs/brand-logo.svg" width="80" alt="" aria-hidden="true" />
+        <aum-confirmation-image type="search-not-found" class="aum-grid-overlay__image"></aum-confirmation-image>
         <span class="aum-grid-overlay__title">{{ 'AUM.GRID_EMPTY_TITLE' | translate }}</span>
         <span class="aum-grid-overlay__subtitle">{{ 'AUM.GRID_EMPTY_SUBTITLE' | translate }}</span>
       </div>
@@ -159,7 +159,7 @@
     <!-- Error state -->
     @if (error()) {
       <div class="aum-grid-overlay aum-grid-overlay--error">
-        <span class="material-icons aum-grid-overlay__error-icon">error_outline</span>
+        <aum-confirmation-image type="alert" class="aum-grid-overlay__image"></aum-confirmation-image>
         <span class="aum-grid-overlay__title">{{ 'AUM.GRID_ERROR_TITLE' | translate }}</span>
         <span class="aum-grid-overlay__subtitle">{{ 'AUM.GRID_ERROR_SUBTITLE' | translate }}</span>
       </div>
@@ -255,7 +255,7 @@
         <aum-button
           type="basic"
           size="small"
-          [value]="'AUM.GRID_COLUMNS_RESET' | translate"
+          [value]="'AUM.GRID_FILTER_RESET_TO_DEFAULT' | translate"
           (clickButton)="resetColumnVisibility()"
         ></aum-button>
       </div>

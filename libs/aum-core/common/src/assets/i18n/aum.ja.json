@@ -97,7 +97,6 @@
     "GRID_CSV_TOTAL_ROWS": "{{count}}行がエクスポートされます",
     "GRID_CSV_FILTERED_ROWS": "{{total}}行中{{filtered}}行（フィルター適用中）",
     "GRID_COLUMNS_TITLE": "列",
-    "GRID_COLUMNS_RESET": "リセット",
     "GRID_PAGE_SIZE": "1ページあたりの行数",
     "GRID_PAGE": "ページ",
     "GRID_OF": "/",

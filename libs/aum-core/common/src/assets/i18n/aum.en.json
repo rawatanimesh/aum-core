@@ -97,7 +97,6 @@
     "GRID_CSV_TOTAL_ROWS": "{{count}} rows will be exported",
     "GRID_CSV_FILTERED_ROWS": "{{filtered}} of {{total}} rows (filters active)",
     "GRID_COLUMNS_TITLE": "Columns",
-    "GRID_COLUMNS_RESET": "Reset",
     "GRID_PAGE_SIZE": "Rows per page",
     "GRID_PAGE": "Page",
     "GRID_OF": "of",

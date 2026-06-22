@@ -45,6 +45,7 @@ import { AumGridFilterDirective } from './grid-filter.directive';
 import { AumGridToolbarActionsDirective } from './grid-toolbar-actions.directive';
 import { AumCsvExportDialogComponent, AumCsvExportDialogData } from './dialogs/csv-export-dialog.component';
 import { AumFilterChipsDialogComponent, AumFilterChipsDialogData } from './dialogs/filter-chips-dialog.component';
+import { ConfirmationImageComponent } from '@aum/common';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
@@ -54,7 +55,7 @@ const MAX_VISIBLE_CHIPS = 4;
 @Component({
   selector: 'aum-grid',
   standalone: true,
-  imports: [CommonModule, AgGridAngular, TranslateModule, MatMenuModule, ButtonComponent, MenuList, Spinner, AumChipComponent, CheckboxComponent],
+  imports: [CommonModule, AgGridAngular, TranslateModule, MatMenuModule, ButtonComponent, MenuList, Spinner, AumChipComponent, CheckboxComponent, ConfirmationImageComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   templateUrl: './grid.component.html',

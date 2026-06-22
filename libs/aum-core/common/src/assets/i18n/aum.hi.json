@@ -97,7 +97,6 @@
     "GRID_CSV_TOTAL_ROWS": "{{count}} पंक्तियां निर्यात होंगी",
     "GRID_CSV_FILTERED_ROWS": "{{total}} में से {{filtered}} पंक्तियां (फ़िल्टर सक्रिय)",
     "GRID_COLUMNS_TITLE": "कॉलम",
-    "GRID_COLUMNS_RESET": "रीसेट",
     "GRID_PAGE_SIZE": "पंक्तियां प्रति पृष्ठ",
     "GRID_PAGE": "पृष्ठ",
     "GRID_OF": "का",

@@ -43,15 +43,15 @@ function makeEmployee(i: number): Employee {
 const ALL_ROWS: Employee[] = Array.from({ length: 200 }, (_, i) => makeEmployee(i));
 
 const BASE_COLUMNS: AumColumnDef<Employee>[] = [
-  { field: 'id',         headerNameKey: 'GRID_COL_ID',         width: 70,  flex: 0, filter: 'agNumberColumnFilter', pinned: 'left' },
-  { field: 'name',       headerNameKey: 'GRID_COL_NAME',       minWidth: 160 },
-  { field: 'department', headerNameKey: 'GRID_COL_DEPARTMENT', minWidth: 140 },
-  { field: 'role',       headerNameKey: 'GRID_COL_ROLE',       minWidth: 120 },
-  { field: 'salary',     headerNameKey: 'GRID_COL_SALARY',     minWidth: 120, filter: 'agNumberColumnFilter',
+  { field: 'id',         headerName: 'ID',         width: 70,  flex: 0, filter: 'agNumberColumnFilter', pinned: 'left' },
+  { field: 'name',       headerName: 'Name',       minWidth: 160 },
+  { field: 'department', headerName: 'Department', minWidth: 140 },
+  { field: 'role',       headerName: 'Role',       minWidth: 120 },
+  { field: 'salary',     headerName: 'Salary',     minWidth: 120, filter: 'agNumberColumnFilter',
     valueFormatter: (p: any) => p.value != null ? `$${p.value.toLocaleString()}` : '' },
-  { field: 'country',    headerNameKey: 'GRID_COL_COUNTRY',    minWidth: 120 },
-  { field: 'startDate',  headerNameKey: 'GRID_COL_START_DATE', minWidth: 130 },
-  { field: 'status',     headerNameKey: 'GRID_COL_STATUS',     minWidth: 110 },
+  { field: 'country',    headerName: 'Country',    minWidth: 120 },
+  { field: 'startDate',  headerName: 'Start Date', minWidth: 130 },
+  { field: 'status',     headerName: 'Status',     minWidth: 110 },
 ];
 
 @Component({
@@ -252,13 +252,13 @@ export class GridDemo {
 
   editableConfig: AumGridConfig<Employee> = {
     columns: [
-      { field: 'id',         headerNameKey: 'GRID_COL_ID',         width: 70, flex: 0, editable: false, rowDrag: true },
-      { field: 'name',       headerNameKey: 'GRID_COL_NAME',       minWidth: 160, editable: true },
-      { field: 'department', headerNameKey: 'GRID_COL_DEPARTMENT', minWidth: 140, editable: true,
+      { field: 'id',         headerName: 'ID',         width: 70, flex: 0, editable: false, rowDrag: true },
+      { field: 'name',       headerName: 'Name',       minWidth: 160, editable: true },
+      { field: 'department', headerName: 'Department', minWidth: 140, editable: true,
         cellEditor: 'agSelectCellEditor', cellEditorParams: { values: DEPARTMENTS } },
-      { field: 'role',       headerNameKey: 'GRID_COL_ROLE',       minWidth: 120, editable: true },
-      { field: 'salary',     headerNameKey: 'GRID_COL_SALARY',     minWidth: 120, editable: true, filter: 'agNumberColumnFilter' },
-      { field: 'country',    headerNameKey: 'GRID_COL_COUNTRY',    minWidth: 120, editable: true,
+      { field: 'role',       headerName: 'Role',       minWidth: 120, editable: true },
+      { field: 'salary',     headerName: 'Salary',     minWidth: 120, editable: true, filter: 'agNumberColumnFilter' },
+      { field: 'country',    headerName: 'Country',    minWidth: 120, editable: true,
         cellEditor: 'agSelectCellEditor', cellEditorParams: { values: COUNTRIES } },
     ],
     rowData: ALL_ROWS.slice(0, 20).map(r => ({ ...r })),
