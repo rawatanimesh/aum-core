@@ -1,0 +1,8 @@
+<div class="aum-chip" [title]="label()">
+  <span class="aum-chip-label">{{ label() }}</span>
+  @if (removable()) {
+    <button class="aum-chip-remove" (click)="onRemove($event)" [attr.aria-label]="'Remove ' + label()">
+      <span class="material-icons">close</span>
+    </button>
+  }
+</div>
