@@ -183,6 +183,7 @@ export class Playground implements OnInit, OnDestroy {
   goToButtonToggleDemo() { this.route.navigate(['/playground/button-toggle']); }
   goToIconsDemo() { this.route.navigate(['/playground/icons']); }
   goToButtonsDemo() { this.route.navigate(['/playground/buttons']); }
+  goToGridDemo() { this.route.navigate(['/playground/grid']); }
 
   onMenuSelect(item: MenuItem) {
     console.log('selected', item);

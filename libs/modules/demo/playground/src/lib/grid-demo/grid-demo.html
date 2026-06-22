@@ -1,0 +1,111 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+  <div class="grid-demo-container">
+
+    <div class="demo-header">
+      <h1 class="page-title">{{ 'GRID_DEMO_TITLE' | translate }}</h1>
+      <p class="page-subtitle">{{ 'GRID_DEMO_SUBTITLE' | translate }}</p>
+    </div>
+
+    <aum-tab-group>
+
+      <!-- ── Tab 1: Basic ───────────────────────────────────────────────── -->
+      <aum-tab [label]="'GRID_TAB_BASIC' | translate">
+        <div class="tab-content">
+          <div class="tab-description">
+            <p>{{ 'GRID_TAB_BASIC_DESC' | translate }}</p>
+          </div>
+          <aum-grid
+            height="500px"
+            [config]="basicConfig()"
+            [loading]="isLoading()"
+            [activeFilters]="activeFiltersWithStatusChips()"
+            (filterApply)="onFilterApply()"
+            (filterReset)="onFilterReset()"
+            (filterChipRemove)="onFilterChipRemove($event)"
+            (filterChipClearAll)="onFilterChipClearAll()"
+            (gridReady)="onBasicGridReady($event)"
+          >
+            <!-- Custom toolbar action: reload button -->
+            <ng-template aumGridToolbarActions>
+              <aum-button
+                type="icon"
+                icon="refresh"
+                [tooltip]="'GRID_RELOAD_DATA' | translate"
+                (clickButton)="reloadBasicGrid()"
+              ></aum-button>
+            </ng-template>
+
+            <!-- Filter panel content -->
+            <ng-template aumGridFilter>
+              <div class="filter-panel-content">
+
+                <!-- Status multi-select -->
+                <div class="filter-section">
+                  <span class="filter-section-label">{{ 'GRID_FILTER_STATUS' | translate }}</span>
+                  <div class="filter-status-chips">
+                    @for (status of statusOptions; track status) {
+                      <button
+                        class="filter-status-chip"
+                        [class.selected]="isStatusSelected(status)"
+                        (click)="toggleStatus(status)"
+                      >
+                        <span>{{ status }}</span>
+                      </button>
+                    }
+                  </div>
+                </div>
+
+                <!-- Date range -->
+                <div class="filter-section">
+                  <span class="filter-section-label">{{ 'GRID_FILTER_START_DATE' | translate }}</span>
+                  <div class="filter-date-row">
+                    <input
+                      class="filter-date-input"
+                      type="date"
+                      [formControl]="dateFromControl"
+                      (change)="filterDateFrom.set($any($event.target).value)"
+                    />
+                    <input
+                      class="filter-date-input"
+                      type="date"
+                      [formControl]="dateToControl"
+                      (change)="filterDateTo.set($any($event.target).value)"
+                    />
+                  </div>
+                </div>
+
+              </div>
+            </ng-template>
+          </aum-grid>
+        </div>
+      </aum-tab>
+
+      <!-- ── Tab 2: Editable + Drag ─────────────────────────────────────── -->
+      <aum-tab [label]="'GRID_TAB_EDITABLE' | translate">
+        <div class="tab-content">
+          <div class="tab-description">
+            <p>{{ 'GRID_TAB_EDITABLE_DESC' | translate }}</p>
+          </div>
+          <aum-grid
+            height="500px"
+            [config]="editableConfig"
+            (cellValueChange)="onCellValueChanged($event)"
+          ></aum-grid>
+        </div>
+      </aum-tab>
+
+      <!-- ── Tab 3: Virtual Scroll ──────────────────────────────────────── -->
+      <aum-tab [label]="'GRID_TAB_VIRTUAL' | translate">
+        <div class="tab-content">
+          <div class="tab-description">
+            <p>{{ 'GRID_TAB_VIRTUAL_DESC' | translate }}</p>
+          </div>
+          <aum-grid height="500px" [config]="largeDataConfig"></aum-grid>
+        </div>
+      </aum-tab>
+
+    </aum-tab-group>
+  </div>
+  </div>
+</aum-page>

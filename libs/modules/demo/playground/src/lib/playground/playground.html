@@ -235,6 +235,18 @@
       </div>
     </section>
     <mat-divider></mat-divider>
+    <!-- Grid Demo -->
+    <section>
+      <div class="example-label fs-14">{{ 'GRID' | translate }}</div>
+      <div class="example-button-row">
+        <aum-button
+          [type]="'filled'"
+          [value]="'GO_TO_GRID_DEMO' | translate"
+          (clickButton)="goToGridDemo()"
+        ></aum-button>
+      </div>
+    </section>
+    <mat-divider></mat-divider>
     <section>
       <div class="example-label fs-14">{{ 'ERROR_HANDLERS' | translate }}</div>
 
