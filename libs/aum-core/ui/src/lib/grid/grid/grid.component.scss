@@ -499,6 +499,60 @@ aum-grid {
   .ag-filter-active-icon { color: var(--mat-sys-primary); }
 }
 
+// ── Icon overrides — replace AG Grid SVG icons with Material Symbols ─────────
+// Exact same pattern as PLM (which uses icomoon). The ::before override with
+// !important beats both the ag-grid.css CSS-var content and the agGridQuartz
+// font-family. Applied to both .aum-grid-host (inline grid) and bare .ag-theme-quartz
+// (body-appended popups from popupParent: document.body).
+
+.aum-grid-host .ag-theme-quartz .ag-icon,
+.ag-theme-quartz .ag-icon {
+  &::before {
+    font-family: 'Material Symbols Outlined' !important;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    background: none !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    display: inline-block;
+    font-size: var(--ag-icon-size);
+    line-height: 1;
+    color: inherit;
+  }
+
+  // Filter / header menu
+  &.ag-icon-filter::before   { content: "\ef4f"; } // filter_alt
+  &.ag-icon-menu::before     { content: "\e5d2"; } // menu
+
+  // Sort
+  &.ag-icon-asc::before      { content: "\e5d8"; } // arrow_upward
+  &.ag-icon-desc::before     { content: "\e5db"; } // arrow_downward
+
+  // Pagination
+  &.ag-icon-first::before    { content: "\e5dc"; } // first_page
+  &.ag-icon-previous::before { content: "\e5cb"; } // chevron_left
+  &.ag-icon-next::before     { content: "\e5cc"; } // chevron_right
+  &.ag-icon-last::before     { content: "\e5dd"; } // last_page
+
+  // Column filter popup — dropdown chevron
+  &.ag-icon-small-left::before  { content: "\e5cb"; } // chevron_left
+  &.ag-icon-small-right::before { content: "\e5cc"; } // chevron_right
+  &.ag-icon-small-down::before  { content: "\e5cf"; } // expand_more
+  &.ag-icon-small-up::before    { content: "\e5ce"; } // expand_less
+
+  // Search / close
+  &.ag-icon-search::before   { content: "\e8b6"; } // search
+  &.ag-icon-close::before    { content: "\e5cd"; } // close
+  &.ag-icon-cancel::before   { content: "\e5cd"; } // close
+
+  // More / overflow
+  &.ag-icon-more::before     { content: "\e5d4"; } // more_vert
+  &.ag-icon-menu-alt::before { content: "\e5d4"; } // more_vert
+
+  // Drag
+  &.ag-icon-grip::before     { content: "\e945"; color: var(--mat-sys-outline); } // drag_indicator
+  &.ag-icon-arrows::before   { content: "\e89f"; } // open_with (drag ghost preview)
+}
+
 // ── Checkbox — CSS-drawn SVG to match Angular Material MDC ────────────────────
 // AG Grid quartz renders checkboxes as icon-font glyphs. We suppress that and
 // redraw using real CSS border + ::after checkmark so it matches mat-checkbox.
