@@ -1,0 +1,636 @@
+// ViewEncapsulation.None — scoped under the aum-grid element selector.
+// AG Grid renders DOM outside Angular's component tree so encapsulated styles don't reach it.
+@use 'sass:math';
+@use 'functions' as *;
+
+// AG Grid px tokens cannot use rem() — keep as plain numbers for math.round()
+$scale-compact: 0.85;
+$scale-large:   1.15;
+
+// Base AG Grid sizing tokens (default / scale-1.0)
+$ag-font-size:        13;
+$ag-icon-size:        14;
+$ag-grid-size:         4;
+$ag-row-height:       36;
+$ag-header-height:    38;
+$ag-list-item-height: 28;
+
+aum-grid {
+  display: block;
+  width: 100%;
+}
+
+.aum-grid-host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: rem(200);
+  overflow: hidden;
+  background: var(--mat-sys-surface);
+}
+
+// ── Toolbar ──────────────────────────────────────────────────────────────────
+
+.aum-grid-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+  height: rem(40);
+  padding: 0 rem(12);
+  gap: rem(8);
+  flex-shrink: 0;
+}
+
+.aum-grid-count-label {
+  font-size: rem(13);
+  color: var(--mat-sys-on-surface-variant);
+  white-space: nowrap;
+
+  &--selected {
+    color: var(--mat-sys-on-surface);
+    font-weight: 500;
+  }
+}
+
+// ── Selection state ───────────────────────────────────────────────────────────
+
+.aum-grid-selection-state {
+  display: flex;
+  align-items: center;
+  gap: rem(4);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.aum-grid-toolbar-divider {
+  display: inline-block;
+  width: rem(1);
+  height: rem(20);
+  background: var(--mat-sys-outline-variant);
+  flex-shrink: 0;
+  margin: 0 rem(8);
+}
+
+.aum-grid-bulk-actions {
+  display: flex;
+  align-items: center;
+  gap: rem(4);
+  margin-left: rem(4);
+}
+
+.aum-grid-toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: rem(4);
+  margin-left: auto;
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+
+.aum-grid-search {
+  display: flex;
+  align-items: center;
+  gap: rem(6);
+  background: var(--mat-sys-surface);
+  border: rem(1) solid var(--mat-sys-outline-variant);
+  border-radius: rem(6);
+  padding: rem(4) rem(10);
+  height: rem(24);
+  transition: border-color 120ms ease;
+
+  &:focus-within {
+    border-color: var(--mat-sys-primary);
+  }
+}
+
+.aum-grid-search-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: rem(16);
+  color: var(--mat-sys-on-surface-variant);
+  user-select: none;
+  flex-shrink: 0;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+}
+
+.aum-grid-search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: rem(13);
+  color: var(--mat-sys-on-surface);
+  width: rem(160);
+  font-family: inherit;
+
+  &::placeholder { color: var(--mat-sys-on-surface-variant); }
+}
+
+// ── Filter toggle wrapper + active badge ──────────────────────────────────────
+
+.aum-filter-toggle-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  &.filters-active aum-button button {
+    background: var(--mat-sys-primary-container);
+    color: var(--mat-sys-primary);
+  }
+}
+
+.aum-filter-badge {
+  position: absolute;
+  top: rem(-2);
+  right: rem(-2);
+  min-width: rem(16);
+  height: rem(16);
+  padding: 0 rem(4);
+  border-radius: rem(8);
+  background: var(--mat-sys-primary);
+  color: var(--mat-sys-on-primary);
+  border: rem(1.5) solid var(--mat-sys-surface);
+  font-size: rem(9);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.aum-grid-toolbar-actions aum-button.active button {
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-primary);
+}
+
+// ── Filter chips bar ──────────────────────────────────────────────────────────
+
+.aum-chip-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: rem(6);
+  padding: 0 rem(12);
+  border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface);
+  height: rem(40);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.aum-filter-chip--overflow {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  height: rem(26);
+  padding: 0 rem(10);
+  border-radius: rem(13);
+  border: rem(1) solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container);
+  color: var(--mat-sys-on-surface-variant);
+  font-size: rem(12);
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: background 120ms ease, border-color 120ms ease;
+
+  &:hover {
+    background: var(--mat-sys-surface-container-high);
+    border-color: var(--mat-sys-outline);
+  }
+}
+
+// ── Grid body + overlay container ─────────────────────────────────────────────
+
+.aum-grid-body {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// ── Loading / empty / error overlays ──────────────────────────────────────────
+
+.aum-grid-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: rem(8);
+  background: var(--mat-sys-surface);
+  pointer-events: none;
+
+  // Empty/error sit below the header so column filters remain accessible
+  &--empty,
+  &--error {
+    pointer-events: auto;
+    top: #{$ag-header-height}px;
+    height: calc(100% - #{$ag-header-height}px);
+  }
+}
+
+.aum-grid-overlay__title {
+  font-size: rem(14);
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+  text-align: center;
+}
+
+.aum-grid-overlay__subtitle {
+  font-size: rem(12);
+  color: var(--mat-sys-on-surface-variant);
+  text-align: center;
+}
+
+.aum-grid-overlay__error-icon {
+  font-family: 'Material Symbols Outlined';
+  font-size: rem(40);
+  color: var(--mat-sys-error);
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+}
+
+// ── Grid wrapper ──────────────────────────────────────────────────────────────
+
+.aum-grid-wrapper {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+}
+
+// ── Filter overlay panel ──────────────────────────────────────────────────────
+
+.aum-filter-panel {
+  position: absolute;
+  top: rem(40);
+  right: 0;
+  bottom: 0;
+  width: rem(300);
+  display: flex;
+  flex-direction: column;
+  background: var(--mat-sys-surface);
+  border-left: rem(1) solid var(--mat-sys-outline-variant);
+  box-shadow: rem(-4) 0 rem(16) color-mix(in srgb, var(--mat-sys-shadow) 12%, transparent);
+  z-index: 15;
+  animation: aum-filter-slide-in 180ms ease;
+}
+
+@keyframes aum-filter-slide-in {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
+}
+
+.aum-filter-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: rem(6) rem(12);
+  border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+  flex-shrink: 0;
+}
+
+.aum-filter-panel-title {
+  font-size: rem(14);
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+}
+
+.aum-filter-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: rem(12);
+}
+
+.aum-filter-panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: rem(10) rem(12);
+  border-top: rem(1) solid var(--mat-sys-outline-variant);
+  flex-shrink: 0;
+}
+
+// ── Column visibility panel ───────────────────────────────────────────────────
+
+.aum-column-panel {
+  position: absolute;
+  top: rem(40);
+  right: 0;
+  bottom: 0;
+  width: rem(300);
+  display: flex;
+  flex-direction: column;
+  background: var(--mat-sys-surface);
+  border-left: rem(1) solid var(--mat-sys-outline-variant);
+  box-shadow: rem(-4) 0 rem(16) color-mix(in srgb, var(--mat-sys-shadow) 12%, transparent);
+  z-index: 15;
+  animation: aum-filter-slide-in 180ms ease;
+}
+
+.aum-column-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: rem(6) rem(12);
+  border-bottom: rem(1) solid var(--mat-sys-outline-variant);
+  flex-shrink: 0;
+}
+
+.aum-column-panel-title {
+  font-size: rem(14);
+  font-weight: 600;
+  color: var(--mat-sys-on-surface);
+}
+
+.aum-column-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: rem(8) rem(12);
+  display: flex;
+  flex-direction: column;
+}
+
+.aum-column-panel-footer {
+  display: flex;
+  align-items: center;
+  padding: rem(10) rem(12);
+  border-top: rem(1) solid var(--mat-sys-outline-variant);
+  flex-shrink: 0;
+}
+
+// ── Custom pagination bar ─────────────────────────────────────────────────────
+
+.aum-pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 rem(4) 0 rem(12);
+  height: rem(40);
+  border-top: rem(1) solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container);
+  gap: rem(16);
+  flex-shrink: 0;
+}
+
+.aum-pagination-size {
+  display: flex;
+  align-items: center;
+  gap: rem(6);
+}
+
+.aum-pagination-label {
+  font-size: rem(13);
+  color: var(--mat-sys-on-surface-variant);
+  white-space: nowrap;
+}
+
+.aum-pagination-size-btn {
+  display: flex;
+  align-items: center;
+  gap: rem(4);
+  height: rem(28);
+  padding: 0 rem(8);
+  border: rem(1) solid var(--mat-sys-outline-variant);
+  border-radius: rem(6);
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-size: rem(13);
+  cursor: pointer;
+  transition: border-color 120ms ease, background 120ms ease;
+  font-family: inherit;
+
+  .material-icons {
+    font-size: rem(16);
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  &:hover {
+    border-color: var(--mat-sys-primary);
+    background: var(--mat-sys-surface-container-low);
+  }
+}
+
+.aum-pagination-info {
+  font-size: rem(13);
+  color: var(--mat-sys-on-surface-variant);
+  white-space: nowrap;
+}
+
+.aum-pagination-nav {
+  display: flex;
+  align-items: center;
+}
+
+.aum-pagination-page-indicator {
+  padding: 0 rem(8);
+  font-size: rem(13);
+  color: var(--mat-sys-on-surface-variant);
+  white-space: nowrap;
+}
+
+// ── AG Grid quartz theme token overrides ──────────────────────────────────────
+// AG Grid CSS custom properties must use px — they do not support calc()/rem().
+
+.aum-grid-host .ag-theme-quartz {
+  width: 100%;
+  height: 100%;
+
+  --ag-active-color: var(--mat-sys-primary);
+
+  --ag-background-color: var(--mat-sys-surface);
+  --ag-foreground-color: var(--mat-sys-on-surface);
+  --ag-secondary-foreground-color: var(--mat-sys-on-surface-variant);
+  --ag-disabled-foreground-color: var(--mat-sys-on-surface-variant);
+  --ag-data-color: var(--mat-sys-on-surface);
+
+  --ag-border-color: var(--mat-sys-outline-variant);
+  --ag-secondary-border-color: var(--mat-sys-outline-variant);
+  --ag-row-border-color: var(--mat-sys-outline-variant);
+  --ag-borders: none;
+
+  --ag-header-background-color: var(--mat-sys-surface-container);
+  --ag-header-foreground-color: var(--mat-sys-on-surface-variant);
+  --ag-header-column-resize-handle-color: var(--mat-sys-outline-variant);
+  --ag-header-column-separator-color: var(--mat-sys-outline-variant);
+
+  --ag-selected-row-background-color: var(--mat-sys-primary-container);
+  --ag-row-hover-color: var(--mat-sys-surface-container-low);
+
+  --ag-menu-background-color: var(--mat-sys-surface-container);
+  --ag-menu-border-color: var(--mat-sys-outline-variant);
+  --ag-panel-background-color: var(--mat-sys-surface-container);
+  --ag-panel-border-color: var(--mat-sys-outline-variant);
+  --ag-control-panel-background-color: var(--mat-sys-surface-container);
+  --ag-tooltip-background-color: var(--mat-sys-inverse-surface);
+  --ag-chip-background-color: var(--mat-sys-surface-container-high);
+
+  --ag-font-family: inherit;
+  --ag-font-size: #{$ag-font-size}px;
+  --ag-icon-size: #{$ag-icon-size}px;
+
+  --ag-grid-size: #{$ag-grid-size}px;
+  --ag-row-height: #{$ag-row-height}px;
+  --ag-header-height: #{$ag-header-height}px;
+  --ag-list-item-height: #{$ag-list-item-height}px;
+
+  --ag-border-radius: 0px;
+  --ag-wrapper-border-radius: 0px;
+}
+
+// ── Column header text ────────────────────────────────────────────────────────
+
+.aum-grid-host .ag-theme-quartz .ag-header-cell-text {
+  font-weight: 600;
+}
+
+// ── Sort / filter active indicators ──────────────────────────────────────────
+
+.aum-grid-host .ag-theme-quartz {
+  .ag-sort-indicator-icon { color: var(--mat-sys-primary); }
+  .ag-filter-active-icon { color: var(--mat-sys-primary); }
+}
+
+// ── Checkbox — CSS-drawn SVG to match Angular Material MDC ────────────────────
+// AG Grid quartz renders checkboxes as icon-font glyphs. We suppress that and
+// redraw using real CSS border + ::after checkmark so it matches mat-checkbox.
+
+.aum-grid-host .ag-theme-quartz {
+  --ag-icon-font-display-checkbox-unchecked:     none;
+  --ag-icon-font-display-checkbox-checked:       none;
+  --ag-icon-font-display-checkbox-indeterminate: none;
+  --ag-icon-image-display-checkbox-unchecked:    none;
+  --ag-icon-image-display-checkbox-checked:      none;
+  --ag-icon-image-display-checkbox-indeterminate: none;
+
+  .ag-checkbox-input-wrapper {
+    position: relative;
+    width: rem(18);
+    height: rem(18);
+    border-radius: 2px;
+    background: transparent;
+    border: 2px solid var(--mat-sys-on-surface-variant);
+    box-sizing: border-box;
+    transition: border-color 90ms ease, background 90ms ease;
+
+    &:focus-within {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    input[type='checkbox'] {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    // Checked: fill with primary, draw white SVG checkmark
+    &.ag-checked {
+      background: var(--mat-sys-primary);
+      border-color: var(--mat-sys-primary);
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='white' stroke-width='3.12' stroke-linecap='round' stroke-linejoin='round' d='M4.1 12.7 9 17.6l10.9-11'/%3E%3C/svg%3E") center/contain no-repeat;
+        inset: -1px;
+      }
+    }
+
+    // Indeterminate: fill with primary, draw white horizontal bar
+    &.ag-indeterminate {
+      background: var(--mat-sys-primary);
+      border-color: var(--mat-sys-primary);
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='white' stroke-width='3.12' stroke-linecap='round' d='M4 12h16'/%3E%3C/svg%3E") center/contain no-repeat;
+        inset: -1px;
+      }
+    }
+
+    &.ag-disabled { opacity: 0.38; }
+  }
+}
+
+// ── Three-dot actions column ──────────────────────────────────────────────────
+
+.aum-grid-host .ag-theme-quartz {
+  .ag-cell.aum-actions-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .aum-grid-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(28);
+    height: rem(28);
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--mat-sys-on-surface-variant);
+    transition: background 120ms ease, color 120ms ease;
+
+    .material-icons {
+      font-size: rem(18);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background: var(--mat-sys-surface-container-high);
+      color: var(--mat-sys-on-surface);
+    }
+  }
+}
+
+// ── Scale adjustments ─────────────────────────────────────────────────────────
+// When body carries a density class, scale all AG Grid px sizing proportionally.
+
+body.scale-compact .aum-grid-host .ag-theme-quartz {
+  --ag-font-size: #{math.round($ag-font-size * $scale-compact)}px;
+  --ag-icon-size: #{math.round($ag-icon-size * $scale-compact)}px;
+  --ag-grid-size: #{math.round($ag-grid-size * $scale-compact)}px;
+  --ag-row-height: #{math.round($ag-row-height * $scale-compact)}px;
+  --ag-header-height: #{math.round($ag-header-height * $scale-compact)}px;
+  --ag-list-item-height: #{math.round($ag-list-item-height * $scale-compact)}px;
+}
+
+body.scale-compact .aum-grid-host .aum-grid-overlay--empty,
+body.scale-compact .aum-grid-host .aum-grid-overlay--error {
+  $h: math.round($ag-header-height * $scale-compact);
+  top: #{$h}px;
+  height: calc(100% - #{$h}px);
+}
+
+body.scale-large .aum-grid-host .ag-theme-quartz {
+  --ag-font-size: #{math.round($ag-font-size * $scale-large)}px;
+  --ag-icon-size: #{math.round($ag-icon-size * $scale-large)}px;
+  --ag-grid-size: #{math.round($ag-grid-size * $scale-large)}px;
+  --ag-row-height: #{math.round($ag-row-height * $scale-large)}px;
+  --ag-header-height: #{math.round($ag-header-height * $scale-large)}px;
+  --ag-list-item-height: #{math.round($ag-list-item-height * $scale-large)}px;
+}
+
+body.scale-large .aum-grid-host .aum-grid-overlay--empty,
+body.scale-large .aum-grid-host .aum-grid-overlay--error {
+  $h: math.round($ag-header-height * $scale-large);
+  top: #{$h}px;
+  height: calc(100% - #{$h}px);
+}

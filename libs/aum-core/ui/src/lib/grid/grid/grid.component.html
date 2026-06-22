@@ -1,0 +1,317 @@
+<div class="aum-grid-host" [style.height]="height()">
+
+  <!-- ── Toolbar ─────────────────────────────────────────────────────────────── -->
+  @if (hasToolbar()) {
+    <div class="aum-grid-toolbar">
+
+      <!-- Left: count label OR selection state (same slot — no layout shift) -->
+      @if (hasSelection() && hasBulkActions()) {
+        <div class="aum-grid-selection-state">
+          <aum-button
+            type="icon"
+            icon="close"
+            [tooltip]="'AUM.GRID_DESELECT_ALL' | translate"
+            (clickButton)="clearSelection()"
+          ></aum-button>
+          <span class="aum-grid-count-label aum-grid-count-label--selected">
+            {{ visibleSelectedCount() }}&nbsp;{{ 'AUM.GRID_ROWS_SELECTED' | translate }}
+          </span>
+          <span class="aum-grid-toolbar-divider"></span>
+          <div class="aum-grid-bulk-actions">
+            @for (action of inlineBulkActions(); track action.label) {
+              <aum-button
+                type="basic"
+                size="small"
+                [value]="action.label"
+                [icon]="action.icon ?? ''"
+                [disabled]="action.disabled ? action.disabled(selectedRows()) : false"
+                (clickButton)="triggerBulkAction(action)"
+              ></aum-button>
+            }
+            @if (overflowBulkActions().length > 0) {
+              <aum-button
+                type="icon"
+                icon="more_vert"
+                [matMenuTriggerFor]="bulkOverflowMenu.childMenu"
+                [tooltip]="'AUM.MORE_OPTIONS' | translate"
+              ></aum-button>
+              <aum-menu-list
+                #bulkOverflowMenu="aumMenu"
+                [list]="overflowBulkMenuItems()"
+                (itemSelected)="onBulkOverflowSelected($event)"
+              ></aum-menu-list>
+            }
+          </div>
+        </div>
+      } @else {
+        <span class="aum-grid-count-label">{{ countLabel() }}</span>
+      }
+
+      <!-- Right: custom slot + built-in actions -->
+      <div class="aum-grid-toolbar-actions">
+
+        <!-- Custom toolbar actions projected via ng-template[aumGridToolbarActions] -->
+        @if (hasToolbarActions() && toolbarActionsDirective) {
+          <ng-container [ngTemplateOutlet]="toolbarActionsDirective.templateRef"></ng-container>
+          @if (hasAnyBuiltinAction()) {
+            <span class="aum-grid-toolbar-divider"></span>
+          }
+        }
+
+        <!-- Search input -->
+        @if (showSearch()) {
+          <div class="aum-grid-search">
+            <span class="material-icons aum-grid-search-icon">search</span>
+            <input
+              class="aum-grid-search-input"
+              type="text"
+              [placeholder]="'AUM.GRID_SEARCH_PLACEHOLDER' | translate"
+              (input)="onSearchInput($any($event.target).value)"
+            />
+          </div>
+        }
+
+        <!-- CSV Export -->
+        @if (showCsvExport()) {
+          <aum-button
+            type="icon"
+            icon="download"
+            [tooltip]="'AUM.GRID_EXPORT_CSV' | translate"
+            (clickButton)="openCsvExportDialog()"
+          ></aum-button>
+        }
+
+        <!-- Column Toggle -->
+        @if (showColumnToggle()) {
+          <aum-button
+            type="icon"
+            icon="view_column"
+            [tooltip]="'AUM.GRID_TOGGLE_COLUMNS' | translate"
+            [class.active]="columnPanelOpen()"
+            (clickButton)="toggleColumnPanel()"
+          ></aum-button>
+        }
+
+        <!-- Filter Toggle -->
+        @if (showFilterToggle()) {
+          <span class="aum-grid-toolbar-divider"></span>
+          <div class="aum-filter-toggle-wrap" [class.filters-active]="hasChips()">
+            <aum-button
+              type="icon"
+              [icon]="filterPanelOpen() ? 'filter_list_off' : 'filter_list'"
+              [tooltip]="'AUM.GRID_TOGGLE_FILTERS' | translate"
+              [class.active]="filterPanelOpen()"
+              (clickButton)="toggleFilters()"
+            ></aum-button>
+            @if (hasChips()) {
+              <span class="aum-filter-badge">{{ appliedFilters().length }}</span>
+            }
+          </div>
+        }
+
+      </div>
+    </div>
+  }
+
+  <!-- ── Filter Chips Bar ──────────────────────────────────────────────────── -->
+  @if (hasChips()) {
+    <div class="aum-chip-bar">
+      @for (chip of visibleChips(); track chip.key) {
+        <aum-chip
+          [label]="chip.label"
+          [removable]="true"
+          (removed)="removeFilterChip(chip.key)"
+        ></aum-chip>
+      }
+      @if (overflowChips().length > 0) {
+        <button class="aum-filter-chip--overflow" (click)="openOverflowDialog()">
+          +{{ overflowChips().length }}
+        </button>
+      }
+      <aum-button
+        type="basic"
+        size="small"
+        [value]="'AUM.GRID_FILTER_CLEAR_ALL' | translate"
+        (clickButton)="clearAllFilterChips()"
+      ></aum-button>
+    </div>
+  }
+
+  <!-- ── Grid Body ─────────────────────────────────────────────────────────── -->
+  <div class="aum-grid-body">
+
+    <!-- Loading overlay -->
+    @if (loading()) {
+      <div class="aum-grid-overlay">
+        <aum-spinner [diameter]="36" [strokeWidth]="3"></aum-spinner>
+      </div>
+    }
+
+    <!-- Empty state -->
+    @if (showEmpty()) {
+      <div class="aum-grid-overlay aum-grid-overlay--empty">
+        <img src="assets/svgs/brand-logo.svg" width="80" alt="" aria-hidden="true" />
+        <span class="aum-grid-overlay__title">{{ 'AUM.GRID_EMPTY_TITLE' | translate }}</span>
+        <span class="aum-grid-overlay__subtitle">{{ 'AUM.GRID_EMPTY_SUBTITLE' | translate }}</span>
+      </div>
+    }
+
+    <!-- Error state -->
+    @if (error()) {
+      <div class="aum-grid-overlay aum-grid-overlay--error">
+        <span class="material-icons aum-grid-overlay__error-icon">error_outline</span>
+        <span class="aum-grid-overlay__title">{{ 'AUM.GRID_ERROR_TITLE' | translate }}</span>
+        <span class="aum-grid-overlay__subtitle">{{ 'AUM.GRID_ERROR_SUBTITLE' | translate }}</span>
+      </div>
+    }
+
+    <div class="aum-grid-wrapper">
+      <ag-grid-angular
+        class="ag-theme-quartz"
+        [popupParent]="popupParent"
+        [columnDefs]="columnDefs()"
+        [defaultColDef]="defaultColDef()"
+        [rowData]="config().mode !== 'infinite' ? config().rowData ?? [] : null"
+        [rowModelType]="rowModelType()"
+        [rowSelection]="rowSelection()"
+        [pagination]="pagination()"
+        [paginationPageSize]="paginationPageSize()"
+        [suppressPaginationPanel]="pagination()"
+        [rowDragManaged]="config().rowDrag ?? false"
+        [animateRows]="!(config().rowDrag ?? false)"
+        [treeData]="treeData()"
+        [getDataPath]="config().getDataPath"
+        (gridReady)="onGridReady($event)"
+        (modelUpdated)="onModelUpdated($event)"
+        (selectionChanged)="onSelectionChanged($event)"
+        (cellValueChanged)="onCellValueChanged($event)"
+        (rowDragEnd)="onRowDragEnd($event)"
+        (sortChanged)="onSortChanged($event)"
+        (filterChanged)="onFilterChanged($event)"
+        (paginationChanged)="onPaginationChanged($event)"
+      ></ag-grid-angular>
+    </div>
+  </div>
+
+  <!-- ── Filter overlay — direct child of host so it covers body + pagination ── -->
+  @if (filterDirective && filterPanelOpen()) {
+    <div class="aum-filter-panel">
+      <div class="aum-filter-panel-header">
+        <span class="aum-filter-panel-title">{{ 'AUM.GRID_FILTER_PANEL_TITLE' | translate }}</span>
+        <aum-button
+          type="icon"
+          icon="close"
+          [tooltip]="'AUM.CLOSE' | translate"
+          (clickButton)="closeFilterPanel()"
+        ></aum-button>
+      </div>
+
+      <div class="aum-filter-panel-body">
+        <ng-container [ngTemplateOutlet]="filterDirective.templateRef"></ng-container>
+      </div>
+
+      <div class="aum-filter-panel-footer">
+        <aum-button
+          type="basic"
+          size="small"
+          [value]="'AUM.GRID_FILTER_RESET_TO_DEFAULT' | translate"
+          (clickButton)="resetFilters()"
+        ></aum-button>
+        <aum-button
+          type="filled"
+          size="small"
+          [value]="'AUM.GRID_FILTER_APPLY' | translate"
+          (clickButton)="applyFilters()"
+        ></aum-button>
+      </div>
+    </div>
+  }
+
+  <!-- ── Column visibility panel — mirrors filter panel, opens from right ──── -->
+  @if (columnPanelOpen()) {
+    <div class="aum-column-panel">
+      <div class="aum-column-panel-header">
+        <span class="aum-column-panel-title">{{ 'AUM.GRID_COLUMNS_TITLE' | translate }}</span>
+        <aum-button
+          type="icon"
+          icon="close"
+          [tooltip]="'AUM.CLOSE' | translate"
+          (clickButton)="closeColumnPanel()"
+        ></aum-button>
+      </div>
+
+      <div class="aum-column-panel-body">
+        @for (col of columnPanelItems(); track col.field) {
+          <aum-checkbox
+            [checked]="col.visible"
+            [disabled]="col.visible && !canHideMoreColumns()"
+            [label]="col.label"
+            (checkedChange)="setColumnVisible(col.field, $event)"
+          ></aum-checkbox>
+        }
+      </div>
+
+      <div class="aum-column-panel-footer">
+        <aum-button
+          type="basic"
+          size="small"
+          [value]="'AUM.GRID_COLUMNS_RESET' | translate"
+          (clickButton)="resetColumnVisibility()"
+        ></aum-button>
+      </div>
+    </div>
+  }
+
+  <!-- ── Custom pagination footer — direct child so flex layout accounts for height ── -->
+  @if (pagination()) {
+    <div class="aum-pagination-bar">
+
+      <div class="aum-pagination-size">
+        <span class="aum-pagination-label">{{ 'AUM.GRID_PAGE_SIZE' | translate }}:</span>
+        <button
+          class="aum-pagination-size-btn"
+          [matMenuTriggerFor]="pageSizeMenu.childMenu"
+        >
+          {{ currentPageSize() }}
+          <span class="material-icons">expand_more</span>
+        </button>
+        <aum-menu-list
+          #pageSizeMenu="aumMenu"
+          [list]="pageSizeMenuItems()"
+          (itemSelected)="onPageSizeSelected($event)"
+        ></aum-menu-list>
+      </div>
+
+      <span class="aum-pagination-info">
+        {{ pageStartRow() }} – {{ pageEndRow() }}&nbsp;{{ 'AUM.GRID_OF' | translate }}&nbsp;{{ totalRowCount() }}
+      </span>
+
+      <div class="aum-pagination-nav">
+        <aum-button type="icon" icon="first_page" [disabled]="isFirstPage()" (clickButton)="goToFirstPage()"></aum-button>
+        <aum-button type="icon" icon="chevron_left" [disabled]="isFirstPage()" (clickButton)="goToPrevPage()"></aum-button>
+        <span class="aum-pagination-page-indicator">
+          {{ 'AUM.GRID_PAGE' | translate }} {{ currentPage() + 1 }} {{ 'AUM.GRID_OF' | translate }} {{ totalPages() }}
+        </span>
+        <aum-button type="icon" icon="chevron_right" [disabled]="isLastPage()" (clickButton)="goToNextPage()"></aum-button>
+        <aum-button type="icon" icon="last_page" [disabled]="isLastPage()" (clickButton)="goToLastPage()"></aum-button>
+      </div>
+
+    </div>
+  }
+
+</div>
+
+<!-- Invisible fixed-position span: repositioned to the clicked button before opening. -->
+@if (hasRowActions()) {
+  <span
+    #menuTrigger="matMenuTrigger"
+    [matMenuTriggerFor]="rowActionsMenu.childMenu"
+    style="position:fixed;width:0;height:0;display:block;opacity:0;pointer-events:none;"
+  ></span>
+
+  <aum-menu-list
+    #rowActionsMenu="aumMenu"
+    [list]="rowActionMenuItems()"
+    (itemSelected)="onMenuItemSelected($event)"
+  ></aum-menu-list>
+}

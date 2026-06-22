@@ -29,6 +29,7 @@ Always use `aum-*` wrappers. Only fall back to raw `mat-*` if no wrapper exists.
 | Snackbar | `SnackbarService` | `@aum/ui/utilities` |
 | Spinner | `<aum-spinner>` | `@aum/ui/utilities` |
 | Icon | `<aum-icon>` | `@aum/ui/utilities` |
+| Data grid | `<aum-grid>` | `@aum/ui/grid` |
 
 ### Icons (MANDATORY)
 ```html
