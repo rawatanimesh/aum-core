@@ -705,6 +705,8 @@
   "GRID_FILTER_INACTIVE": "निष्क्रिय",
   "GRID_FILTER_PENDING": "लंबित",
   "GRID_FILTER_START_DATE": "शुरुआत तिथि",
+  "GRID_FILTER_DATE_FROM": "से",
+  "GRID_FILTER_DATE_TO": "तक",
   "GRID_FILTERS_APPLIED": "फ़िल्टर लागू किए गए",
   "GRID_RELOAD_DATA": "डेटा पुनः लोड करें"
 }

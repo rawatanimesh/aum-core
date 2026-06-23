@@ -704,6 +704,8 @@
   "GRID_FILTER_INACTIVE": "Inactive",
   "GRID_FILTER_PENDING": "Pending",
   "GRID_FILTER_START_DATE": "Start Date",
+  "GRID_FILTER_DATE_FROM": "From",
+  "GRID_FILTER_DATE_TO": "To",
   "GRID_FILTERS_APPLIED": "Filters applied",
   "GRID_RELOAD_DATA": "Reload data"
 }

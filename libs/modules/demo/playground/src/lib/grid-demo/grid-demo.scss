@@ -97,32 +97,3 @@
   }
 }
 
-.filter-date-row {
-  display: flex;
-  flex-direction: column;
-  gap: rem(8);
-}
-
-.filter-date-input {
-  width: 100%;
-  height: rem(32);
-  padding: 0 rem(10);
-  border: rem(1) solid var(--mat-sys-outline-variant);
-  border-radius: rem(6);
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font-size: rem(13);
-  font-family: inherit;
-  box-sizing: border-box;
-  transition: border-color 120ms ease;
-
-  &:focus {
-    outline: none;
-    border-color: var(--mat-sys-primary);
-  }
-
-  &::-webkit-calendar-picker-indicator {
-    opacity: 0.6;
-    cursor: pointer;
-  }
-}

@@ -705,6 +705,8 @@
   "GRID_FILTER_INACTIVE": "非アクティブ",
   "GRID_FILTER_PENDING": "保留中",
   "GRID_FILTER_START_DATE": "入社日",
+  "GRID_FILTER_DATE_FROM": "開始",
+  "GRID_FILTER_DATE_TO": "終了",
   "GRID_FILTERS_APPLIED": "フィルターが適用されました",
   "GRID_RELOAD_DATA": "データを再読み込み"
 }

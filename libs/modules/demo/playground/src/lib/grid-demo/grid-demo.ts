@@ -6,6 +6,7 @@ import { GridApi } from '@ag-grid-community/core';
 import { PageComponent } from '@aum/ui/layout';
 import { TabGroupComponent, TabComponent } from '@aum/ui/layout';
 import { ButtonComponent } from '@aum/ui/buttons';
+import { DatePickerComponent } from '@aum/ui/form-controls';
 import { AumGridComponent, AumGridFilterDirective, AumGridToolbarActionsDirective, AumGridFilterState } from '@aum/ui/grid';
 import type { AumGridConfig, AumColumnDef, AumRowAction, AumBulkAction, AumActiveFilter } from '@aum/ui/grid';
 import { SnackbarService } from '@aum/ui/utilities';
@@ -68,6 +69,7 @@ const BASE_COLUMNS: AumColumnDef<Employee>[] = [
     AumGridComponent,
     AumGridFilterDirective,
     AumGridToolbarActionsDirective,
+    DatePickerComponent,
   ],
   providers: [AumGridFilterState],
   templateUrl: './grid-demo.html',
@@ -95,9 +97,9 @@ export class GridDemo {
   readonly filterDateFrom = signal('');
   readonly filterDateTo   = signal('');
 
-  // FormControls for date inputs — kept in sync with the signals above
-  readonly dateFromControl = new FormControl('');
-  readonly dateToControl   = new FormControl('');
+  // FormControls for aum-date-picker — kept in sync with the signals above
+  readonly dateFromControl = new FormControl<Date | null>(null);
+  readonly dateToControl   = new FormControl<Date | null>(null);
 
   isLoading = signal(true);
   basicRowData = signal<Employee[] | null>(null);
@@ -163,6 +165,18 @@ export class GridDemo {
     );
   }
 
+  onDateFromSelected(date: Date | null): void {
+    this.filterDateFrom.set(date ? this.toIsoDate(date) : '');
+  }
+
+  onDateToSelected(date: Date | null): void {
+    this.filterDateTo.set(date ? this.toIsoDate(date) : '');
+  }
+
+  private toIsoDate(date: Date): string {
+    return date.toISOString().slice(0, 10);
+  }
+
   onFilterApply(): void {
     if (!this.basicGridApi) return;
     this.filterState.applyToGrid(this.basicGridApi);
@@ -175,19 +189,28 @@ export class GridDemo {
       this.filterStatuses.update(s => s.filter(x => x !== status));
       if (this.basicGridApi) this.filterState.applyToGrid(this.basicGridApi);
     } else {
+      if (key === 'dateFrom') this.dateFromControl.reset(null, { emitEvent: false });
+      if (key === 'dateTo')   this.dateToControl.reset(null, { emitEvent: false });
       this.filterState.removeByKey(key, this.basicGridApi ?? undefined);
     }
   }
 
   onFilterReset(): void {
     this.filterStatuses.set([]);
-    this.dateFromControl.reset('');
-    this.dateToControl.reset('');
+    this.dateFromControl.reset(null, { emitEvent: false });
+    this.dateToControl.reset(null, { emitEvent: false });
     this.filterState.clearAll(this.basicGridApi ?? undefined);
   }
 
   onFilterChipClearAll(): void {
-    this.onFilterReset();
+    this.filterStatuses.set([]);
+    this.dateFromControl.reset(null, { emitEvent: false });
+    this.dateToControl.reset(null, { emitEvent: false });
+    this.filterState.clearAll(this.basicGridApi ?? undefined);
+  }
+
+  onFilterClose(): void {
+    // panel toggled closed — no action needed, chips persist
   }
 
   // ── Tab 1: Basic ──────────────────────────────────────────────────────────

@@ -22,6 +22,7 @@
             [activeFilters]="activeFiltersWithStatusChips()"
             (filterApply)="onFilterApply()"
             (filterReset)="onFilterReset()"
+            (filterClose)="onFilterClose()"
             (filterChipRemove)="onFilterChipRemove($event)"
             (filterChipClearAll)="onFilterChipClearAll()"
             (gridReady)="onBasicGridReady($event)"
@@ -40,6 +41,23 @@
             <ng-template aumGridFilter>
               <div class="filter-panel-content">
 
+                <!-- Date range -->
+                <div class="filter-section">
+                  <span class="filter-section-label">{{ 'GRID_FILTER_START_DATE' | translate }}</span>
+                  <aum-date-picker
+                    [label]="'GRID_FILTER_DATE_FROM' | translate"
+                    [control]="dateFromControl"
+                    (dateSelected)="onDateFromSelected($event)"
+                    (dateCleared)="onDateFromSelected(null)"
+                  ></aum-date-picker>
+                  <aum-date-picker
+                    [label]="'GRID_FILTER_DATE_TO' | translate"
+                    [control]="dateToControl"
+                    (dateSelected)="onDateToSelected($event)"
+                    (dateCleared)="onDateToSelected(null)"
+                  ></aum-date-picker>
+                </div>
+
                 <!-- Status multi-select -->
                 <div class="filter-section">
                   <span class="filter-section-label">{{ 'GRID_FILTER_STATUS' | translate }}</span>
@@ -53,25 +71,6 @@
                         <span>{{ status }}</span>
                       </button>
                     }
-                  </div>
-                </div>
-
-                <!-- Date range -->
-                <div class="filter-section">
-                  <span class="filter-section-label">{{ 'GRID_FILTER_START_DATE' | translate }}</span>
-                  <div class="filter-date-row">
-                    <input
-                      class="filter-date-input"
-                      type="date"
-                      [formControl]="dateFromControl"
-                      (change)="filterDateFrom.set($any($event.target).value)"
-                    />
-                    <input
-                      class="filter-date-input"
-                      type="date"
-                      [formControl]="dateToControl"
-                      (change)="filterDateTo.set($any($event.target).value)"
-                    />
                   </div>
                 </div>
 
