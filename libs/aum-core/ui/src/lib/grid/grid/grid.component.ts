@@ -34,6 +34,7 @@ import {
   ModelUpdatedEvent,
 } from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { CsvExportModule } from '@ag-grid-community/csv-export';
 
 import { ButtonComponent } from '../../buttons/button/button.component';
 import { MenuList, MenuItem } from '../../navigation/menu-list/menu-list';
@@ -43,11 +44,11 @@ import { CheckboxComponent } from '../../form-controls/checkbox/checkbox';
 import { AumGridConfig, AumGridEvents, AumColumnDef, AumRowAction, AumBulkAction, AumActiveFilter } from './grid.types';
 import { AumGridFilterDirective } from './grid-filter.directive';
 import { AumGridToolbarActionsDirective } from './grid-toolbar-actions.directive';
-import { AumCsvExportDialogComponent, AumCsvExportDialogData } from './dialogs/csv-export-dialog.component';
+import { AumCsvExportDialogComponent, AumCsvExportDialogData, AumCsvExportDialogResult } from './dialogs/csv-export-dialog.component';
 import { AumFilterChipsDialogComponent, AumFilterChipsDialogData } from './dialogs/filter-chips-dialog.component';
 import { ConfirmationImageComponent } from '@aum/common';
 
-ModuleRegistry.registerModules([ClientSideRowModelModule]);
+ModuleRegistry.registerModules([ClientSideRowModelModule, CsvExportModule]);
 
 const MAX_INLINE_BULK_ACTIONS = 4;
 const MAX_VISIBLE_CHIPS = 4;
@@ -411,17 +412,22 @@ export class AumGridComponent implements AfterContentInit, OnDestroy {
     const filtered = this.filteredRowCount();
     const filterActive = filtered < total && total > 0;
 
-    this.dialog.open(AumCsvExportDialogComponent, {
-      data: {
-        defaultFilename: this.config().csvFilename ?? 'export',
-        totalRows: total,
-        filteredRows: filterActive ? filtered : total,
-        filterActive,
-      } satisfies AumCsvExportDialogData,
-      width: '420px',
-      autoFocus: 'input',
-      panelClass: 'aum-dialog-container',
-    }).afterClosed().subscribe(result => {
+    const ref = this.dialog.open<AumCsvExportDialogComponent, AumCsvExportDialogData, AumCsvExportDialogResult>(
+      AumCsvExportDialogComponent,
+      {
+        data: {
+          defaultFilename: this.config().csvFilename ?? 'export',
+          totalRows: total,
+          filteredRows: filterActive ? filtered : total,
+          filterActive,
+        },
+        width: '420px',
+        autoFocus: 'input',
+        panelClass: 'aum-dialog-container',
+      }
+    );
+
+    ref.afterClosed().subscribe(result => {
       if (!result?.filename) return;
       this.gridApi()?.exportDataAsCsv({ fileName: result.filename });
     });

@@ -1,6 +1,6 @@
 import { Component, inject, signal, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '../../../buttons/button/button.component';
 import { GenericDialogComponent } from '../../../dialogs/generic-dialog/generic-dialog';
@@ -105,6 +105,7 @@ export interface AumCsvExportDialogResult {
 export class AumCsvExportDialogComponent {
   readonly dialogRef = inject(MatDialogRef<AumCsvExportDialogComponent, AumCsvExportDialogResult>);
   readonly data: AumCsvExportDialogData = inject(MAT_DIALOG_DATA);
+  private readonly translate = inject(TranslateService);
 
   readonly filenameControl = new FormControl(this.data.defaultFilename);
 
@@ -113,9 +114,9 @@ export class AumCsvExportDialogComponent {
   private buildRowCountLabel(): string {
     const { totalRows, filteredRows, filterActive } = this.data;
     if (filterActive && filteredRows < totalRows) {
-      return `${filteredRows} of ${totalRows} rows will be exported`;
+      return this.translate.instant('AUM.GRID_CSV_FILTERED_ROWS', { filtered: filteredRows, total: totalRows });
     }
-    return `${totalRows} rows will be exported`;
+    return this.translate.instant('AUM.GRID_CSV_TOTAL_ROWS', { count: totalRows });
   }
 
   cancel(): void {
