@@ -32,6 +32,10 @@ import {
   PaginationChangedEvent,
   IDatasource,
   ModelUpdatedEvent,
+  ColumnMovedEvent,
+  ColumnResizedEvent,
+  ColumnVisibleEvent,
+  FirstDataRenderedEvent,
 } from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { CsvExportModule } from '@ag-grid-community/csv-export';
@@ -264,8 +268,8 @@ export class AumGridComponent implements AfterContentInit, OnDestroy {
         event.api.setGridOption(key as any, value);
       }
     }
+    this.loadPersistedState();
     this.gridReadyFired.set(true);
-    this.initColumnPanel(event.api);
   }
 
   onModelUpdated(event: ModelUpdatedEvent<any>): void {
@@ -306,6 +310,7 @@ export class AumGridComponent implements AfterContentInit, OnDestroy {
   }
 
   onSortChanged(event: SortChangedEvent<any>): void {
+    this.saveGridState();
     this.sortChange.emit(event);
     this.events().sortChanged?.(event);
   }
@@ -523,6 +528,67 @@ export class AumGridComponent implements AfterContentInit, OnDestroy {
     this.gridApi()?.destroy();
     this.gridReadyFired.set(false);
     this.filterYieldsEmpty.set(false);
+  }
+
+  // ── Grid state persistence ────────────────────────────────────────────────
+
+  // True while applyColumnState is running — prevents restore-triggered events
+  // from overwriting localStorage with an incomplete intermediate state.
+  private isRestoringState = false;
+  // Stashed column state read from localStorage at gridReady, applied at firstDataRendered
+  // after column defs have fully settled (avoids flex/width reset from async rowData).
+  private pendingColumnState: any[] | null = null;
+
+  private get stateStorageKey(): string | null {
+    const key = this.config().stateKey;
+    return key ? `aum-grid:${key}` : null;
+  }
+
+  private saveGridState(): void {
+    if (this.isRestoringState) return;
+    const storageKey = this.stateStorageKey;
+    const api = this.gridApi();
+    if (!storageKey || !api) return;
+    try {
+      const state = api.getColumnState();
+      localStorage.setItem(storageKey, JSON.stringify(state));
+    } catch { /* quota exceeded or private browsing — silently skip */ }
+  }
+
+  private loadPersistedState(): void {
+    const storageKey = this.stateStorageKey;
+    if (!storageKey) return;
+    try {
+      const raw = localStorage.getItem(storageKey);
+      if (!raw) return;
+      this.pendingColumnState = JSON.parse(raw);
+    } catch { /* corrupt storage — silently skip */ }
+  }
+
+  private applyPendingState(api: GridApi<any>): void {
+    if (!this.pendingColumnState) return;
+    const state = this.pendingColumnState;
+    this.pendingColumnState = null;
+    this.isRestoringState = true;
+    api.applyColumnState({ state, applyOrder: true });
+    setTimeout(() => { this.isRestoringState = false; }, 0);
+  }
+
+  onFirstDataRendered(event: FirstDataRenderedEvent<any>): void {
+    this.applyPendingState(event.api);
+    this.initColumnPanel(event.api);
+  }
+
+  onColumnMoved(event: ColumnMovedEvent<any>): void {
+    if (event.finished) this.saveGridState();
+  }
+
+  onColumnResized(event: ColumnResizedEvent<any>): void {
+    if (event.finished) this.saveGridState();
+  }
+
+  onColumnVisible(_event: ColumnVisibleEvent<any>): void {
+    this.saveGridState();
   }
 
   // ── Internal helpers ──────────────────────────────────────────────────────

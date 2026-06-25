@@ -492,8 +492,7 @@ aum-grid {
 }
 
 // ── Icon overrides — replace AG Grid SVG icons with Material Symbols ─────────
-// Exact same pattern as PLM (which uses icomoon). The ::before override with
-// !important beats both the ag-grid.css CSS-var content and the agGridQuartz
+// The ::before override with !important beats both the ag-grid.css CSS-var content and the agGridQuartz
 // font-family. Applied to both .aum-grid-host (inline grid) and bare .ag-theme-quartz
 // (body-appended popups from popupParent: document.body).
 

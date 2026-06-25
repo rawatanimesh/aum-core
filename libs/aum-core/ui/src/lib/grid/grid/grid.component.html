@@ -182,12 +182,16 @@
         [treeData]="treeData()"
         [getDataPath]="config().getDataPath"
         (gridReady)="onGridReady($event)"
+        (firstDataRendered)="onFirstDataRendered($event)"
         (modelUpdated)="onModelUpdated($event)"
         (selectionChanged)="onSelectionChanged($event)"
         (cellValueChanged)="onCellValueChanged($event)"
         (rowDragEnd)="onRowDragEnd($event)"
         (sortChanged)="onSortChanged($event)"
         (filterChanged)="onFilterChanged($event)"
+        (columnMoved)="onColumnMoved($event)"
+        (columnResized)="onColumnResized($event)"
+        (columnVisible)="onColumnVisible($event)"
         (paginationChanged)="onPaginationChanged($event)"
       ></ag-grid-angular>
     </div>

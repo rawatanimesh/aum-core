@@ -96,6 +96,13 @@ export interface AumGridConfig<T = unknown> {
   csvExport?: boolean;
   csvFilename?: string;
 
+  /**
+   * Unique key for persisting column state (widths, order, visibility, sort) in localStorage.
+   * Use a stable, app-unique string e.g. 'employees-list' or 'products-table'.
+   * Multiple grids on the same page each need their own key.
+   */
+  stateKey?: string;
+
   // Passthrough for advanced use
   gridOptions?: Partial<GridOptions<T>>;
 }

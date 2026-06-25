@@ -269,6 +269,7 @@ export class GridDemo {
       filterToggle: true,
     },
     csvFilename: 'employees',
+    stateKey: 'demo-employees',
   }));
 
   // ── Tab 2: Editable + Row Drag ────────────────────────────────────────────
