@@ -114,6 +114,37 @@ This applies to all libraries in the monorepo:
 | Snackbar (success/error/warning/info) | `SnackbarService` | `@aum/ui/utilities` |
 | Loading spinner | `<aum-spinner>` | `@aum/ui/utilities` |
 | Icon | `<aum-icon>` | `@aum/ui/utilities` |
+| Data grid | `<aum-grid>` | `@aum/ui/grid` |
+
+#### Data Grid — `<aum-grid>` from `@aum/ui/grid`
+
+`<aum-grid>` is the **only** way to render tabular data in AUM apps. Never use a raw `ag-grid-angular`, `mat-table`, or HTML `<table>` for data listing — `<aum-grid>` handles theming, empty/loading/error states, toolbar, filter chips, pagination, CSV export, and column persistence automatically.
+
+```typescript
+import { AumGridComponent } from '@aum/ui/grid';
+import type { AumGridConfig } from '@aum/ui/grid';
+
+config: AumGridConfig<Employee> = {
+  columns: [
+    { field: 'name',   headerNameKey: 'COL_NAME',   minWidth: 160 },
+    { field: 'status', headerNameKey: 'COL_STATUS',  minWidth: 120 },
+  ],
+  rowData: this.employees,
+  pagination: true,
+  pageSize: 25,
+  stateKey: 'hr-employees',   // persist column layout per user
+  toolbar: { search: true, csvExport: true, columnToggle: true },
+};
+```
+
+**Key rules for grids:**
+
+- Always use `headerNameKey` (i18n key) instead of `headerName` for translated column headers
+- Always provide `stateKey` for any grid users can interact with (sort/resize/reorder columns) — use pattern `<module>-<entity>[-<context>]`
+- Do not pass raw pixel values to `width`/`minWidth` — use integers (AG Grid maps them to px internally; `aum-grid.scss` scales them via `$scale-*` variables)
+- Use `mode: 'infinite'` + `datasource` for server-side paging; use `rowData` for client-side
+- Use `AumGridFilterState` (provided at component level) for filter panel logic — never manage AG Grid filter models directly
+- See [docs/GRID.md](./docs/GRID.md) for the full reference
 
 #### Services — `libs/aum-core/utils/src/lib/services/`
 
@@ -1078,6 +1109,8 @@ Before submitting code, ensure:
 
 - [ ] ✅ No raw `mat-*` components used where an `aum-*` wrapper exists (check catalog)
 - [ ] ✅ No raw `<mat-icon>` elements — always use `<aum-icon>` with `[width]`/`[color]` inputs
+- [ ] ✅ No raw `ag-grid-angular`, `mat-table`, or `<table>` for data grids — always use `<aum-grid>`
+- [ ] ✅ Every `<aum-grid>` that users can customise has a unique `stateKey` set (pattern: `<module>-<entity>[-<context>]`)
 - [ ] ✅ If adding code **inside** a NX library (`libs/aum-core/ui`, `libs/aum-core/utils`, etc.) — imports from the same library use relative paths, not the library's own `@aum/*` alias
 - [ ] ✅ No hardcoded color values (#hex, rgb, rgba)
 - [ ] ✅ All colors use var(--mat-sys-\*) variables

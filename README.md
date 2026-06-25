@@ -12,6 +12,7 @@ A modern Angular component library built with NX monorepo architecture, featurin
 - **[📱 Responsive Design](./docs/RESPONSIVE-DESIGN.md)** - SCSS breakpoint mixins and ViewportService usage
 - **[🔧 Dynamic Toolbar Actions](./docs/DYNAMIC-TOOLBAR-ACTIONS.md)** - Register/unregister toolbar buttons at runtime
 - **[🎛️ Custom Toolbar Templates](./docs/CUSTOM-TOOLBAR-TEMPLATES.md)** - Add custom dropdown menus to the toolbar
+- **[📊 Grid Component](./docs/GRID.md)** - Full reference for `<aum-grid>`: config, columns, filtering, CSV export, persistent state
 - **[🤝 Contributing](./CONTRIBUTING.md)** - Developer contribution guide and workflow
 - **[🚀 Getting Started](#-getting-started)** - Quick start guide and development setup
 - **[📖 Component Guide](#-component-library)** - Available components and usage examples
@@ -107,6 +108,10 @@ nx lint demo-app
 - **AumTemplate2** (`@aum/templates/aum-template-2`) - Sidebar-first layout with persistent sidebar on desktop/tablet and responsive mobile drawer
 - **AumTemplate3** (`@aum/templates/aum-template-3`) - Hybrid layout combining a persistent global toolbar (Template 1) with a collapsible persistent sidebar (Template 2). Sidebar collapses to icon-only on desktop and opens as an overlay on mobile. Best when you need both a persistent header and always-visible navigation.
 - **Template switching** - Apps can allow users to switch between templates at runtime via the preferences menu. Enable with `toolbarMenus.preferences.items.template.show: true` in `app-config.json`
+
+#### Data Grid
+
+- **AumGridComponent** (`<aum-grid>`) - Enterprise data grid wrapping AG Grid Community. Supports client-side and infinite-scroll modes, toolbar with search/CSV export/column toggle, filter panel, row & bulk actions, pagination, tree data, and persistent column state via `stateKey`. See [docs/GRID.md](./docs/GRID.md) for the full reference.
 
 #### Feedback & Dialogs
 

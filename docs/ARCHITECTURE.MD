@@ -133,6 +133,8 @@ ui/
 ├── dialogs/
 │   ├── confirmation-dialog/
 │   └── generic-dialog/
+├── grid/
+│   └── grid/               ← <aum-grid> — enterprise data grid (AG Grid Community)
 └── utilities/
    └── snackbar/
 ```
@@ -292,6 +294,21 @@ export class ComponentStateService {
 2. **Feature State**: Shared state within feature modules
 3. **Global State**: Application-wide state via services
 4. **Server State**: API data management with RxJS
+5. **Persistent UI State**: User layout preferences saved to `localStorage`
+
+### Persistent UI State
+
+Some UI state should survive page refreshes and navigation — column layouts in `<aum-grid>` are the canonical example. The pattern used:
+
+- **What**: Column widths, order, visibility, and sort direction per grid instance
+- **Where**: `localStorage` under the key `aum-grid:<stateKey>`
+- **When written**: On `columnResized` (finished), `columnMoved` (finished), `columnVisible`, `sortChanged`
+- **When read**: At `gridReady` (stashed), applied at `firstDataRendered` (after column defs settle from async rowData)
+- **Guard**: `isRestoringState` flag prevents the `applyColumnState` call itself from re-triggering a save with an intermediate state
+
+The deferred-apply pattern (`gridReady` → stash → `firstDataRendered` → apply) is critical: applying state at `gridReady` gets overwritten when AG Grid recalculates flex widths once async `rowData` arrives. Applying at `firstDataRendered` happens after that recalculation and sticks.
+
+Opt in per grid by setting `stateKey` in `AumGridConfig`. See [GRID.md](./GRID.md#persistent-column-state) for full details.
 
 ---
 

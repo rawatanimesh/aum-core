@@ -29,7 +29,34 @@ Always use `aum-*` wrappers. Only fall back to raw `mat-*` if no wrapper exists.
 | Snackbar | `SnackbarService` | `@aum/ui/utilities` |
 | Spinner | `<aum-spinner>` | `@aum/ui/utilities` |
 | Icon | `<aum-icon>` | `@aum/ui/utilities` |
-| Data grid | `<aum-grid>` | `@aum/ui/grid` |
+| Data grid / table | `<aum-grid>` | `@aum/ui/grid` |
+
+### Data Grid (MANDATORY)
+
+**Any time tabular data needs to be displayed, use `<aum-grid>`.** Never use `<mat-table>`, raw `<ag-grid-angular>`, or HTML `<table>` for data listings.
+
+```typescript
+// ✅ CORRECT
+import { AumGridComponent } from '@aum/ui/grid';
+import type { AumGridConfig } from '@aum/ui/grid';
+
+config: AumGridConfig<Employee> = {
+  columns: [{ field: 'name', headerNameKey: 'COL_NAME', minWidth: 160 }],
+  rowData: this.employees,
+  stateKey: 'hr-employees',  // ← ALWAYS set for any interactive grid
+  toolbar: { search: true, csvExport: true, columnToggle: true },
+};
+
+// ❌ FORBIDDEN — bypasses theming, empty/error states, toolbar, persistence
+<mat-table>...</mat-table>
+<ag-grid-angular>...</ag-grid-angular>
+```
+
+**`stateKey` rules:**
+- Set on every grid where users can sort/resize/reorder columns
+- Use a globally unique dash-separated string: `<module>-<entity>[-<context>]`
+- Multiple grids on the same page each need their own key
+- See [docs/GRID.md](./docs/GRID.md) for full reference
 
 ### Icons (MANDATORY)
 ```html
@@ -191,6 +218,8 @@ onMenuSelect(item: MenuItem) {
 
 Before committing code, verify:
 - [ ] **Checked AUM catalog** — no raw `mat-*` where `aum-*` exists; never `<mat-icon>`
+- [ ] **No raw tables** — tabular data uses `<aum-grid>`, not `<mat-table>` / `<ag-grid-angular>` / `<table>`
+- [ ] **Grid stateKey** — every interactive `<aum-grid>` has a unique `stateKey` set (`<module>-<entity>[-<context>]`)
 - [ ] **NX internal imports** — if code lives inside a `libs/aum-core/*` library, all same-library imports use relative paths (not `@aum/*` aliases)
 - [ ] **No hardcoded colors** - only var(--mat-sys-*)
 - [ ] **No pixel values** - only rem() function
