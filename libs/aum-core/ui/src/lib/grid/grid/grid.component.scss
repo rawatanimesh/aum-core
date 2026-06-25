@@ -516,6 +516,7 @@ aum-grid {
   &.ag-icon-menu::before     { content: "\e5d2"; } // menu
 
   // Sort
+  &.ag-icon-none::before     { content: "\e053"; color: var(--mat-sys-outline); } // sort_by_alpha (unsorted)
   &.ag-icon-asc::before      { content: "\e5d8"; } // arrow_upward
   &.ag-icon-desc::before     { content: "\e5db"; } // arrow_downward
 
