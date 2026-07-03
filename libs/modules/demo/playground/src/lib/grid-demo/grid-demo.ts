@@ -1,4 +1,5 @@
-import { Component, signal, computed, ChangeDetectionStrategy, inject } from '@angular/core';
+import { Component, signal, computed, ChangeDetectionStrategy, inject, input } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { GridApi } from '@ag-grid-community/core';
@@ -59,6 +60,7 @@ const BASE_COLUMNS: AumColumnDef<Employee>[] = [
   selector: 'demo-grid',
   standalone: true,
   imports: [
+    NgTemplateOutlet,
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
@@ -77,6 +79,8 @@ const BASE_COLUMNS: AumColumnDef<Employee>[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridDemo {
+  readonly embedded = input(false);
+
   private snackbar = inject(SnackbarService);
   private lang = inject(LanguageTranslationService);
 

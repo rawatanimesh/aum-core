@@ -95,6 +95,7 @@ export class GettingStarted implements AfterViewInit {
     { icon: 'toggle_on',       labelKey: 'GS_COMP_BUTTON_TOGGLE' },
     { icon: 'tab',             labelKey: 'GS_COMP_TABS' },
     { icon: 'progress_activity', labelKey: 'GS_COMP_SPINNER' },
+    { icon: 'table_chart',       labelKey: 'GS_COMP_GRID' },
   ];
 
   readonly resources = [

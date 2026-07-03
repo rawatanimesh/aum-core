@@ -707,5 +707,30 @@
   "GRID_FILTER_DATE_FROM": "From",
   "GRID_FILTER_DATE_TO": "To",
   "GRID_FILTERS_APPLIED": "Filters applied",
-  "GRID_RELOAD_DATA": "Reload data"
+  "GRID_RELOAD_DATA": "Reload data",
+
+  "UI_LAB_GRID": "Grid",
+  "UI_LAB_COMP_GRID_DESC": "Enterprise data grid wrapping AG Grid Community. Supports sorting, filtering, CSV export, column toggle, persistent column state, row and bulk actions, inline editing, infinite scroll, and tree data.",
+
+  "UI_LAB_SCENE_GRID_BASIC_TITLE": "Basic Grid",
+  "UI_LAB_SCENE_GRID_BASIC_DESC": "Columns, client-side row data, sorting, resizing, and pagination — the minimum config to get started.",
+  "UI_LAB_SCENE_GRID_TOOLBAR_TITLE": "Toolbar",
+  "UI_LAB_SCENE_GRID_TOOLBAR_DESC": "Enable search, CSV export, and column-visibility toggle via the toolbar config object. countLabel shows a row count summary.",
+  "UI_LAB_SCENE_GRID_ACTIONS_TITLE": "Row & Bulk Actions",
+  "UI_LAB_SCENE_GRID_ACTIONS_DESC": "rowActions adds a three-dot menu to each row. bulkActions appear inline in the toolbar when rows are selected (up to 4 inline, rest overflow).",
+  "UI_LAB_SCENE_GRID_PERSIST_TITLE": "Persistent Column State",
+  "UI_LAB_SCENE_GRID_PERSIST_DESC": "Set stateKey to save column widths, order, visibility, and sort to localStorage. Resize or reorder columns, then refresh — your layout is restored.",
+  "UI_LAB_SCENE_GRID_LOADING_TITLE": "Loading State",
+  "UI_LAB_SCENE_GRID_LOADING_DESC": "Pass loading: true to display the grid's loading overlay while data is being fetched.",
+
+  "UI_LAB_CODE_GRID_BASIC": "Basic Grid",
+  "UI_LAB_CODE_GRID_TOOLBAR": "With Toolbar",
+  "UI_LAB_CODE_GRID_PERSIST": "Persistent State",
+  "UI_LAB_CODE_GRID_ACTIONS": "Row & Bulk Actions",
+  "UI_LAB_CODE_GRID_INFINITE": "Infinite Scroll",
+
+  "GS_COMP_GRID": "Data Grid",
+
+  "DATA_GRID_TITLE": "Enterprise Data Grid",
+  "DATA_GRID_DESC": "AG Grid Community wrapper with full AUM theming — persistent column state, toolbar, CSV export, row and bulk actions, infinite scroll, and tree data.\nDrop-in replacement for any data table need."
 }

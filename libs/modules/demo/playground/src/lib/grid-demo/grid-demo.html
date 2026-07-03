@@ -1,11 +1,12 @@
-<aum-page [pageInfo]="pageInfo">
-  <div aum-page-body>
+<ng-template #body>
   <div class="grid-demo-container">
 
+    @if (!embedded()) {
     <div class="demo-header">
       <h1 class="page-title">{{ 'GRID_DEMO_TITLE' | translate }}</h1>
       <p class="page-subtitle">{{ 'GRID_DEMO_SUBTITLE' | translate }}</p>
     </div>
+    }
 
     <aum-tab-group>
 
@@ -106,5 +107,14 @@
 
     </aum-tab-group>
   </div>
-  </div>
-</aum-page>
+</ng-template>
+
+@if (embedded()) {
+  <ng-container [ngTemplateOutlet]="body"></ng-container>
+} @else {
+  <aum-page [pageInfo]="pageInfo">
+    <div aum-page-body>
+      <ng-container [ngTemplateOutlet]="body"></ng-container>
+    </div>
+  </aum-page>
+}

@@ -1,0 +1,54 @@
+<aum-page [pageInfo]="pageInfo">
+  <div aum-page-body>
+    <div class="detail-page">
+
+      <ui-lab-component-header
+        [name]="meta.name"
+        [selector]="meta.selector"
+        [importFrom]="meta.importFrom"
+        [description]="meta.description"
+        [status]="meta.status"
+      ></ui-lab-component-header>
+
+      <aum-tab-group>
+
+        <aum-tab [label]="'UI_LAB_TAB_EXAMPLES' | translate">
+          <demo-grid [embedded]="true"></demo-grid>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
+          <div class="detail-page__code-section">
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_IMPORT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.importPath" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_GRID_BASIC' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.basicGrid" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_GRID_TOOLBAR' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.withToolbar" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_GRID_PERSIST' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.persistentState" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_GRID_ACTIONS' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.rowActions" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_GRID_INFINITE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.infiniteScroll" language="typescript"></ui-lab-code-block>
+          </div>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_API' | translate">
+          <ui-lab-api-table [inputs]="inputs" [outputs]="outputs" [interfaces]="interfaces"></ui-lab-api-table>
+        </aum-tab>
+
+      </aum-tab-group>
+
+      <div class="detail-page__nav">
+        <div></div>
+        <div></div>
+      </div>
+
+    </div>
+  </div>
+</aum-page>

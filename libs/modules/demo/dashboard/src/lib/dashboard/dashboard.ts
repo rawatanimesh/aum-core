@@ -105,5 +105,10 @@ export class Dashboard {
       description: 'UI_LAB_SUBTITLE',
       icon: 'widgets',
     },
+    {
+      title: 'DATA_GRID_TITLE',
+      description: 'DATA_GRID_DESC',
+      icon: 'table_chart',
+    },
   ];
 }
