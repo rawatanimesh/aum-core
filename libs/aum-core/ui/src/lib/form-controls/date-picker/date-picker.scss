@@ -80,6 +80,11 @@
     display: flex;
     align-items: center;
   }
+  .mat-mdc-form-field-icon-suffix {
+    align-self: center;
+    display: flex;
+    align-items: center;
+  }
 }
 // styling for datepicker popup in light mode
 .light-mode .mat-datepicker-content {

@@ -73,7 +73,7 @@ export class UiLabCatalog {
       descKey: 'UI_LAB_CAT_DATA_DISPLAY_DESC',
       icon: 'bar_chart',
       route: '/ui-lab/data-display',
-      count: 1,
+      count: 2,
     },
   ];
 

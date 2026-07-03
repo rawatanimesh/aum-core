@@ -28,20 +28,20 @@
       [placeholder]="'AUM.END_DATE' | translate"
     />
   </mat-date-range-input>
-
+  <!-- Clear Button: Appears if a date range is selected -->
+  @if (formGroupForDateRange && (formGroupForDateRange.controls['start'].value
+  || formGroupForDateRange.controls['end'].value)) {
+  <button type="button" mat-icon-button matIconSuffix (click)="clearDate($event)">
+    <aum-icon name="close"></aum-icon>
+  </button>
+  }
   <mat-datepicker-toggle matIconSuffix [for]="picker" />
   <mat-date-range-picker
     #picker
     (closed)="onRangePickerClosed()"
   ></mat-date-range-picker>
 
-  <!-- Clear Button: Appears if a date range is selected -->
-  @if (formGroupForDateRange && (formGroupForDateRange.controls['start'].value
-  || formGroupForDateRange.controls['end'].value)) {
-  <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
-    <aum-icon name="close"></aum-icon>
-  </button>
-  } @if (showError) {
+  @if (showError) {
   <mat-error>{{ getErrorMessage() }}</mat-error>
   }
 </mat-form-field>
@@ -68,15 +68,16 @@
     (dateChange)="onSingleInputDateChange($event)"
   />
 
+  <!-- Clear Button: Appears if a single date is selected -->
+  @if (formControlForSingleDate && formControlForSingleDate.value) {
+  <button type="button" mat-icon-button matIconSuffix (click)="clearDate($event)">
+    <aum-icon name="close"></aum-icon>
+  </button>
+  }
   <mat-datepicker-toggle matIconSuffix [for]="picker" />
   <mat-datepicker #picker />
 
-  <!-- Clear Button: Appears if a single date is selected -->
-  @if (formControlForSingleDate && formControlForSingleDate.value) {
-  <button type="button" mat-icon-button matSuffix (click)="clearDate($event)">
-    <aum-icon name="close"></aum-icon>
-  </button>
-  } @if (showError) {
+  @if (showError) {
   <mat-error>{{ getErrorMessage() }}</mat-error>
   }
 </mat-form-field>

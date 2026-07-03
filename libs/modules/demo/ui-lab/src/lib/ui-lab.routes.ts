@@ -163,6 +163,12 @@ export const uiLabRoutes: Routes = [
         loadComponent: () =>
           import('./data-display/chart-detail/chart-detail').then((m) => m.ChartDetail),
       },
+      {
+        path: 'grid',
+        title: 'Grid | UI Lab',
+        loadComponent: () =>
+          import('./data-display/grid-detail/grid-detail').then((m) => m.GridDetail),
+      },
     ],
   },
   {

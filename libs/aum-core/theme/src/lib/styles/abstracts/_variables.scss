@@ -5,3 +5,9 @@
 // Breakpoints — match ViewportService in libs/aum-core/utils
 $breakpoint-mobile: 600px;
 $breakpoint-tablet: 960px;
+
+// UI Scale ratios — single source of truth for both CSS --ui-scale values (core.scss)
+// and any px-only token overrides (AG Grid, third-party libs). Update here only.
+$scale-compact: 0.85;
+$scale-default: 1;
+$scale-large:   1.15;

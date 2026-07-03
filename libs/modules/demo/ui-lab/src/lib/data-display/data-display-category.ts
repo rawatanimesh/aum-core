@@ -35,5 +35,12 @@ export class DataDisplayCategory {
       route: '/ui-lab/data-display/chart',
       icon: 'bar_chart',
     },
+    {
+      nameKey: 'UI_LAB_GRID',
+      selector: '<aum-grid>',
+      descKey: 'UI_LAB_COMP_GRID_DESC',
+      route: '/ui-lab/data-display/grid',
+      icon: 'table_chart',
+    },
   ];
 }

@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   Input,
   Output,
   EventEmitter,
@@ -7,9 +8,11 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { Icon } from '@aum/ui/utilities';
-import { Router, RouterModule } from '@angular/router';
+import { NavigationEnd, Router, RouterModule } from '@angular/router';
+import { filter } from 'rxjs';
 import { TranslateModule } from '@ngx-translate/core';
 
 export interface SideMenuItem {
@@ -39,11 +42,21 @@ export class SideMenu implements OnInit {
   selected: string | null = null;
 
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    const currentRoute = this.router.url;
-    // Initialize items based on the current route and set the selected item and expanded state
-    this.initializeItems(this.items, currentRoute);
+    this.syncSelection(this.router.url);
+
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((e) => this.syncSelection(e.urlAfterRedirects));
+  }
+
+  private syncSelection(url: string): void {
+    this.initializeItems(this.items, url);
   }
 
   initializeItems(items: SideMenuItem[], currentRoute: string): boolean {

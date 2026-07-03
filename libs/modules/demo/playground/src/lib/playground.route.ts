@@ -84,4 +84,11 @@ export const playgroundRoutes: Routes = [
     loadComponent: () =>
       import('./button-demo/button-demo').then((m) => m.ButtonDemo),
   },
+
+  {
+    path: 'grid',
+    title: 'Grid | Aum Core',
+    loadComponent: () =>
+      import('./grid-demo/grid-demo').then((m) => m.GridDemo),
+  },
 ];

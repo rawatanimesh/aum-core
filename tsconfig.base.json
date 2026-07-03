@@ -30,6 +30,7 @@
       "@aum/ui/form-controls": ["libs/aum-core/ui/src/lib/form-controls/index.ts"],
       "@aum/ui/layout": ["libs/aum-core/ui/src/lib/layout/index.ts"],
       "@aum/ui/navigation": ["libs/aum-core/ui/src/lib/navigation/index.ts"],
+      "@aum/ui/grid": ["libs/aum-core/ui/src/lib/grid/index.ts"],
       "@aum/ui/utilities": ["libs/aum-core/ui/src/lib/utilities/index.ts"],
       "@aum/utils/interfaces": ["libs/aum-core/utils/src/lib/interfaces/index.ts"],
       "@aum/utils/services": ["libs/aum-core/utils/src/lib/services/index.ts"]

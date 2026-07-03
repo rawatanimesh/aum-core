@@ -1,0 +1,50 @@
+@use 'functions' as *;
+
+aum-chip {
+  display: inline-flex;
+}
+
+.aum-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: rem(4);
+  height: rem(26);
+  padding: 0 rem(6) 0 rem(10);
+  border-radius: rem(13);
+  background: var(--mat-sys-primary-container);
+  color: var(--mat-sys-primary);
+  font-size: rem(12);
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.aum-chip-label {
+  max-width: rem(160);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+
+.aum-chip-remove {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: rem(16);
+  height: rem(16);
+  border-radius: 50%;
+  color: var(--mat-sys-primary);
+  flex-shrink: 0;
+
+  .material-icons {
+    font-size: rem(13);
+    line-height: 1;
+  }
+
+  &:hover {
+    background: color-mix(in srgb, var(--mat-sys-primary) 16%, transparent);
+  }
+}

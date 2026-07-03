@@ -133,6 +133,8 @@ ui/
 ├── dialogs/
 │   ├── confirmation-dialog/
 │   └── generic-dialog/
+├── grid/
+│   └── grid/               ← <aum-grid> — enterprise data grid (AG Grid Community)
 └── utilities/
    └── snackbar/
 ```
@@ -144,9 +146,10 @@ theme/
 ├── src/
 │   ├── styles/
 │   │   ├── abstracts/
-│   │   │   ├── _variables.scss  # Breakpoint values, spacing tokens
+│   │   │   ├── _variables.scss  # ⭐ Single source of truth — breakpoints + scale ratios
 │   │   │   ├── _mixins.scss     # Responsive mixins (mobile/tablet/desktop)
 │   │   │   └── functions.scss   # rem() function
+│   │   ├── core.scss            # Imports _variables.scss; emits --ui-scale CSS vars
 │   │   └── themes/
 │   │       ├── theme-purple/    # Default palette (Purple) — light + dark
 │   │       ├── theme-ocean-blue/ # Ocean Blue palette — light + dark
@@ -291,6 +294,21 @@ export class ComponentStateService {
 2. **Feature State**: Shared state within feature modules
 3. **Global State**: Application-wide state via services
 4. **Server State**: API data management with RxJS
+5. **Persistent UI State**: User layout preferences saved to `localStorage`
+
+### Persistent UI State
+
+Some UI state should survive page refreshes and navigation — column layouts in `<aum-grid>` are the canonical example. The pattern used:
+
+- **What**: Column widths, order, visibility, and sort direction per grid instance
+- **Where**: `localStorage` under the key `aum-grid:<stateKey>`
+- **When written**: On `columnResized` (finished), `columnMoved` (finished), `columnVisible`, `sortChanged`
+- **When read**: At `gridReady` (stashed), applied at `firstDataRendered` (after column defs settle from async rowData)
+- **Guard**: `isRestoringState` flag prevents the `applyColumnState` call itself from re-triggering a save with an intermediate state
+
+The deferred-apply pattern (`gridReady` → stash → `firstDataRendered` → apply) is critical: applying state at `gridReady` gets overwritten when AG Grid recalculates flex widths once async `rowData` arrives. Applying at `firstDataRendered` happens after that recalculation and sticks.
+
+Opt in per grid by setting `stateKey` in `AumGridConfig`. See [GRID.md](./GRID.md#persistent-column-state) for full details.
 
 ---
 
@@ -672,6 +690,38 @@ The AUM UI system supports three display modes that affect all components:
 - **Scaling Factor**: 1.125x
 - **Touch Targets**: Minimum 48px (rem(48))
 - **Padding/Margins**: Increased by 12.5%
+
+### Scale Ratios — Single Source of Truth
+
+All UI scale ratios are declared **once** in `_variables.scss` and consumed everywhere:
+
+```scss
+// libs/aum-core/theme/src/lib/styles/abstracts/_variables.scss
+$scale-compact: 0.85;
+$scale-default: 1;
+$scale-large:   1.15;
+```
+
+**To change a ratio**, edit only `_variables.scss`. The value propagates automatically to:
+
+| Consumer | What it drives |
+|---|---|
+| `core.scss` | `--ui-scale` CSS custom property on `body.scale-*` classes |
+| `grid.component.scss` | AG Grid px tokens (`--ag-row-height`, `--ag-font-size`, etc.) via `math.round()` |
+| Any future third-party lib | `@use 'variables' as *` then use `$scale-compact` / `$scale-large` |
+
+**Rule:** Never hardcode `0.85`, `1`, or `1.15` anywhere in SCSS. Always `@use 'variables' as *` and reference the variable. This is how AG Grid's px-only tokens (which cannot use `rem()`) stay in sync with the rest of the UI.
+
+```scss
+// ✅ Correct — consume from variables
+@use 'variables' as *;
+body.scale-compact .my-px-widget { font-size: #{math.round(14 * $scale-compact)}px; }
+
+// ❌ Wrong — hardcoded ratio, will drift if design changes
+body.scale-compact .my-px-widget { font-size: 12px; }
+```
+
+---
 
 ### Theme System Implementation
 

@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @forward 'libs/aum-core/theme/src/lib/styles/core.scss';
+
+// AG Grid base layout + quartz visual theme (required for aum-grid)
+@import '@ag-grid-community/styles/ag-grid.css';
+@import '@ag-grid-community/styles/ag-theme-quartz.css';

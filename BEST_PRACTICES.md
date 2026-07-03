@@ -114,6 +114,37 @@ This applies to all libraries in the monorepo:
 | Snackbar (success/error/warning/info) | `SnackbarService` | `@aum/ui/utilities` |
 | Loading spinner | `<aum-spinner>` | `@aum/ui/utilities` |
 | Icon | `<aum-icon>` | `@aum/ui/utilities` |
+| Data grid | `<aum-grid>` | `@aum/ui/grid` |
+
+#### Data Grid — `<aum-grid>` from `@aum/ui/grid`
+
+`<aum-grid>` is the **only** way to render tabular data in AUM apps. Never use a raw `ag-grid-angular`, `mat-table`, or HTML `<table>` for data listing — `<aum-grid>` handles theming, empty/loading/error states, toolbar, filter chips, pagination, CSV export, and column persistence automatically.
+
+```typescript
+import { AumGridComponent } from '@aum/ui/grid';
+import type { AumGridConfig } from '@aum/ui/grid';
+
+config: AumGridConfig<Employee> = {
+  columns: [
+    { field: 'name',   headerNameKey: 'COL_NAME',   minWidth: 160 },
+    { field: 'status', headerNameKey: 'COL_STATUS',  minWidth: 120 },
+  ],
+  rowData: this.employees,
+  pagination: true,
+  pageSize: 25,
+  stateKey: 'hr-employees',   // persist column layout per user
+  toolbar: { search: true, csvExport: true, columnToggle: true },
+};
+```
+
+**Key rules for grids:**
+
+- Always use `headerNameKey` (i18n key) instead of `headerName` for translated column headers
+- Always provide `stateKey` for any grid users can interact with (sort/resize/reorder columns) — use pattern `<module>-<entity>[-<context>]`
+- Do not pass raw pixel values to `width`/`minWidth` — use integers (AG Grid maps them to px internally; `aum-grid.scss` scales them via `$scale-*` variables)
+- Use `mode: 'infinite'` + `datasource` for server-side paging; use `rowData` for client-side
+- Use `AumGridFilterState` (provided at component level) for filter panel logic — never manage AG Grid filter models directly
+- See [docs/GRID.md](./docs/GRID.md) for the full reference
 
 #### Services — `libs/aum-core/utils/src/lib/services/`
 
@@ -405,9 +436,17 @@ export class ButtonComponent {
 
 All UI must be responsive and look polished across **mobile (≤ 600px)**, **tablet (601px–960px)**, and **desktop (> 960px)** viewports. Horizontal overflow is strictly forbidden — content must never cause the page to scroll horizontally.
 
-> Breakpoints are defined in `libs/aum-core/theme/src/lib/styles/abstracts/_variables.scss`:
-> - `$breakpoint-mobile: 600px`
-> - `$breakpoint-tablet: 960px`
+> `libs/aum-core/theme/src/lib/styles/abstracts/_variables.scss` is the **single source of truth** for all global SCSS tokens. Update values here only — they propagate everywhere automatically:
+>
+> | Variable | Value | Purpose |
+> |---|---|---|
+> | `$breakpoint-mobile` | `600px` | Breakpoint for `@include mobile` mixin |
+> | `$breakpoint-tablet` | `960px` | Breakpoint for `@include tablet` mixin |
+> | `$scale-compact` | `0.85` | Compact display mode ratio |
+> | `$scale-default` | `1` | Default display mode ratio |
+> | `$scale-large` | `1.15` | Large display mode ratio |
+>
+> The scale ratios drive both `--ui-scale` (CSS custom property in `core.scss`, used by `rem()`) and any px-only third-party token overrides (e.g. AG Grid). Any SCSS file needing these values must `@use 'variables' as *` — never hardcode `0.85`, `1`, or `1.15`.
 >
 > Responsive mixins live in `libs/aum-core/theme/src/lib/styles/abstracts/_mixins.scss`. **Always use these mixins — never write raw media queries.**
 
@@ -1070,11 +1109,14 @@ Before submitting code, ensure:
 
 - [ ] ✅ No raw `mat-*` components used where an `aum-*` wrapper exists (check catalog)
 - [ ] ✅ No raw `<mat-icon>` elements — always use `<aum-icon>` with `[width]`/`[color]` inputs
+- [ ] ✅ No raw `ag-grid-angular`, `mat-table`, or `<table>` for data grids — always use `<aum-grid>`
+- [ ] ✅ Every `<aum-grid>` that users can customise has a unique `stateKey` set (pattern: `<module>-<entity>[-<context>]`)
 - [ ] ✅ If adding code **inside** a NX library (`libs/aum-core/ui`, `libs/aum-core/utils`, etc.) — imports from the same library use relative paths, not the library's own `@aum/*` alias
 - [ ] ✅ No hardcoded color values (#hex, rgb, rgba)
 - [ ] ✅ All colors use var(--mat-sys-\*) variables
 - [ ] ✅ No pixel (px) values for dimensions
 - [ ] ✅ All dimensions use rem() function
+- [ ] ✅ If overriding px-only tokens for a third-party lib (e.g. AG Grid), use `@use 'variables' as *` and reference `$scale-compact` / `$scale-large` — never hardcode `0.85` or `1.15`
 - [ ] ✅ Component scales properly in Compact mode
 - [ ] ✅ Component scales properly in Large mode
 - [ ] ✅ Theme switching works without any visual breaks

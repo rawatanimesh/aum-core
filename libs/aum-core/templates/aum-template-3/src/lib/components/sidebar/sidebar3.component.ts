@@ -3,6 +3,7 @@ import {
   ChangeDetectorRef,
   Component,
   computed,
+  DestroyRef,
   EventEmitter,
   inject,
   input,
@@ -41,6 +42,7 @@ export class Sidebar3Component implements OnInit {
   private appConfigService = inject(AppConfigService);
   private router = inject(Router);
   private cdr = inject(ChangeDetectorRef);
+  private destroyRef = inject(DestroyRef);
 
   navItems = this.appConfigService.navItems;
 
@@ -59,27 +61,33 @@ export class Sidebar3Component implements OnInit {
     return parent?.value ?? null;
   });
 
-  constructor() {
+  ngOnInit(): void {
+    this.syncState(this.router.url);
+
     this.router.events
-      .pipe(filter((e) => e instanceof NavigationEnd), takeUntilDestroyed())
-      .subscribe(() => {
-        this.activeItemValue.set(this.router.url);
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((e) => {
+        this.syncState(e.urlAfterRedirects);
         this.cdr.markForCheck();
       });
   }
 
-  ngOnInit(): void {
-    const url = this.router.url;
+  private syncState(url: string): void {
     this.activeItemValue.set(url);
+    this.syncOpenParents(url);
+  }
 
-    if (this.mobileMode()) {
-      const activeParent = this.navItems().find(
-        (item) =>
-          item.children?.length &&
-          item.children.some((c) => url === c.value || url.startsWith(c.value + '/'))
-      );
-      if (activeParent) this.openParents.set([activeParent.value]);
-    }
+  private syncOpenParents(url: string): void {
+    if (!this.mobileMode()) return;
+    const activeParent = this.navItems().find(
+      (item) =>
+        item.children?.length &&
+        item.children.some((c) => url === c.value || url.startsWith(c.value + '/'))
+    );
+    if (activeParent) this.openParents.set([activeParent.value]);
   }
 
   onItemClick(item: SideNavItem): void {
