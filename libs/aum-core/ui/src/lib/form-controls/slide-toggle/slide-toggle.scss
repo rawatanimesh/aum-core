@@ -101,6 +101,14 @@
   opacity: 1 !important;
 }
 
+.aum-slide-toggle
+  .mdc-form-field
+  .mdc-switch.mdc-switch--selected
+  .mdc-switch__handle-track
+  .mdc-switch__handle {
+  transform: translate(-30%, -50%) !important;
+}
+
 body.scale-compact {
   .aum-slide-toggle
     .mdc-form-field
