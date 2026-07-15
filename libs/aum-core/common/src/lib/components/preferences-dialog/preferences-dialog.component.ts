@@ -18,10 +18,12 @@ import {
   AppEventBusService,
   AppEventType,
   ColorPalette,
+  DisplayMode,
   LanguageTranslationService,
   MenuConfigHelper,
   PaletteService,
   ThemeService,
+  UiScaleService,
 } from '@aum/utils/services';
 import {
   ButtonComponent,
@@ -33,7 +35,6 @@ import { GenericDialogComponent } from '@aum/ui/dialogs';
 import { SnackbarService } from '@aum/ui/utilities';
 
 export type ThemeMode = 'light' | 'dark' | 'system';
-export type DisplayMode = 'compact' | 'default' | 'large';
 export type Language = 'en' | 'ja' | 'hi';
 export type Template = 'template-1' | 'template-2' | 'template-3';
 
@@ -70,6 +71,7 @@ export interface PreferencesDialogData {
 export class PreferencesDialogComponent implements OnInit {
   private themeService = inject(ThemeService);
   private paletteService = inject(PaletteService);
+  private uiScaleService = inject(UiScaleService);
   private languageService = inject(LanguageTranslationService);
   private appConfigService = inject(AppConfigService);
   private eventBus = inject(AppEventBusService);
@@ -166,7 +168,7 @@ export class PreferencesDialogComponent implements OnInit {
     const displayMode = value as DisplayMode;
     const previous = this.draft.displayMode;
     this.draft = { ...this.draft, displayMode };
-    this.applyUiScale(displayMode);
+    this.uiScaleService.setScale(displayMode);
     this.eventBus.emit(AppEventType.UI_SCALE_CHANGED, { scale: displayMode, previousScale: previous });
   }
 
@@ -240,9 +242,7 @@ export class PreferencesDialogComponent implements OnInit {
     return {
       theme:       this.themeService.getTheme(),
       palette:     this.paletteService.getPalette(),
-      displayMode: (localStorage.getItem('ui-scale-mode') as DisplayMode)
-                    ?? this.appConfigService.defaults()?.displayMode
-                    ?? 'default',
+      displayMode: this.uiScaleService.getScale(),
       language:    this.languageService.getLanguage() as Language,
       template:    (localStorage.getItem('app-template') as Template)
                     ?? this.appConfigService.defaults()?.template
@@ -263,7 +263,7 @@ export class PreferencesDialogComponent implements OnInit {
       this.eventBus.emit(AppEventType.PALETTE_CHANGED, { palette: s.palette, previousPalette: d.palette });
     }
     if (s.displayMode !== d.displayMode) {
-      this.applyUiScale(s.displayMode);
+      this.uiScaleService.setScale(s.displayMode);
       this.eventBus.emit(AppEventType.UI_SCALE_CHANGED, { scale: s.displayMode, previousScale: d.displayMode });
     }
     if (s.template !== d.template) {
@@ -275,12 +275,6 @@ export class PreferencesDialogComponent implements OnInit {
       this.languageService.setLanguage(s.language);
       this.eventBus.emit(AppEventType.LANGUAGE_CHANGED, { language: s.language, previousLanguage: d.language });
     }
-  }
-
-  private applyUiScale(mode: DisplayMode): void {
-    localStorage.setItem('ui-scale-mode', mode);
-    document.body.classList.remove('scale-compact', 'scale-default', 'scale-large');
-    document.body.classList.add(`scale-${mode}`);
   }
 
   private setInitialTab(): void {
