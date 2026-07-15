@@ -60,6 +60,8 @@ export class InputComponent {
   @Input() maxlength: number | null = null;
   @Input() readonly = false;
   @Input() disabled = false;
+  @Input() size: 'large' | 'medium' = 'medium';
+  @Input() boldLabel = true;
 
   // --- Forms Integration Inputs/Outputs ---
   @Input() control!: FormControl; // For Reactive Forms

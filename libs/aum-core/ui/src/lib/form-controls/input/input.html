@@ -1,6 +1,6 @@
 <mat-form-field
   class="aum-input-root"
-  [ngClass]="{'aum-input-box': !textarea}"
+  [ngClass]="{'aum-input-box': !textarea, 'aum-input-large': size === 'large', 'aum-input-medium': size === 'medium', 'aum-input-label-bold': boldLabel, 'aum-input-label-normal': !boldLabel}"
   floatLabel="always"
   appearance="outline"
 >

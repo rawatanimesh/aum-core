@@ -2,6 +2,7 @@
 <!-- Date Range Picker: Mat Form Field Container -->
 <mat-form-field
   class="aum-date-picker-root aum-date-picker-box"
+  [ngClass]="{'aum-date-picker-large': size === 'large', 'aum-date-picker-medium': size === 'medium', 'aum-date-picker-label-bold': boldLabel, 'aum-date-picker-label-normal': !boldLabel}"
   appearance="outline"
   floatLabel="always"
 >
@@ -49,6 +50,7 @@
 <!-- Single Date Picker: Mat Form Field Container -->
 <mat-form-field
   class="aum-date-picker-root aum-date-picker-box"
+  [ngClass]="{'aum-date-picker-large': size === 'large', 'aum-date-picker-medium': size === 'medium', 'aum-date-picker-label-bold': boldLabel, 'aum-date-picker-label-normal': !boldLabel}"
   appearance="outline"
   floatLabel="always"
 >

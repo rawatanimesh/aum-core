@@ -1,5 +1,6 @@
 <mat-form-field
   class="aum-select-box-root"
+  [ngClass]="{'aum-select-box-large': size === 'large', 'aum-select-box-medium': size === 'medium', 'aum-select-box-label-bold': boldLabel, 'aum-select-box-label-normal': !boldLabel}"
   [floatLabel]="'always'"
   subscriptSizing="dynamic"
   appearance="outline"

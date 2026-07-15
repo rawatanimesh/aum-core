@@ -109,6 +109,8 @@ export class DatePickerComponent implements OnInit, OnChanges, OnDestroy {
   @Input() mode: 'date' | 'daterange' | 'month' | 'year' = 'date';
   @Input() readonly = false;
   @Input() disabled = false;
+  @Input() size: 'large' | 'medium' = 'medium';
+  @Input() boldLabel = true;
 
   /**
    * Reactive Forms control. For 'date' mode, expects `FormControl`.
