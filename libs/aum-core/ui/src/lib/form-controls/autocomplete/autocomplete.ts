@@ -68,6 +68,8 @@ export class Autocomplete implements OnInit {
   @Input() placeholder = '';
   @Input() disabled = false;
   @Input() readonly = false;
+  @Input() size: 'large' | 'medium' = 'medium';
+  @Input() boldLabel = true;
 
   // Input for the list of all available options
   @Input() optionList: SelectOption[] = [];

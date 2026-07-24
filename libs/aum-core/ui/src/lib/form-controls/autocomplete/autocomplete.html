@@ -1,5 +1,6 @@
 <mat-form-field
   class="aum-autocomplete-root"
+  [ngClass]="{'aum-autocomplete-large': size === 'large', 'aum-autocomplete-medium': size === 'medium', 'aum-autocomplete-label-bold': boldLabel, 'aum-autocomplete-label-normal': !boldLabel}"
   [floatLabel]="'always'"
   subscriptSizing="dynamic"
   appearance="outline"

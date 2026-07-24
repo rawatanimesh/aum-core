@@ -1,13 +1,20 @@
 @use 'functions' as *;
 .aum-autocomplete-root {
-  margin: em(18) 0;
+  margin: rem(18) 0;
   position: relative;
   width: 100%;
 
   //update input styling
   .mdc-text-field__input {
     font-size: rem(14) !important;
+    font-weight: 500 !important;
+  }
+
+  // placeholder: lighter + muted so typed text stands out clearly
+  .mat-mdc-input-element::placeholder {
     font-weight: 400 !important;
+    letter-spacing: rem(0.1) !important;
+    color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 55%, transparent) !important;
   }
 
   //move the label above the input
@@ -15,11 +22,19 @@
     .mdc-notched-outline--upgraded
     .mdc-floating-label--float-above {
     --mat-mdc-form-field-label-transform: translateY(
-        calc(calc(22px + var(--mat-form-field-container-height, 56px) / 2) * -1)
+        calc(calc(24px + var(--mat-form-field-container-height, 56px) / 2) * -1)
       )
       scale(var(--mat-mdc-form-field-floating-label-scale, 0.75)) !important;
-    font-size: rem(16) !important;
-    font-weight: 400 !important;
+    font-size: rem(18) !important;
+    font-weight: 700 !important;
+    letter-spacing: rem(0.1) !important;
+    color: var(--mat-sys-on-surface-variant) !important;
+  }
+
+  .mdc-text-field--outlined.mdc-text-field--focused
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    color: var(--mat-sys-primary) !important;
   }
 
   //add border to input after moving label above
@@ -28,15 +43,13 @@
     border-top: 1px solid var(--mat-sys-outline);
   }
   .mdc-notched-outline__leading {
-    // border-top: 1px solid !important;
     border-right: none !important;
   }
   .mdc-notched-outline__notch {
-    // border-top: 1px solid rgba(0, 0, 0, 0) !important;
     border-right: none !important;
+    border-left: none !important;
   }
   .mdc-notched-outline__trailing {
-    // border-top: 1px solid !important;
     border-left: none !important;
   }
   // border in disabled state
@@ -50,13 +63,14 @@
   }
   //add border to input after moving label above end
 
-  //update border width on focus
+  //highlight active state — increase border-width on focus
   .mdc-text-field--outlined:not(
       .mdc-text-field--disabled
     ).mdc-text-field--focused
     .mdc-notched-outline
     .mat-mdc-notch-piece {
-    border-width: var(--mat-form-field-outlined-focus-outline-width, 1px);
+    border-width: 2px;
+    border-color: var(--mat-sys-primary) !important;
   }
 
   //update required styling
@@ -65,6 +79,7 @@
     )::after {
     font-weight: 900;
     margin-left: rem(4) !important;
+    color: var(--mat-sys-error) !important;
   }
 
   //letter spacing in input field
@@ -76,6 +91,8 @@
   .mat-mdc-form-field-subscript-wrapper {
     font-size: rem(12) !important;
     font-weight: 400 !important;
+    left: 0 !important;
+    letter-spacing: rem(0.1) !important;
   }
 
   //styling to change height of input from 56px to 48px
@@ -90,6 +107,89 @@
   }
 }
 
+// Label bold toggle
+.aum-autocomplete-label-bold {
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    font-weight: 700 !important;
+  }
+
+  .mdc-text-field--outlined.mdc-text-field--disabled
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    color: color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent) !important;
+  }
+
+  .mdc-text-field--outlined
+    .mdc-notched-outline
+    .mat-mdc-notch-piece {
+    border-width: 2px !important;
+  }
+}
+
+.aum-autocomplete-label-normal {
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    font-weight: 500 !important;
+  }
+
+  .mdc-text-field--outlined
+    .mdc-notched-outline
+    .mat-mdc-notch-piece {
+    border-width: 1px !important;
+  }
+
+  .mdc-text-field--outlined.mdc-text-field--disabled
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    color: color-mix(in srgb, var(--mat-sys-on-surface) 38%, transparent) !important;
+  }
+}
+
+// Large size: taller height, larger label
+.aum-autocomplete-large {
+  .mat-mdc-text-field-wrapper {
+    height: rem(56) !important;
+  }
+  .mat-mdc-form-field-infix {
+    min-height: rem(56) !important;
+    height: rem(56) !important;
+  }
+
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    font-size: rem(20) !important;
+  }
+
+  .mdc-text-field__input {
+    font-size: rem(15) !important;
+  }
+}
+
+// Medium size: default height, medium label
+.aum-autocomplete-medium {
+  .mat-mdc-text-field-wrapper {
+    height: rem(48) !important;
+  }
+  .mat-mdc-form-field-infix {
+    min-height: rem(48) !important;
+    height: rem(48) !important;
+  }
+
+  .mdc-text-field--outlined
+    .mdc-notched-outline--upgraded
+    .mdc-floating-label--float-above {
+    font-size: rem(18) !important;
+  }
+
+  .mdc-text-field__input {
+    font-size: rem(14) !important;
+  }
+}
+
 .aum-autocomplete-panel {
   //styling mat options
 
@@ -98,7 +198,6 @@
     font-size: rem(13) !important;
     font-weight: 400 !important;
     min-height: rem(42) !important;
-    // background-color: var(--mat-sys-surface) !important;
   }
   // change color of selected option text in single select mode
   .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(

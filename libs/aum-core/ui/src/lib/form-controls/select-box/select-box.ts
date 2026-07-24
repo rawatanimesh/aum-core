@@ -62,6 +62,8 @@ export class SelectBox {
   @Input() placeholder = '';
   @Input() disabled = false;
   @Input() multiple = false;
+  @Input() size: 'large' | 'medium' = 'medium';
+  @Input() boldLabel = true;
 
   // Input for the list of options
   @Input() optionList: SelectOption[] = [];

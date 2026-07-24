@@ -1,296 +1,370 @@
 <aum-page [pageInfo]="pageInfo">
   <div aum-page-body>
-    <div class="padding-16">
-      <h2 class="fs-24">Standalone Inputs (Not part of a Reactive Form)</h2>
-      <p class="margin-bottom-16 fs-18">
-        These inputs use <code>[(ngModel)]</code> internally or simple
-        <code>[data]</code> binding.
-      </p>
+    <div class="inputs-demo">
 
-      <!-- ADDED: Grid container for standalone inputs -->
-      <div class="input-grid">
-        <aum-autocomplete
-          label="Search Country Capital"
-          [(data)]="selectedCapital"
-          [optionList]="capitalOptions"
-          [placeholder]="'e.g., Paris'"
-        ></aum-autocomplete>
-        <aum-select-box
-          [label]="'Fruit Opitons'"
-          [placeholder]="'Select Fruit'"
-          [data]="selectedFruit"
-          [optionList]="fruitOptions"
-          (dataChange)="selectValueChange($event)"
-        ></aum-select-box>
-        <aum-select-box
-          [label]="'Color Opitons'"
-          [placeholder]="'Select Colors'"
-          [multiple]="true"
-          [data]="selectedColors"
-          [optionList]="colorOptions"
-          (dataChange)="selectValueChange($event)"
-        ></aum-select-box>
-
-        <aum-input
-          [label]="'Favorite food'"
-          [placeholder]="'Ex. Pizza'"
-          [required]="true"
-          [data]="inputValue1"
-          [maxlength]="20"
-          [disabled]="false"
-          (dataChange)="valueChange($event)"
-        ></aum-input>
-
-        <aum-input
-          [label]="'Favorite food'"
-          [placeholder]="'Ex. Pizza'"
-          [data]="inputValue2"
-          [readonly]="true"
-          (dataChange)="valueChange($event)"
-        ></aum-input>
-
-        <aum-input
-          [textarea]="true"
-          [rows]="2"
-          [label]="'Leave a comment'"
-          [placeholder]="'Ex. It makes me feel...'"
-          [required]="true"
-          [data]="inputValue3"
-          [maxlength]="300"
-          [disabled]="false"
-          (dataChange)="valueChange($event)"
-        ></aum-input>
-
-        <!-- Existing standalone date pickers, now within the grid -->
-        <aum-date-picker
-          [label]="'Choose a date'"
-          (dateSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a date range'"
-          [required]="true"
-          [mode]="'daterange'"
-          [disabled]="true"
-          (dateRangeSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a date range'"
-          [mode]="'daterange'"
-          (dateRangeSelected)="dateSelected($event)"
-        ></aum-date-picker>
-        <aum-date-picker
-          [label]="'Choose a date range'"
-          [required]="true"
-          [mode]="'daterange'"
-          [disabled]="true"
-          (dateRangeSelected)="dateSelected($event)"
-        ></aum-date-picker>
-
-        <aum-date-picker
-          label="Standalone Single Date"
-          mode="date"
-          [(data)]="standaloneSingleDate"
-          [minDate]="minAllowedDate"
-          [maxDate]="maxAllowedDate"
-        ></aum-date-picker>
-        <!-- <p>Standalone Single Date Value: {{ standaloneSingleDate | json }}</p> -->
-
-        <aum-date-picker
-          label="Standalone Date Range"
-          mode="daterange"
-          [(data)]="standaloneDateRange"
-        ></aum-date-picker>
-        <!-- <p>Standalone Date Range Value: {{ standaloneDateRange | json }}</p> -->
-      </div>
-      <!-- END ADDED: Grid container for standalone inputs -->
-
-      <div style="margin-top: 20px">
-        <aum-button
-          [type]="'filled'"
-          [value]="'Set Standalone Values Programmatically'"
-          (clickButton)="setStandaloneValues()"
-        >
-        </aum-button>
-      </div>
-
-      <div class="padding-16">
-        <h2 class="fs-24">Reactive Form Example</h2>
-        <p class="margin-bottom-16 fs-18">
-          These inputs are controlled by <code>[formControl]</code>.
+      <div class="inputs-demo-header">
+        <h1 class="inputs-demo-title">Inputs</h1>
+        <p class="inputs-demo-subtitle">
+          <code>aum-input</code>, <code>aum-select-box</code>, <code>aum-autocomplete</code> and
+          <code>aum-date-picker</code> — bold/normal label, sizes, disabled, readonly, reactive forms.
         </p>
+      </div>
 
+      <!-- ── Controls ─────────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Controls</div>
+        <div class="inputs-section-row">
+          <aum-slide-toggle
+            label="Bold Labels"
+            [checked]="boldLabel"
+            (checkedChange)="boldLabel = $event"
+          ></aum-slide-toggle>
+          <aum-slide-toggle
+            label="Large Size"
+            [checked]="size === 'large'"
+            (checkedChange)="size = $event ? 'large' : 'medium'"
+          ></aum-slide-toggle>
+        </div>
+      </section>
+
+      <!-- ── Text Input ────────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Text Input</div>
+        <div class="inputs-section-grid">
+          <div class="inputs-demo-item">
+            <aum-input
+              label="Favourite food"
+              placeholder="Ex. Pizza"
+              [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              [data]="inputValue1"
+              [maxlength]="20"
+              (dataChange)="valueChange($event)"
+            ></aum-input>
+            <span class="inputs-demo-caption">default</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-input
+              label="Readonly"
+              placeholder="Ex. Pizza"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              [data]="inputValue2"
+              [readonly]="true"
+              (dataChange)="valueChange($event)"
+            ></aum-input>
+            <span class="inputs-demo-caption">[readonly]="true"</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-input
+              label="Disabled"
+              placeholder="Ex. Pizza"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              [data]="inputValue1"
+              [disabled]="true"
+              (dataChange)="valueChange($event)"
+            ></aum-input>
+            <span class="inputs-demo-caption">[disabled]="true"</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-input
+              label="Leave a comment"
+              placeholder="Ex. It makes me feel..."
+              [textarea]="true"
+              [rows]="2"
+              [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              [data]="inputValue3"
+              [maxlength]="300"
+              (dataChange)="valueChange($event)"
+            ></aum-input>
+            <span class="inputs-demo-caption">[textarea]="true"</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Select Box ─────────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Select Box</div>
+        <div class="inputs-section-grid">
+          <div class="inputs-demo-item">
+            <aum-select-box
+              label="Fruit Options"
+              placeholder="Select Fruit"
+              [data]="selectedFruit"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              [optionList]="fruitOptions"
+              (dataChange)="selectValueChange($event)"
+            ></aum-select-box>
+            <span class="inputs-demo-caption">single select</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-select-box
+              label="Color Options"
+              placeholder="Select Colors"
+              [multiple]="true"
+              [data]="selectedColors"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              [optionList]="colorOptions"
+              (dataChange)="selectValueChange($event)"
+            ></aum-select-box>
+            <span class="inputs-demo-caption">[multiple]="true"</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Autocomplete ───────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Autocomplete</div>
+        <div class="inputs-section-grid">
+          <div class="inputs-demo-item">
+            <aum-autocomplete
+              label="Search Country Capital"
+              [(data)]="selectedCapital"
+              [optionList]="capitalOptions"
+              placeholder="e.g., Paris"
+              [boldLabel]="boldLabel"
+              [size]="size"
+            ></aum-autocomplete>
+            <span class="inputs-demo-caption">default</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Date Picker ────────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Date Picker</div>
+        <div class="inputs-section-grid">
+          <div class="inputs-demo-item">
+            <aum-date-picker
+              label="Single Date"
+              mode="date"
+              [(data)]="standaloneSingleDate"
+              [minDate]="minAllowedDate"
+              [maxDate]="maxAllowedDate"
+              [boldLabel]="boldLabel"
+              [size]="size"
+            ></aum-date-picker>
+            <span class="inputs-demo-caption">mode="date"</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-date-picker
+              label="Date Range"
+              mode="daterange"
+              [(data)]="standaloneDateRange"
+              [boldLabel]="boldLabel"
+              [size]="size"
+            ></aum-date-picker>
+            <span class="inputs-demo-caption">mode="daterange"</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-date-picker
+              label="Required Date Range"
+              mode="daterange"
+              [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              (dateRangeSelected)="dateSelected($event)"
+            ></aum-date-picker>
+            <span class="inputs-demo-caption">required</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-date-picker
+              label="Disabled Date Range"
+              mode="daterange"
+              [required]="true"
+              [disabled]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+              (dateRangeSelected)="dateSelected($event)"
+            ></aum-date-picker>
+            <span class="inputs-demo-caption">disabled</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Reactive Form ───────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Reactive Form</div>
         <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-          <!-- ADDED: Grid container for reactive form inputs -->
-          <div class="input-grid">
-            <!-- Email Input: Default value, required, email format -->
+          <div class="inputs-section-grid">
             <aum-input
               label="Email Address"
               placeholder="Enter your email"
               type="email"
               [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.email"
               [customErrorMessages]="{
-               email: 'Invalid email format.',
-               required: 'Email is required!',
-               companyEmail: 'Email must end with @company.com.'
-             }"
+                email: 'Invalid email format.',
+                required: 'Email is required!',
+                rakutenEmail: 'Email must end with @rakuten.com.'
+              }"
             ></aum-input>
 
-            <!-- Password Input: Default disabled state, custom pattern validator -->
             <aum-input
               label="Password"
               placeholder="Enter password"
               type="password"
               [required]="true"
               [maxlength]="20"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.password"
               [customErrorMessages]="{
-               minlength: 'Password must be at least 6 characters.',
-               required: 'Password is required!',
-               pattern: 'Password cannot be 123456!'
-             }"
+                minlength: 'Password must be at least 6 characters.',
+                required: 'Password is required!',
+                pattern: 'Password cannot be 123456!'
+              }"
             ></aum-input>
 
-            <!-- Username Input: Default value, dynamically enable/disable -->
             <aum-input
               label="Username"
               placeholder="Choose a username"
               [required]="true"
               [maxlength]="20"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.username"
               [customErrorMessages]="{
-               minlength: 'Username must be at least 3 characters.',
-               required: 'Username is required!'
-             }"
+                minlength: 'Username must be at least 3 characters.',
+                required: 'Username is required!'
+              }"
             ></aum-input>
 
-            <!-- Notes Textarea: Default value, maxlength -->
             <aum-input
               label="Notes"
               placeholder="Your notes here..."
               [textarea]="true"
               [rows]="2"
               [maxlength]="200"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.notes"
             ></aum-input>
 
-            <!-- Reactive Form Date Pickers, now within the grid -->
             <aum-date-picker
-              label="Select a Single Date"
+              label="Single Date"
               mode="date"
               [control]="myForm.controls.someDate"
               [required]="true"
               [minDate]="minAllowedDate"
               [maxDate]="maxAllowedDate"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [customErrorMessages]="{
-               required: 'This single date is required!',
-               matDatepickerMin: 'Date cannot be before ' + (minAllowedDate | date:'shortDate') + '.',
-               matDatepickerMax: 'Date cannot be after ' + (maxAllowedDate | date:'shortDate') + '.',
-               matDatepickerParse: 'Invalid date format.'
-             }"
+                required: 'This single date is required!',
+                matDatepickerMin: 'Date cannot be before ' + (minAllowedDate | date:'shortDate') + '.',
+                matDatepickerMax: 'Date cannot be after ' + (maxAllowedDate | date:'shortDate') + '.',
+                matDatepickerParse: 'Invalid date format.'
+              }"
             ></aum-date-picker>
 
             <aum-date-picker
-              label="Select a Date Range"
+              label="Date Range"
               mode="daterange"
               [control]="myForm.controls.someDateRange"
               [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [customErrorMessages]="{
-               required: 'This date range is required!',
-               matDatepickerMin: 'Range start is too early.',
-               matDatepickerMax: 'Range end is too late.',
-               matEndDateInvalid: 'End date must be after start date.'
-             }"
+                required: 'This date range is required!',
+                matDatepickerMin: 'Range start is too early.',
+                matDatepickerMax: 'Range end is too late.',
+                matEndDateInvalid: 'End date must be after start date.'
+              }"
             ></aum-date-picker>
+
             <aum-select-box
-              [label]="'Country'"
-              [placeholder]="'Select your country'"
+              label="Country"
+              placeholder="Select your country"
               [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.country"
               [optionList]="countryOptions"
               [customErrorMessages]="{
-       required: 'Country selection is required!',
-       pattern: 'Please select USA, Canada, or Mexico.'
-     }"
+                required: 'Country selection is required!',
+                pattern: 'Please select USA, Canada, or Mexico.'
+              }"
             ></aum-select-box>
+
             <aum-select-box
-              [label]="'Hobbies'"
-              [placeholder]="'Select your hobbies'"
+              label="Hobbies"
+              placeholder="Select your hobbies"
               [multiple]="true"
               [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.multiSelectHobbies"
               [optionList]="hobbyOptions"
               [customErrorMessages]="{
-       required: 'Please select at least one hobby!'
-     }"
+                required: 'Please select at least one hobby!'
+              }"
             ></aum-select-box>
+
             <aum-autocomplete
-              [label]="'Programming Language'"
-              [placeholder]="'Type to search language'"
+              label="Programming Language"
+              placeholder="Type to search language"
               [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.programmingLanguage"
               [optionList]="programmingLanguageOptions"
               [customErrorMessages]="{
-             required: 'Language is required!',
-              invalidOption: 'Please select a valid language from the list.'
-
-           }"
+                required: 'Language is required!',
+                invalidOption: 'Please select a valid language from the list.'
+              }"
             ></aum-autocomplete>
 
-            <!--  Autocomplete for Product (Object Value) -->
             <aum-autocomplete
-              [label]="'Select Product'"
-              [placeholder]="'Type to search product'"
+              label="Select Product"
+              placeholder="Type to search product"
               [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
               [control]="myForm.controls.selectedProduct"
               [optionList]="productOptions"
               [customErrorMessages]="{
-               required: 'Product selection is required!',
-
-             }"
+                required: 'Product selection is required!'
+              }"
             ></aum-autocomplete>
           </div>
-          <!-- END ADDED: Grid container for reactive form inputs -->
 
-          <div class="flex-row-flex-start">
-            <!-- Button to submit the form, enabled only when form is valid -->
+          <div class="inputs-section-actions">
             <aum-button
-              [type]="'filled'"
+              type="filled"
+              value="Submit"
               [disabled]="myForm.invalid"
-              [value]="'Submit Reactive Form'"
               (clickButton)="onSubmit()"
-            >
-            </aum-button>
-
-            <!-- Button to dynamically toggle password field's enabled state -->
+            ></aum-button>
             <aum-button
-              [type]="'outlined'"
-              [value]="'Toggle Password Enabled'"
+              type="outlined"
+              value="Toggle Password"
               (clickButton)="togglePasswordEnabled()"
-            >
-            </aum-button>
-
-            <!-- Button to patch values into the form -->
+            ></aum-button>
             <aum-button
-              [type]="'outlined'"
-              [value]="'Patch Values'"
+              type="outlined"
+              value="Patch Values"
               (clickButton)="patchFormValues()"
-            >
-            </aum-button>
-
-            <!-- Button to reset the form -->
+            ></aum-button>
             <aum-button
-              [type]="'outlined'"
-              [value]="'Reset Form'"
+              type="outlined"
+              value="Reset"
               (clickButton)="resetForm()"
-            >
-            </aum-button>
+            ></aum-button>
           </div>
-        </form>
 
-        <pre>Form Value: {{ myForm.value | json }}</pre>
-        <pre>Form Status: {{ myForm.status | json }}</pre>
-      </div>
+          <pre class="inputs-demo-pre">{{ myForm.value | json }}</pre>
+        </form>
+      </section>
+
     </div>
   </div>
 </aum-page>
