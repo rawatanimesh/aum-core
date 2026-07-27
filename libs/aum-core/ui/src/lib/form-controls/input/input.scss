@@ -112,12 +112,6 @@
 
 // Label bold toggle
 .aum-input-label-bold {
-  .mdc-text-field--outlined
-    .mdc-notched-outline--upgraded
-    .mdc-floating-label--float-above {
-    font-weight: 700 !important;
-  }
-
   .mdc-text-field--outlined.mdc-text-field--disabled
     .mdc-notched-outline--upgraded
     .mdc-floating-label--float-above {
