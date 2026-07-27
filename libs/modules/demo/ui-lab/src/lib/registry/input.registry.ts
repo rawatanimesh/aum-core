@@ -19,6 +19,8 @@ export const INPUT_INPUTS: ApiRow[] = [
   { name: 'textarea', type: 'boolean', default: 'false', description: 'Renders a multiline textarea instead of a single-line input.' },
   { name: 'rows', type: 'number', default: '3', description: 'Number of visible rows for textarea mode.' },
   { name: 'maxlength', type: 'number | null', default: 'null', description: 'Maximum character count. Shows a counter when set.' },
+  { name: 'size', type: "'medium' | 'large'", default: "'medium'", description: 'Controls field height and font size. Use large for prominent inputs.' },
+  { name: 'boldLabel', type: 'boolean', default: 'true', description: 'Renders the floating label in bold weight when true.' },
   { name: 'control', type: 'FormControl', description: 'Reactive form control. Enables automatic error display.' },
   { name: 'data', type: 'string | number', default: "''", description: 'Standalone value binding. Pair with (dataChange) for two-way binding.' },
   { name: 'customErrorMessages', type: '{ [key: string]: string }', default: '{}', description: 'Overrides default error messages for specific validator keys.' },
@@ -79,4 +81,16 @@ nameControl  = new FormControl('', [Validators.required, Validators.minLength(3)
 
 <!-- Readonly -->
 <aum-input label="Readonly" [readonly]="true" data="View only"></aum-input>`,
+
+  sizeAndLabel: `<!-- Medium field, bold label (default) -->
+<aum-input label="Name" size="medium" [boldLabel]="true" [(data)]="name"></aum-input>
+
+<!-- Medium field, normal label -->
+<aum-input label="Name" size="medium" [boldLabel]="false" [(data)]="name"></aum-input>
+
+<!-- Large field, bold label -->
+<aum-input label="Name" size="large" [boldLabel]="true" [(data)]="name"></aum-input>
+
+<!-- Large field, normal label -->
+<aum-input label="Name" size="large" [boldLabel]="false" [(data)]="name"></aum-input>`,
 };

@@ -34,14 +34,31 @@ import { UploadBoxComponent }           from '@aum/ui/utilities/upload-box';
 
 ### Form Controls
 
-| Component | Selector |
-|-----------|----------|
-| `InputComponent` | `<aum-input>` |
-| `CheckboxComponent` | `<aum-checkbox>` |
-| `RadioButtonComponent` | `<aum-radio-button>` |
-| `SelectBoxComponent` | `<aum-select-box>` |
-| `DatePickerComponent` | `<aum-date-picker>` |
-| `AutocompleteComponent` | `<aum-autocomplete>` |
+| Component | Selector | Key inputs |
+|-----------|----------|------------|
+| `InputComponent` | `<aum-input>` | `label`, `type`, `placeholder`, `size` (`'medium'`\|`'large'`), `boldLabel` (default `true`), `required`, `disabled`, `readonly`, `textarea`, `rows`, `maxlength`, `control`, `data`, `customErrorMessages` |
+| `SelectBoxComponent` | `<aum-select-box>` | `label`, `optionList`, `size` (`'medium'`\|`'large'`), `boldLabel` (default `true`), `multiple`, `required`, `disabled`, `control`, `data`, `customErrorMessages` |
+| `AutocompleteComponent` | `<aum-autocomplete>` | `label`, `optionList`, `placeholder`, `size` (`'medium'`\|`'large'`), `boldLabel` (default `true`), `required`, `disabled`, `control`, `data`, `customErrorMessages` |
+| `DatePickerComponent` | `<aum-date-picker>` | `label`, `mode` (`'date'`\|`'daterange'`), `size` (`'medium'`\|`'large'`), `boldLabel` (default `true`), `required`, `disabled`, `minDate`, `maxDate`, `control`, `data`, `customErrorMessages` |
+| `CheckboxComponent` | `<aum-checkbox>` | |
+| `RadioButtonComponent` | `<aum-radio-button>` | |
+
+#### `size` and `boldLabel` inputs
+
+All four field components (`aum-input`, `aum-select-box`, `aum-autocomplete`, `aum-date-picker`) share these appearance inputs:
+
+| Input | Type | Default | Effect |
+|-------|------|---------|--------|
+| `size` | `'medium' \| 'large'` | `'medium'` | Controls field height and font size |
+| `boldLabel` | `boolean` | `true` | When `true` the floating label renders in bold weight |
+
+```html
+<!-- Large field with normal-weight label -->
+<aum-input label="Name" size="large" [boldLabel]="false"></aum-input>
+
+<!-- Medium field with bold label (default) -->
+<aum-input label="Name" size="medium" [boldLabel]="true"></aum-input>
+```
 
 ### Layout & Navigation
 

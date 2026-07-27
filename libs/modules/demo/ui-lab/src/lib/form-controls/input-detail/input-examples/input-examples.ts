@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { InputComponent } from '@aum/ui/form-controls';
+import { InputComponent, SlideToggle } from '@aum/ui/form-controls';
 import { TranslateModule } from '@ngx-translate/core';
 import { ScenarioCard } from '../../../shared/scenario-card/scenario-card';
 
 @Component({
   selector: 'ui-lab-input-examples',
-  imports: [InputComponent, ScenarioCard, TranslateModule, ReactiveFormsModule],
+  imports: [InputComponent, SlideToggle, ScenarioCard, TranslateModule, ReactiveFormsModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './input-examples.html',
 })
@@ -16,6 +16,9 @@ export class InputExamples {
   password = signal('');
   age     = signal<number | ''>('');
   message = signal('');
+
+  boldLabel = signal(true);
+  size      = signal<'medium' | 'large'>('medium');
 
   readonly nameControl  = new FormControl('', [Validators.required, Validators.minLength(3)]);
   readonly emailControl = new FormControl('', [Validators.required, Validators.email]);

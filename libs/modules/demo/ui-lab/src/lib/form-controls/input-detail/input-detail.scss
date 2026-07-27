@@ -89,4 +89,18 @@
     font-size: rem(13);
     color: var(--mat-sys-on-surface-variant);
   }
+
+  .fc-size-demo {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    width: 100%;
+    max-width: rem(400);
+  }
+
+  .fc-size-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(24);
+  }
 }
