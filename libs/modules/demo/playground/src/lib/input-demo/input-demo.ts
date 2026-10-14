@@ -12,6 +12,8 @@ import { takeUntil } from 'rxjs/operators';
 import { PageComponent } from '@aum/ui/layout';
 import {
   InputComponent,
+  PasswordInputComponent,
+  SearchInputComponent,
   DatePickerComponent,
   SelectBox,
   SelectOption,
@@ -49,6 +51,8 @@ type MyForm = FormGroup<{
     ReactiveFormsModule,
     PageComponent,
     InputComponent,
+    PasswordInputComponent,
+    SearchInputComponent,
     DatePickerComponent,
     SelectBox,
     Autocomplete,

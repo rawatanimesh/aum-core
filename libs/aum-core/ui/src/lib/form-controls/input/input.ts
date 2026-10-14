@@ -5,10 +5,12 @@ import {
   EventEmitter,
   ChangeDetectionStrategy,
   ViewEncapsulation,
+  HostListener,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ButtonComponent } from '../../buttons/button/button.component';
 import {
   FormsModule,
   ReactiveFormsModule,
@@ -41,6 +43,7 @@ export class AumErrorStateMatcher implements ErrorStateMatcher {
     CommonModule,
     MatFormFieldModule,
     MatInputModule,
+    ButtonComponent,
     FormsModule,
     ReactiveFormsModule,
   ],
@@ -62,6 +65,22 @@ export class InputComponent {
   @Input() disabled = false;
   @Input() size: 'large' | 'medium' = 'medium';
   @Input() boldLabel = true;
+
+  // --- Suffix Icon ---
+  @Input() suffixIcon: string | null = null;
+  @Input() suffixIconActive: string | null = null;
+  @Input() suffixIconToggled = false;
+  @Output() suffixClick = new EventEmitter<void>();
+  @Output() enterKey = new EventEmitter<void>();
+
+  @HostListener('keydown.enter')
+  onEnterKey(): void {
+    this.enterKey.emit();
+  }
+
+  onSuffixClick(): void {
+    this.suffixClick.emit();
+  }
 
   // --- Forms Integration Inputs/Outputs ---
   @Input() control!: FormControl; // For Reactive Forms

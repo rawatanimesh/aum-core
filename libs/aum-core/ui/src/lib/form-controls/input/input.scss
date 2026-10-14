@@ -110,6 +110,37 @@
   }
 }
 
+// Custom suffix — strip all Material button chrome, keep only the aum-button icon
+.aum-input-root {
+  .mat-mdc-form-field-text-suffix,
+  .mat-mdc-form-field-icon-suffix {
+    display: flex;
+    align-items: center;
+    padding: 0 rem(4);
+
+    .aum-button {
+      .mat-mdc-icon-button {
+        --mdc-icon-button-state-layer-size: 0;
+        background: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: auto !important;
+        height: auto !important;
+
+        .mat-mdc-button-persistent-ripple,
+        .mat-mdc-button-ripple,
+        .mdc-icon-button__ripple,
+        .mat-mdc-focus-indicator,
+        .mat-mdc-button-touch-target {
+          display: none !important;
+        }
+      }
+    }
+  }
+}
+
 // Label bold toggle
 .aum-input-label-bold {
   .mdc-text-field--outlined.mdc-text-field--disabled
