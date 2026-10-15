@@ -1,0 +1,74 @@
+<div class="fc-examples">
+
+  <!-- Scenario 1: Search events -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SEARCH_BASIC_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SEARCH_BASIC_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-search-input
+        label="Search"
+        placeholder="Type to search..."
+        (search)="submitted.set($event)"
+        (searchChange)="debounced.set($event)"
+      ></aum-search-input>
+      <p class="fc-output">Submitted: <strong>{{ submitted() || '—' }}</strong></p>
+      <p class="fc-output">Debounced: <strong>{{ debounced() || '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Filter a list -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SEARCH_FILTER_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SEARCH_FILTER_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-search-input
+        label="Filter fruits"
+        placeholder="e.g. an"
+        (searchChange)="query.set($event)"
+      ></aum-search-input>
+      <p class="fc-output">Results: <strong>{{ filtered().join(', ') || '—' }}</strong></p>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 3: Disabled -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_SEARCH_STATES_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_SEARCH_STATES_DESC' | translate"
+  >
+    <div class="fc-demo-field">
+      <aum-search-input label="Disabled" [disabled]="true"></aum-search-input>
+    </div>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 4: Size & Label Weight -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_SIZE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_SIZE_DESC' | translate"
+  >
+    <div class="fc-size-demo">
+      <div class="fc-size-controls">
+        <aum-slide-toggle
+          label="Bold Label"
+          [checked]="boldLabel()"
+          (checkedChange)="boldLabel.set($event)"
+        ></aum-slide-toggle>
+        <aum-slide-toggle
+          label="Large Size"
+          [checked]="size() === 'large'"
+          (checkedChange)="size.set($event ? 'large' : 'medium')"
+        ></aum-slide-toggle>
+      </div>
+      <div class="fc-demo-field">
+        <aum-search-input
+          label="Search"
+          placeholder="Type to search..."
+          [boldLabel]="boldLabel()"
+          [size]="size()"
+        ></aum-search-input>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
+</div>

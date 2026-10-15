@@ -36,6 +36,20 @@ export class FormControlsCategory {
       icon: 'text_fields',
     },
     {
+      nameKey: 'UI_LAB_PASSWORD_INPUT',
+      selector: '<aum-password-input>',
+      descKey: 'UI_LAB_COMP_PASSWORD_INPUT_DESC',
+      route: '/ui-lab/form-controls/password-input',
+      icon: 'password',
+    },
+    {
+      nameKey: 'UI_LAB_SEARCH_INPUT',
+      selector: '<aum-search-input>',
+      descKey: 'UI_LAB_COMP_SEARCH_INPUT_DESC',
+      route: '/ui-lab/form-controls/search-input',
+      icon: 'manage_search',
+    },
+    {
       nameKey: 'UI_LAB_CHECKBOX',
       selector: '<aum-checkbox>',
       descKey: 'UI_LAB_COMP_CHECKBOX_DESC',

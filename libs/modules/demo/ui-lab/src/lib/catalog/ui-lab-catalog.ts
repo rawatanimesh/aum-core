@@ -38,7 +38,7 @@ export class UiLabCatalog {
       descKey: 'UI_LAB_CAT_FORM_CONTROLS_DESC',
       icon: 'edit_note',
       route: '/ui-lab/form-controls',
-      count: 6,
+      count: 8,
     },
     {
       titleKey: 'UI_LAB_LAYOUT',

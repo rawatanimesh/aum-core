@@ -191,6 +191,22 @@ export const uiLabRoutes: Routes = [
           ),
       },
       {
+        path: 'password-input',
+        title: 'Password Input | UI Lab',
+        loadComponent: () =>
+          import(
+            './form-controls/password-input-detail/password-input-detail'
+          ).then((m) => m.PasswordInputDetail),
+      },
+      {
+        path: 'search-input',
+        title: 'Search Input | UI Lab',
+        loadComponent: () =>
+          import(
+            './form-controls/search-input-detail/search-input-detail'
+          ).then((m) => m.SearchInputDetail),
+      },
+      {
         path: 'checkbox',
         title: 'Checkbox | UI Lab',
         loadComponent: () =>
