@@ -73,7 +73,7 @@
   .mat-mdc-form-field-infix {
     letter-spacing: normal !important;
     display: flex;
-    height: 24px !important;
+    height: rem(24) !important;
   }
 
   //mat hint styling
@@ -100,6 +100,16 @@
     align-self: center;
     display: flex;
     align-items: center;
+
+    .mat-mdc-icon-button {
+      --mdc-icon-button-state-layer-size: #{rem(32)};
+      width: rem(32) !important;
+      height: rem(32) !important;
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 }
 
