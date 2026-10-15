@@ -90,6 +90,8 @@ nx lint demo-app
 #### Form Controls
 
 - **InputComponent** - Text input with validation
+- **PasswordInputComponent** - Password field with a show/hide visibility toggle
+- **SearchInputComponent** - Search field with Enter/icon submit and a debounced change event
 - **CheckboxComponent** - Checkbox with indeterminate state
 - **RadioButtonComponent** - Radio button groups
 - **DatePickerComponent** - Date selection with calendar
