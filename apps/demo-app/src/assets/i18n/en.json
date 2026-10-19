@@ -76,6 +76,7 @@
   "CONTENT_3": "Content 3",
   "DRAWER": "Drawer",
   "DRAWER_TITLE": "Drawer Title",
+  "DRAWER_ITEM": "Item",
   "CLOSE": "Close",
   "LOADING_PLEASE_WAIT": "Loading, please wait...",
   "PROFILE_UPDATED_SUCCESSFULLY": "Profile updated successfully",

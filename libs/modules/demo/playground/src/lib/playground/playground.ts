@@ -101,6 +101,7 @@ export class Playground implements OnInit, OnDestroy {
 
   showPageSpinner = false;
   isDrawerOpen = false;
+  readonly drawerItems = Array.from({ length: 40 }, (_, i) => i + 1);
   enableBrowserNavigationProtection = false;
 
   openMenu() {

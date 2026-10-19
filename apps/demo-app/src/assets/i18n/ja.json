@@ -76,6 +76,7 @@
   "CONTENT_3": "コンテンツ3",
   "DRAWER": "ドロワー",
   "DRAWER_TITLE": "ドロワータイトル",
+  "DRAWER_ITEM": "項目",
   "CLOSE": "閉じる",
   "LOADING_PLEASE_WAIT": "読み込み中、お待ちください...",
   "PROFILE_UPDATED_SUCCESSFULLY": "プロフィールが正常に更新されました",
