@@ -45,7 +45,7 @@ export class UiLabCatalog {
       descKey: 'UI_LAB_CAT_LAYOUT_DESC',
       icon: 'dashboard',
       route: '/ui-lab/layout',
-      count: 4,
+      count: 5,
     },
     {
       titleKey: 'UI_LAB_NAVIGATION',

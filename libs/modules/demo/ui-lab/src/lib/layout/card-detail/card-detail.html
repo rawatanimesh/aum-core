@@ -42,7 +42,10 @@
       </aum-tab-group>
 
       <div class="detail-page__nav">
-        <div></div>
+        <a class="detail-page__nav-prev" [routerLink]="'/ui-lab/layout/page'">
+          <aum-icon name="arrow_back" color="primary" [width]="18"></aum-icon>
+          <span>{{ 'UI_LAB_PAGE' | translate }}</span>
+        </a>
         <a class="detail-page__nav-next" [routerLink]="'/ui-lab/layout/tabs'">
           <span>{{ 'UI_LAB_TABS' | translate }}</span>
           <aum-icon name="arrow_forward" color="primary" [width]="18"></aum-icon>

@@ -44,6 +44,12 @@ export const uiLabRoutes: Routes = [
           import('./layout/layout-category').then((m) => m.LayoutCategory),
       },
       {
+        path: 'page',
+        title: 'Page | UI Lab',
+        loadComponent: () =>
+          import('./layout/page-detail/page-detail').then((m) => m.PageDetail),
+      },
+      {
         path: 'card',
         title: 'Card | UI Lab',
         loadComponent: () =>

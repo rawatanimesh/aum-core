@@ -64,7 +64,7 @@ All four field components (`aum-input`, `aum-select-box`, `aum-autocomplete`, `a
 
 | Component | Selector | Notes |
 |-----------|----------|-------|
-| `PageComponent` | `<aum-page>` | Content projection via `aum-page-body` attribute |
+| `PageComponent` | `<aum-page>` | Content projection via `aum-page-body` attribute. Side drawer via `aum-drawer-header` / `aum-drawer-content` / `aum-drawer-footer` (header and footer optional and fixed, content scrolls) |
 | `CardComponent` | `<aum-card>` | Content projection via `card-header`, `card-body`, `card-footer` |
 | `BreadcrumbComponent` | `<aum-breadcrumb>` | |
 
