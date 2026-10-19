@@ -492,7 +492,7 @@
   "UI_LAB_SCENE_PAGE_ABOUT_DESC": "Every screen in AUM is built on aum-page.",
   "UI_LAB_SCENE_PAGE_ABOUT_BODY": "The page you are viewing is itself an aum-page. Its breadcrumbs, side drawer and navigation protection are all configured through the inputs and outputs listed on the API tab.",
   "UI_LAB_SCENE_PAGE_DRAWER_TITLE": "Side Drawer",
-  "UI_LAB_SCENE_PAGE_DRAWER_DESC": "Bind [openDrawer] to open it. Project aum-drawer-header and aum-drawer-footer for fixed sections; aum-drawer-content scrolls when it overflows.",
+  "UI_LAB_SCENE_PAGE_DRAWER_DESC": "Bind [(openDrawer)] to open it; set [drawerDisableClose]='false' so a click outside closes it. Project aum-drawer-header and aum-drawer-footer for fixed sections; aum-drawer-content scrolls when it overflows.",
   "UI_LAB_PAGE_TOGGLE_DRAWER": "Toggle drawer",
   "UI_LAB_TABS": "Tabs",
   "UI_LAB_EXPANSION_PANEL": "Expansion Panel",

@@ -493,7 +493,7 @@
   "UI_LAB_SCENE_PAGE_ABOUT_DESC": "AUM की हर स्क्रीन aum-page पर बनी होती है।",
   "UI_LAB_SCENE_PAGE_ABOUT_BODY": "आप जो पेज देख रहे हैं वह स्वयं एक aum-page है। इसके ब्रेडक्रंब, साइड ड्रॉअर और नेविगेशन सुरक्षा सभी API टैब में दिए गए इनपुट और आउटपुट से कॉन्फ़िगर होते हैं।",
   "UI_LAB_SCENE_PAGE_DRAWER_TITLE": "साइड ड्रॉअर",
-  "UI_LAB_SCENE_PAGE_DRAWER_DESC": "खोलने के लिए [openDrawer] बाइंड करें। फिक्स्ड हिस्सों के लिए aum-drawer-header और aum-drawer-footer दें; ओवरफ़्लो होने पर aum-drawer-content स्क्रॉल होता है।",
+  "UI_LAB_SCENE_PAGE_DRAWER_DESC": "खोलने के लिए [(openDrawer)] बाइंड करें; [drawerDisableClose]='false' रखने पर बाहर क्लिक करने से बंद होता है। फिक्स्ड हिस्सों के लिए aum-drawer-header और aum-drawer-footer दें; ओवरफ़्लो होने पर aum-drawer-content स्क्रॉल होता है।",
   "UI_LAB_PAGE_TOGGLE_DRAWER": "ड्रॉअर टॉगल करें",
   "UI_LAB_TABS": "टैब",
   "UI_LAB_EXPANSION_PANEL": "एक्सपेंशन पैनल",

@@ -18,7 +18,13 @@ export const PAGE_INPUTS: ApiRow[] = [
   {
     name: 'openDrawer',
     type: 'boolean',
-    description: 'Opens the side drawer when true and closes it when false.',
+    description: 'Opens the side drawer when true and closes it when false. Use [(openDrawer)] to keep it in sync when the user closes it.',
+  },
+  {
+    name: 'drawerDisableClose',
+    type: 'boolean',
+    default: 'true',
+    description: 'When false, clicking outside the drawer (backdrop) or pressing Esc closes it. Pair with [(openDrawer)] so your state stays in sync.',
   },
   {
     name: 'drawerWidth',
@@ -54,6 +60,11 @@ export const PAGE_INPUTS: ApiRow[] = [
 
 export const PAGE_OUTPUTS: ApiRow[] = [
   {
+    name: 'openDrawerChange',
+    type: 'EventEmitter<boolean>',
+    description: 'Emits when the drawer opens or closes, including when the user closes it. Use with [(openDrawer)] for two-way binding.',
+  },
+  {
     name: 'beforeBrowserNavigation',
     type: "EventEmitter<{ event: BeforeUnloadEvent | PopStateEvent; type: 'refresh' | 'back' | 'forward' }>",
     description: 'Emits when the user attempts to refresh or navigate back/forward while protection is enabled.',
@@ -79,7 +90,8 @@ pageInfo = {
 
   drawer: `<aum-page
   [pageInfo]="pageInfo"
-  [openDrawer]="drawerOpen"
+  [(openDrawer)]="drawerOpen"
+  [drawerDisableClose]="false"
   [drawerWidth]="30"
   drawerPosition="end"
   drawerMode="over"

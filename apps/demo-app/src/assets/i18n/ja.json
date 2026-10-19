@@ -493,7 +493,7 @@
   "UI_LAB_SCENE_PAGE_ABOUT_DESC": "AUM のすべての画面は aum-page 上に構築されます。",
   "UI_LAB_SCENE_PAGE_ABOUT_BODY": "ご覧のページ自体が aum-page です。パンくずリスト、サイドドロワー、ナビゲーション保護はすべて、API タブに記載された入力と出力で設定できます。",
   "UI_LAB_SCENE_PAGE_DRAWER_TITLE": "サイドドロワー",
-  "UI_LAB_SCENE_PAGE_DRAWER_DESC": "[openDrawer] をバインドして開きます。固定部分には aum-drawer-header と aum-drawer-footer を使用します。aum-drawer-content は溢れるとスクロールします。",
+  "UI_LAB_SCENE_PAGE_DRAWER_DESC": "[(openDrawer)] をバインドして開きます。[drawerDisableClose]='false' にすると外側クリックで閉じます。固定部分には aum-drawer-header と aum-drawer-footer を使用します。aum-drawer-content は溢れるとスクロールします。",
   "UI_LAB_PAGE_TOGGLE_DRAWER": "ドロワーを切り替え",
   "UI_LAB_TABS": "タブ",
   "UI_LAB_EXPANSION_PANEL": "展開パネル",

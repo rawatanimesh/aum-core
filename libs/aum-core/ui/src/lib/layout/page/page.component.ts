@@ -65,6 +65,9 @@ export class PageComponent implements OnInit, OnDestroy, OnChanges {
   @Output() toggleDrawer = new EventEmitter<true | false>();
 
   @Input() openDrawer?: boolean;
+  @Output() openDrawerChange = new EventEmitter<boolean>();
+  /** When false, clicking the backdrop or pressing Esc closes the drawer. */
+  @Input() drawerDisableClose = true;
 
   // Browser navigation events
   @Input() enableBrowserNavigation = false;
