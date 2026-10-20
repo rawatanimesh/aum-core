@@ -29,6 +29,13 @@ export class LayoutCategory {
 
   readonly components: ComponentCard[] = [
     {
+      nameKey: 'UI_LAB_PAGE',
+      selector: '<aum-page>',
+      descKey: 'UI_LAB_COMP_PAGE_DESC',
+      route: '/ui-lab/layout/page',
+      icon: 'web_asset',
+    },
+    {
       nameKey: 'UI_LAB_CARD',
       selector: '<aum-card>',
       descKey: 'UI_LAB_COMP_CARD_DESC',

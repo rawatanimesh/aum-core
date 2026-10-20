@@ -1,6 +1,7 @@
 <aum-page
   [pageInfo]="pageInfo"
-  [openDrawer]="isDrawerOpen"
+  [(openDrawer)]="isDrawerOpen"
+  [drawerDisableClose]="false"
   [drawerWidth]="30"
   [drawerPosition]="'end'"
   [drawerMode]="'over'"
@@ -437,15 +438,23 @@
     </section>
     <mat-divider></mat-divider>
   </div>
+  <div aum-drawer-header class="flex-row-space-between-center">
+    <span class="fs-14 fw-600">{{ 'DRAWER_TITLE' | translate }}</span>
+    <aum-button
+      [type]="'icon'"
+      [icon]="'close'"
+      [tooltip]="'CLOSE' | translate"
+      (clickButton)="toggleDrawer()"
+    ></aum-button>
+  </div>
   <div aum-drawer-content>
-    <div class="flex-row-space-between-center">
-      <h2>{{ 'DRAWER_TITLE' | translate }}</h2>
-      <aum-button
-        [type]="'icon'"
-        [icon]="'close'"
-        [tooltip]="'CLOSE' | translate"
-        (clickButton)="toggleDrawer()"
-      ></aum-button>
-    </div>
+    @for (item of drawerItems; track item) {
+    <p>{{ 'DRAWER_ITEM' | translate }} {{ item }}</p>
+    }
+  </div>
+  <div aum-drawer-footer>
+    <div class="flex-row-flex-end gap-8">
+      <aum-button type="filled" [value]="'CLOSE' | translate" (clickButton)="toggleDrawer()"></aum-button>
+     </div>
   </div>
 </aum-page>

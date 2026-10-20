@@ -118,6 +118,8 @@ ui/
 │   └── button/
 ├── form-controls/
 │   ├── input/
+│   ├── password-input/
+│   ├── search-input/
 │   ├── checkbox/
 │   ├── radio-button/
 │   ├── select-box/

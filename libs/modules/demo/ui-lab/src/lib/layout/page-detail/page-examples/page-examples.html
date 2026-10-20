@@ -1,0 +1,24 @@
+<div class="layout-examples">
+
+  <!-- Scenario 1: This page -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_PAGE_ABOUT_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_PAGE_ABOUT_DESC' | translate"
+  >
+    <p class="layout-demo-text">{{ 'UI_LAB_SCENE_PAGE_ABOUT_BODY' | translate }}</p>
+  </ui-lab-scenario-card>
+
+  <!-- Scenario 2: Side drawer -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_PAGE_DRAWER_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_PAGE_DRAWER_DESC' | translate"
+  >
+    <aum-button
+      type="outlined"
+      icon="right_panel_open"
+      [value]="'UI_LAB_PAGE_TOGGLE_DRAWER' | translate"
+      (clickButton)="drawerToggle.emit()"
+    ></aum-button>
+  </ui-lab-scenario-card>
+
+</div>

@@ -88,6 +88,17 @@
   ></textarea>
   } }
 
+  @if (suffixIcon) {
+  <span matSuffix>
+    <aum-button
+      type="icon"
+      [icon]="suffixIconToggled && suffixIconActive ? suffixIconActive : suffixIcon"
+      [disabled]="disabled || (control && control.disabled)"
+      (clickButton)="onSuffixClick()"
+    ></aum-button>
+  </span>
+  }
+
   <!-- @if for conditional hints -->
   @if (maxlength) {
   <mat-hint align="end">

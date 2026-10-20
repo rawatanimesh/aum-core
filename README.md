@@ -90,6 +90,8 @@ nx lint demo-app
 #### Form Controls
 
 - **InputComponent** - Text input with validation
+- **PasswordInputComponent** - Password field with a show/hide visibility toggle
+- **SearchInputComponent** - Search field with Enter/icon submit and a debounced change event
 - **CheckboxComponent** - Checkbox with indeterminate state
 - **RadioButtonComponent** - Radio button groups
 - **DatePickerComponent** - Date selection with calendar
@@ -98,7 +100,7 @@ nx lint demo-app
 
 #### Layout & Navigation
 
-- **PageComponent** - Standard page layout with breadcrumbs
+- **PageComponent** - Standard page layout with breadcrumbs and a built-in side drawer (`aum-drawer-header`, `aum-drawer-content`, `aum-drawer-footer` slots; header and footer are optional and fixed, content scrolls)
 - **CardComponent** - Content container with shadow
 - **BreadcrumbComponent** - Navigation breadcrumbs
 
@@ -118,7 +120,6 @@ nx lint demo-app
 - **ConfirmationDialogComponent** - Yes/No confirmation dialogs
 - **GenericDialogComponent** - Customizable modal dialogs
 - **SnackbarService** - Toast notifications
-- **DrawerComponent** - Side panel for additional content
 - **SpinnerComponent** - Loading indicators (page and element modes)
 
 #### Services

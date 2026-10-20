@@ -1,0 +1,74 @@
+<aum-page [pageInfo]="pageInfo" [(openDrawer)]="drawerOpen" [drawerDisableClose]="false" [drawerWidth]="30">
+  <div aum-page-body>
+    <div class="detail-page">
+
+      <ui-lab-component-header
+        [name]="meta.name"
+        [selector]="meta.selector"
+        [importFrom]="meta.importFrom"
+        [description]="meta.description"
+        [status]="meta.status"
+      ></ui-lab-component-header>
+
+      <aum-tab-group>
+
+        <aum-tab [label]="'UI_LAB_TAB_EXAMPLES' | translate">
+          <demo-page-examples (drawerToggle)="toggleDrawer()"></demo-page-examples>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_CODE' | translate">
+          <div class="detail-page__code-section">
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_IMPORT' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.importPath" language="typescript"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_BASIC_USAGE' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.basicUsage" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_PAGE_DRAWER' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.drawer" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_PAGE_NAVIGATION' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.navigation" language="html"></ui-lab-code-block>
+          </div>
+        </aum-tab>
+
+        <aum-tab [label]="'UI_LAB_TAB_API' | translate">
+          <ui-lab-api-table [inputs]="inputs" [outputs]="outputs"></ui-lab-api-table>
+        </aum-tab>
+
+      </aum-tab-group>
+
+      <div class="detail-page__nav">
+        <div></div>
+        <a class="detail-page__nav-next" [routerLink]="'/ui-lab/layout/card'">
+          <span>{{ 'UI_LAB_CARD' | translate }}</span>
+          <aum-icon name="arrow_forward" color="primary" [width]="18"></aum-icon>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <div aum-drawer-header class="flex-row-space-between-center">
+    <span class="fs-14 fw-600">{{ 'DRAWER_TITLE' | translate }}</span>
+    <aum-button
+      type="icon"
+      icon="close"
+      [tooltip]="'CLOSE' | translate"
+      (clickButton)="drawerOpen.set(false)"
+    ></aum-button>
+  </div>
+  <div aum-drawer-content>
+    @for (item of drawerItems; track item) {
+    <p>{{ 'DRAWER_ITEM' | translate }} {{ item }}</p>
+    }
+  </div>
+  <div aum-drawer-footer>
+    <aum-button
+      type="filled"
+      size="small"
+      [value]="'CLOSE' | translate"
+      (clickButton)="drawerOpen.set(false)"
+    ></aum-button>
+  </div>
+</aum-page>

@@ -1,4 +1,6 @@
-export { InputComponent } from './input/input';
+export { InputComponent, AumErrorStateMatcher } from './input/input';
+export { PasswordInputComponent } from './password-input/password-input';
+export { SearchInputComponent } from './search-input/search-input';
 export { DatePickerComponent } from './date-picker/date-picker';
 export { CheckboxComponent } from './checkbox/checkbox';
 export { RadioButton } from './radio-button/radio-button';

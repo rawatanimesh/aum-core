@@ -44,6 +44,12 @@ export const uiLabRoutes: Routes = [
           import('./layout/layout-category').then((m) => m.LayoutCategory),
       },
       {
+        path: 'page',
+        title: 'Page | UI Lab',
+        loadComponent: () =>
+          import('./layout/page-detail/page-detail').then((m) => m.PageDetail),
+      },
+      {
         path: 'card',
         title: 'Card | UI Lab',
         loadComponent: () =>
@@ -189,6 +195,22 @@ export const uiLabRoutes: Routes = [
           import('./form-controls/input-detail/input-detail').then(
             (m) => m.InputDetail
           ),
+      },
+      {
+        path: 'password-input',
+        title: 'Password Input | UI Lab',
+        loadComponent: () =>
+          import(
+            './form-controls/password-input-detail/password-input-detail'
+          ).then((m) => m.PasswordInputDetail),
+      },
+      {
+        path: 'search-input',
+        title: 'Search Input | UI Lab',
+        loadComponent: () =>
+          import(
+            './form-controls/search-input-detail/search-input-detail'
+          ).then((m) => m.SearchInputDetail),
       },
       {
         path: 'checkbox',

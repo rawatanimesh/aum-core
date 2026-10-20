@@ -68,4 +68,35 @@
     </div>
   </ui-lab-scenario-card>
 
+  <!-- Scenario 6: Size & Label Weight -->
+  <ui-lab-scenario-card
+    [title]="'UI_LAB_SCENE_INPUT_SIZE_TITLE' | translate"
+    [description]="'UI_LAB_SCENE_INPUT_SIZE_DESC' | translate"
+  >
+    <div class="fc-size-demo">
+      <div class="fc-size-controls">
+        <aum-slide-toggle
+          label="Bold Label"
+          [checked]="boldLabel()"
+          (checkedChange)="boldLabel.set($event)"
+        ></aum-slide-toggle>
+        <aum-slide-toggle
+          label="Large Size"
+          [checked]="size() === 'large'"
+          (checkedChange)="size.set($event ? 'large' : 'medium')"
+        ></aum-slide-toggle>
+      </div>
+      <div class="fc-demo-field">
+        <aum-input
+          label="Full Name"
+          placeholder="Enter your name"
+          [boldLabel]="boldLabel()"
+          [size]="size()"
+          [data]="name()"
+          (dataChange)="name.set($event)"
+        ></aum-input>
+      </div>
+    </div>
+  </ui-lab-scenario-card>
+
 </div>

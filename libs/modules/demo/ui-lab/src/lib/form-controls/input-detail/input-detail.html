@@ -35,6 +35,9 @@
 
             <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_DISABLED_READONLY' | translate }}</h3>
             <ui-lab-code-block [code]="examples.states" language="html"></ui-lab-code-block>
+
+            <h3 class="detail-page__code-title">{{ 'UI_LAB_CODE_INPUT_SIZE_LABEL' | translate }}</h3>
+            <ui-lab-code-block [code]="examples.sizeAndLabel" language="html"></ui-lab-code-block>
           </div>
         </aum-tab>
 
@@ -46,8 +49,8 @@
 
       <div class="detail-page__nav">
         <div></div>
-        <a class="detail-page__nav-next" [routerLink]="'/ui-lab/form-controls/checkbox'">
-          <span>{{ 'UI_LAB_CHECKBOX' | translate }}</span>
+        <a class="detail-page__nav-next" [routerLink]="'/ui-lab/form-controls/password-input'">
+          <span>{{ 'UI_LAB_PASSWORD_INPUT' | translate }}</span>
           <aum-icon name="arrow_forward" color="primary" [width]="18"></aum-icon>
         </a>
       </div>

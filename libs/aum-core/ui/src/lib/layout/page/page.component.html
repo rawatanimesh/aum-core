@@ -116,9 +116,18 @@
     [position]="drawerPosition"
     [mode]="drawerMode"
     [style.width.rem]="drawerWidth"
-    [disableClose]="true"
+    [disableClose]="drawerDisableClose"
+    (openedChange)="openDrawerChange.emit($event)"
     class="aum-drawer"
   >
-    <ng-content select="[aum-drawer-content]"></ng-content>
+    <div class="aum-drawer__header">
+      <ng-content select="[aum-drawer-header]"></ng-content>
+    </div>
+    <div class="aum-drawer__body">
+      <ng-content select="[aum-drawer-content]"></ng-content>
+    </div>
+    <div class="aum-drawer__footer">
+      <ng-content select="[aum-drawer-footer]"></ng-content>
+    </div>
   </mat-drawer>
 </mat-drawer-container>

@@ -77,6 +77,8 @@ export class GettingStarted implements AfterViewInit {
   readonly componentGroups = [
     { icon: 'smart_button',  labelKey: 'GS_COMP_BUTTONS' },
     { icon: 'text_fields',   labelKey: 'GS_COMP_INPUTS' },
+    { icon: 'password',      labelKey: 'GS_COMP_PASSWORD' },
+    { icon: 'manage_search', labelKey: 'GS_COMP_SEARCH' },
     { icon: 'check_box',     labelKey: 'GS_COMP_CHECKBOX' },
     { icon: 'radio_button_checked', labelKey: 'GS_COMP_RADIO' },
     { icon: 'arrow_drop_down_circle', labelKey: 'GS_COMP_SELECT' },

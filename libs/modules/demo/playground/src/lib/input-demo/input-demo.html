@@ -5,7 +5,8 @@
       <div class="inputs-demo-header">
         <h1 class="inputs-demo-title">Inputs</h1>
         <p class="inputs-demo-subtitle">
-          <code>aum-input</code>, <code>aum-select-box</code>, <code>aum-autocomplete</code> and
+          <code>aum-input</code>, <code>aum-password-input</code>, <code>aum-search-input</code>,
+          <code>aum-select-box</code>, <code>aum-autocomplete</code> and
           <code>aum-date-picker</code> — bold/normal label, sizes, disabled, readonly, reactive forms.
         </p>
       </div>
@@ -82,6 +83,61 @@
               (dataChange)="valueChange($event)"
             ></aum-input>
             <span class="inputs-demo-caption">[textarea]="true"</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Password Input ───────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Password Input</div>
+        <div class="inputs-section-grid">
+          <div class="inputs-demo-item">
+            <aum-password-input
+              label="Password"
+              placeholder="Enter password"
+              [required]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+            ></aum-password-input>
+            <span class="inputs-demo-caption">default</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-password-input
+              label="Password"
+              placeholder="Enter password"
+              [disabled]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+            ></aum-password-input>
+            <span class="inputs-demo-caption">[disabled]="true"</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Search Input ───────────────────────────────────────────────────── -->
+      <section class="inputs-section">
+        <div class="inputs-section-label">Search Input</div>
+        <div class="inputs-section-grid">
+          <div class="inputs-demo-item">
+            <aum-search-input
+              label="Search"
+              placeholder="Type to search..."
+              [boldLabel]="boldLabel"
+              [size]="size"
+              (search)="valueChange($event)"
+              (searchChange)="valueChange($event)"
+            ></aum-search-input>
+            <span class="inputs-demo-caption">default</span>
+          </div>
+          <div class="inputs-demo-item">
+            <aum-search-input
+              label="Search"
+              placeholder="Type to search..."
+              [disabled]="true"
+              [boldLabel]="boldLabel"
+              [size]="size"
+            ></aum-search-input>
+            <span class="inputs-demo-caption">[disabled]="true"</span>
           </div>
         </div>
       </section>
@@ -208,10 +264,9 @@
               }"
             ></aum-input>
 
-            <aum-input
+            <aum-password-input
               label="Password"
               placeholder="Enter password"
-              type="password"
               [required]="true"
               [maxlength]="20"
               [boldLabel]="boldLabel"
@@ -222,7 +277,7 @@
                 required: 'Password is required!',
                 pattern: 'Password cannot be 123456!'
               }"
-            ></aum-input>
+            ></aum-password-input>
 
             <aum-input
               label="Username"

@@ -133,6 +133,30 @@ export const environment: Environment = {
 };
 ```
 
+### Content Security Policy (CSP)
+
+The shell app's `index.html` ships a strict default policy as a `<meta>` tag:
+
+```
+default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self';
+```
+
+This is a **starting point, not the final policy**. Two things to do for every new app:
+
+1. **Allow your API origin.** `connect-src 'self'` blocks requests to any other origin, so if `apiUrl` in your environment file points to a different origin (e.g. `http://localhost:8000` in development), add that origin to `connect-src`:
+
+   ```
+   connect-src 'self' http://localhost:8000;
+   ```
+
+   Use the origin only (scheme + host + port), not a path — `https://api.example.com`, not `https://api.example.com/v1`.
+
+2. **Send the policy as an HTTP header in deployed environments.** Configure `Content-Security-Policy` on your web server, CDN or reverse proxy (nginx, CloudFront, Netlify `_headers`, etc.) and set `connect-src` there per environment. A header is the standard approach: it applies before any page content loads, cannot be edited by page scripts, and supports directives that `<meta>` ignores (`frame-ancestors`, `report-uri`, `sandbox`). Keep the `<meta>` tag only as a fallback for hosts where you cannot set headers. If both exist the browser enforces **both**, so the stricter one wins: a `connect-src 'self'` left in the meta tag will still block your API even if the header allows it. Once the header is in place, remove the CSP `<meta>` from that app's `index.html` (or make it match).
+
+If you must rely on the `<meta>` tag across several environments, `index.html` is one static file, so use a separate file per build configuration (e.g. `index.prod.html`) via the `index` option in `project.json`, each with its own `connect-src`.
+
+> Do **not** rewrite the CSP from JavaScript at startup. A policy injected after the page loads leaves everything loaded earlier unprotected and can be removed by any script running on the page.
+
 ---
 
 ## Step 5 — Routing
@@ -314,7 +338,7 @@ Add the **Material Symbols Outlined** font link inside `<head>`. Without it all 
 
 > `core.scss` already aliases `.material-icons` → `Material Symbols Outlined`, so no additional CSS is needed. The font link is the only per-app requirement.
 
-The `index.html` already includes the correct `style-src` and `font-src` directives for Google Fonts — no changes needed.
+The default CSP in `index.html` only allows `'self'`. If you load the font from Google Fonts as shown above, also add `https://fonts.googleapis.com` to `style-src` and `https://fonts.gstatic.com` to `font-src` (see [Content Security Policy](#content-security-policy-csp)). Fonts bundled with `aum-core` (via the theme's `font.scss`) need no CSP change.
 
 ### `styles.scss`
 
@@ -515,6 +539,7 @@ export const appConfig: ApplicationConfig = {
 - [ ] `src/app/app.routes.ts` — route definitions with chosen template
 - [ ] `src/app/app-config.json` — nav items, toolbar menus, branding
 - [ ] `src/app/environments/*.ts` — environment files
+- [ ] `src/index.html` CSP — API origin added to `connect-src`; header-based CSP planned for deployment
 - [ ] `src/styles.scss` — theme import
 - [ ] `public/favicon.ico`
 - [ ] `tsconfig.json`, `tsconfig.app.json`, `tsconfig.spec.json`
